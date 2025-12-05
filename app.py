@@ -444,8 +444,8 @@ if step == 1:
             topic, prompt = food_manager.get_todays_food_topic()
             st.session_state.final_data['food_prompt'] = prompt
         else:
-            cands = research.get_realtime_trends()
-            topic = research.select_best_topic(cands)
+            cands = research.get_trending_dog_topics()
+            topic = research.select_topic(cands)
     
     st.session_state.final_data['topic'] = topic
     st.session_state.progress['combine_research']['status'] = 'complete'
