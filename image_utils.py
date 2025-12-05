@@ -97,26 +97,29 @@ def generate_images_hybrid(prompts, callback=None):
     """
     High-Quality Strategy (Flux 1.1 Pro for Hero/Reaction, Imagen 3 for others)
     """
-    print(f"🎨 [High-Quality Engine] Generating {len(prompts)} images...")
-    generated_files = []
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    print(f"🎨 [High-Quality Engine] Generating {len(prompts)} images in PARALLEL...")
+    generated_files = [None] * len(prompts) # Pre-allocate to maintain order
+    completed_count = 0
     
-    for i, prompt_detail in enumerate(prompts):
-        print(f"   📸 Generating Image {i+1}/{len(prompts)}...")
+    def process_single_image(index, prompt_detail):
+        print(f"   📸 Starting Image {index+1}/{len(prompts)}...")
         
         # Clean prompt
         clean_prompt = prompt_detail.split('.', 1)[-1].strip() if '.' in prompt_detail[:3] else prompt_detail
         
         # Determine Model based on type
-        is_hero = "Hero" in prompt_detail or i == 0
+        is_hero = "Hero" in prompt_detail or index == 0
         is_reaction = "Reaction" in prompt_detail or "햇살이" in prompt_detail
+        
+        filename = None
         
         if is_hero or is_reaction:
             # Use FLUX 1.1 Pro (Best Quality)
-            print(f"      ✨ Using FLUX 1.1 Pro (High Quality)")
+            print(f"      ✨ [Img {index+1}] Using FLUX 1.1 Pro")
             full_prompt = f"A high-end commercial photography of {clean_prompt}. 8k resolution, highly detailed, professional lighting, shot on Phase One XF IQ4 150MP. -fake -illustration"
             
-            # Call Replicate (Flux)
-            # Using the base Flux Pro model for guaranteed quality
             try:
                 output = replicate.run(
                     "black-forest-labs/flux-1.1-pro",
@@ -128,43 +131,41 @@ def generate_images_hybrid(prompts, callback=None):
                         "safety_tolerance": 2
                     }
                 )
-                # Flux Pro returns a URL (or stream)
-                # Replicate python client usually returns a standard output format. 
-                # For Flux Pro, it returns a FileOutput object or URL string.
-                
                 image_url = str(output)
                 resp = requests.get(image_url)
                 if resp.status_code == 200:
                     if not os.path.exists("images"): os.makedirs("images")
-                    filename = f"images/flux_{datetime.now().strftime('%H%M%S')}_{random.randint(1,99)}.jpg"
+                    filename = f"images/flux_{datetime.now().strftime('%H%M%S')}_{random.randint(1,999)}.jpg"
                     with open(filename, "wb") as f: f.write(resp.content)
-                    print(f"      ✅ Saved: {filename}")
                     
                     # Firebase Upload
                     firebase_uploader.upload_file(filename, f"flux/{os.path.basename(filename)}")
-                    generated_files.append(filename)
-                else:
-                    print(f"      ❌ Download failed: {resp.status_code}")
-                    
             except Exception as e:
-                print(f"      ❌ Flux generation failed: {e}")
+                print(f"      ❌ [Img {index+1}] Flux failed: {e}")
                 # Fallback to Imagen
-                print("      ⚠️ Falling back to Imagen 3...")
-                f = generate_imagen_landscape(clean_prompt)
-                if f: generated_files.append(f)
+                filename = generate_imagen_landscape(clean_prompt)
 
         else:
             # Use Google Imagen 3 (Standard Quality)
-            print(f"      🔹 Using Google Imagen 3")
+            print(f"      🔹 [Img {index+1}] Using Google Imagen 3")
             full_prompt = f"A high-quality photography of {clean_prompt}. Realistic, detailed, natural light. -text -watermark"
-            f = generate_imagen_landscape(full_prompt)
-            if f: generated_files.append(f)
+            filename = generate_imagen_landscape(full_prompt)
             
-        # [Callback] Report progress
-        if callback:
-            callback(i + 1, len(prompts))
+        return index, filename
+
+    # Run in parallel
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = [executor.submit(process_single_image, i, p) for i, p in enumerate(prompts)]
+        
+        for future in as_completed(futures):
+            idx, fname = future.result()
+            if fname:
+                generated_files[idx] = fname
             
-        time.sleep(2)
-            
-    return generated_files
+            completed_count += 1
+            if callback:
+                callback(completed_count, len(prompts))
+                
+    # Filter out Nones just in case
+    return [f for f in generated_files if f]
 
