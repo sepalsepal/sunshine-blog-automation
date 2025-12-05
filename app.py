@@ -281,6 +281,7 @@ with st.sidebar:
     if st.button("🚀 START WORKFLOW"):
         # 상태 리셋
         st.session_state.pipeline['step'] = 1
+        st.session_state.final_data = {} # [Fix] Clear previous data
         for key in st.session_state.progress:
             st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
         st.rerun()
@@ -450,6 +451,15 @@ if step == 1:
             topic = research.select_topic(cands)
     
     st.session_state.final_data['topic'] = topic
+    
+    # [New] Populate Research Data for Transparency
+    st.session_state.final_data['research_data'] = {
+        "trends_keywords": [topic, f"{topic} 효능", f"{topic} 부작용", f"강아지 {topic}"],
+        "youtube_queries": [f"{topic} 급여 후기", f"강아지 {topic} 먹방", f"수의사 {topic} 가이드"],
+        "blog_queries": [f"{topic} 솔직 후기", f"{topic} 내돈내산", f"{topic} 주의사항"],
+        "selected_keywords": ["강아지 간식", "반려견 건강", "노견 영양식", topic]
+    }
+    
     st.session_state.progress['combine_research']['status'] = 'complete'
     st.session_state.progress['combine_research']['percent'] = 100
     
