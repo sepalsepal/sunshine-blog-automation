@@ -1,0 +1,11 @@
+.env
+google_service_account.json
+__pycache__/
+*.pyc
+.DS_Store
+app_state.json
+bot_command.json
+launch_ngrok.py
+expose_app.py
+images/
+*.deb

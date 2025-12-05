@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sunshine-imageworks",
+  "private_key_id": "28dd92d7267980d8e04e062cbb68eefd0391d1e2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDC9YY6t1WqitiK\n2EbyPDjbCaCl7wLOw6VFWW8pGO50cdxpmfjVNFfAEzId6+5P36H0bHPkRargpYhc\nfkArdgS+IC5qyURXTUyYRbSxMDf8JOD3SR3vpTrCCHQuxlFZoEslM64By3NMuHSp\no88xirRWQQnak1H/0feQMcnRIODAoyhyZ1GJGwQszFqX7HME6/PJ/A94LZwt6PIa\nU8xFaAUY0hzMyEdr8tvmcJU7cJH8bQw1V/k5NaWpZ5LT4XsFvsxJ3Y4+NbDJzwLz\nX2ZLqPxuFH7hrQmEoJbMxOnB0bswqYkLb4raX+wgl4/2vrfgak/ksg1jvFggjK/Y\nPyMXHdoVAgMBAAECggEAJdQGkMeIeYAZ3qzy7ScWwBd44qGC+bQYEiH1kfOatyDt\nq9bao6HVofkHiStBcSGbFuZhQUpsSs0Lrai4kkZCytJLN2CooEjpIwWpdxT8U/Ii\n7ZB0HM8CXOpPgtDrsXiLBCOoMIR1sY374vucJQh9D9xsSUs7BqiKwOGMP4YB3haj\nln+b3KgNkkYd7B9AkIEHpi2KdlwgVA0L+tQAQeD04fqTaEfm7KPlbi74SdopJDlU\nxNutAqzSrNJFs8uGtXUyLf0aI9cOkIIWidIVUKzfWJ+YbZpFaspCAI1v9XXHRc30\nLKYuWRnwzDjazRT0vVEhfTBQo0FjGWcDFGrXLLIyEQKBgQDs8ubXxlYDg2PLMExz\nwdr2Bm8UGu3ELZiwFkuZ3L29kg8hC8c3OFhzVz2MdIJZyje41SZNMmf3n5/Yh6C4\npHzSafMoj5Tv6mM0nIXQh4365l0gc+77BJZDTvAwmTNJ8kuI3dEIVtPOlWrCUe2U\nKm9Jbri4RGF8LobWpodWDucAEQKBgQDSolnXM69fGmdsfyFa0ifc474XJJtk3UWP\n8XDVuERG2nHs4m6Comv9AQlC84X4+YsIFuFk9FxxIb43Cu+fk9h6Yb1KG537cIwx\nJcgNdsvAgoIlA5lTb1pHRoAIr6HvgMmI4reMd+UzRxD7FRdnHc64HzM61DufaJTT\nApntuar9xQKBgQDsz7rsrjmq2zbyjPvruTQ4LKf5ZQx6w8NVQYMfbGFpxD9AnL/m\nrXahF/DYnlzklljobocQIi+MaUldI/f6cdKajO9Le2yz9wJdQ43tonzA5FjwpU2U\nLLps3MjrGUIMRo89Y8uVVQns7qI7QZx7N4nvzyvoZdc0QF/cyaR62vv9sQKBgFhg\numVrUEgNIhwJ84rR5tvtytKXD4Rwu0E8QuXJnQxFl8uW7lttnvXXO3WWDD59JfLM\n9uGPDkKBr/gUZJqGRCyFWhEAKXdYr9nnSlsr3y31FHpHWkwBytVhJVN/reh6FxWS\nWwVbQRYU2XEgVmNzxErI/IvQhPvLu7YVv1RZtP8pAoGBAJBlKclsPMh5i1lFhDos\nzweibfrhCxutdTUE5Oh1C+Nwv2MP0Zv5dmiLm0PCSZ6uYOqQRE3oGl5leT6q20Cp\nxmMaaHZQtS9mx6GcqNesBkBuJdcUAECQmAq+oCOsCcvfbl6wzpu6cJcsrp/y48nn\nGWQ/KyfPE73M/nTVZgx3Ujlh\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@sunshine-imageworks.iam.gserviceaccount.com",
+  "client_id": "100372536329451600379",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40sunshine-imageworks.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
