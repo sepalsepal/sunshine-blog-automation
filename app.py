@@ -82,16 +82,23 @@ st.markdown("""
             gap: 0.5rem;
         }
         
-        /* Workflow Timeline */
+        /* Workflow Container (Mobile Scroll) */
         .workflow-container {
             display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            padding: 1rem 0.5rem;
-            margin-bottom: 2rem;
-            scrollbar-width: none; /* Firefox */
+            justify-content: flex-start; /* Left align for scrolling */
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            overflow-x: auto; /* Enable horizontal scroll */
+            white-space: nowrap; /* Prevent wrapping */
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            gap: 1rem; /* Space between items */
         }
-        .workflow-container::-webkit-scrollbar { display: none; } /* Chrome */
+        
+        /* Hide scrollbar for clean look */
+        .workflow-container::-webkit-scrollbar {
+            display: none;
+        }
 
         .step-item {
             display: flex;
@@ -222,11 +229,19 @@ def render_workflow_timeline():
     """가로 스크롤 타임라인 렌더링"""
     steps = [
         ('search_trends', '📊', 'Trends'),
+        ('search_youtube', '📺', 'YouTube'),
+        ('search_blog', '📝', 'Blog'),
+        ('combine_research', '🧠', 'Combine'),
         ('write_content', '✍️', 'Draft'),
+        ('create_hashtags', '#️⃣', 'Tags'),
         ('audit_content', '⚖️', 'Audit'),
-        ('generate_images', '🎨', 'Images'),
-        ('approval', '👍', 'Approval'),
-        ('upload_wordpress', '🚀', 'Deploy')
+        ('create_img_prompt', '🖼️', 'Prompt'),
+        ('audit_img_prompt', '🔍', 'ChkPrompt'),
+        ('generate_images', '🎨', 'GenImg'),
+        ('telegram_report', '📢', 'Report'),
+        ('approval', '👍', 'Approve'),
+        ('upload_wordpress', '🚀', 'Deploy'),
+        ('archive_sheets', '📂', 'Archive')
     ]
     
     html = '<div class="workflow-container">'
@@ -258,7 +273,7 @@ with st.sidebar:
     st.image("https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Dog%20Face.png", width=120)
     st.markdown("### 🎮 Control Center")
     
-    category = st.selectbox("📁 Category", ["FOOD_DB", "WALK_TIPS"])
+    category = st.selectbox("📁 Category", ["강아지 ## 먹어도 되나요?", "WALK_TIPS"])
     topic_input = st.text_input("💡 Custom Topic (Optional)")
     
     st.markdown("---")
@@ -309,6 +324,37 @@ def update_progress(key, percent, status='active', do_rerun=True):
     
     if do_rerun:
         st.rerun()
+
+    # --- [5.5] 상세 산출물 확인 (Mobile Friendly) ---
+    st.markdown("### 📑 Process Details")
+    
+    # 1. Research Data
+    with st.expander("📊 1. Research Data (Trends & Keywords)", expanded=False):
+        if 'research_data' in st.session_state.final_data:
+            st.json(st.session_state.final_data['research_data'])
+        else:
+            st.info("No research data yet.")
+
+    # 2. Draft Content
+    with st.expander("✍️ 2. Draft Content", expanded=False):
+        if 'post' in st.session_state.final_data and 'content_html' in st.session_state.final_data['post']:
+            st.markdown(st.session_state.final_data['post']['content_html'])
+        else:
+            st.info("No content generated yet.")
+
+    # 3. Audit Report
+    with st.expander("⚖️ 3. Audit Report", expanded=False):
+        if 'audit_report' in st.session_state.final_data:
+            st.markdown(st.session_state.final_data['audit_report'])
+        else:
+            st.info("No audit report yet.")
+            
+    # 4. Image Prompts
+    with st.expander("🖼️ 4. Image Prompts", expanded=False):
+        if 'post' in st.session_state.final_data and 'image_prompts' in st.session_state.final_data['post']:
+            st.json(st.session_state.final_data['post']['image_prompts'])
+        else:
+            st.info("No image prompts yet.")
 
 # --- [Process Visualization] ---
 # 현재 단계 이전의 완료된 작업들을 "Notion Card" 형태로 보여줍니다.
