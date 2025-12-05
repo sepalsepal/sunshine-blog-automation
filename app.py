@@ -338,7 +338,9 @@ def update_progress(key, percent, status='active', do_rerun=True):
     # 2. Draft Content
     with st.expander("✍️ 2. Draft Content", expanded=False):
         if 'post' in st.session_state.final_data and 'content_html' in st.session_state.final_data['post']:
-            st.markdown(st.session_state.final_data['post']['content_html'])
+            st.markdown(st.session_state.final_data['post']['content_html'], unsafe_allow_html=True)
+        elif 'content' in st.session_state.final_data: # Fallback for older state structure
+             st.markdown(st.session_state.final_data['content'], unsafe_allow_html=True)
         else:
             st.info("No content generated yet.")
 

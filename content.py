@@ -44,14 +44,18 @@ def generate_blog_content(category, topic):
       "search_description": "요약",
       "content_html": "HTML 본문 (Inline CSS가 적용된 예쁜 디자인)",
       "image_prompts": [
-        "1. [Hero] 주제를 한눈에 보여주는 매력적인 썸네일 (자연광, 고화질)",
-        "2. [Detail] 핵심 소재나 정보의 디테일 컷 (클로즈업)",
-        "3. [Reaction] 햇살이(골든 리트리버)가 주제와 상호작용하거나 반응하는 모습",
-        "4. [Creative] 주제와 관련된 감성적인 연출 컷",
+        "1. [Hero] 주제를 한눈에 보여주는 매력적인 썸네일 (자연광, 고화질, 리얼리즘, 골든 리트리버 포함 필수)",
+        "2. [Detail] 핵심 소재나 정보의 디테일 컷 (클로즈업, 제품이나 상황에 집중)",
+        "3. [Reaction] 햇살이(골든 리트리버)가 주제와 상호작용하거나 반응하는 모습 (행복한 표정)",
+        "4. [Creative] 주제와 관련된 감성적인 연출 컷 (판타지 금지, 현실적인 배경)",
         "5. [Summary] 전체 내용을 아우르는 따뜻한 분위기의 마무리 컷"
       ],
       "hashtags": ["태그"]
     }
+    
+    # Image Prompt Rules (Critical)
+    - 모든 이미지 프롬프트는 **'골든 리트리버(Golden Retriever)'**가 포함되거나, 주제와 직접 관련된 **현실적인(Realistic)** 장면이어야 합니다.
+    - 호랑이, 벚꽃, 판타지, 애니메이션 등 주제와 무관한 요소는 **절대 금지**입니다.
     """
     
     import time

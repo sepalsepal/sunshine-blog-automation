@@ -127,7 +127,7 @@ def generate_images_hybrid(prompts, callback=None):
                         "prompt": full_prompt,
                         "aspect_ratio": "16:9",
                         "output_format": "jpg",
-                        "output_quality": 100,
+                        "output_quality": 90,
                         "safety_tolerance": 2
                     }
                 )
