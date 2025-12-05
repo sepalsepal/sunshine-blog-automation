@@ -14,6 +14,7 @@ import research
 import auditor
 import g_sheet_archiver
 import telegram_notifier
+import state_manager  # [Fix] Import early for button handler
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
