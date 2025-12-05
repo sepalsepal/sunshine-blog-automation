@@ -284,6 +284,9 @@ with st.sidebar:
         st.session_state.final_data = {} # [Fix] Clear previous data
         for key in st.session_state.progress:
             st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
+        
+        # [Critical] Save clean state immediately to prevent zombie reload
+        state_manager.save_state()
         st.rerun()
 
     # [Telegram Bot Listener]
