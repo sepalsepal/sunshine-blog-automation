@@ -285,8 +285,8 @@ with st.sidebar:
         for key in st.session_state.progress:
             st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
         
-        # [Critical] Save clean state immediately to prevent zombie reload
-        state_manager.save_state()
+        # [Critical] DELETE state file to kill zombie completely
+        state_manager.clear_state()
         st.rerun()
 
     # [Telegram Bot Listener]
