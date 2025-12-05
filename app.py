@@ -247,12 +247,7 @@ def render_workflow_timeline():
             state_class = ''
             display_icon = icon
             
-        html += f"""
-        <div class="step-item {state_class}">
-            <div class="step-icon">{display_icon}</div>
-            <div class="step-label">{title}</div>
-        </div>
-        """
+        html += f"""<div class="step-item {state_class}"><div class="step-icon">{display_icon}</div><div class="step-label">{title}</div></div>"""
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
