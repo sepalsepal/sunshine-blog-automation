@@ -445,12 +445,20 @@ def update_progress(key, percent, status='active', do_rerun=True):
                         st.write(f"🔥 {q}")
                 st.markdown("---")
             
-            # YouTube
+            # YouTube (Real API)
             youtube = research_data.get('youtube', {})
             if youtube:
                 st.markdown(f"**📺 YouTube** (검색어: `{youtube.get('query', '')}`)")
-                for v in youtube.get('suggested_videos', []):
-                    st.write(f"• {v}")
+                videos = youtube.get('videos', [])
+                if videos:
+                    for v in videos:
+                        video_url = f"https://youtube.com/watch?v={v.get('video_id', '')}"
+                        st.markdown(f"• [{v.get('title', '')}]({video_url})")
+                        st.caption(f"  📺 {v.get('channel', '')}")
+                else:
+                    # Fallback for old format
+                    for v in youtube.get('suggested_videos', []):
+                        st.write(f"• {v}")
                 st.markdown("---")
             
             # Blog

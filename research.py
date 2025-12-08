@@ -40,22 +40,72 @@ def search_google_trends(keywords=["강아지", "반려견", "애견"]):
     return result
 
 
-def search_youtube(query):
+def search_youtube(query, max_results=5):
     """
-    YouTube 검색 시뮬레이션 (실제 API는 별도 필요)
-    Returns: dict with search results
+    YouTube Data API v3를 사용한 실제 검색
+    
+    Args:
+        query: 검색어 (예: "강아지 복숭아")
+        max_results: 최대 결과 수 (기본 5개)
+    
+    Returns:
+        dict: 검색 결과 (영상 제목, 채널명, 영상 ID)
     """
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+    
+    api_key = os.getenv("YOUTUBE_API_KEY")
+    
     result = {
         "source": "YouTube",
         "query": query,
-        "suggested_videos": [
-            f"[영상] {query} 완벽 가이드",
-            f"[영상] 수의사가 알려주는 {query}",
-            f"[영상] {query} 먹방 리뷰"
-        ],
-        "status": "complete"
+        "videos": [],
+        "status": "pending"
     }
-    print(f"✅ [YouTube] Simulated search: {query}")
+    
+    if not api_key:
+        result["status"] = "error"
+        result["error"] = "YOUTUBE_API_KEY가 .env에 없습니다"
+        print("❌ [YouTube] API 키 없음")
+        return result
+    
+    try:
+        from googleapiclient.discovery import build
+        
+        # YouTube API 클라이언트 생성
+        youtube = build('youtube', 'v3', developerKey=api_key)
+        
+        # 검색 요청
+        request = youtube.search().list(
+            part="snippet",
+            q=query,
+            type="video",
+            maxResults=max_results,
+            regionCode="KR",
+            relevanceLanguage="ko",
+            order="relevance"
+        )
+        response = request.execute()
+        
+        # 결과 파싱
+        for item in response.get('items', []):
+            video = {
+                "title": item['snippet']['title'],
+                "channel": item['snippet']['channelTitle'],
+                "video_id": item['id']['videoId'],
+                "thumbnail": item['snippet']['thumbnails']['medium']['url'],
+            }
+            result["videos"].append(video)
+        
+        result["status"] = "complete"
+        print(f"✅ [YouTube] {len(result['videos'])}개 영상 검색 완료: {query}")
+        
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+        print(f"❌ [YouTube] 검색 실패: {e}")
+    
     return result
 
 
