@@ -333,12 +333,49 @@ def update_progress(key, percent, status='active', do_rerun=True):
     # --- [5.5] 상세 산출물 확인 (Mobile Friendly) ---
     st.markdown("### 📑 Process Details")
     
-    # 1. Research Data
-    with st.expander("📊 1. Research Data (Trends & Keywords)", expanded=False):
-        if 'research_data' in st.session_state.final_data:
-            st.json(st.session_state.final_data['research_data'])
+    # 1. Research Data (Detailed Breakdown)
+    with st.expander("📊 1. Research Data (실시간 검색 결과)", expanded=True):
+        research_data = st.session_state.final_data.get('research_data', {})
+        
+        if research_data:
+            # Trends
+            trends = research_data.get('trends', {})
+            if trends:
+                st.markdown("**📈 Google Trends**")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("*인기 검색어:*")
+                    for q in trends.get('top_queries', [])[:5]:
+                        st.write(f"• {q}")
+                with col2:
+                    st.markdown("*급상승 검색어:*")
+                    for q in trends.get('rising_queries', [])[:5]:
+                        st.write(f"🔥 {q}")
+                st.markdown("---")
+            
+            # YouTube
+            youtube = research_data.get('youtube', {})
+            if youtube:
+                st.markdown(f"**📺 YouTube** (검색어: `{youtube.get('query', '')}`)")
+                for v in youtube.get('suggested_videos', []):
+                    st.write(f"• {v}")
+                st.markdown("---")
+            
+            # Blog
+            blog = research_data.get('blog', {})
+            if blog:
+                st.markdown(f"**📝 네이버 블로그** (검색어: `{blog.get('query', '')}`)")
+                for b in blog.get('blog_titles', []):
+                    st.write(f"• {b}")
+                st.markdown("---")
+            
+            # Combined
+            combined = research_data.get('combined', {})
+            if combined:
+                st.markdown("**🧠 최종 선정 키워드**")
+                st.write(", ".join(combined.get('selected_keywords', [])))
         else:
-            st.info("No research data yet.")
+            st.info("⏳ 리서치가 시작되면 여기에 실시간으로 결과가 표시됩니다.")
 
     # 2. Draft Content
     with st.expander("✍️ 2. Draft Content", expanded=False):
@@ -428,51 +465,78 @@ if step >= 6: # 이미지 생성 완료 후
                     st.image(img_path, use_container_width=True)
 
 if step == 1:
-    # Research 단계
+    # 1-1. Trends 검색
     st.session_state.progress['search_trends']['status'] = 'active'
+    state_manager.save_state()
+    
+    with st.spinner("📊 Google Trends 검색 중..."):
+        trends_data = research.search_google_trends()
+    st.session_state.final_data['trends_data'] = trends_data
     st.session_state.progress['search_trends']['percent'] = 100
     st.session_state.progress['search_trends']['status'] = 'complete'
+    state_manager.save_state()
     
+    # 1-2. YouTube 검색
     st.session_state.progress['search_youtube']['status'] = 'active'
+    state_manager.save_state()
+    
+    # 먼저 주제 결정
+    if topic_input:
+        topic = topic_input
+    elif "FOOD" in str(category):
+        topic, prompt = food_manager.get_todays_food_topic()
+        st.session_state.final_data['food_prompt'] = prompt
+    else:
+        # Trends에서 선택
+        all_topics = trends_data.get('top_queries', []) + trends_data.get('rising_queries', [])
+        topic = research.select_topic(all_topics) if all_topics else "강아지 건강"
+    
+    with st.spinner(f"📺 YouTube 검색 중: {topic}..."):
+        youtube_data = research.search_youtube(topic)
+    st.session_state.final_data['youtube_data'] = youtube_data
     st.session_state.progress['search_youtube']['percent'] = 100
     st.session_state.progress['search_youtube']['status'] = 'complete'
+    state_manager.save_state()
     
+    # 1-3. 네이버 블로그 검색
     st.session_state.progress['search_blog']['status'] = 'active'
+    state_manager.save_state()
+    
+    with st.spinner(f"📝 네이버 블로그 검색 중: {topic}..."):
+        blog_data = research.search_naver_blog(topic)
+    st.session_state.final_data['blog_data'] = blog_data
     st.session_state.progress['search_blog']['percent'] = 100
     st.session_state.progress['search_blog']['status'] = 'complete'
+    state_manager.save_state()
     
-    # [수정] 주제 선정 우선순위: 1. 텔레그램/기존 설정 -> 2. 사이드바 입력 -> 3. 자동 생성
-    if st.session_state.final_data.get('topic'):
-        topic = st.session_state.final_data['topic']
-    elif topic_input:
-        topic = topic_input
-    else:
-        if "FOOD" in str(category):
-            topic, prompt = food_manager.get_todays_food_topic()
-            st.session_state.final_data['food_prompt'] = prompt
-        else:
-            cands = research.get_trending_dog_topics()
-            topic = research.select_topic(cands)
+    # 1-4. 결과 종합
+    st.session_state.progress['combine_research']['status'] = 'active'
+    state_manager.save_state()
+    
+    with st.spinner("🧠 리서치 결과 종합 중..."):
+        combined_data = research.combine_research(trends_data, youtube_data, blog_data)
     
     st.session_state.final_data['topic'] = topic
+    st.session_state.final_data['combined_data'] = combined_data
     
-    # [New] Populate Research Data for Transparency
+    # 통합 research_data (Process Details용)
     st.session_state.final_data['research_data'] = {
-        "trends_keywords": [topic, f"{topic} 효능", f"{topic} 부작용", f"강아지 {topic}"],
-        "youtube_queries": [f"{topic} 급여 후기", f"강아지 {topic} 먹방", f"수의사 {topic} 가이드"],
-        "blog_queries": [f"{topic} 솔직 후기", f"{topic} 내돈내산", f"{topic} 주의사항"],
-        "selected_keywords": ["강아지 간식", "반려견 건강", "노견 영양식", topic]
+        "trends": trends_data,
+        "youtube": youtube_data,
+        "blog": blog_data,
+        "combined": combined_data
     }
     
     st.session_state.progress['combine_research']['status'] = 'complete'
     st.session_state.progress['combine_research']['percent'] = 100
+    state_manager.save_state()
     
     # [Telegram] Research Complete
     try:
         telegram_notifier.send_message(f"📊 [1/5] 주제 선정 완료: {topic}")
     except: pass
     
-    time.sleep(0.5)
+    time.sleep(0.3)
     st.session_state.pipeline['step'] = 2
     st.rerun()
 
