@@ -12,6 +12,7 @@ from vertexai.preview.vision_models import ImageGenerationModel
 import firebase_uploader # [NEW] Firebase 업로더 추가
 from retry_utils import retry  # [NEW] 재시도 유틸
 import leonardo_ai  # [NEW] Leonardo AI 연동
+import stability_ai  # [NEW] Stable Diffusion 3.5 연동
 
 # .env 로드
 load_dotenv()
@@ -80,6 +81,19 @@ def generate_leonardo(prompt):
         return result
     except Exception as e:
         print(f"   ❌ [Leonardo] 실패: {e}")
+        raise
+
+@retry(max_attempts=3, delay=3)
+def generate_sd3(prompt, model="sd3.5-large"):
+    """[Stable Diffusion 3.5] 무료 고품질 이미지 생성"""
+    try:
+        result = stability_ai.generate_stable_diffusion(prompt, model=model)
+        if result:
+            # Firebase 업로드
+            firebase_uploader.upload_file(result, f"sd3/{os.path.basename(result)}")
+        return result
+    except Exception as e:
+        print(f"   ❌ [SD3] 실패: {e}")
         raise
 
 # =========================================================
