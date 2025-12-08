@@ -100,11 +100,34 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         save_command("REJECT_UPLOAD")
         await query.edit_message_text(text="❌ **거절됨.** 워크플로우를 종료합니다.")
 
+# --- [NEW] 스케줄러 설정 ---
+def scheduled_auto_post():
+    """스케줄된 자동 포스팅"""
+    from datetime import datetime
+    print(f"⏰ [{datetime.now()}] 스케줄러 자동 실행!")
+    trigger_streamlit("start", topic="auto")
+    print("📧 승인 요청이 텔레그램/이메일로 전송됩니다.")
+
 if __name__ == '__main__':
     if not TOKEN:
         print("❌ Error: TELEGRAM_BOT_TOKEN not found in .env")
         exit(1)
-        
+    
+    # APScheduler 설정 (8am, 7pm KST)
+    from apscheduler.schedulers.asyncio import AsyncIOScheduler
+    import pytz
+    
+    scheduler = AsyncIOScheduler(timezone=pytz.timezone('Asia/Seoul'))
+    
+    # 오전 8시 실행
+    scheduler.add_job(scheduled_auto_post, 'cron', hour=8, minute=0)
+    # 오후 7시 실행
+    scheduler.add_job(scheduled_auto_post, 'cron', hour=19, minute=0)
+    
+    scheduler.start()
+    print("⏰ 스케줄러 설정 완료: 오전 8시, 오후 7시 (KST)")
+    
+    # 텔레그램 봇 시작
     application = ApplicationBuilder().token(TOKEN).build()
     
     application.add_handler(CommandHandler('start', start))
@@ -113,3 +136,4 @@ if __name__ == '__main__':
     
     print("🤖 Telegram Bot is running...")
     application.run_polling()
+
