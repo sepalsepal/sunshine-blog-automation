@@ -45,7 +45,17 @@ def _get_or_create_worksheet(gc, sheet_name):
 def archive_post(title, content, link, topic):
     """게시물 정보 저장"""
     gc = _get_sheet_client()
-    if not gc: return False
+    
+    archive_data = {
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "topic": topic,
+        "title": title,
+        "link": link
+    }
+    
+    if not gc:
+        # Google Sheets 실패 시 로컬 백업
+        return _local_backup(archive_data)
 
     try:
         wks = _get_or_create_worksheet(gc, SHEET_NAME)
@@ -59,7 +69,7 @@ def archive_post(title, content, link, topic):
         next_id = len(wks.get_all_values()) # 간단 ID 생성
         row = [
             next_id,
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            archive_data["date"],
             topic,
             title,
             link
@@ -70,4 +80,46 @@ def archive_post(title, content, link, topic):
         
     except Exception as e:
         print(f"❌ 아카이빙 실패: {e}")
+        # 실패 시 로컬 백업
+        return _local_backup(archive_data)
+
+
+def _local_backup(data):
+    """
+    Google Sheets 실패 시 로컬 JSON 백업
+    파일: archive_backup.json
+    """
+    BACKUP_FILE = "archive_backup.json"
+    
+    try:
+        # 기존 데이터 로드
+        if os.path.exists(BACKUP_FILE):
+            with open(BACKUP_FILE, 'r', encoding='utf-8') as f:
+                backup_list = json.load(f)
+        else:
+            backup_list = []
+        
+        # 데이터 추가
+        data['id'] = len(backup_list) + 1
+        backup_list.append(data)
+        
+        # 저장
+        with open(BACKUP_FILE, 'w', encoding='utf-8') as f:
+            json.dump(backup_list, f, ensure_ascii=False, indent=2)
+        
+        print(f"💾 로컬 백업 저장됨: {BACKUP_FILE} (총 {len(backup_list)}개)")
+        return True
+        
+    except Exception as e:
+        print(f"❌ 로컬 백업도 실패: {e}")
         return False
+
+
+def get_backup_count():
+    """로컬 백업 개수 확인"""
+    BACKUP_FILE = "archive_backup.json"
+    if os.path.exists(BACKUP_FILE):
+        with open(BACKUP_FILE, 'r', encoding='utf-8') as f:
+            return len(json.load(f))
+    return 0
+

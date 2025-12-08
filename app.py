@@ -369,6 +369,11 @@ with st.sidebar:
     category = st.selectbox("📁 Category", ["강아지 ## 먹어도 되나요?", "WALK_TIPS"])
     topic_input = st.text_input("💡 Custom Topic (Optional)")
     
+    # 자동 승인 옵션
+    auto_approve = st.checkbox("⚡ 자동 승인 (검토 없이 바로 업로드)", value=False)
+    if auto_approve:
+        st.caption("⚠️ 텔레그램 승인 없이 자동으로 워드프레스에 업로드됩니다.")
+    
     st.markdown("---")
     
     if st.button("🚀 START WORKFLOW"):
@@ -832,21 +837,32 @@ elif step == 4:
             try: telegram_notifier.send_message(f"✅ [4/5] 이미지 {len(images)}장 생성 완료")
             except: pass
             
-            # 텔레그램 승인 요청 전송
-            st.session_state.progress['telegram_report']['status'] = 'active'
-            st.session_state.progress['telegram_report']['percent'] = 50
-            
-            if post and post.get('title'):
-                telegram_notifier.send_telegram_notification(
-                    post['title'],
-                    st.session_state.final_data['topic'],
-                    images
-                )
-            
-            st.session_state.progress['telegram_report']['percent'] = 100
-            st.session_state.progress['telegram_report']['status'] = 'complete'
-            st.session_state.progress['approval']['status'] = 'complete'
-            st.session_state.progress['approval']['percent'] = 100
+            # 자동 승인 모드 vs 수동 승인 모드
+            if auto_approve:
+                # 자동 승인: 텔레그램 승인 없이 바로 업로드
+                st.info("⚡ 자동 승인 모드 - 텔레그램 승인 없이 바로 업로드합니다")
+                st.session_state.progress['telegram_report']['status'] = 'complete'
+                st.session_state.progress['telegram_report']['percent'] = 100
+                st.session_state.progress['approval']['status'] = 'complete'
+                st.session_state.progress['approval']['percent'] = 100
+                try: telegram_notifier.send_message("⚡ [자동 승인] 검토 없이 자동 업로드를 진행합니다...")
+                except: pass
+            else:
+                # 수동 승인: 텔레그램 승인 요청 전송
+                st.session_state.progress['telegram_report']['status'] = 'active'
+                st.session_state.progress['telegram_report']['percent'] = 50
+                
+                if post and post.get('title'):
+                    telegram_notifier.send_telegram_notification(
+                        post['title'],
+                        st.session_state.final_data['topic'],
+                        images
+                    )
+                
+                st.session_state.progress['telegram_report']['percent'] = 100
+                st.session_state.progress['telegram_report']['status'] = 'complete'
+                st.session_state.progress['approval']['status'] = 'complete'
+                st.session_state.progress['approval']['percent'] = 100
         
         time.sleep(0.5)
         st.session_state.pipeline['step'] = 6
