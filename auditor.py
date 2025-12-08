@@ -1,13 +1,7 @@
 import os
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup
+import json
+import urllib.request
+import urllib.parse
 import google.generativeai as genai
 from dotenv import load_dotenv
 
@@ -55,54 +49,52 @@ def audit_and_improve(topic, current_draft_html):
         return current_draft_html
 
 def _scrape_top_competitor(keyword):
-    """구글 검색 결과 크롤링 (개선 버전 - 타임아웃 및 에러 처리 강화)"""
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36")
-
-    driver = None
-    try:
-        # [수정] 자동 드라이버 설치
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        driver.set_page_load_timeout(15)
-        
-        search_url = f"https://www.google.com/search?q={keyword}"
-        print(f"   🔍 크롤링: {search_url}")
-        driver.get(search_url)
-        
-        # [수정] 명시적 대기 추가
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )
-        
-        body_text = driver.find_element(By.TAG_NAME, "body").text
-        print(f"   ✅ 크롤링 완료 ({len(body_text)} chars)")
-        return body_text[:2000]
-
-    except Exception as e:
-        print(f"   ⚠️ 크롤링 에러: {e}")
-        
-        # [NEW] 에러 스크린샷 저장
-        if driver:
-            try:
-                os.makedirs("debug", exist_ok=True)
-                screenshot_path = f"debug/audit_error_{int(time.time())}.png"
-                driver.save_screenshot(screenshot_path)
-                print(f"   📸 에러 스크린샷 저장: {screenshot_path}")
-            except:
-                pass
-        
+    """
+    네이버 블로그 API로 경쟁사 글 수집 (Selenium 제거)
+    
+    장점:
+    - 안정적 (API라서 차단 없음)
+    - 빠름 (1초 이내)
+    - 클라우드 호환 (Selenium 불필요)
+    """
+    client_id = os.getenv("NAVER_CLIENT_ID")
+    client_secret = os.getenv("NAVER_CLIENT_SECRET")
+    
+    if not client_id or not client_secret:
+        print("   ⚠️ [Auditor] Naver API 키 없음 - 자체 완성도 집중")
         return None
-    finally:
-        if driver:
-            try:
-                driver.quit()
-            except:
-                pass
+    
+    try:
+        encText = urllib.parse.quote(keyword)
+        url = f"https://openapi.naver.com/v1/search/blog?query={encText}&display=3&sort=sim"
+        
+        print(f"   🔍 [Auditor] 네이버 블로그 API 검색: {keyword}")
+        
+        request = urllib.request.Request(url)
+        request.add_header("X-Naver-Client-Id", client_id)
+        request.add_header("X-Naver-Client-Secret", client_secret)
+        
+        response = urllib.request.urlopen(request, timeout=10)
+        data = json.loads(response.read().decode('utf-8'))
+        
+        # 상위 3개 블로그 글의 제목+설명 결합
+        competitor_text = ""
+        for item in data.get('items', [])[:3]:
+            title = item['title'].replace('<b>', '').replace('</b>', '')
+            desc = item['description'].replace('<b>', '').replace('</b>', '')
+            blogger = item.get('bloggername', '')
+            competitor_text += f"[{blogger}] {title}: {desc}\n\n"
+        
+        if competitor_text:
+            print(f"   ✅ [Auditor] 경쟁사 {len(data.get('items', []))}개 블로그 분석 완료")
+            return competitor_text
+        else:
+            print("   ⚠️ [Auditor] 검색 결과 없음")
+            return None
+            
+    except Exception as e:
+        print(f"   ❌ [Auditor] 경쟁사 분석 실패: {e}")
+        return None
 
 
 def audit_image_prompts(topic, content_html, image_prompts, max_retries=2):
