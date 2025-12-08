@@ -11,6 +11,7 @@ import vertexai
 from vertexai.preview.vision_models import ImageGenerationModel
 import firebase_uploader # [NEW] Firebase 업로더 추가
 from retry_utils import retry  # [NEW] 재시도 유틸
+import leonardo_ai  # [NEW] Leonardo AI 연동
 
 # .env 로드
 load_dotenv()
@@ -66,7 +67,20 @@ def generate_haetsal_lora(prompt):
             return filename
     except Exception as e:
         print(f"   ❌ [FLUX] 실패: {e}")
-        return None
+        raise  # retry 데코레이터가 처리
+
+@retry(max_attempts=3, delay=3)
+def generate_leonardo(prompt):
+    """[Leonardo AI] 고품질 일관된 스타일 이미지 생성"""
+    try:
+        result = leonardo_ai.generate_leonardo_image(prompt)
+        if result:
+            # Firebase 업로드
+            firebase_uploader.upload_file(result, f"leonardo/{os.path.basename(result)}")
+        return result
+    except Exception as e:
+        print(f"   ❌ [Leonardo] 실패: {e}")
+        raise
 
 # =========================================================
 # [2] 템플릿 기반 이미지 생성 (안정적인 고정 프롬프트)
