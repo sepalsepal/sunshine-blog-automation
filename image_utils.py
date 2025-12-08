@@ -10,6 +10,7 @@ import base64
 import vertexai
 from vertexai.preview.vision_models import ImageGenerationModel
 import firebase_uploader # [NEW] Firebase 업로더 추가
+from retry_utils import retry  # [NEW] 재시도 유틸
 
 # .env 로드
 load_dotenv()
@@ -24,6 +25,7 @@ def encode_image_to_base64(image_path):
 # [1] 기초 부품 함수 (먼저 정의해야 함!)
 # =========================================================
 
+@retry(max_attempts=3, delay=2)
 def generate_imagen_landscape(prompt):
     """[구글] 풍경/사물 생성"""
     try:
@@ -43,6 +45,7 @@ def generate_imagen_landscape(prompt):
         print(f"   ❌ [구글] 실패: {e}")
         return None
 
+@retry(max_attempts=3, delay=2)
 def generate_haetsal_lora(prompt):
     """[FLUX] 햇살이 생성"""
     try:
