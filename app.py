@@ -25,14 +25,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- [NEW] URL 파라미터 처리 (이메일/텔레그램 통합) ---
+# --- [NEW] URL 파라미터 처리 (이메일/텔레그램/스케줄러 통합) ---
 params = st.query_params
 
-# 텔레그램에서 시작 요청
+# 텔레그램 또는 스케줄러에서 시작 요청
 if params.get("action") == "start":
     topic = params.get("topic", "")
+    
+    # 자동 주제 선정 (스케줄러에서 topic=auto로 호출)
+    if topic == "auto":
+        st.info("⏰ 스케줄러 자동 실행! 트렌드 주제 선정 중...")
+        try:
+            trends = research.get_google_trends("강아지")
+            if trends.get('top_queries'):
+                topic = trends['top_queries'][0]  # 상위 1개 선택
+                st.success(f"📈 트렌드 주제 선정: **{topic}**")
+            else:
+                topic = "복숭아"  # 기본값
+                st.warning(f"⚠️ 트렌드 없음, 기본 주제 사용: {topic}")
+        except:
+            topic = "사과"  # 폴백
+            st.warning(f"⚠️ 트렌드 조회 실패, 기본 주제 사용: {topic}")
+    
     if topic:
-        st.success(f"🚀 텔레그램에서 요청됨! 주제: **{topic}**")
+        st.success(f"🚀 워크플로우 시작! 주제: **{topic}**")
         st.session_state.final_data['topic'] = topic
         st.session_state.pipeline['step'] = 1
         st.query_params.clear()
