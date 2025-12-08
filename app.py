@@ -14,6 +14,7 @@ import research
 import auditor
 import g_sheet_archiver
 import telegram_notifier
+import email_notifier  # [NEW] Gmail 승인 시스템
 import state_manager  # [Fix] Import early for button handler
 
 # --- [1] 페이지 설정 ---
@@ -23,6 +24,18 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="expanded"
 )
+
+# --- [NEW] 이메일 승인 URL 파라미터 처리 ---
+params = st.query_params
+if params.get("action") == "approve":
+    st.success("✅ 이메일 승인 확인! 워드프레스 업로드를 시작합니다...")
+    st.session_state.email_approved = True
+    # URL 파라미터 제거
+    st.query_params.clear()
+elif params.get("action") == "reject":
+    st.warning("❌ 이메일에서 거절되었습니다. 워크플로우를 종료합니다.")
+    st.session_state.email_rejected = True
+    st.query_params.clear()
 
 # --- [2] Notion Style CSS ---
 st.markdown("""
@@ -840,7 +853,7 @@ elif step == 4:
             # 자동 승인 모드 vs 수동 승인 모드
             if auto_approve:
                 # 자동 승인: 텔레그램 승인 없이 바로 업로드
-                st.info("⚡ 자동 승인 모드 - 텔레그램 승인 없이 바로 업로드합니다")
+                st.info("⚡ 자동 승인 모드 - 승인 없이 바로 업로드합니다")
                 st.session_state.progress['telegram_report']['status'] = 'complete'
                 st.session_state.progress['telegram_report']['percent'] = 100
                 st.session_state.progress['approval']['status'] = 'complete'
@@ -848,11 +861,23 @@ elif step == 4:
                 try: telegram_notifier.send_message("⚡ [자동 승인] 검토 없이 자동 업로드를 진행합니다...")
                 except: pass
             else:
-                # 수동 승인: 텔레그램 승인 요청 전송
+                # 수동 승인: 이메일 + 텔레그램 승인 요청 전송
                 st.session_state.progress['telegram_report']['status'] = 'active'
                 st.session_state.progress['telegram_report']['percent'] = 50
                 
                 if post and post.get('title'):
+                    # 1. 이메일 승인 요청 (새로 추가)
+                    app_url = os.getenv("STREAMLIT_APP_URL", "https://sunshine-blog.streamlit.app")
+                    email_notifier.send_approval_email(
+                        title=post['title'],
+                        topic=st.session_state.final_data['topic'],
+                        preview_html=post.get('content_html', '')[:500],
+                        images=images[:3],
+                        app_url=app_url
+                    )
+                    st.info("📧 승인 요청 이메일을 발송했습니다. 이메일을 확인해주세요!")
+                    
+                    # 2. 텔레그램도 함께 전송 (기존 유지)
                     telegram_notifier.send_telegram_notification(
                         post['title'],
                         st.session_state.final_data['topic'],
@@ -861,8 +886,15 @@ elif step == 4:
                 
                 st.session_state.progress['telegram_report']['percent'] = 100
                 st.session_state.progress['telegram_report']['status'] = 'complete'
-                st.session_state.progress['approval']['status'] = 'complete'
-                st.session_state.progress['approval']['percent'] = 100
+                st.session_state.progress['approval']['status'] = 'active'
+                st.session_state.progress['approval']['percent'] = 50
+                
+                # 이메일 승인 대기 (Step 5로 이동하지 않고 대기)
+                st.warning("⏳ 이메일 또는 텔레그램에서 승인을 기다리는 중...")
+                st.session_state.pipeline['step'] = 5  # 승인 대기 상태로 변경
+                state_manager.save_state()
+                time.sleep(1)
+                st.rerun()
         
         time.sleep(0.5)
         st.session_state.pipeline['step'] = 6
@@ -880,6 +912,44 @@ elif step == 4:
         try: telegram_notifier.send_message(f"🚨 [오류] 이미지 생성 실패: {str(e)}")
         except: pass
         st.stop()
+
+elif step == 5:
+    # 승인 대기 중
+    st.markdown("### ⏳ 승인 대기 중...")
+    st.info("📧 이메일 또는 📱 텔레그램에서 [승인] 버튼을 클릭해주세요.")
+    
+    # 이메일 승인 확인
+    if st.session_state.get('email_approved'):
+        st.success("✅ 이메일에서 승인되었습니다! 업로드를 진행합니다...")
+        st.session_state.progress['approval']['status'] = 'complete'
+        st.session_state.progress['approval']['percent'] = 100
+        st.session_state.email_approved = False  # 리셋
+        st.session_state.pipeline['step'] = 6
+        state_manager.save_state()
+        time.sleep(1)
+        st.rerun()
+    
+    # 이메일 거절 확인
+    if st.session_state.get('email_rejected'):
+        st.error("❌ 이메일에서 거절되었습니다. 워크플로우를 종료합니다.")
+        st.session_state.email_rejected = False
+        st.session_state.pipeline['step'] = 0
+        state_manager.save_state()
+        st.stop()
+    
+    # 텔레그램 승인 확인 (기존 로직)
+    if st.session_state.get('auto_upload_triggered'):
+        st.success("✅ 텔레그램에서 승인되었습니다!")
+        st.session_state.progress['approval']['status'] = 'complete'
+        st.session_state.progress['approval']['percent'] = 100
+        st.session_state.pipeline['step'] = 6
+        state_manager.save_state()
+        time.sleep(1)
+        st.rerun()
+    
+    # 자동 새로고침 (5초마다)
+    time.sleep(5)
+    st.rerun()
 
 # --- [8] 결과 화면 ---
 if step >= 6:
