@@ -25,13 +25,26 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- [NEW] 이메일 승인 URL 파라미터 처리 ---
+# --- [NEW] URL 파라미터 처리 (이메일/텔레그램 통합) ---
 params = st.query_params
-if params.get("action") == "approve":
+
+# 텔레그램에서 시작 요청
+if params.get("action") == "start":
+    topic = params.get("topic", "")
+    if topic:
+        st.success(f"🚀 텔레그램에서 요청됨! 주제: **{topic}**")
+        st.session_state.final_data['topic'] = topic
+        st.session_state.pipeline['step'] = 1
+        st.query_params.clear()
+        st.rerun()
+
+# 이메일 승인
+elif params.get("action") == "approve":
     st.success("✅ 이메일 승인 확인! 워드프레스 업로드를 시작합니다...")
     st.session_state.email_approved = True
-    # URL 파라미터 제거
     st.query_params.clear()
+
+# 이메일 거절
 elif params.get("action") == "reject":
     st.warning("❌ 이메일에서 거절되었습니다. 워크플로우를 종료합니다.")
     st.session_state.email_rejected = True

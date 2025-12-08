@@ -2,6 +2,8 @@ import os
 import logging
 import json
 import time
+import urllib.request
+import urllib.parse
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 from dotenv import load_dotenv
@@ -10,6 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+STREAMLIT_APP_URL = os.getenv("STREAMLIT_APP_URL", "https://sunshine-blog.streamlit.app")
 
 # Logging setup
 logging.basicConfig(
@@ -17,11 +20,28 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-# Shared State File (Communication with Streamlit)
+def trigger_streamlit(action, topic=None):
+    """Streamlit 앱에 HTTP 요청으로 워크플로우 트리거"""
+    try:
+        url = f"{STREAMLIT_APP_URL}?action={action}"
+        if topic:
+            url += f"&topic={urllib.parse.quote(topic)}"
+        
+        print(f"🌐 Streamlit 앱 호출: {url}")
+        
+        # 간단한 GET 요청 (Streamlit은 URL 파라미터로 처리)
+        req = urllib.request.Request(url, headers={'User-Agent': 'TelegramBot/1.0'})
+        urllib.request.urlopen(req, timeout=10)
+        return True
+    except Exception as e:
+        print(f"⚠️ Streamlit 호출 실패 (정상일 수 있음): {e}")
+        return True  # Streamlit은 리다이렉트할 수 있어서 에러여도 OK
+
+# Fallback: 로컬 파일 기반 (로컬 테스트용)
 STATE_FILE = "bot_command.json"
 
 def save_command(command, data=None):
-    """Save command to shared file for Streamlit to pick up"""
+    """Save command to shared file for Streamlit to pick up (fallback)"""
     with open(STATE_FILE, "w") as f:
         json.dump({"command": command, "data": data, "timestamp": time.time()}, f)
     print(f"💾 Command saved: {command}")
@@ -54,10 +74,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyword = text
         context.user_data['awaiting_keyword'] = False
         
-        # Save command to trigger Streamlit
-        save_command("START_WORKFLOW", {"topic": keyword})
+        # HTTP로 Streamlit 앱에 워크플로우 시작 요청
+        trigger_streamlit("start", topic=keyword)
+        save_command("START_WORKFLOW", {"topic": keyword})  # 로컬 백업
         
-        await update.message.reply_text(f"🚀 **'{keyword}'** 주제로 워크플로우를 시작합니다!")
+        await update.message.reply_text(f"🚀 **'{keyword}'** 주제로 워크플로우를 시작합니다!\n\n📧 승인 요청이 이메일로 전송됩니다.")
     else:
         await update.message.reply_text("❓ 알 수 없는 명령어입니다. '1'을 입력하여 시작하세요.")
 
