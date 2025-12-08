@@ -255,6 +255,7 @@ def render_workflow_timeline():
             "color": "#FF7452",
             "steps": [
                 ('create_img_prompt', '🖼️', 'Prompt'),
+                ('audit_img_prompt', '🔍', 'Audit'),
                 ('generate_images', '🎨', 'Generate'),
             ]
         },
@@ -708,10 +709,55 @@ elif step == 3:
 
 elif step == 4:
     # Image Rendering 단계
-    st.session_state.progress['create_img_prompt']['status'] = 'complete'
-    st.session_state.progress['create_img_prompt']['percent'] = 100
-    st.session_state.progress['audit_img_prompt']['status'] = 'complete'
+    post = st.session_state.final_data.get('post')
+    topic = st.session_state.final_data.get('topic', '')
+    
+    # 4-1. Prompt 생성/확인
+    st.session_state.progress['create_img_prompt']['status'] = 'active'
+    state_manager.save_state()
+    
+    if post and 'image_prompts' in post:
+        image_prompts = post['image_prompts']
+        st.session_state.progress['create_img_prompt']['percent'] = 100
+        st.session_state.progress['create_img_prompt']['status'] = 'complete'
+    else:
+        st.warning("⚠️ 이미지 프롬프트가 없습니다. 기본값 사용.")
+        image_prompts = [f"Golden Retriever with {topic}", f"Close-up of {topic}"]
+        st.session_state.progress['create_img_prompt']['status'] = 'complete'
+    
+    # 4-2. Prompt 검수 (최대 2회 재시도)
+    st.session_state.progress['audit_img_prompt']['status'] = 'active'
+    state_manager.save_state()
+    
+    max_audit_retries = 2
+    audit_passed = False
+    
+    for audit_attempt in range(max_audit_retries + 1):
+        with st.spinner(f"🔍 이미지 프롬프트 검수 중... (시도 {audit_attempt + 1}/{max_audit_retries + 1})"):
+            content_html = post.get('content_html', '') if post else ''
+            audit_result = auditor.audit_image_prompts(topic, content_html, image_prompts)
+        
+        if audit_result.get('approved'):
+            st.success(f"✅ 프롬프트 검수 통과: {audit_result.get('reason', '')}")
+            image_prompts = audit_result.get('improved_prompts', image_prompts)
+            audit_passed = True
+            break
+        else:
+            st.warning(f"⚠️ 검수 실패 (시도 {audit_attempt + 1}): {audit_result.get('reason', '')}")
+            # 수정된 프롬프트로 재시도
+            image_prompts = audit_result.get('improved_prompts', image_prompts)
+            st.info(f"📝 프롬프트 수정됨: {len(image_prompts)}개")
+    
+    if not audit_passed:
+        st.warning("⚠️ 검수를 통과하지 못했지만, 수정된 프롬프트로 진행합니다.")
+    
+    # 검수 완료된 프롬프트 저장
+    st.session_state.final_data['audited_prompts'] = image_prompts
     st.session_state.progress['audit_img_prompt']['percent'] = 100
+    st.session_state.progress['audit_img_prompt']['status'] = 'complete'
+    state_manager.save_state()
+    
+    # 4-3. 이미지 생성
     st.session_state.progress['generate_images']['status'] = 'active'
     st.session_state.progress['generate_images']['percent'] = 30
     
@@ -734,12 +780,11 @@ elif step == 4:
                 except: pass
 
             if "FOOD" in str(category):
-                food_name = st.session_state.final_data['topic'].split()[1] if len(st.session_state.final_data['topic'].split()) > 1 else "food"
-                food_prompt = st.session_state.final_data.get('food_prompt', f"fresh {food_name}")
-                images = image_utils.generate_images_food_mode(food_name, food_prompt)
+                # FOOD 모드: 템플릿 기반 생성
+                images = image_utils.generate_images_from_template(topic, callback=image_progress_callback)
             else:
-                prompts = post.get("image_prompts", ["Scenery", "Dog"]) if post else ["Scenery", "Dog"]
-                # Pass callback here
+                # 검수된 프롬프트 사용
+                prompts = st.session_state.final_data.get('audited_prompts', image_prompts)
                 images = image_utils.generate_images_hybrid(prompts, callback=image_progress_callback)
             
             if not images or len(images) == 0:

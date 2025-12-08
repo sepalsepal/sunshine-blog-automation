@@ -103,3 +103,82 @@ def _scrape_top_competitor(keyword):
                 driver.quit()
             except:
                 pass
+
+
+def audit_image_prompts(topic, content_html, image_prompts, max_retries=2):
+    """
+    이미지 프롬프트가 글 내용과 일치하는지 검수
+    
+    Returns:
+        dict: {
+            "approved": True/False,
+            "reason": "검수 결과 설명",
+            "improved_prompts": [...] (승인 안 될 경우 개선된 프롬프트)
+        }
+    """
+    print(f"🔍 [Prompt Auditor] 이미지 프롬프트 검수 시작... (주제: {topic})")
+    
+    audit_prompt = f"""
+    당신은 이미지 생성 프롬프트 검수자입니다.
+    
+    [글 주제] {topic}
+    [글 요약] (HTML에서 첫 500자) {content_html[:500]}...
+    
+    [검수할 이미지 프롬프트들]
+    {chr(10).join([f"{i+1}. {p}" for i, p in enumerate(image_prompts)])}
+    
+    [검수 기준]
+    1. 모든 프롬프트에 "골든 리트리버(Golden Retriever)"가 포함되어야 함
+    2. 모든 프롬프트에 "{topic}"이 포함되어야 함
+    3. 배경은 가정집, 부엌, 마당 등 현실적인 장소여야 함
+    4. 꽃밭, 산, 판타지, 일러스트, 애니메이션은 금지
+    5. 글 내용과 관련 없는 요소(예: 호랑이, 벚꽃)는 금지
+    
+    [출력 형식 - JSON만 출력]
+    {{
+        "approved": true 또는 false,
+        "reason": "검수 결과 설명 (한국어)",
+        "issues": ["문제점1", "문제점2"],
+        "improved_prompts": [
+            "수정된 프롬프트 1",
+            "수정된 프롬프트 2",
+            "수정된 프롬프트 3",
+            "수정된 프롬프트 4",
+            "수정된 프롬프트 5"
+        ]
+    }}
+    
+    승인(approved=true)일 경우에도 improved_prompts에 원본을 그대로 넣어주세요.
+    """
+    
+    try:
+        model = genai.GenerativeModel('gemini-2.0-flash')
+        response = model.generate_content(audit_prompt)
+        result_text = response.text.strip()
+        
+        # JSON 추출
+        if "```json" in result_text:
+            result_text = result_text.split("```json")[1].split("```")[0]
+        elif "```" in result_text:
+            result_text = result_text.split("```")[1].split("```")[0]
+        
+        import json
+        result = json.loads(result_text)
+        
+        if result.get("approved"):
+            print(f"   ✅ [Approved] 프롬프트 검수 통과!")
+        else:
+            print(f"   ⚠️ [Rejected] 프롬프트 수정 필요: {result.get('reason')}")
+            print(f"   📝 문제점: {result.get('issues')}")
+        
+        return result
+        
+    except Exception as e:
+        print(f"   ❌ 검수 실패: {e}")
+        # 실패 시 원본 승인
+        return {
+            "approved": True,
+            "reason": f"검수 에러로 원본 승인: {str(e)}",
+            "improved_prompts": image_prompts
+        }
+
