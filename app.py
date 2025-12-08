@@ -316,14 +316,27 @@ def render_workflow_timeline():
         for key, icon, title in group['steps']:
             state_class, display_icon = get_status_display(key)
             
+            # Audit 단계는 빨간색 테마
+            is_audit = 'audit' in key.lower()
+            audit_color = "#DE350B"  # Red
+            
             if state_class == 'complete':
-                item_style = "background: #00875A; color: white;"
+                if is_audit:
+                    item_style = f"background: {audit_color}; color: white;"
+                else:
+                    item_style = "background: #00875A; color: white;"
             elif state_class == 'active':
-                item_style = f"background: {group['color']}; color: white; animation: pulse 1s infinite;"
+                if is_audit:
+                    item_style = f"background: {audit_color}; color: white; animation: pulse 1s infinite;"
+                else:
+                    item_style = f"background: {group['color']}; color: white; animation: pulse 1s infinite;"
             elif state_class == 'error':
                 item_style = "background: #DE350B; color: white;"
             else:
-                item_style = "background: #E0E0E0; color: #666;"
+                if is_audit:
+                    item_style = f"background: #FFEBE6; color: {audit_color}; border: 1px solid {audit_color};"
+                else:
+                    item_style = "background: #E0E0E0; color: #666;"
             
             html += f'''
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; {item_style}">
