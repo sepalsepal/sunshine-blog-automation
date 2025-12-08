@@ -90,10 +90,13 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = query.data
     
     if data == "APPROVE_UPLOAD":
-        save_command("APPROVE_UPLOAD")
+        # HTTP로 Streamlit 앱에 승인 요청
+        trigger_streamlit("approve")
+        save_command("APPROVE_UPLOAD")  # 로컬 백업
         await query.edit_message_text(text="✅ **승인 완료!** 워드프레스 업로드를 시작합니다.")
         
     elif data == "REJECT_UPLOAD":
+        trigger_streamlit("reject")
         save_command("REJECT_UPLOAD")
         await query.edit_message_text(text="❌ **거절됨.** 워크플로우를 종료합니다.")
 
