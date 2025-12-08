@@ -109,32 +109,75 @@ def search_youtube(query, max_results=5):
     return result
 
 
-def search_naver_blog(query):
+def search_naver_blog(query, display=5):
     """
-    네이버 블로그 RSS 검색
-    Returns: dict with blog titles
+    네이버 검색 API를 사용한 블로그 검색
+    
+    Args:
+        query: 검색어
+        display: 결과 개수 (기본 5)
+    
+    Returns:
+        dict: 블로그 검색 결과 (제목, 링크, 블로거명)
     """
+    import os
+    import urllib.request
+    import urllib.parse
+    import json
+    from dotenv import load_dotenv
+    load_dotenv()
+    
+    client_id = os.getenv("NAVER_CLIENT_ID")
+    client_secret = os.getenv("NAVER_CLIENT_SECRET")
+    
     result = {
         "source": "Naver Blog",
         "query": query,
-        "blog_titles": [],
+        "blog_posts": [],
         "status": "pending"
     }
     
+    if not client_id or not client_secret:
+        # Fallback to RSS
+        print("⚠️ [Naver] API 키 없음 - RSS로 대체")
+        try:
+            naver_url = f"https://search.naver.com/search.naver?where=rss&query={query}"
+            naver_feed = feedparser.parse(naver_url)
+            for entry in naver_feed.entries[:5]:
+                result['blog_posts'].append({"title": entry.title, "link": "", "blogger": ""})
+            result['status'] = "complete"
+        except:
+            result['status'] = "error"
+        return result
+    
     try:
-        naver_url = f"https://search.naver.com/search.naver?where=rss&query={query}"
-        naver_feed = feedparser.parse(naver_url)
+        encText = urllib.parse.quote(query)
+        url = f"https://openapi.naver.com/v1/search/blog?query={encText}&display={display}&sort=sim"
         
-        for entry in naver_feed.entries[:5]:
-            result['blog_titles'].append(entry.title)
+        request = urllib.request.Request(url)
+        request.add_header("X-Naver-Client-Id", client_id)
+        request.add_header("X-Naver-Client-Secret", client_secret)
         
-        result['status'] = "complete"
-        print(f"✅ [Naver] Found {len(result['blog_titles'])} blogs")
+        response = urllib.request.urlopen(request)
+        response_body = response.read()
+        data = json.loads(response_body.decode('utf-8'))
+        
+        for item in data.get('items', []):
+            # Remove HTML tags from title
+            title = item['title'].replace('<b>', '').replace('</b>', '')
+            result["blog_posts"].append({
+                "title": title,
+                "link": item['link'],
+                "blogger": item['bloggername']
+            })
+        
+        result["status"] = "complete"
+        print(f"✅ [Naver] {len(result['blog_posts'])}개 블로그 검색 완료: {query}")
         
     except Exception as e:
-        result['status'] = "error"
-        result['error'] = str(e)
-        print(f"❌ [Naver] Failed: {e}")
+        result["status"] = "error"
+        result["error"] = str(e)
+        print(f"❌ [Naver] 검색 실패: {e}")
     
     return result
 

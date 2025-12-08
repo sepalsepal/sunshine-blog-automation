@@ -461,12 +461,22 @@ def update_progress(key, percent, status='active', do_rerun=True):
                         st.write(f"• {v}")
                 st.markdown("---")
             
-            # Blog
+            # Blog (Real API)
             blog = research_data.get('blog', {})
             if blog:
                 st.markdown(f"**📝 네이버 블로그** (검색어: `{blog.get('query', '')}`)")
-                for b in blog.get('blog_titles', []):
-                    st.write(f"• {b}")
+                blog_posts = blog.get('blog_posts', [])
+                if blog_posts:
+                    for b in blog_posts:
+                        if b.get('link'):
+                            st.markdown(f"• [{b.get('title', '')}]({b.get('link', '')})")
+                            st.caption(f"  ✍️ {b.get('blogger', '')}")
+                        else:
+                            st.write(f"• {b.get('title', '')}")
+                else:
+                    # Fallback for old format
+                    for b in blog.get('blog_titles', []):
+                        st.write(f"• {b}")
                 st.markdown("---")
             
             # Combined
