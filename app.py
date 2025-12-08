@@ -442,6 +442,41 @@ with st.sidebar:
         st.rerun()
     elif command == "APPROVE_UPLOAD":
         st.rerun()
+    
+    # --- [NEW] 통계 대시보드 ---
+    st.markdown("---")
+    st.markdown("### 📊 Statistics")
+    
+    try:
+        stats = g_sheet_archiver.get_statistics()
+        
+        # 핵심 지표 (3열)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("📝 전체", stats['total_posts'])
+        col2.metric("📅 이번 달", stats['posts_this_month'])
+        col3.metric("📆 이번 주", stats['posts_this_week'])
+        
+        # 데이터 출처 표시
+        if stats['source'] == 'sheets':
+            st.caption("📗 Google Sheets 연동")
+        elif stats['source'] == 'backup':
+            st.caption("💾 로컬 백업 데이터")
+        else:
+            st.caption("⚠️ 아직 발행 기록 없음")
+        
+        # 최근 글 목록
+        if stats['recent_posts']:
+            with st.expander("📋 최근 발행 글", expanded=False):
+                for post in stats['recent_posts']:
+                    title = post.get('Title') or post.get('title', '제목 없음')
+                    date = post.get('Date') or post.get('date', '')
+                    link = post.get('Link') or post.get('link', '')
+                    if link:
+                        st.markdown(f"• [{title[:30]}...]({link}) ({date[:10]})")
+                    else:
+                        st.markdown(f"• {title[:30]}... ({date[:10]})")
+    except Exception as e:
+        st.caption(f"⚠️ 통계 로드 실패: {str(e)[:30]}")
             
     # [Auto-Refresh for Bot]
     bot_listener.auto_refresh_if_idle()

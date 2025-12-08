@@ -123,3 +123,77 @@ def get_backup_count():
             return len(json.load(f))
     return 0
 
+
+def get_statistics():
+    """
+    통계 데이터 조회 (대시보드용)
+    Returns: {
+        'total_posts': int,
+        'posts_this_month': int,
+        'posts_this_week': int,
+        'recent_posts': list[dict],  # 최근 5개
+        'source': 'sheets' | 'backup' | 'none'
+    }
+    """
+    from datetime import datetime, timedelta
+    
+    stats = {
+        'total_posts': 0,
+        'posts_this_month': 0,
+        'posts_this_week': 0,
+        'recent_posts': [],
+        'source': 'none'
+    }
+    
+    all_posts = []
+    
+    # 1. Google Sheets에서 데이터 가져오기
+    gc = _get_sheet_client()
+    if gc:
+        try:
+            wks = _get_or_create_worksheet(gc, SHEET_NAME)
+            records = wks.get_all_records()
+            all_posts = records
+            stats['source'] = 'sheets'
+        except Exception as e:
+            print(f"⚠️ 시트 조회 실패: {e}")
+    
+    # 2. 로컬 백업에서 데이터 가져오기 (fallback 또는 병합)
+    BACKUP_FILE = "archive_backup.json"
+    if os.path.exists(BACKUP_FILE):
+        try:
+            with open(BACKUP_FILE, 'r', encoding='utf-8') as f:
+                backup_data = json.load(f)
+                if not all_posts:
+                    all_posts = backup_data
+                    stats['source'] = 'backup'
+        except:
+            pass
+    
+    if not all_posts:
+        return stats
+    
+    # 통계 계산
+    now = datetime.now()
+    month_start = now.replace(day=1, hour=0, minute=0, second=0)
+    week_start = now - timedelta(days=now.weekday())
+    
+    for post in all_posts:
+        try:
+            date_str = post.get('Date') or post.get('date', '')
+            if date_str:
+                post_date = datetime.strptime(date_str[:10], '%Y-%m-%d')
+                
+                if post_date >= month_start:
+                    stats['posts_this_month'] += 1
+                if post_date >= week_start:
+                    stats['posts_this_week'] += 1
+        except:
+            pass
+    
+    stats['total_posts'] = len(all_posts)
+    stats['recent_posts'] = all_posts[-5:][::-1]  # 최근 5개, 역순
+    
+    return stats
+
+
