@@ -27,6 +27,103 @@ def encode_image_to_base64(image_path):
 # [1] 기초 부품 함수 (먼저 정의해야 함!)
 # =========================================================
 
+# ===== Imagen 초사실적 프리셋 =====
+IMAGEN_PHOTOREALISTIC_PRESET = {
+    "quality_core": [
+        "professional photography",
+        "award-winning photograph", 
+        "national geographic quality",
+        "ultra high definition 8k",
+        "extremely detailed and sharp",
+        "perfect focus throughout",
+        "RAW photograph quality",
+        "professional color grading"
+    ],
+    
+    "scene_presets": {
+        "food": [
+            "professional food photography",
+            "appetizing and fresh ingredients",
+            "perfect lighting from multiple angles",
+            "beautiful plating and presentation",
+            "visible texture and moisture",
+            "shallow depth of field",
+            "natural food colors",
+            "editorial quality"
+        ],
+        "landscape": [
+            "breathtaking landscape photography",
+            "vivid natural colors",
+            "perfect atmospheric perspective",
+            "golden hour natural lighting",
+            "dramatic clouds and sky",
+            "crisp details from foreground to background",
+            "professional composition"
+        ],
+        "object": [
+            "professional product photography",
+            "studio lighting setup",
+            "clean and minimalist background",
+            "perfect shadows and highlights",
+            "visible material texture and details",
+            "commercial photography quality"
+        ]
+    }
+}
+
+
+def enhance_imagen_prompt(base_prompt, scene_type="object"):
+    """
+    Imagen용 프롬프트를 초사실적으로 개선
+    
+    Args:
+        base_prompt: 기본 설명
+        scene_type: "food", "landscape", "object"
+    
+    Returns:
+        enhanced_prompt: 개선된 프롬프트
+    """
+    preset = IMAGEN_PHOTOREALISTIC_PRESET
+    
+    # 핵심 품질 키워드 (랜덤 선택)
+    import random
+    quality = random.sample(preset["quality_core"], 4)
+    
+    # 장면별 키워드
+    scene_keys = preset["scene_presets"].get(scene_type, preset["scene_presets"]["object"])
+    scene_selected = random.sample(scene_keys, min(4, len(scene_keys)))
+    
+    # 프롬프트 조합  
+    enhanced = (
+        f"{base_prompt}, "
+        f"{', '.join(quality)}, "
+        f"{', '.join(scene_selected)}"
+    )
+    
+    return enhanced
+
+
+@retry(max_attempts=3, delay=2)
+def generate_imagen_photorealistic(base_prompt, scene_type="object"):
+    """
+    [Imagen] 초사실적 이미지 생성 (프리셋 자동 적용)
+    
+    Args:
+        base_prompt: 기본 설명 (예: "fresh ripe peach on wooden table")
+        scene_type: "food", "landscape", "object"
+    
+    Returns:
+        이미지 파일 경로
+    """
+    # 프롬프트 자동 개선
+    enhanced_prompt = enhance_imagen_prompt(base_prompt, scene_type)
+    
+    print(f"📸 [Imagen Photorealistic] Scene: {scene_type}")
+    print(f"   Enhanced: {enhanced_prompt[:80]}...")
+    
+    return generate_imagen_landscape(enhanced_prompt)
+
+
 @retry(max_attempts=3, delay=2)
 def generate_imagen_landscape(prompt):
     """[구글] 풍경/사물 생성"""
