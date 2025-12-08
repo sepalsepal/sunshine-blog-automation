@@ -16,6 +16,109 @@ load_dotenv()
 STABILITY_API_KEY = os.getenv("STABILITY_API_KEY")
 BASE_URL = "https://api.stability.ai/v2beta"
 
+# ===== 초사실적 이미지 프리셋 =====
+PHOTOREALISTIC_PRESET = {
+    "quality_boosters": [
+        "shot on Canon EOS R5",
+        "85mm f/1.4 lens",
+        "professional photography",
+        "award-winning photograph",
+        "national geographic style",
+        "8k ultra HD resolution",
+        "extremely detailed",
+        "sharp focus throughout",
+        "perfect exposure",
+        "natural color grading",
+        "RAW image quality"
+    ],
+    
+    "lighting": [
+        "natural lighting",
+        "golden hour soft light",
+        "professional studio lighting",
+        "volumetric lighting",
+        "realistic shadows and highlights",
+        "ambient occlusion"
+    ],
+    
+    "texture_detail": [
+        "ultra-realistic skin texture",
+        "visible pores and fine details",
+        "realistic fur texture with individual hairs",
+        "fabric weave visible",
+        "natural surface imperfections",
+        "micro-details visible",
+        "lifelike material properties"
+    ],
+    
+    "negative_prompts": [
+        "illustration", "cartoon", "anime", "drawing", "painting",
+        "3d render", "cgi", "artificial", "fake", "unrealistic",
+        "low quality", "blurry", "grainy", "pixelated", "compressed",
+        "oversaturated", "overexposed", "underexposed",
+        "amateur", "poorly lit", "out of focus",
+        "distorted", "deformed", "ugly", "bad anatomy"
+    ]
+}
+
+
+def enhance_prompt_photorealistic(base_prompt, scene_type="general"):
+    """
+    프롬프트를 초사실적으로 개선
+    
+    Args:
+        base_prompt: 기본 프롬프트
+        scene_type: 장면 타입 ("landscape", "portrait", "food", "general")
+    
+    Returns:
+        enhanced_prompt: 개선된 프롬프트
+        negative_prompt: 네거티브 프롬프트
+    """
+    preset = PHOTOREALISTIC_PRESET
+    
+    # 장면별 추가 키워드
+    scene_keywords = {
+        "landscape": [
+            "landscape photography", "wide angle", "depth of field",
+            "atmospheric perspective", "natural colors"
+        ],
+        "portrait": [
+            "portrait photography", "bokeh background", "shallow depth of field",
+            "catch light in eyes", "skin tone accuracy"
+        ],
+        "food": [
+            "food photography", "macro lens", "appetizing presentation",
+            "fresh ingredients", "professional food styling"
+        ],
+        "pet": [
+            "pet photography", "shallow depth of field", "eye-level perspective",
+            "natural animal behavior", "detailed fur texture"
+        ]
+    }
+    
+    # 품질 부스터 (랜덤 3개 선택)
+    import random
+    quality = random.sample(preset["quality_boosters"], 3)
+    lighting = random.sample(preset["lighting"], 2)
+    texture = random.sample(preset["texture_detail"], 2)
+    
+    # 장면별 키워드
+    scene_keys = scene_keywords.get(scene_type, ["professional photography"])
+    
+    # 프롬프트 조합
+    enhanced = (
+        f"{base_prompt}, "
+        f"{', '.join(scene_keys)}, "
+        f"{', '.join(quality)}, "
+        f"{', '.join(lighting)}, "  
+        f"{', '.join(texture)}"
+    )
+    
+    # 네거티브 프롬프트
+    negative = ", ".join(preset["negative_prompts"])
+    
+    return enhanced, negative
+
 
 @retry(max_attempts=3, delay=3)
 def generate_stable_diffusion(prompt, width=1024, height=768, model="sd3.5-large"):
@@ -82,6 +185,33 @@ def generate_stable_diffusion(prompt, width=1024, height=768, model="sd3.5-large
     except Exception as e:
         print(f"   ❌ [Stable Diffusion] 실패: {e}")
         raise  # retry 데코레이터가 처리
+
+
+def generate_photorealistic(base_prompt, scene_type="general", model="sd3.5-large"):
+    """
+    초사실적 이미지 생성 (프리셋 자동 적용)
+    
+    Args:
+        base_prompt: 기본 설명
+        scene_type: "landscape", "portrait", "food", "pet", "general"
+        model: SD3.5 모델
+    
+    Returns:
+        이미지 파일 경로
+    
+    Example:
+        >>> generate_photorealistic("golden retriever looking at peach", scene_type="pet")
+    """
+    # 프롬프트 자동 개선
+    enhanced_prompt, negative = enhance_prompt_photorealistic(base_prompt, scene_type)
+    
+    print(f"📸 [Photorealistic Mode] Scene: {scene_type}")
+    print(f"   Enhanced: {enhanced_prompt[:80]}...")
+    
+    # 생성 (네거티브 프롬프트는 SD3.5 API에서 직접 지원 안함, 프롬프트에 통합)
+    full_prompt = f"{enhanced_prompt}. NOT: {negative}"
+    
+    return generate_stable_diffusion(full_prompt, model=model)
 
 
 def get_account_balance():
