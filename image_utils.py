@@ -66,32 +66,121 @@ def generate_haetsal_lora(prompt):
         return None
 
 # =========================================================
-# [2] 조립 함수 (메인 로직)
+# [2] 템플릿 기반 이미지 생성 (안정적인 고정 프롬프트)
 # =========================================================
 
+def load_image_templates():
+    """config/image_templates.json에서 고정 프롬프트 로드"""
+    import json
+    template_path = os.path.join(os.path.dirname(__file__), "config", "image_templates.json")
+    try:
+        with open(template_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("⚠️ [Warning] image_templates.json not found. Using fallback prompts.")
+        return None
+
+def generate_images_from_template(food_name, callback=None):
+    """
+    템플릿 기반 이미지 생성 (일관된 품질 보장)
+    - config/image_templates.json의 고정 프롬프트 사용
+    - {food} 자리를 food_name으로 치환
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    
+    templates = load_image_templates()
+    if not templates:
+        # Fallback to basic prompts if template not found
+        templates = {
+            "food_mode": {
+                "hero": "A senior Golden Retriever looking at {food}. Home kitchen, natural light.",
+                "detail": "Close-up of {food} on wooden table. Dog paw visible.",
+                "reaction": "Golden Retriever happily eating {food}.",
+                "info": "Dog bowl next to {food} portion.",
+                "summary": "Golden Retriever with owner enjoying {food} snack time."
+            },
+            "negative_prompts": {"global": "-illustration -cartoon"},
+            "model_config": {
+                "hero": {"model": "flux-1.1-pro", "quality": 90},
+                "detail": {"model": "imagen", "quality": 90},
+                "reaction": {"model": "flux-1.1-pro", "quality": 90},
+                "info": {"model": "imagen", "quality": 90},
+                "summary": {"model": "imagen", "quality": 90}
+            }
+        }
+    
+    food_templates = templates["food_mode"]
+    negative = templates.get("negative_prompts", {}).get("global", "")
+    model_config = templates.get("model_config", {})
+    
+    # 프롬프트 생성 (템플릿에서 {food} 치환)
+    prompts = [
+        ("hero", food_templates["hero"].replace("{food}", food_name) + " " + negative),
+        ("detail", food_templates["detail"].replace("{food}", food_name) + " " + negative),
+        ("reaction", food_templates["reaction"].replace("{food}", food_name) + " " + negative),
+        ("info", food_templates["info"].replace("{food}", food_name) + " " + negative),
+        ("summary", food_templates["summary"].replace("{food}", food_name) + " " + negative),
+    ]
+    
+    print(f"🎨 [Template Engine] Generating {len(prompts)} images for '{food_name}'...")
+    generated_files = [None] * len(prompts)
+    completed_count = 0
+    
+    def process_image(index, prompt_type, prompt):
+        print(f"   📸 [{index+1}/5] Generating {prompt_type}...")
+        
+        config = model_config.get(prompt_type, {"model": "imagen", "quality": 90})
+        use_flux = config["model"] == "flux-1.1-pro"
+        
+        filename = None
+        
+        if use_flux:
+            print(f"      ✨ Using FLUX 1.1 Pro")
+            try:
+                output = replicate.run(
+                    "black-forest-labs/flux-1.1-pro",
+                    input={
+                        "prompt": prompt,
+                        "aspect_ratio": "16:9",
+                        "output_format": "jpg",
+                        "output_quality": config["quality"],
+                        "safety_tolerance": 2
+                    }
+                )
+                image_url = str(output)
+                resp = requests.get(image_url)
+                if resp.status_code == 200:
+                    if not os.path.exists("images"): os.makedirs("images")
+                    filename = f"images/flux_{prompt_type}_{datetime.now().strftime('%H%M%S')}_{random.randint(1,999)}.jpg"
+                    with open(filename, "wb") as f: f.write(resp.content)
+                    firebase_uploader.upload_file(filename, f"flux/{os.path.basename(filename)}")
+            except Exception as e:
+                print(f"      ❌ Flux failed: {e}. Fallback to Imagen.")
+                filename = generate_imagen_landscape(prompt)
+        else:
+            print(f"      🔹 Using Google Imagen 3")
+            filename = generate_imagen_landscape(prompt)
+        
+        return index, filename
+    
+    # 병렬 실행
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = [executor.submit(process_image, i, p_type, p) for i, (p_type, p) in enumerate(prompts)]
+        
+        for future in as_completed(futures):
+            idx, fname = future.result()
+            if fname:
+                generated_files[idx] = fname
+            completed_count += 1
+            if callback:
+                callback(completed_count, len(prompts))
+    
+    return [f for f in generated_files if f]
+
+# Legacy function (backward compatibility)
 def generate_images_food_mode(food_name, food_detail_prompt):
-    """음식 모드 (구글 2장 + 햇살이 1장)"""
-    print(f"🎨 [Food Engine] 가동: {food_name}")
-    generated_files = []
-    
-    # 1. 구글 (음식 클로즈업)
-    p1 = f"A candid smartphone food photography of {food_detail_prompt}. Focus on texture. Natural light. -fake"
-    f1 = generate_imagen_landscape(p1) # 위에서 정의했으므로 에러 안 남
-    if f1: generated_files.append(f1)
-    time.sleep(2)
-
-    # 2. 구글 (테이블 샷)
-    p2 = f"A candid smartphone photography of {food_detail_prompt} on a wooden table, home kitchen context. -fake"
-    f2 = generate_imagen_landscape(p2)
-    if f2: generated_files.append(f2)
-    time.sleep(2)
-
-    # 3. FLUX (햇살이)
-    flux_prompt = f"A detailed macro photograph of TOK dog, senior Golden Retriever, looking at {food_name} with curious eyes. soft lighting. -plastic"
-    f3 = generate_haetsal_lora(flux_prompt) # 위에서 정의했으므로 에러 안 남
-    if f3: generated_files.append(f3)
-    
-    return generated_files
+    """음식 모드 (레거시 - generate_images_from_template 사용 권장)"""
+    return generate_images_from_template(food_name)
 
 def generate_images_hybrid(prompts, callback=None):
     """

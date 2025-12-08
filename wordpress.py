@@ -1,6 +1,7 @@
 import os
 import requests
 import html
+import time
 from datetime import datetime
 
 class WordPressClient:
@@ -13,6 +14,28 @@ class WordPressClient:
             raise ValueError("WordPress credentials are missing in .env")
             
         self.xmlrpc_url = f"{self.url}/xmlrpc.php"
+        self.max_retries = 3  # 최대 재시도 횟수
+    
+    def _retry_operation(self, operation_name, func, *args, **kwargs):
+        """
+        재시도 로직 (exponential backoff)
+        - 최대 3회 시도
+        - 실패 시 2초 → 4초 → 8초 대기
+        """
+        for attempt in range(self.max_retries):
+            try:
+                result = func(*args, **kwargs)
+                if result:
+                    return result
+            except Exception as e:
+                wait_time = 2 ** (attempt + 1)
+                print(f"   ⚠️ [{operation_name}] Attempt {attempt+1}/{self.max_retries} failed: {e}")
+                if attempt < self.max_retries - 1:
+                    print(f"      ⏳ Retrying in {wait_time} seconds...")
+                    time.sleep(wait_time)
+                else:
+                    print(f"   ❌ [{operation_name}] All {self.max_retries} attempts failed.")
+        return None
 
     def upload_image(self, image_path):
         """
@@ -126,9 +149,8 @@ class WordPressClient:
         if tags:
             tags_str = ", ".join(tags)
 
-        # 3. Upload Post using xmlrpc.client (Cleaner than raw XML string)
+        # 3. Upload Post using xmlrpc.client with RETRY
         import xmlrpc.client
-        client = xmlrpc.client.ServerProxy(self.xmlrpc_url)
         
         post_struct = {
             'title': title,
@@ -137,14 +159,15 @@ class WordPressClient:
             'post_status': 'publish'
         }
         
-        try:
+        def _do_post():
+            client = xmlrpc.client.ServerProxy(self.xmlrpc_url)
             post_id = client.metaWeblog.newPost(1, self.user, self.password, post_struct, True)
             print(f"✅ [WordPress] Post published! ID: {post_id}")
             return f"{self.url}/?p={post_id}"
-            
-        except Exception as e:
-            print(f"❌ [WordPress] Post upload failed: {e}")
-            return None
+        
+        # 재시도 로직 적용
+        result = self._retry_operation("Post Upload", _do_post)
+        return result
 
 if __name__ == "__main__":
     # Test
