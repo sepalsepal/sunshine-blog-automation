@@ -17,6 +17,7 @@ import telegram_notifier
 import email_notifier  # [NEW] Gmail 승인 시스템
 import state_manager
 from components.timeline import render_workflow_timeline  # [Fix] Import early for button handler
+from components import results_view  # [NEW] 결과물 표시 컴포넌트
 import bot_listener  # [NEW] 텔레그램 봇 리스너
 
 # --- [1] 페이지 설정 ---
@@ -276,6 +277,19 @@ st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platf
 
 
 render_workflow_timeline()
+
+# --- [NEW] 단계별 산출물 표시 (Persistent View) ---
+step = st.session_state.pipeline['step']
+final_data = st.session_state.final_data
+
+if step >= 2:
+    results_view.show_research_results(final_data)
+
+if step >= 3: # 초안 작성 완료 후
+    results_view.show_draft_preview(final_data)
+
+if step >= 5: # 이미지 생성 완료 후 (Step 4는 생성 중)
+    results_view.show_image_gallery(final_data)
 
 # --- [6] 사이드바 ---
 with st.sidebar:
