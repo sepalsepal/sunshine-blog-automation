@@ -288,6 +288,9 @@ if step >= 2:
 if step >= 3: # 초안 작성 완료 후
     results_view.show_draft_preview(final_data)
 
+if step >= 4: # 프롬프트 생성 완료 후
+    results_view.show_image_prompts(final_data)
+
 if step >= 5: # 이미지 생성 완료 후 (Step 4는 생성 중)
     results_view.show_image_gallery(final_data)
 

@@ -31,6 +31,16 @@ def show_draft_preview(final_data):
         st.markdown("---")
         st.markdown(post.get('content_html', ''), unsafe_allow_html=True)
 
+def show_image_prompts(final_data):
+    """Step 4: 이미지 프롬프트 표시"""
+    prompts = final_data.get('audited_prompts') or final_data.get('post', {}).get('image_prompts', [])
+    if not prompts:
+        return
+
+    with st.expander("🖼️ Step 4: Image Prompts", expanded=False):
+        for i, prompt in enumerate(prompts):
+            st.markdown(f"**{i+1}.** {prompt}")
+
 def show_image_gallery(final_data):
     """Step 4: 이미지 생성 결과 표시"""
     images = final_data.get('images', [])
