@@ -38,7 +38,8 @@ def check_for_commands():
     return None
 
 def auto_refresh_if_idle():
-    """대기 상태일 때 자동 새로고침"""
-    if st.session_state.pipeline['step'] == 0:
-        time.sleep(2)
+    """대기 상태 또는 승인 대기 중일 때 자동 새로고침"""
+    # Step 0: 시작 대기, Step 6: 승인 대기
+    if st.session_state.pipeline['step'] in [0, 6]:
+        time.sleep(3)  # 3초마다 확인
         st.rerun()

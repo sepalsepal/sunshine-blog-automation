@@ -17,6 +17,7 @@ import telegram_notifier
 import email_notifier  # [NEW] Gmail 승인 시스템
 import state_manager
 from components.timeline import render_workflow_timeline  # [Fix] Import early for button handler
+import bot_listener  # [NEW] 텔레그램 봇 리스너
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
@@ -25,6 +26,11 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="expanded"
 )
+
+# --- [NEW] 텔레그램 봇 명령 감지 ---
+bot_cmd = bot_listener.check_for_commands()
+if bot_cmd:
+    st.rerun()
 
 # --- [NEW] URL 파라미터 처리 (이메일/텔레그램/스케줄러 통합) ---
 params = st.query_params
@@ -1021,3 +1027,7 @@ for i, f in enumerate(files[:12]):
         st.markdown('<div class="gallery-item">', unsafe_allow_html=True)
         st.image(f, use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
+
+# --- [NEW] 자동 새로고침 (봇 명령 감지용) ---
+bot_listener.auto_refresh_if_idle()
+
