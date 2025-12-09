@@ -67,6 +67,16 @@ IMAGEN_PHOTOREALISTIC_PRESET = {
             "perfect shadows and highlights",
             "visible material texture and details",
             "commercial photography quality"
+        ],
+        "product_white_bg": [
+            "clean product photography on pure white background",
+            "soft natural window light from side",
+            "medium distance framing showing full product",
+            "moderate depth of field",
+            "subtle shadows for depth",
+            "muted desaturated colors",
+            "seamless white backdrop",
+            "blog-style minimalist composition"
         ]
     }
 }
