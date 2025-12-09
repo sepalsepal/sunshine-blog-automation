@@ -14,8 +14,9 @@ def check_for_commands():
         with open(STATE_FILE, "r") as f:
             cmd_data = json.load(f)
         
-        # 5초 이내 명령만 처리 (중복 방지)
-        if time.time() - cmd_data.get('timestamp', 0) < 5:
+        # 5초 제한 제거: 파일이 존재하면 무조건 처리 (처리 후 삭제하므로 안전)
+        # if time.time() - cmd_data.get('timestamp', 0) < 5:
+        if True:
             command = cmd_data.get('command')
             
             if command == "START_WORKFLOW":
