@@ -685,13 +685,23 @@ elif step == 2:
             if 'title' not in current_post or 'content_html' not in current_post:
                 raise ValueError("Corrupted post data")
 
-            # 에디터 UI
-            edited_title = st.text_input("제목 (Title)", value=current_post['title'])
-            edited_content = st.text_area("본문 (Content HTML)", value=current_post['content_html'], height=600)
+            # 에디터 UI (Tabs)
+            tab1, tab2 = st.tabs(["📝 Edit (HTML)", "👁️ Preview"])
+            
+            with tab1:
+                edited_title = st.text_input("제목 (Title)", value=current_post['title'])
+                edited_content = st.text_area("본문 (Content HTML)", value=current_post['content_html'], height=600)
+            
+            with tab2:
+                st.markdown(f"### {current_post['title']}")
+                st.markdown(current_post['content_html'], unsafe_allow_html=True)
+
         except Exception as e:
             st.error(f"⚠️ 데이터 오류 발생: {e}")
             if st.button("🗑️ 데이터 초기화 및 재생성"):
                 del st.session_state.final_data['post']
+                st.session_state.progress['write_content']['status'] = 'pending' # [FIX] 상태 초기화
+                state_manager.save_state()
                 st.rerun()
             st.stop()
         
@@ -721,6 +731,8 @@ elif step == 2:
             if st.button("🔄 Regenerate Draft (다시 쓰기)", use_container_width=True):
                 # 재확인 없이 바로 삭제 후 리런 (버튼 중첩 문제 해결)
                 del st.session_state.final_data['post']
+                st.session_state.progress['write_content']['status'] = 'pending' # [FIX] 상태 초기화
+                state_manager.save_state() # [FIX] 상태 저장
                 st.rerun()
 
 elif step == 3:
