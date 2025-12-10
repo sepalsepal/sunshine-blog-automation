@@ -662,12 +662,28 @@ elif step == 2:
 
     # --- [NEW] Content Command Center: Phase 1 (Draft Editor) ---
     if st.session_state.final_data.get('post'):
+        # 상태 동기화 (복구 시 Pending으로 뜨는 문제 해결)
+        if st.session_state.progress['write_content']['status'] != 'active':
+            st.session_state.progress['write_content']['status'] = 'active'
+        
         st.markdown("### 📝 Draft Editor (Human-in-the-Loop)")
         st.info("AI가 작성한 초안입니다. 내용을 확인하고 수정해주세요. 완료되면 'Save & Continue'를 눌러주세요.")
 
-        # 에디터 UI
-        edited_title = st.text_input("제목 (Title)", value=st.session_state.final_data['post']['title'])
-        edited_content = st.text_area("본문 (Content HTML)", value=st.session_state.final_data['post']['content_html'], height=600)
+        try:
+            # 데이터 무결성 체크
+            current_post = st.session_state.final_data['post']
+            if 'title' not in current_post or 'content_html' not in current_post:
+                raise ValueError("Corrupted post data")
+
+            # 에디터 UI
+            edited_title = st.text_input("제목 (Title)", value=current_post['title'])
+            edited_content = st.text_area("본문 (Content HTML)", value=current_post['content_html'], height=600)
+        except Exception as e:
+            st.error(f"⚠️ 데이터 오류 발생: {e}")
+            if st.button("🗑️ 데이터 초기화 및 재생성"):
+                del st.session_state.final_data['post']
+                st.rerun()
+            st.stop()
         
         col1, col2 = st.columns([1, 1])
         with col1:
