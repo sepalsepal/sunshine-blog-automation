@@ -630,52 +630,72 @@ if step == 1:
     st.rerun()
 
 elif step == 2:
-    # Draft 단계
-    st.session_state.progress['write_content']['status'] = 'active'
-    st.session_state.progress['write_content']['percent'] = 30
-    
-    # [Telegram] Start Notification
-    try: telegram_notifier.send_message(f"✍️ [2/5] 글 작성을 시작합니다... (Topic: {st.session_state.final_data['topic']})")
-    except: pass
-    
-    try:
-        with st.spinner("✍️ Writing content..."):
-            post = content.generate_blog_content("정보성", st.session_state.final_data['topic'])
+    # Draft 생성 로직 (없을 때만 실행)
+    if not st.session_state.final_data.get('post'):
+        try:
+            st.session_state.progress['write_content']['status'] = 'active'
+            st.session_state.progress['write_content']['percent'] = 30
             
-            if not post:
-                raise Exception("Gemini API No Response")
+            # [Telegram] Start Notification
+            try: telegram_notifier.send_message(f"✍️ [2/5] 글 작성을 시작합니다... (Topic: {st.session_state.final_data['topic']})")
+            except: pass
             
-            if not all(k in post for k in ['title', 'content_html', 'hashtags']):
-                raise Exception("Missing required fields")
-            
-            st.session_state.final_data['post'] = post
-            st.success(f"✅ 글 작성 완료: {post['title']}")
+            with st.spinner("✍️ Writing content..."):
+                post = content.generate_blog_content("정보성", st.session_state.final_data['topic'])
+                
+                if not post:
+                    raise Exception("Gemini API No Response")
+                
+                if not all(k in post for k in ['title', 'content_html', 'hashtags']):
+                    raise Exception("Missing required fields")
+                
+                st.session_state.final_data['post'] = post
+                st.success(f"✅ 글 작성 완료: {post['title']}")
+                state_manager.save_state()
+                st.rerun() # 생성 후 리런하여 에디터 진입
+                
+        except Exception as e:
+            st.session_state.progress['write_content']['status'] = 'error'
+            state_manager.save_state()
+            st.error(f"❌ 글 작성 중 에러 발생: {str(e)}")
+            st.stop()
+
+    # --- [NEW] Content Command Center: Phase 1 (Draft Editor) ---
+    if st.session_state.final_data.get('post'):
+        st.markdown("### 📝 Draft Editor (Human-in-the-Loop)")
+        st.info("AI가 작성한 초안입니다. 내용을 확인하고 수정해주세요. 완료되면 'Save & Continue'를 눌러주세요.")
+
+        # 에디터 UI
+        edited_title = st.text_input("제목 (Title)", value=st.session_state.final_data['post']['title'])
+        edited_content = st.text_area("본문 (Content HTML)", value=st.session_state.final_data['post']['content_html'], height=600)
         
-        st.session_state.progress['write_content']['percent'] = 100
-        st.session_state.progress['write_content']['status'] = 'complete'
-        st.session_state.progress['create_hashtags']['status'] = 'complete'
-        st.session_state.progress['create_hashtags']['percent'] = 100
-        
-        # [Telegram] Complete Notification
-        try: telegram_notifier.send_message(f"✅ [2/5] 초안 작성 완료: {post['title']}")
-        except: pass
-        
-        time.sleep(0.5)
-        st.session_state.pipeline['step'] = 3
-        st.rerun()
-        
-    except Exception as e:
-        st.session_state.progress['write_content']['status'] = 'error'
-        state_manager.save_state()
-        
-        st.error(f"❌ 글 작성 중 에러 발생")
-        with st.expander("🚨 System Logs (Debug Info)", expanded=True):
-            st.code(str(e), language="bash")
-            st.warning("위 에러 메시지를 캡처해서 개발자에게 보내주세요.")
-            
-        try: telegram_notifier.send_message(f"🚨 [오류] 글 작성 중 문제가 발생했습니다: {str(e)}")
-        except: pass
-        st.stop()
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            if st.button("💾 Save & Continue (Next Step)", type="primary", use_container_width=True):
+                # 수정 사항 저장
+                st.session_state.final_data['post']['title'] = edited_title
+                st.session_state.final_data['post']['content_html'] = edited_content
+                
+                # 상태 업데이트 및 다음 단계로 이동
+                st.session_state.progress['write_content']['percent'] = 100
+                st.session_state.progress['write_content']['status'] = 'complete'
+                st.session_state.progress['create_hashtags']['status'] = 'complete'
+                st.session_state.progress['create_hashtags']['percent'] = 100
+                
+                # [Telegram] Complete Notification
+                try: telegram_notifier.send_message(f"✅ [2/5] 초안 컨펌 완료: {edited_title}")
+                except: pass
+                
+                state_manager.save_state()
+                time.sleep(0.5)
+                st.session_state.pipeline['step'] = 3
+                st.rerun()
+                
+        with col2:
+            if st.button("🔄 Regenerate Draft (다시 쓰기)", use_container_width=True):
+                # 재확인 없이 바로 삭제 후 리런 (버튼 중첩 문제 해결)
+                del st.session_state.final_data['post']
+                st.rerun()
 
 elif step == 3:
     # Audit 단계
