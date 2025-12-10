@@ -22,7 +22,7 @@ import bot_listener  # [NEW] 텔레그램 봇 리스너
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
-    page_title="Sunshine Imageworks", 
+    page_title="Sunshine v2.2", 
     page_icon="🌞", 
     layout="wide", 
     initial_sidebar_state="expanded"
@@ -278,7 +278,7 @@ if state_manager.load_state():
     st.toast("💾 이전 작업 상태를 복구했습니다.")
 
 # --- [4] 헤더 ---
-st.markdown('<div class="hero-title">Sunshine Imageworks (v2.1)</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-title">Sunshine Imageworks (v2.2)</div>', unsafe_allow_html=True)
 st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platform</div>', unsafe_allow_html=True)
 
 # --- [5] 타임라인 ---
