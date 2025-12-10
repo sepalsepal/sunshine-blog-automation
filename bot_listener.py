@@ -2,6 +2,7 @@ import os
 import json
 import time
 import streamlit as st
+import state_manager  # [NEW] 상태 저장용
 
 STATE_FILE = "bot_command.json"
 
@@ -15,7 +16,6 @@ def check_for_commands():
             cmd_data = json.load(f)
         
         # 5초 제한 제거: 파일이 존재하면 무조건 처리 (처리 후 삭제하므로 안전)
-        # if time.time() - cmd_data.get('timestamp', 0) < 5:
         if True:
             command = cmd_data.get('command')
             
@@ -23,6 +23,10 @@ def check_for_commands():
                 st.toast(f"🤖 텔레그램 명령 수신: {cmd_data['data']['topic']} 시작")
                 st.session_state.final_data['topic'] = cmd_data['data']['topic']
                 st.session_state.pipeline['step'] = 1
+                
+                # 상태 저장
+                state_manager.save_state()
+                
                 # 파일 삭제하여 중복 실행 방지
                 os.remove(STATE_FILE)
                 return "START_WORKFLOW"
@@ -30,6 +34,10 @@ def check_for_commands():
             elif command == "APPROVE_UPLOAD":
                 st.toast("🤖 텔레그램 승인 수신: 업로드 시작")
                 st.session_state.auto_upload_triggered = True
+                
+                # [CRITICAL] 상태 즉시 저장 (재시작/오류 대비)
+                state_manager.save_state()
+                
                 os.remove(STATE_FILE)
                 return "APPROVE_UPLOAD"
                 

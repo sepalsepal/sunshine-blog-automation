@@ -908,8 +908,12 @@ elif step == 5:
         time.sleep(1)
         st.rerun()
     
-    # 자동 새로고침 (5초마다)
-    time.sleep(5)
+    # 수동 확인 버튼
+    if st.button("🔄 승인 상태 확인 (텔레그램/이메일)"):
+        st.rerun()
+    
+    # 자동 새로고침 (bot_listener가 처리하므로 여기서는 짧게 대기)
+    time.sleep(2)
     st.rerun()
 
 # --- [8] 결과 화면 ---
