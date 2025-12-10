@@ -248,11 +248,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- [3] 상태 초기화 ---
+# --- [3] Session State 초기화 ---
 if 'pipeline' not in st.session_state:
-    st.session_state.pipeline = {"step": 0}
-if 'final_data' not in st.session_state:
-    st.session_state.final_data = {}
+    st.session_state.pipeline = {'step': 0, 'status': 'idle'}
+
 if 'progress' not in st.session_state:
     st.session_state.progress = {
         'search_trends': {'status': 'pending', 'percent': 0},
@@ -270,6 +269,13 @@ if 'progress' not in st.session_state:
         'upload_wordpress': {'status': 'pending', 'percent': 0},
         'archive_sheets': {'status': 'pending', 'percent': 0}
     }
+
+if 'final_data' not in st.session_state:
+    st.session_state.final_data = {}
+
+# [NEW] 저장된 상태 불러오기 (앱 재시작 시 복구)
+if state_manager.load_state():
+    st.toast("💾 이전 작업 상태를 복구했습니다.")
 
 # --- [4] 헤더 ---
 st.markdown('<div class="hero-title">Sunshine Imageworks</div>', unsafe_allow_html=True)
