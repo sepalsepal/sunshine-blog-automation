@@ -278,14 +278,11 @@ if state_manager.load_state():
     st.toast("💾 이전 작업 상태를 복구했습니다.")
 
 # --- [4] 헤더 ---
-st.markdown('<div class="hero-title">Sunshine Imageworks (v2.0)</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-title">Sunshine Imageworks (v2.1)</div>', unsafe_allow_html=True)
 st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platform</div>', unsafe_allow_html=True)
 
 # --- [5] 타임라인 ---
 render_workflow_timeline()
-
-# [DEBUG] Global State Check
-st.write(f"Global Debug: Pipeline={st.session_state.pipeline}, Step Type={type(st.session_state.pipeline.get('step'))}")
 
 # --- [6] 메인 로직 (Step-by-Step) ---
 step = st.session_state.pipeline['step']
@@ -643,9 +640,6 @@ if step == 1:
     st.rerun()
 
 elif step == 2:
-    # [DEBUG] 상태 확인용
-    st.write(f"Debug: Step={step}, Post Exists={bool(st.session_state.final_data.get('post'))}")
-    
     # Draft 생성 로직 (없을 때만 실행)
     if not st.session_state.final_data.get('post'):
         try:
