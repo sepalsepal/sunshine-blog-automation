@@ -294,9 +294,11 @@ final_data = st.session_state.final_data
 # [Auto-Recovery] 진행 상태와 Step이 맞지 않을 경우 자동 보정
 if step == 1 and st.session_state.progress['combine_research']['status'] == 'complete':
     st.session_state.pipeline['step'] = 2
+    state_manager.save_state()  # [FIX] 무한 루프 방지: 변경된 상태 저장
     st.rerun()
 elif step == 2 and st.session_state.progress['write_content']['status'] == 'complete':
     st.session_state.pipeline['step'] = 3
+    state_manager.save_state()  # [FIX] 무한 루프 방지: 변경된 상태 저장
     st.rerun()
 
 if step >= 2:
