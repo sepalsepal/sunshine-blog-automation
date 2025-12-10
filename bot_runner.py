@@ -114,10 +114,10 @@ if __name__ == '__main__':
         exit(1)
     
     # APScheduler 설정 (8am, 7pm KST)
-    from apscheduler.schedulers.asyncio import AsyncIOScheduler
+    from apscheduler.schedulers.background import BackgroundScheduler
     import pytz
     
-    scheduler = AsyncIOScheduler(timezone=pytz.timezone('Asia/Seoul'))
+    scheduler = BackgroundScheduler(timezone=pytz.timezone('Asia/Seoul'))
     
     # 오전 8시 실행
     scheduler.add_job(scheduled_auto_post, 'cron', hour=8, minute=0)
