@@ -908,6 +908,14 @@ elif step == 5:
         time.sleep(1)
         st.rerun()
     
+    # [NEW] 웹에서 바로 승인 버튼
+    if st.button("✅ 웹에서 바로 승인 (Direct Approve)", type="primary", use_container_width=True):
+        st.success("✅ 웹에서 승인되었습니다! 업로드를 진행합니다...")
+        st.session_state.auto_upload_triggered = True
+        state_manager.save_state()
+        time.sleep(0.5)
+        st.rerun()
+
     # 수동 확인 버튼
     if st.button("🔄 승인 상태 확인 (텔레그램/이메일)"):
         st.rerun()
