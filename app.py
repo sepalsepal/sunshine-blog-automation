@@ -291,6 +291,14 @@ st.write(f"Global Debug: Pipeline={st.session_state.pipeline}, Step Type={type(s
 step = st.session_state.pipeline['step']
 final_data = st.session_state.final_data
 
+# [Auto-Recovery] 진행 상태와 Step이 맞지 않을 경우 자동 보정
+if step == 1 and st.session_state.progress['combine_research']['status'] == 'complete':
+    st.session_state.pipeline['step'] = 2
+    st.rerun()
+elif step == 2 and st.session_state.progress['write_content']['status'] == 'complete':
+    st.session_state.pipeline['step'] = 3
+    st.rerun()
+
 if step >= 2:
     results_view.show_research_results(final_data)
 
