@@ -215,58 +215,23 @@ if st.session_state.view_mode == 'workflow':
         st.markdown("""
         <div class="bento-container">
             <div class="bento-card">
-                <div>
-                    <div class="card-icon">🔍</div>
-                    <div class="card-title">Research</div>
-                    <div class="card-desc">Analyze Google Trends and YouTube for high-traffic keywords.</div>
-                </div>
-                <div style="margin-top:1rem;">
-                    <span class="step-badge">Trend Analysis</span>
-                    <span class="step-badge">Keyword Mining</span>
-                </div>
+                <div><div class="card-icon">🔍</div><div class="card-title">Research</div><div class="card-desc">Analyze Google Trends and YouTube for high-traffic keywords.</div></div>
+                <div style="margin-top:1rem;"><span class="step-badge">Trend Analysis</span><span class="step-badge">Keyword Mining</span></div>
             </div>
-            
             <div class="bento-card">
-                <div>
-                    <div class="card-icon">✍️</div>
-                    <div class="card-title">Content Engine</div>
-                    <div class="card-desc">Generate SEO-optimized drafts with structured headings.</div>
-                </div>
-                <div style="margin-top:1rem;">
-                    <span class="step-badge">Gemini 2.0</span>
-                    <span class="step-badge">Markdown</span>
-                </div>
+                <div><div class="card-icon">✍️</div><div class="card-title">Content Engine</div><div class="card-desc">Generate SEO-optimized drafts with structured headings.</div></div>
+                <div style="margin-top:1rem;"><span class="step-badge">Gemini 2.0</span><span class="step-badge">Markdown</span></div>
             </div>
-            
             <div class="bento-card card-visuals">
-                <div>
-                    <div class="card-icon">🎨</div>
-                    <div class="card-title">Visual Studio</div>
-                    <div class="card-desc">Create stunning, high-fidelity images using Imagen 3 and Nano Banana Pro models. Supports 2K/4K upscaling.</div>
-                </div>
-                <div style="margin-top:auto; text-align:right;">
-                    <div style="font-size:4rem; opacity:0.1;">🖼️</div>
-                </div>
+                <div><div class="card-icon">🎨</div><div class="card-title">Visual Studio</div><div class="card-desc">Create stunning, high-fidelity images using Imagen 3 and Nano Banana Pro models. Supports 2K/4K upscaling.</div></div>
+                <div style="margin-top:auto; text-align:right;"><div style="font-size:4rem; opacity:0.1;">🖼️</div></div>
             </div>
-            
             <div class="bento-card">
-                <div>
-                    <div class="card-icon">🚀</div>
-                    <div class="card-title">Publishing</div>
-                    <div class="card-desc">Automated upload to WordPress and Google Sheets archiving.</div>
-                </div>
-                <div style="margin-top:1rem;">
-                    <span class="step-badge">WordPress</span>
-                    <span class="step-badge">Sheets</span>
-                </div>
+                <div><div class="card-icon">🚀</div><div class="card-title">Publishing</div><div class="card-desc">Automated upload to WordPress and Google Sheets archiving.</div></div>
+                <div style="margin-top:1rem;"><span class="step-badge">WordPress</span><span class="step-badge">Sheets</span></div>
             </div>
-            
             <div class="bento-card">
-                <div>
-                    <div class="card-icon">📊</div>
-                    <div class="card-title">Analytics</div>
-                    <div class="card-desc">Track performance and engagement metrics.</div>
-                </div>
+                <div><div class="card-icon">📊</div><div class="card-title">Analytics</div><div class="card-desc">Track performance and engagement metrics.</div></div>
             </div>
         </div>
         """, unsafe_allow_html=True)
