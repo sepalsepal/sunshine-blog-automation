@@ -79,6 +79,80 @@ st.markdown("""
             color: white;
             border-color: #30363D;
         }
+
+        /* Bento Grid */
+        .bento-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 60vh;
+        }
+        
+        .bento-card {
+            background: rgba(22, 27, 34, 0.6);
+            border: 1px solid #30363D;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bento-card:hover {
+            border-color: #58A6FF;
+            background: rgba(22, 27, 34, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.05);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-desc {
+            font-size: 0.9rem;
+            color: #8B949E;
+            line-height: 1.4;
+        }
+        
+        .card-visuals {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.8) 0%, rgba(35, 134, 54, 0.1) 100%);
+        }
+        
+        .step-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 0.7rem;
+            color: #8B949E;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -131,13 +205,71 @@ if st.session_state.view_mode == 'workflow':
     </div>
     """, unsafe_allow_html=True)
     
-    # 3. Empty State
-    st.markdown("""
-    <div style="display:flex; justify-content:center; align-items:center; height:60vh; flex-direction:column; color:#8B949E;">
-        <div style="font-size:3rem; margin-bottom:1rem;">🎨</div>
-        <div style="font-size:1.2rem;">Start creating by describing your idea below.</div>
-    </div>
-    """, unsafe_allow_html=True)
+    # 3. Main Content Area (Bento Grid Dashboard)
+    if step == 0:
+        st.markdown("""
+        <div class="bento-container">
+            <!-- 1. Research -->
+            <div class="bento-card">
+                <div>
+                    <div class="card-icon">🔍</div>
+                    <div class="card-title">Research</div>
+                    <div class="card-desc">Analyze Google Trends and YouTube for high-traffic keywords.</div>
+                </div>
+                <div style="margin-top:1rem;">
+                    <span class="step-badge">Trend Analysis</span>
+                    <span class="step-badge">Keyword Mining</span>
+                </div>
+            </div>
+            
+            <!-- 2. Content -->
+            <div class="bento-card">
+                <div>
+                    <div class="card-icon">✍️</div>
+                    <div class="card-title">Content Engine</div>
+                    <div class="card-desc">Generate SEO-optimized drafts with structured headings.</div>
+                </div>
+                <div style="margin-top:1rem;">
+                    <span class="step-badge">Gemini 2.0</span>
+                    <span class="step-badge">Markdown</span>
+                </div>
+            </div>
+            
+            <!-- 3. Visuals (Large) -->
+            <div class="bento-card card-visuals">
+                <div>
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">Visual Studio</div>
+                    <div class="card-desc">Create stunning, high-fidelity images using Imagen 3 and Nano Banana Pro models. Supports 2K/4K upscaling.</div>
+                </div>
+                <div style="margin-top:auto; text-align:right;">
+                    <div style="font-size:4rem; opacity:0.1;">🖼️</div>
+                </div>
+            </div>
+            
+            <!-- 4. Publishing -->
+            <div class="bento-card">
+                <div>
+                    <div class="card-icon">🚀</div>
+                    <div class="card-title">Publishing</div>
+                    <div class="card-desc">Automated upload to WordPress and Google Sheets archiving.</div>
+                </div>
+                <div style="margin-top:1rem;">
+                    <span class="step-badge">WordPress</span>
+                    <span class="step-badge">Sheets</span>
+                </div>
+            </div>
+            
+            <!-- 5. Analytics (Placeholder) -->
+            <div class="bento-card">
+                <div>
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Analytics</div>
+                    <div class="card-desc">Track performance and engagement metrics.</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     # 4. Floating Bottom Bar
     with st.container():
