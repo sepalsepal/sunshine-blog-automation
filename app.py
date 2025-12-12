@@ -43,20 +43,24 @@ with st.sidebar:
     st.markdown("### Manager")
     st.caption("Admin Dashboard")
     
+    # Initialize view_mode if not set (default to 'workflow')
+    if 'view_mode' not in st.session_state:
+        st.session_state.view_mode = 'workflow'
+    
     # Navigation
     nav_selection = st.radio(
         "Navigation", 
-        ["Generation History", "Knowledge Base", "API Management", "User Management", "---", "Go to Studio"],
+        ["Go to Studio", "Generation History", "Knowledge Base", "API Management", "User Management"],
         label_visibility="collapsed"
     )
     
     # Routing Logic
-    if nav_selection == "Generation History":
+    if nav_selection == "Go to Studio":
+        st.session_state.view_mode = 'workflow'
+    elif nav_selection == "Generation History":
         st.session_state.view_mode = 'gallery'
     elif nav_selection == "API Management":
         st.session_state.view_mode = 'api_management'
-    elif nav_selection == "Go to Studio":
-        st.session_state.view_mode = 'workflow'
     else:
         st.session_state.view_mode = 'placeholder'
 
@@ -310,13 +314,22 @@ if st.session_state.get('view_mode') == 'gallery':
 elif st.session_state.get('view_mode') == 'api_management':
     api_management.render()
     st.stop()
+elif st.session_state.get('view_mode') == 'workflow':
+    # Workflow (Studio) mode - skip header/timeline, render Studio UI directly
+    pass
+else:
+    # For placeholder views, show header
+    st.markdown('<div class="hero-title">Sunshine Imageworks (v2.2)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platform</div>', unsafe_allow_html=True)
+    render_workflow_timeline()
+    st.info("🚧 This page is under construction.")
+    st.stop()
 
-# --- [4] 헤더 ---
-st.markdown('<div class="hero-title">Sunshine Imageworks (v2.2)</div>', unsafe_allow_html=True)
-st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platform</div>', unsafe_allow_html=True)
+# --- [4] 헤더 --- (Only for non-workflow modes now handled above)
+# Removed from here to avoid showing in Studio mode
 
-# --- [5] 타임라인 ---
-render_workflow_timeline()
+# --- [5] 타임라인 --- (Only for non-workflow modes now handled above)
+# Removed from here to avoid showing in Studio mode
 
 # --- [6] 메인 로직 (Step-by-Step) ---
 
