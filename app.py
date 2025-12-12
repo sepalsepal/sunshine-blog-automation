@@ -296,17 +296,24 @@ if st.session_state.view_mode == 'workflow':
             
         # --- LAZY LOGIC EXECUTION ---
         if start_btn and topic_input:
-            st.info("🚀 Starting workflow... (Loading modules)")
-            
-            # [CRITICAL] Lazy Import Here!
-            # Only import heavy modules when the user actually clicks the button
-            import workflow_manager
-            
-            # Initialize Manager
-            wm = workflow_manager.WorkflowManager()
-            st.session_state.final_data = {'topic': topic_input}
-            wm.set_step(1)
-            wm.rerun()
+            try:
+                with st.spinner("🚀 Starting workflow... (Initializing AI Models)"):
+                    # [CRITICAL] Lazy Import Here!
+                    import workflow_manager
+                    
+                    # Initialize Manager
+                    wm = workflow_manager.WorkflowManager()
+                    
+                    # Initialize final_data if missing
+                    if 'final_data' not in st.session_state:
+                        st.session_state.final_data = {}
+                        
+                    st.session_state.final_data['topic'] = topic_input
+                    wm.set_step(1)
+                    wm.rerun()
+            except Exception as e:
+                st.error(f"❌ Failed to start workflow: {str(e)}")
+                st.exception(e)
 
 # B. Gallery Mode
 elif st.session_state.view_mode == 'gallery':
