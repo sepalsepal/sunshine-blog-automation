@@ -3,7 +3,7 @@ import time
 
 # --- [1] Configuration (Lightweight) ---
 st.set_page_config(
-    page_title="Sunshine Studio", 
+    page_title="Sunshine Studio v2.4", 
     page_icon="🎨", 
     layout="wide", 
     initial_sidebar_state="expanded"
