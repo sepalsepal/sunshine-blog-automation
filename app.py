@@ -199,6 +199,103 @@ st.markdown("""
             border-radius: 8px;
             border: 1px solid #30363D;
         }
+
+        /* --- STUDIO UI --- */
+        
+        /* Grid Background */
+        .studio-grid-bg {
+            background-color: #0E1117;
+            background-image: linear-gradient(#161B22 1px, transparent 1px), linear-gradient(90deg, #161B22 1px, transparent 1px);
+            background-size: 40px 40px;
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: #0E1117;
+            border-bottom: 1px solid #30363D;
+            margin-bottom: 2rem;
+        }
+        
+        .model-badge {
+            background: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            color: #8B949E;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .model-badge.active {
+            border-color: #2383E2;
+            color: #2383E2;
+            background: rgba(35, 131, 226, 0.1);
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #238636;
+        }
+        
+        /* Floating Bottom Bar */
+        .bottom-bar-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 900px;
+            background: rgba(22, 27, 34, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid #30363D;
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 1000;
+        }
+        
+        .bottom-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .control-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        /* Custom Input for Bottom Bar */
+        .studio-input textarea {
+            background: transparent !important;
+            border: none !important;
+            color: white !important;
+            font-size: 1rem !important;
+            resize: none;
+        }
+        
+        .studio-input textarea:focus {
+            box-shadow: none !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -223,11 +320,70 @@ render_workflow_timeline()
 
 # --- [6] 메인 로직 (Step-by-Step) ---
 
-step = st.session_state.pipeline['step']()
+step = st.session_state.pipeline['step']
 final_data = st.session_state.final_data
 
-# [Auto-Recovery] 진행 상태와 Step이 맞지 않을 경우 자동 보정 (WorkflowManager 내부로 이동됨)
-# wm._auto_recover() is called in load_state()
+# [STUDIO UI] Render Studio Interface if in Workflow mode
+if st.session_state.get('view_mode') == 'workflow':
+    # 1. Grid Background
+    st.markdown('<div class="studio-grid-bg"></div>', unsafe_allow_html=True)
+    
+    # 2. Top Bar
+    st.markdown("""
+    <div class="top-bar">
+        <div class="model-badge active"><div class="dot"></div>Gemini 2.0 Flash Exp</div>
+        <div class="model-badge"><div class="dot" style="background:#8B949E"></div>Nano Banana Pro</div>
+        <div style="flex-grow:1"></div>
+        <div class="model-badge">2K</div>
+        <div class="model-badge">4K</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 3. Main Content Area (Empty State or Results)
+    if step == 0:
+        st.markdown("""
+        <div style="display:flex; justify-content:center; align-items:center; height:60vh; flex-direction:column; color:#8B949E;">
+            <div style="font-size:3rem; margin-bottom:1rem;">🎨</div>
+            <div style="font-size:1.2rem;">Start creating by describing your idea below.</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # 4. Floating Bottom Bar (Input & Controls)
+    # We use a container to mimic the floating bar
+    with st.container():
+        st.markdown('<div style="height: 100px;"></div>', unsafe_allow_html=True) # Spacer
+        
+        # Using columns to center the input area if needed, but CSS handles fixed pos.
+        # Streamlit widgets can't be easily put inside custom HTML fixed divs.
+        # So we use a trick: Place widgets at the bottom and use CSS to style the container?
+        # No, Streamlit widgets are hard to float.
+        # Alternative: Use standard Streamlit widgets at the bottom of the page, styled to look like a floating bar?
+        # Or just put them in a container at the bottom.
+        
+        st.markdown("---") # Visual separator
+        
+        col_input, col_btn = st.columns([5, 1])
+        with col_input:
+            topic_input = st.text_input("Topic", placeholder="이미지를 설명하세요... (예: 눈 내리는 마을의 크리스마스)", label_visibility="collapsed")
+        with col_btn:
+            start_btn = st.button("✨ Generate", type="primary", use_container_width=True)
+            
+        # Options
+        c1, c2, c3 = st.columns([1, 1, 3])
+        with c1:
+            st.toggle("Step-by-Step", value=True)
+        with c2:
+            st.selectbox("Ratio", ["1:1", "16:9", "9:16"], label_visibility="collapsed")
+            
+        if start_btn and topic_input:
+            st.session_state.final_data['topic'] = topic_input
+            wm.set_step(1)
+            wm.rerun()
+
+# [Legacy Logic for Steps 1-5] - Only show if step > 0
+if step >= 1:
+    # Hide the empty state if step > 0 (handled above)
+    pass
 
 if step >= 2:
     results_view.show_research_results(final_data)
