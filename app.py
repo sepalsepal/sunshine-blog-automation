@@ -4,28 +4,29 @@ import os
 import glob
 from PIL import Image
 
-# 모듈 연결
-import content
-import image_utils
-import weather_utils
-import wordpress 
-import food_manager
-import research
-import auditor
-import g_sheet_archiver
-import telegram_notifier
-import email_notifier
+# 모듈 연결 - LAZY LOADED to prevent blocking on startup
+# These will be imported only when needed
+# import content
+# import image_utils
+# import weather_utils
+# import wordpress 
+# import food_manager
+# import research
+# import auditor
+# import g_sheet_archiver
+# import telegram_notifier
+# import email_notifier
 import state_manager
 from components.timeline import render_workflow_timeline
 from components import results_view
-import bot_listener
+# import bot_listener  # DISABLED - causing infinite loading
 
 # [NEW] Modular Architecture Imports
 from workflow_manager import WorkflowManager
 from views import step_01_research
 from views import step_02_draft
 from views import gallery
-from views import api_management # [NEW] # [NEW]
+from views import api_management
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
