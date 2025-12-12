@@ -202,9 +202,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# [NEW] 저장된 상태 불러오기 (앱 재시작 시 복구)
+# --- [NEW] 저장된 상태 불러오기 (앱 재시작 시 복구)
 if wm.load_state():
     pass # Toast is handled in load_state
+
+# --- [ROUTING] View Mode Routing (Before Header/Timeline) ---
+if st.session_state.get('view_mode') == 'gallery':
+    gallery.render()
+    st.stop()
+elif st.session_state.get('view_mode') == 'api_management':
+    api_management.render()
+    st.stop()
 
 # --- [4] 헤더 ---
 st.markdown('<div class="hero-title">Sunshine Imageworks (v2.2)</div>', unsafe_allow_html=True)
@@ -214,12 +222,6 @@ st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platf
 render_workflow_timeline()
 
 # --- [6] 메인 로직 (Step-by-Step) ---
-if st.session_state.get('view_mode') == 'gallery':
-    gallery.render()
-    st.stop()
-elif st.session_state.get('view_mode') == 'api_management':
-    api_management.render()
-    st.stop()
 
 step = st.session_state.pipeline['step']()
 final_data = st.session_state.final_data

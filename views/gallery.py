@@ -12,7 +12,7 @@ def render():
     st.markdown('<div class="hero-title">Generation History</div>', unsafe_allow_html=True)
     
     # 이미지 파일 검색
-    image_files = glob.glob("generated_images/*.png") + glob.glob("generated_images/*.jpg") + glob.glob("generated_images/*.webp")
+    image_files = glob.glob("generated_images/*.png") + glob.glob("generated_images/*.jpg") + glob.glob("generated_images/*.jpeg") + glob.glob("generated_images/*.webp")
     
     if not image_files:
         st.info("🖼️ No images generated yet.")
