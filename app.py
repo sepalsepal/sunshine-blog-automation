@@ -38,6 +38,45 @@ st.set_page_config(
 # --- [NEW] Workflow Manager 초기화 ---
 wm = WorkflowManager()
 
+# --- [6] 사이드바 (Moved to Top) ---
+with st.sidebar:
+    st.markdown("### Manager")
+    st.caption("Admin Dashboard")
+    
+    # Navigation
+    nav_selection = st.radio(
+        "Navigation", 
+        ["Generation History", "Knowledge Base", "API Management", "User Management", "---", "Go to Studio"],
+        label_visibility="collapsed"
+    )
+    
+    # Routing Logic
+    if nav_selection == "Generation History":
+        st.session_state.view_mode = 'gallery'
+    elif nav_selection == "API Management":
+        st.session_state.view_mode = 'api_management'
+    elif nav_selection == "Go to Studio":
+        st.session_state.view_mode = 'workflow'
+    else:
+        st.session_state.view_mode = 'placeholder'
+
+    st.markdown("---")
+    
+    # Studio Controls (Only visible in Studio Mode)
+    if st.session_state.get('view_mode') == 'workflow':
+        st.markdown("### 🎮 Studio Controls")
+        category = st.selectbox("📁 Category", ["강아지 ## 먹어도 되나요?", "WALK_TIPS"])
+        topic_input = st.text_input("💡 Custom Topic")
+        
+        if st.button("🚀 START WORKFLOW"):
+            # 상태 리셋
+            st.session_state.pipeline['step'] = 1
+            st.session_state.final_data = {} 
+            for key in st.session_state.progress:
+                st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
+            state_manager.clear_state()
+            st.rerun()
+
 # --- [NEW] 텔레그램 봇 명령 감지 ---
 bot_cmd = bot_listener.check_for_commands()
 if bot_cmd:
@@ -355,7 +394,8 @@ elif step == 5:
                 del st.session_state[key]
             wm.rerun()
 
-# --- [6] 사이드바 ---
+# --- [6] 사이드바 (Moved to Top) ---
+# Sidebar must be defined before st.stop() calls
 with st.sidebar:
     st.markdown("### Manager")
     st.caption("Admin Dashboard")
@@ -394,24 +434,24 @@ with st.sidebar:
             state_manager.clear_state()
             st.rerun()
 
-    # [Telegram Bot Listener]
-    import bot_listener
-    command = bot_listener.check_for_commands()
-    if command == "START_WORKFLOW":
-        try: telegram_notifier.send_message(f"🚀 웹 앱에서 작업을 시작했습니다! (주제: {st.session_state.final_data['topic']})")
-        except: pass
-        state_manager.save_state()
-        st.rerun()
-    elif command == "APPROVE_UPLOAD":
-        st.rerun()
-        st.balloons()
-        
-        # 완료 후 리셋 버튼
-        if st.button("🔄 새로운 글 작성하기"):
-            state_manager.clear_state()
-            for key in list(st.session_state.keys()):
-                del st.session_state[key]
-            wm.rerun()
+# [Telegram Bot Listener]
+import bot_listener
+command = bot_listener.check_for_commands()
+if command == "START_WORKFLOW":
+    try: telegram_notifier.send_message(f"🚀 웹 앱에서 작업을 시작했습니다! (주제: {st.session_state.final_data['topic']})")
+    except: pass
+    state_manager.save_state()
+    st.rerun()
+elif command == "APPROVE_UPLOAD":
+    st.rerun()
+    st.balloons()
+    
+    # 완료 후 리셋 버튼
+    if st.button("🔄 새로운 글 작성하기"):
+        state_manager.clear_state()
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        wm.rerun()
 
 # 봇 리스너 주기적 체크 (마지막 안전장치)
 bot_listener.auto_refresh_if_idle()
