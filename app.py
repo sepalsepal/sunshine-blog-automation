@@ -24,6 +24,7 @@ import bot_listener
 from workflow_manager import WorkflowManager
 from views import step_01_research
 from views import step_02_draft
+from views import gallery # [NEW]
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
@@ -268,7 +269,11 @@ st.markdown('<div class="hero-subtitle">AI-Powered Blog Content Generation Platf
 render_workflow_timeline()
 
 # --- [6] 메인 로직 (Step-by-Step) ---
-step = wm.get_current_step()
+if st.session_state.get('view_mode') == 'gallery':
+    gallery.render()
+    st.stop() # 갤러리 모드에서는 워크플로우 렌더링 중단
+
+step = st.session_state.pipeline['step']()
 final_data = st.session_state.final_data
 
 # [Auto-Recovery] 진행 상태와 Step이 맞지 않을 경우 자동 보정 (WorkflowManager 내부로 이동됨)
@@ -286,16 +291,6 @@ if step >= 4:
 if step == 0:
     # 0. 시작 대기
     with st.sidebar:
-        st.header("🎮 Control Center")
-        
-        category = st.selectbox("📂 Category", ["강아지 건강", "강아지 훈련", "강아지 영양", "강아지 행동", "FOOD (오늘 뭐 먹지?)"])
-        topic_input = st.text_input("💡 Custom Topic (Optional)", placeholder="Enter specific topic...")
-        
-        auto_approve = st.checkbox("⚡ 자동 승인 (검토 없이 바로 업로드)", value=False)
-        st.session_state.auto_approve = auto_approve
-        
-        if st.button("🚀 START WORKFLOW", type="primary"):
-            wm.set_step(1)
             wm.rerun()
 
 elif step == 1:
