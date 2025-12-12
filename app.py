@@ -214,7 +214,6 @@ if st.session_state.view_mode == 'workflow':
     if step == 0:
         st.markdown("""
         <div class="bento-container">
-            <!-- 1. Research -->
             <div class="bento-card">
                 <div>
                     <div class="card-icon">🔍</div>
@@ -227,7 +226,6 @@ if st.session_state.view_mode == 'workflow':
                 </div>
             </div>
             
-            <!-- 2. Content -->
             <div class="bento-card">
                 <div>
                     <div class="card-icon">✍️</div>
@@ -240,7 +238,6 @@ if st.session_state.view_mode == 'workflow':
                 </div>
             </div>
             
-            <!-- 3. Visuals (Large) -->
             <div class="bento-card card-visuals">
                 <div>
                     <div class="card-icon">🎨</div>
@@ -252,7 +249,6 @@ if st.session_state.view_mode == 'workflow':
                 </div>
             </div>
             
-            <!-- 4. Publishing -->
             <div class="bento-card">
                 <div>
                     <div class="card-icon">🚀</div>
@@ -265,7 +261,6 @@ if st.session_state.view_mode == 'workflow':
                 </div>
             </div>
             
-            <!-- 5. Analytics (Placeholder) -->
             <div class="bento-card">
                 <div>
                     <div class="card-icon">📊</div>
