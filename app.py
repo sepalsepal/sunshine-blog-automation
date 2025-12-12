@@ -73,10 +73,12 @@ with st.sidebar:
     st.markdown("---")
     st.caption("🎛️ Studio controls are in the main area")
 
+
 # --- [NEW] 텔레그램 봇 명령 감지 ---
-bot_cmd = bot_listener.check_for_commands()
-if bot_cmd:
-    wm.rerun()
+# TEMPORARILY DISABLED - causing infinite loading
+# bot_cmd = bot_listener.check_for_commands()
+# if bot_cmd:
+#     wm.rerun()
 
 # --- [NEW] URL 파라미터 처리 (이메일/텔레그램/스케줄러 통합) ---
 params = st.query_params
@@ -617,4 +619,5 @@ elif command == "APPROVE_UPLOAD":
         wm.rerun()
 
 # 봇 리스너 주기적 체크 (마지막 안전장치)
-bot_listener.auto_refresh_if_idle()
+# TEMPORARILY DISABLED - causing infinite loading every 3 seconds
+# bot_listener.auto_refresh_if_idle()
