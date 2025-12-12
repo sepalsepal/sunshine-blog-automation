@@ -24,7 +24,8 @@ import bot_listener
 from workflow_manager import WorkflowManager
 from views import step_01_research
 from views import step_02_draft
-from views import gallery # [NEW]
+from views import gallery
+from views import api_management # [NEW] # [NEW]
 
 # --- [1] 페이지 설정 ---
 st.set_page_config(
@@ -88,171 +89,76 @@ st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        /* Global */
-        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #37352f; }
-        .stApp { background-color: #FFFFFF; }
+        /* Global Dark Theme */
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #E6E6E6; }
+        .stApp { background-color: #0E1117; }
         
         /* Sidebar */
         [data-testid="stSidebar"] {
-            background-color: #F7F7F5;
-            border-right: 1px solid #E0E0E0;
+            background-color: #161B22;
+            border-right: 1px solid #30363D;
         }
         
         /* Main Title */
         .hero-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: #37352f;
+            color: #FFFFFF;
             margin-top: 1rem;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
         
         .hero-subtitle {
-            color: #787774;
+            color: #8B949E;
             font-size: 1.1rem;
             margin-bottom: 2rem;
             font-weight: 400;
         }
         
-        /* Notion Card (Callout) */
+        /* Notion Card (Dark Mode) */
         .notion-card {
-            background: #FFFFFF;
-            border: 1px solid #E0E0E0;
+            background: #161B22;
+            border: 1px solid #30363D;
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
-        .notion-card:hover {
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-color: #D0D0D0;
-        }
-        
-        /* Section Headers */
         .section-header {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #37352f;
+            color: #FFFFFF;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        /* Workflow Container (Mobile Scroll) */
-        .workflow-container {
-            display: flex;
-            justify-content: flex-start; /* Left align for scrolling */
-            align-items: center;
-            margin: 2rem 0;
-            padding: 1rem 0;
-            overflow-x: auto; /* Enable horizontal scroll */
-            white-space: nowrap; /* Prevent wrapping */
-            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
-            gap: 1rem; /* Space between items */
-        }
-        
-        /* Hide scrollbar for clean look */
-        .workflow-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .step-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-            gap: 0.5rem;
-            opacity: 0.4;
-            transition: all 0.3s ease;
-        }
-        
-        .step-item.active { opacity: 1; transform: scale(1.05); }
-        .step-item.complete { opacity: 1; color: #2EAADC; }
-        
-        .step-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            background: #F0F0F0;
-            border: 1px solid #E0E0E0;
-        }
-        
-        .step-item.active .step-icon {
-            background: #2383E2;
-            color: white;
-            border-color: #2383E2;
-            box-shadow: 0 0 0 4px rgba(35, 131, 226, 0.2);
-        }
-        
-        .step-item.complete .step-icon {
-            background: #E3FCEF;
-            color: #00703C;
-            border-color: #E3FCEF;
-        }
-        
-        .step-item.error { opacity: 1; color: #D70022; }
-        .step-item.error .step-icon {
-            background: #FFEBE6;
-            color: #D70022;
-            border-color: #FFBDAD;
-            box-shadow: 0 0 0 4px rgba(215, 0, 34, 0.2);
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-        
-        .step-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-align: center;
-        }
-        
         /* Buttons */
         .stButton > button {
-            width: 100%;
-            background-color: #2383E2;
+            background-color: #238636; /* GitHub Green */
             color: white !important;
-            border: none;
+            border: 1px solid rgba(240, 246, 252, 0.1);
             border-radius: 6px;
-            padding: 0.5rem 1rem;
             font-weight: 500;
-            transition: background 0.2s;
         }
         .stButton > button:hover {
-            background-color: #1A6FB0;
+            background-color: #2EA043;
         }
         
-        /* Status Messages */
-        .stSuccess { background-color: #E3FCEF; color: #00703C; border: none; }
-        .stInfo { background-color: #E6F3F7; color: #005A87; border: none; }
-        .stWarning { background-color: #FFF8C5; color: #5C4B00; border: none; }
-        .stError { background-color: #FFEBE6; color: #BF2600; border: none; }
-        
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
+        /* Inputs */
+        .stTextInput > div > div > input, .stSelectbox > div > div > div {
+            background-color: #0D1117;
+            color: white;
+            border-color: #30363D;
         }
+        
+        /* Gallery Grid */
         .gallery-img {
             border-radius: 8px;
-            border: 1px solid #E0E0E0;
-            width: 100%;
-            height: auto;
+            border: 1px solid #30363D;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -271,7 +177,10 @@ render_workflow_timeline()
 # --- [6] 메인 로직 (Step-by-Step) ---
 if st.session_state.get('view_mode') == 'gallery':
     gallery.render()
-    st.stop() # 갤러리 모드에서는 워크플로우 렌더링 중단
+    st.stop()
+elif st.session_state.get('view_mode') == 'api_management':
+    api_management.render()
+    st.stop()
 
 step = st.session_state.pipeline['step']()
 final_data = st.session_state.final_data
@@ -437,6 +346,64 @@ elif step == 5:
         wm.save_state()
         
         st.success(f"✨ 모든 작업 완료! [포스트 보러가기]({post_url})")
+        st.balloons()
+        
+        # 완료 후 리셋 버튼
+        if st.button("🔄 새로운 글 작성하기"):
+            state_manager.clear_state()
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            wm.rerun()
+
+# --- [6] 사이드바 ---
+with st.sidebar:
+    st.markdown("### Manager")
+    st.caption("Admin Dashboard")
+    
+    # Navigation
+    nav_selection = st.radio(
+        "Navigation", 
+        ["Generation History", "Knowledge Base", "API Management", "User Management", "---", "Go to Studio"],
+        label_visibility="collapsed"
+    )
+    
+    # Routing Logic
+    if nav_selection == "Generation History":
+        st.session_state.view_mode = 'gallery'
+    elif nav_selection == "API Management":
+        st.session_state.view_mode = 'api_management'
+    elif nav_selection == "Go to Studio":
+        st.session_state.view_mode = 'workflow'
+    else:
+        st.session_state.view_mode = 'placeholder'
+
+    st.markdown("---")
+    
+    # Studio Controls (Only visible in Studio Mode)
+    if st.session_state.get('view_mode') == 'workflow':
+        st.markdown("### 🎮 Studio Controls")
+        category = st.selectbox("📁 Category", ["강아지 ## 먹어도 되나요?", "WALK_TIPS"])
+        topic_input = st.text_input("💡 Custom Topic")
+        
+        if st.button("🚀 START WORKFLOW"):
+            # 상태 리셋
+            st.session_state.pipeline['step'] = 1
+            st.session_state.final_data = {} 
+            for key in st.session_state.progress:
+                st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
+            state_manager.clear_state()
+            st.rerun()
+
+    # [Telegram Bot Listener]
+    import bot_listener
+    command = bot_listener.check_for_commands()
+    if command == "START_WORKFLOW":
+        try: telegram_notifier.send_message(f"🚀 웹 앱에서 작업을 시작했습니다! (주제: {st.session_state.final_data['topic']})")
+        except: pass
+        state_manager.save_state()
+        st.rerun()
+    elif command == "APPROVE_UPLOAD":
+        st.rerun()
         st.balloons()
         
         # 완료 후 리셋 버튼
