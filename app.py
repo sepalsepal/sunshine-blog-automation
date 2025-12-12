@@ -191,6 +191,11 @@ with st.sidebar:
 
 # A. Studio (Workflow) Mode
 if st.session_state.view_mode == 'workflow':
+    # Initialize step
+    if 'pipeline' not in st.session_state:
+        st.session_state.pipeline = {'step': 0}
+    step = st.session_state.pipeline['step']
+
     # 1. Background
     st.markdown('<div class="studio-grid-bg"></div>', unsafe_allow_html=True)
     
