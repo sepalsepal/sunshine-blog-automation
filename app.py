@@ -47,39 +47,31 @@ with st.sidebar:
     if 'view_mode' not in st.session_state:
         st.session_state.view_mode = 'workflow'
     
-    # Navigation
-    nav_selection = st.radio(
+    # Map view_mode to index for radio button
+    view_options = ["Go to Studio", "Generation History", "API Management"]
+    view_map = {"workflow": 0, "gallery": 1, "api_management": 2}
+    reverse_map = {0: "workflow", 1: "gallery", 2: "api_management"}
+    
+    # Get current index
+    current_index = view_map.get(st.session_state.view_mode, 0)
+    
+    # Navigation (use index to avoid constant reruns)
+    nav_index = st.radio(
         "Navigation", 
-        ["Go to Studio", "Generation History", "Knowledge Base", "API Management", "User Management"],
+        range(len(view_options)),
+        format_func=lambda x: view_options[x],
+        index=current_index,
         label_visibility="collapsed"
     )
     
-    # Routing Logic
-    if nav_selection == "Go to Studio":
-        st.session_state.view_mode = 'workflow'
-    elif nav_selection == "Generation History":
-        st.session_state.view_mode = 'gallery'
-    elif nav_selection == "API Management":
-        st.session_state.view_mode = 'api_management'
-    else:
-        st.session_state.view_mode = 'placeholder'
+    # Only update if changed
+    new_view_mode = reverse_map[nav_index]
+    if st.session_state.view_mode != new_view_mode:
+        st.session_state.view_mode = new_view_mode
+        st.rerun()
 
     st.markdown("---")
-    
-    # Studio Controls (Only visible in Studio Mode)
-    if st.session_state.get('view_mode') == 'workflow':
-        st.markdown("### 🎮 Studio Controls")
-        category = st.selectbox("📁 Category", ["강아지 ## 먹어도 되나요?", "WALK_TIPS"])
-        topic_input = st.text_input("💡 Custom Topic")
-        
-        if st.button("🚀 START WORKFLOW"):
-            # 상태 리셋
-            st.session_state.pipeline['step'] = 1
-            st.session_state.final_data = {} 
-            for key in st.session_state.progress:
-                st.session_state.progress[key] = {'status': 'pending', 'percent': 0}
-            state_manager.clear_state()
-            st.rerun()
+    st.caption("🎛️ Studio controls are in the main area")
 
 # --- [NEW] 텔레그램 봇 명령 감지 ---
 bot_cmd = bot_listener.check_for_commands()
