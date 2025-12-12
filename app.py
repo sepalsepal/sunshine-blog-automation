@@ -254,25 +254,32 @@ if st.session_state.view_mode == 'workflow':
         with c2:
             st.selectbox("Ratio", ["1:1", "16:9", "9:16"], label_visibility="collapsed")
             
-        # --- LAZY LOGIC EXECUTION ---
+        # --- n8n WEBHOOK INTEGRATION ---
         if start_btn and topic_input:
             try:
-                with st.spinner("🚀 Starting workflow... (Initializing AI Models)"):
-                    # [CRITICAL] Lazy Import Here!
-                    import workflow_manager
+                with st.spinner("🚀 Sending job to n8n automation engine..."):
+                    import requests
                     
-                    # Initialize Manager
-                    wm = workflow_manager.WorkflowManager()
+                    # n8n Webhook URL (Test Mode)
+                    N8N_WEBHOOK_URL = "http://localhost:5678/webhook-test/3b7f98ba-fdd1-45f2-b0f6-429a1a9febac"
                     
-                    # Initialize final_data if missing
-                    if 'final_data' not in st.session_state:
-                        st.session_state.final_data = {}
+                    payload = {
+                        "topic": topic_input,
+                        "timestamp": time.time(),
+                        "source": "Sunshine Studio v2.4"
+                    }
+                    
+                    response = requests.post(N8N_WEBHOOK_URL, json=payload)
+                    
+                    if response.status_code == 200:
+                        st.success(f"✅ Job sent successfully! Check your n8n dashboard.")
+                        st.balloons()
+                    else:
+                        st.error(f"❌ Failed to send to n8n. Status: {response.status_code}")
+                        st.write(response.text)
                         
-                    st.session_state.final_data['topic'] = topic_input
-                    wm.set_step(1)
-                    wm.rerun()
             except Exception as e:
-                st.error(f"❌ Failed to start workflow: {str(e)}")
+                st.error(f"❌ Connection Error: {str(e)}")
                 st.exception(e)
 
 # B. Gallery Mode
