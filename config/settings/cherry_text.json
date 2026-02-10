@@ -1,0 +1,62 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "CHERRY",
+        "subtitle": "달콤새콤 빨간 체리"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "조건부 OK!",
+        "subtitle": "씨앗/줄기/잎은 절대 안돼요! 🍒"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "항산화 성분",
+        "subtitle": "안토시아닌이 노화를 방지해요! ✨"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "관절 건강",
+        "subtitle": "염증 완화에 도움이 돼요! 💪"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "수면 개선",
+        "subtitle": "멜라토닌이 숙면을 도와요! 😴"
+    },
+    {
+        "slide": 6,
+        "type": "content_bottom",
+        "title": "씨앗 독성!",
+        "subtitle": "시안화물 성분이 있어요 ☠️"
+    },
+    {
+        "slide": 7,
+        "type": "content_bottom",
+        "title": "줄기/잎 금지",
+        "subtitle": "마찬가지로 독성이 있어요! 🚫"
+    },
+    {
+        "slide": 8,
+        "type": "content_top",
+        "title": "1-2알만!",
+        "subtitle": "과육만 씨 빼고 소량 급여하세요! 🍒"
+    },
+    {
+        "slide": 9,
+        "type": "content_bottom",
+        "title": "새콤달콤 간식",
+        "subtitle": "여름철 시원한 체리 한 알 🍒"
+    },
+    {
+        "slide": 10,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "체리는 조심해서 주세요! 🐶"
+    }
+]

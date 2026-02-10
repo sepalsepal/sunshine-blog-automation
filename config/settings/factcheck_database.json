@@ -1,0 +1,389 @@
+{
+  "version": "1.0",
+  "created_at": "2026-01-24",
+  "created_by": "박리서치",
+  "purpose": "최검증 에이전트 팩트체크용 데이터베이스",
+  "disclaimer": "수의학적 참고 자료입니다. 실제 급여 전 수의사 상담을 권장합니다.",
+
+  "sources": {
+    "ASPCA": "American Society for the Prevention of Cruelty to Animals",
+    "AKC": "American Kennel Club",
+    "MVM": "Merck Veterinary Manual",
+    "KVMA": "대한수의사회",
+    "PMC": "PubMed Central (수의학 논문)",
+    "Hills": "Hill's Pet Nutrition",
+    "RoyalCanin": "Royal Canin Korea"
+  },
+
+  "general_rules": {
+    "treat_rule": {
+      "rule": "10% 규칙",
+      "description": "간식(과일/채소 포함)은 하루 전체 칼로리의 10% 이내",
+      "source": "AKC, Hills, 수의영양학회 공통 권장",
+      "example_5kg": "새끼 손가락 한두 마디 정도 (약 15~25g)"
+    },
+    "first_feeding": "새로운 음식은 소량부터 시작, 24시간 알레르기 반응 관찰",
+    "preparation": "씨앗/껍질 제거, 익혀서 급여 원칙 (특히 육류/해산물)",
+    "emergency_contact": "ASPCA 독극물센터: (888) 426-4435 / 한국: 가까운 24시 동물병원"
+  },
+
+  "dangerous_foods": {
+    "chocolate_danger": {
+      "ko": "초콜릿",
+      "toxic_component": "테오브로민 (Theobromine) + 카페인",
+      "toxic_dose": {
+        "mild_symptoms": "20 mg/kg (테오브로민 기준)",
+        "cardiac_symptoms": "40~50 mg/kg",
+        "seizures": "60+ mg/kg",
+        "lethal": "100~200 mg/kg"
+      },
+      "theobromine_content": {
+        "white_chocolate": "0.25 mg/g (거의 무독성)",
+        "milk_chocolate": "2.4 mg/g",
+        "dark_chocolate": "5.5~16 mg/g",
+        "baking_chocolate": "16 mg/g",
+        "cocoa_powder": "28.5 mg/g (가장 위험)"
+      },
+      "symptoms": ["구토", "설사", "과잉행동", "빠른 심박", "떨림", "발작", "사망"],
+      "onset": "6~12시간 이내",
+      "first_aid": "즉시 동물병원 방문, 섭취 2시간 이내 구토 유도 가능 (수의사 지시 하에)",
+      "sources": ["ASPCA", "MVM", "PMC:PMC4801869"]
+    },
+    "grape_danger": {
+      "ko": "포도",
+      "toxic_component": "타르타르산 (추정, 정확한 기전 불명)",
+      "toxic_dose": {
+        "note": "안전한 용량이 확립되지 않음",
+        "warning": "단 1알로도 급성 신부전 가능",
+        "raisin_note": "건포도는 포도의 1/6 양으로도 위험"
+      },
+      "symptoms": ["구토 (24시간 내)", "설사", "무기력", "식욕부진", "핍뇨/무뇨", "급성 신부전"],
+      "onset": "6~24시간 이내 (구토), 24~72시간 (신부전)",
+      "first_aid": "즉시 동물병원, 시간이 생사를 결정",
+      "sources": ["ASPCA", "AKC", "PMC:PMC4801869"]
+    },
+    "raisin_danger": {
+      "ko": "건포도",
+      "toxic_component": "포도와 동일 (농축된 형태로 더 위험)",
+      "toxic_dose": {
+        "note": "포도보다 6배 농축, 극소량도 치명적",
+        "case": "5kg 시츄, 건포도 10알로 사망 사례 보고"
+      },
+      "symptoms": ["구토", "설사", "핍뇨", "급성 신부전"],
+      "onset": "6~24시간",
+      "first_aid": "즉시 동물병원",
+      "sources": ["ASPCA", "PMC:PMC4801869"]
+    },
+    "onion_danger": {
+      "ko": "양파",
+      "toxic_component": "N-프로필 디설파이드 (N-propyl disulfide)",
+      "toxic_dose": {
+        "toxic_start": "체중의 0.5% (5kg 강아지 = 25g)",
+        "clinical_dose": "15~30 g/kg",
+        "note": "익혀도 독성 유지, 누적 독성 있음"
+      },
+      "symptoms": ["구토", "설사", "무기력", "혈뇨 (붉은 소변)", "빈혈", "잇몸 창백"],
+      "onset": "1~5일 (누적 후 발현)",
+      "first_aid": "동물병원 방문, 수혈 필요할 수 있음",
+      "sources": ["ASPCA", "MVM", "KVMA"]
+    },
+    "garlic_danger": {
+      "ko": "마늘",
+      "toxic_component": "티오설페이트 (Thiosulfate) - 양파의 5배 농축",
+      "toxic_dose": {
+        "toxic_start": "15~30 g/kg (양파와 유사)",
+        "note": "양파보다 5배 독성 강함, 소량도 위험"
+      },
+      "symptoms": ["빈혈", "혈뇨", "무기력", "잇몸 창백", "빠른 호흡"],
+      "onset": "수일 (누적 독성)",
+      "first_aid": "동물병원 방문",
+      "sources": ["ASPCA", "RoyalCanin"]
+    },
+    "leek_danger": {
+      "ko": "대파/쪽파",
+      "toxic_component": "파속(Allium) 식물 공통 독성",
+      "toxic_dose": {
+        "note": "양파/마늘과 동일 계열, 소량도 위험"
+      },
+      "symptoms": ["구토", "설사", "빈혈", "무기력"],
+      "onset": "1~5일",
+      "first_aid": "동물병원 방문",
+      "sources": ["ASPCA", "AKC"]
+    },
+    "xylitol_danger": {
+      "ko": "자일리톨",
+      "toxic_component": "자일리톨 (Xylitol) - 인슐린 과분비 유도",
+      "toxic_dose": {
+        "hypoglycemia": "0.1 g/kg (100 mg/kg)",
+        "liver_failure": "0.5 g/kg (500 mg/kg)",
+        "note": "껌 1~2개로도 소형견 위험"
+      },
+      "common_products": ["무설탕 껌", "사탕", "치약", "땅콩버터(일부)", "베이킹 제품"],
+      "symptoms": ["구토", "무기력", "보행실조", "발작", "간부전"],
+      "onset": "10~60분 (매우 빠름)",
+      "first_aid": "즉시 동물병원, 설탕물/꿀 응급 급여 (저혈당 대응)",
+      "sources": ["ASPCA", "PMC:PMC4801869"]
+    },
+    "caffeine_danger": {
+      "ko": "카페인(커피)",
+      "toxic_component": "카페인 (메틸잔틴 알칼로이드)",
+      "toxic_dose": {
+        "mild_symptoms": "20 mg/kg",
+        "severe_symptoms": "40~50 mg/kg",
+        "seizures": "60 mg/kg",
+        "lethal": "140 mg/kg (LD50: 120~200 mg/kg)"
+      },
+      "caffeine_content": {
+        "coffee_cup_240ml": "95~200 mg",
+        "espresso_30ml": "63 mg",
+        "green_tea_240ml": "25~50 mg",
+        "cola_355ml": "30~40 mg"
+      },
+      "symptoms": ["구토", "설사", "빠른 심박", "불안/흥분", "떨림", "발작"],
+      "onset": "1~2시간",
+      "first_aid": "동물병원 방문",
+      "sources": ["ASPCA", "PMC:PMC3550263"]
+    },
+    "alcohol_danger": {
+      "ko": "술(알코올)",
+      "toxic_component": "에탄올 (Ethanol)",
+      "toxic_dose": {
+        "toxic": "5.5~6.5 mL/kg",
+        "lethal": "약 8 g/kg (경구)",
+        "note": "소량으로도 급성 간독성, 냄새만으로도 영향"
+      },
+      "symptoms": ["구토", "설사", "호흡곤란", "떨림", "혼수", "사망"],
+      "onset": "30~60분",
+      "first_aid": "즉시 동물병원",
+      "sources": ["MVM", "PMC:PMC2984110"]
+    },
+    "macadamia_danger": {
+      "ko": "마카다미아",
+      "toxic_component": "불명 (기전 미확인)",
+      "toxic_dose": {
+        "symptoms_start": "0.7 g/kg",
+        "clinical_dose": "2~2.4 g/kg",
+        "experimental": "20 g/kg (12시간 내 증상, 48시간 회복)",
+        "lethal": "사망 사례 보고 없음"
+      },
+      "symptoms": ["뒷다리 약화", "구토", "떨림", "고열", "보행실조", "무기력"],
+      "onset": "12시간 이내",
+      "first_aid": "동물병원 방문 (대부분 48시간 내 자연 회복)",
+      "sources": ["MVM", "ASPCA"]
+    },
+    "avocado_danger": {
+      "ko": "아보카도",
+      "toxic_component": "페르신 (Persin) - 껍질/씨/잎에 농축",
+      "toxic_dose": {
+        "note": "과육은 소량 가능하나, 씨/껍질/잎 위험",
+        "seed_risk": "장폐색 위험 (크기)"
+      },
+      "symptoms": ["구토", "설사", "복통", "호흡곤란 (대량 시)"],
+      "onset": "수시간",
+      "first_aid": "증상 시 동물병원",
+      "sources": ["ASPCA", "AKC"]
+    },
+    "grapefruit_danger": {
+      "ko": "자몽",
+      "toxic_component": "에센셜 오일, 솔라렌 (Psoralen)",
+      "toxic_dose": {"note": "껍질에 독성 농축, 과육도 위장 자극"},
+      "symptoms": ["구토", "설사", "피부 광과민증"],
+      "onset": "수시간",
+      "first_aid": "증상 시 동물병원",
+      "sources": ["ASPCA"]
+    },
+    "lemon_danger": {
+      "ko": "레몬",
+      "toxic_component": "구연산 과다 + 에센셜 오일",
+      "toxic_dose": {"note": "소량 과육은 위장 자극, 껍질/씨 더 위험"},
+      "symptoms": ["구토", "설사", "중추신경 억제 (대량)"],
+      "onset": "수시간",
+      "first_aid": "증상 시 동물병원",
+      "sources": ["ASPCA"]
+    },
+    "mushroom_wild_danger": {
+      "ko": "야생 버섯",
+      "toxic_component": "아마톡신 등 (종류별 다양)",
+      "toxic_dose": {"note": "종류에 따라 극소량도 치명적"},
+      "symptoms": ["구토", "설사", "간부전", "신부전", "발작", "사망"],
+      "onset": "6~24시간 (종류별 차이)",
+      "first_aid": "즉시 동물병원, 가능하면 버섯 샘플 가져갈 것",
+      "sources": ["ASPCA", "MVM"]
+    },
+    "rhubarb_danger": {
+      "ko": "루바브",
+      "toxic_component": "옥살산 칼슘 (Calcium Oxalate)",
+      "toxic_dose": {"note": "잎에 농축, 줄기도 주의"},
+      "symptoms": ["구강 자극", "침 흘림", "구토", "신부전 (대량)"],
+      "onset": "수시간",
+      "first_aid": "동물병원 방문",
+      "sources": ["ASPCA"]
+    }
+  },
+
+  "safe_foods": {
+    "apple": {
+      "ko": "사과",
+      "safety": "safe",
+      "benefits": ["비타민 A/C", "식이섬유", "치아 건강"],
+      "cautions": ["씨앗 시안화물 함유 - 반드시 제거", "껍질은 소량 OK"],
+      "feeding_amount": "체중 5kg 기준: 1~2조각 (15~20g)",
+      "preparation": "씨앗/심 제거, 작게 잘라서",
+      "sources": ["AKC", "Hills"]
+    },
+    "banana": {
+      "ko": "바나나",
+      "safety": "safe",
+      "benefits": ["칼륨", "비타민 B6/C", "마그네슘", "식이섬유"],
+      "cautions": ["당분 높음 - 소량만", "비만견 주의"],
+      "feeding_amount": "소형견: 2~3조각 / 대형견: 반개",
+      "preparation": "껍질 제거, 얇게 슬라이스",
+      "sources": ["AKC", "Hills"]
+    },
+    "blueberry": {
+      "ko": "블루베리",
+      "safety": "safe",
+      "benefits": ["안토시아닌 (항산화)", "비타민 C/K", "식이섬유", "저칼로리"],
+      "cautions": ["과다 시 설사 가능"],
+      "feeding_amount": "소형견: 3~5알 / 대형견: 10~15알",
+      "preparation": "세척 후 그대로 급여",
+      "sources": ["AKC", "PMC:PMC9291198"]
+    },
+    "watermelon": {
+      "ko": "수박",
+      "safety": "safe",
+      "benefits": ["수분 보충 (92% 수분)", "비타민 A/B6/C", "리코펜"],
+      "cautions": ["씨앗 장폐색 위험", "껍질 소화 불가"],
+      "feeding_amount": "작은 조각 2~3개",
+      "preparation": "씨앗/껍질 완전 제거",
+      "sources": ["AKC"]
+    },
+    "carrot": {
+      "ko": "당근",
+      "safety": "safe",
+      "benefits": ["비타민 A (베타카로틴)", "치아 건강 (씹기)", "저칼로리", "식이섬유"],
+      "cautions": ["큰 조각 질식 주의"],
+      "feeding_amount": "소형견: 1/4개 / 대형견: 1개",
+      "preparation": "생 또는 익혀서, 작게 잘라서",
+      "sources": ["AKC", "Hills"]
+    },
+    "sweet_potato": {
+      "ko": "고구마",
+      "safety": "safe",
+      "benefits": ["비타민 A/C", "식이섬유", "칼륨", "소화 건강"],
+      "cautions": ["반드시 익혀서", "당분 주의"],
+      "feeding_amount": "체중 5kg 기준: 1~2조각 (20~30g)",
+      "preparation": "껍질 제거, 삶거나 쪄서",
+      "sources": ["AKC"]
+    },
+    "chicken": {
+      "ko": "닭고기(가슴살)",
+      "safety": "safe",
+      "benefits": ["고단백 저지방", "소화 용이", "근육 발달"],
+      "cautions": ["반드시 익혀서 (살모넬라)", "뼈 절대 금지", "피부/지방 제거"],
+      "feeding_amount": "하루 사료량의 10% 이내",
+      "preparation": "삶거나 구워서, 양념 없이, 뼈 제거",
+      "sources": ["AKC", "KVMA"]
+    },
+    "salmon": {
+      "ko": "연어",
+      "safety": "safe",
+      "benefits": ["오메가3 지방산", "EPA/DHA", "피모 건강", "관절 건강"],
+      "cautions": ["반드시 익혀서 (연어중독병)", "뼈 제거", "훈제 연어는 염분 높음"],
+      "feeding_amount": "주 1~2회, 소량",
+      "preparation": "완전히 익혀서, 뼈/가시 제거, 무염",
+      "sources": ["AKC", "MVM"]
+    },
+    "egg": {
+      "ko": "달걀",
+      "safety": "safe",
+      "benefits": ["완전 단백질", "비타민 A/B12", "철분", "셀레늄"],
+      "cautions": ["반드시 익혀서 (살모넬라/아비딘)", "알레르기 가능"],
+      "feeding_amount": "소형견: 주 1~2개 / 대형견: 주 3~4개",
+      "preparation": "삶거나 스크램블, 양념 없이",
+      "sources": ["AKC"]
+    },
+    "pumpkin": {
+      "ko": "단호박",
+      "safety": "safe",
+      "benefits": ["비타민 A/C/E", "식이섬유", "소화 건강 (변비/설사 완화)"],
+      "cautions": ["씨앗 제거 (or 별도 급여 가능)", "설탕 첨가 통조림 금지"],
+      "feeding_amount": "1~2 테이블스푼",
+      "preparation": "씨앗 제거, 삶거나 쪄서",
+      "sources": ["AKC", "ASPCA"]
+    },
+    "yogurt": {
+      "ko": "플레인 요거트",
+      "safety": "caution",
+      "benefits": ["프로바이오틱스", "칼슘", "단백질"],
+      "cautions": ["무당/무첨가만", "유당불내증 가능", "자일리톨 함유 제품 절대 금지"],
+      "feeding_amount": "소형견: 1티스푼 / 대형견: 1테이블스푼",
+      "preparation": "플레인, 무지방/저지방, 무첨가 확인",
+      "sources": ["AKC"]
+    },
+    "rice": {
+      "ko": "쌀(백미)",
+      "safety": "safe",
+      "benefits": ["소화 용이", "에너지원", "설사 시 회복식"],
+      "cautions": ["당뇨견 주의 (혈당 상승)"],
+      "feeding_amount": "주식 보조로 소량",
+      "preparation": "잘 익혀서, 양념 없이",
+      "sources": ["AKC"]
+    },
+    "peanut_butter": {
+      "ko": "땅콩버터(무첨가)",
+      "safety": "safe",
+      "benefits": ["단백질", "건강한 지방", "비타민 B/E", "나이아신"],
+      "cautions": ["자일리톨 무첨가 반드시 확인!", "고칼로리 - 소량만", "무염/무당"],
+      "feeding_amount": "1/2 ~ 1 티스푼",
+      "preparation": "성분표 확인 (자일리톨 무첨가), 무염/무당 제품",
+      "sources": ["AKC", "ASPCA"]
+    },
+    "honey": {
+      "ko": "꿀",
+      "safety": "safe",
+      "benefits": ["항산화 물질", "소량 알레르기 완화 (꽃가루 면역)"],
+      "cautions": ["고당분 - 극소량만", "1세 미만 강아지 금지 (보툴리눔)", "당뇨견 금지"],
+      "feeding_amount": "1/4 ~ 1/2 티스푼",
+      "preparation": "생꿀 소량 직접 급여",
+      "sources": ["AKC"]
+    },
+    "coconut_oil": {
+      "ko": "코코넛 오일",
+      "safety": "safe",
+      "benefits": ["피모 건강", "항염", "소화 지원", "면역 강화"],
+      "cautions": ["고칼로리 - 소량만", "과다 시 설사"],
+      "feeding_amount": "체중 5kg당 1/4 티스푼부터 시작",
+      "preparation": "버진 코코넛 오일, 사료에 혼합",
+      "sources": ["AKC"]
+    }
+  },
+
+  "feeding_guidelines_by_weight": {
+    "note": "10% 규칙 기반 간식 한도 (하루 기준)",
+    "small_2_5kg": {
+      "label": "초소형견 (2~5kg)",
+      "daily_calories": "150~300 kcal",
+      "treat_limit": "15~30 kcal (약 15~25g 과일/채소)",
+      "examples": "블루베리 5알, 당근 1조각, 사과 1조각"
+    },
+    "medium_5_15kg": {
+      "label": "소~중형견 (5~15kg)",
+      "daily_calories": "300~600 kcal",
+      "treat_limit": "30~60 kcal (약 30~50g 과일/채소)",
+      "examples": "바나나 3조각, 당근 반개, 고구마 1조각"
+    },
+    "large_15_30kg": {
+      "label": "중~대형견 (15~30kg)",
+      "daily_calories": "600~1200 kcal",
+      "treat_limit": "60~120 kcal (약 50~100g 과일/채소)",
+      "examples": "사과 3~4조각, 수박 2~3조각, 당근 1개"
+    },
+    "giant_30kg_plus": {
+      "label": "대형견 (30kg+, 골든리트리버 포함)",
+      "daily_calories": "1200~2000 kcal",
+      "treat_limit": "120~200 kcal (약 100~150g 과일/채소)",
+      "examples": "바나나 반개, 블루베리 15알, 당근 1~2개"
+    }
+  }
+}

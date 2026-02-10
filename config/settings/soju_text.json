@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "SOJU",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "절대 금지!",
+    "subtitle": "알코올 독성, 소량도 치명적"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "증상 & 대처",
+    "subtitle": "비틀거림, 호흡곤란 시 응급실"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "version": "2026-01",
+  "updated": "2026-01-25",
+  "policy": {
+    "max_hashtags": 5,
+    "note": "2026년부터 Instagram 해시태그 5개 제한"
+  },
+
+  "strategy": {
+    "composition": [
+      {"slot": 1, "type": "reach", "desc": "글로벌 도달용 (영어, 대형)"},
+      {"slot": 2, "type": "niche", "desc": "타겟 오디언스 (품종/주제)"},
+      {"slot": 3, "type": "topic_ko", "desc": "주제 관련 (한글)"},
+      {"slot": 4, "type": "community", "desc": "커뮤니티 (펫스타그램 등)"},
+      {"slot": 5, "type": "brand", "desc": "브랜드 (햇살이)"}
+    ]
+  },
+
+  "base_tags": {
+    "reach": ["#DogsOfInstagram", "#DogLovers", "#PetLife"],
+    "niche": ["#GoldenRetriever", "#Goldens", "#RetrieversOfInstagram"],
+    "community": ["#펫스타그램", "#멍스타그램", "#반려견"],
+    "brand": ["#햇살이", "#sunshinedogfood"]
+  },
+
+  "topics": {
+    "banana": {
+      "tags": ["#DogsOfInstagram", "#GoldenRetriever", "#강아지바나나", "#펫스타그램", "#햇살이"]
+    },
+    "broccoli": {
+      "tags": ["#DogsOfInstagram", "#GoldenRetriever", "#강아지음식", "#펫스타그램", "#햇살이"]
+    },
+    "apple": {
+      "tags": ["#DogsOfInstagram", "#GoldenRetriever", "#강아지사과", "#펫스타그램", "#햇살이"]
+    },
+    "carrot": {
+      "tags": ["#DogsOfInstagram", "#GoldenRetriever", "#강아지당근", "#펫스타그램", "#햇살이"]
+    }
+  },
+
+  "posting_schedule": {
+    "optimal_days": ["목요일", "금요일"],
+    "optimal_time": "21:00",
+    "timezone": "KST",
+    "note": "목/금 오후 9시 최적 도달률"
+  }
+}

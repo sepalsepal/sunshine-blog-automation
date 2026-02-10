@@ -1,0 +1,219 @@
+{
+  "version": "2.0",
+  "created_at": "2026-01-24",
+  "created_by": "박리서치",
+  "total_topics": 100,
+  "note": "하루 3포스팅 기준 33일치. 30일 중복 방지 규칙 충족.",
+
+  "categories": {
+    "fruits_safe": {
+      "label": "과일 (안전)",
+      "count": 20,
+      "topics": [
+        {"id": "apple", "ko": "사과", "safety": "safe", "note": "씨앗 제거 필수"},
+        {"id": "banana", "ko": "바나나", "safety": "safe", "note": "소량 급여"},
+        {"id": "blueberry", "ko": "블루베리", "safety": "safe", "note": "항산화 풍부"},
+        {"id": "strawberry", "ko": "딸기", "safety": "safe", "note": "치아 건강"},
+        {"id": "watermelon", "ko": "수박", "safety": "safe", "note": "씨앗 제거 필수"},
+        {"id": "mango", "ko": "망고", "safety": "safe", "note": "씨앗 제거 필수"},
+        {"id": "peach", "ko": "복숭아", "safety": "safe", "note": "씨앗 제거 필수"},
+        {"id": "pear", "ko": "배", "safety": "safe", "note": "씨앗 제거"},
+        {"id": "kiwi", "ko": "키위", "safety": "safe", "note": "껍질 제거"},
+        {"id": "papaya", "ko": "파파야", "safety": "safe", "note": "씨앗 제거"},
+        {"id": "orange", "ko": "오렌지", "safety": "safe", "note": "껍질 제거, 소량"},
+        {"id": "pineapple", "ko": "파인애플", "safety": "safe", "note": "껍질/심 제거"},
+        {"id": "raspberry", "ko": "라즈베리", "safety": "safe", "note": "소량 급여"},
+        {"id": "blackberry", "ko": "블랙베리", "safety": "safe", "note": "항산화 풍부"},
+        {"id": "cranberry", "ko": "크랜베리", "safety": "safe", "note": "요로 건강"},
+        {"id": "coconut", "ko": "코코넛", "safety": "safe", "note": "소량, 오일도 가능"},
+        {"id": "melon", "ko": "멜론", "safety": "safe", "note": "씨앗 제거"},
+        {"id": "persimmon_ripe", "ko": "홍시(연시)", "safety": "caution", "note": "익은 것만, 소량"},
+        {"id": "cherry", "ko": "체리", "safety": "caution", "note": "씨앗/줄기 독성, 과육만"},
+        {"id": "plum", "ko": "자두", "safety": "caution", "note": "씨앗 독성, 과육만 소량"}
+      ]
+    },
+
+    "fruits_dangerous": {
+      "label": "과일 (위험 - 경고 콘텐츠용)",
+      "count": 5,
+      "topics": [
+        {"id": "grape_danger", "ko": "포도", "safety": "dangerous", "note": "급성 신부전 유발"},
+        {"id": "raisin_danger", "ko": "건포도", "safety": "dangerous", "note": "포도와 동일 독성"},
+        {"id": "avocado_danger", "ko": "아보카도", "safety": "dangerous", "note": "페르신 독성"},
+        {"id": "grapefruit_danger", "ko": "자몽", "safety": "dangerous", "note": "구토/설사 유발"},
+        {"id": "lemon_danger", "ko": "레몬", "safety": "dangerous", "note": "구연산 과다"}
+      ]
+    },
+
+    "vegetables_safe": {
+      "label": "채소 (안전)",
+      "count": 20,
+      "topics": [
+        {"id": "carrot", "ko": "당근", "safety": "safe", "note": "비타민A, 치아 건강"},
+        {"id": "sweet_potato", "ko": "고구마", "safety": "safe", "note": "식이섬유 풍부"},
+        {"id": "pumpkin", "ko": "단호박", "safety": "safe", "note": "소화 건강"},
+        {"id": "cucumber", "ko": "오이", "safety": "safe", "note": "수분 보충, 저칼로리"},
+        {"id": "broccoli", "ko": "브로콜리", "safety": "safe", "note": "소량만, 가스 유발 가능"},
+        {"id": "spinach", "ko": "시금치", "safety": "safe", "note": "소량, 옥살산 주의"},
+        {"id": "zucchini", "ko": "주키니(애호박)", "safety": "safe", "note": "저칼로리"},
+        {"id": "cabbage", "ko": "양배추", "safety": "safe", "note": "익혀서 급여"},
+        {"id": "lettuce", "ko": "상추", "safety": "safe", "note": "수분 풍부"},
+        {"id": "celery", "ko": "셀러리", "safety": "safe", "note": "구취 제거 효과"},
+        {"id": "green_beans", "ko": "강낭콩(그린빈)", "safety": "safe", "note": "익혀서, 무염"},
+        {"id": "bell_pepper", "ko": "파프리카", "safety": "safe", "note": "비타민C 풍부"},
+        {"id": "asparagus", "ko": "아스파라거스", "safety": "safe", "note": "익혀서 급여"},
+        {"id": "beet", "ko": "비트", "safety": "safe", "note": "익혀서 소량"},
+        {"id": "napa_cabbage", "ko": "배추", "safety": "safe", "note": "수분 풍부"},
+        {"id": "radish", "ko": "무", "safety": "safe", "note": "익혀서 급여"},
+        {"id": "corn", "ko": "옥수수", "safety": "safe", "note": "속대 급여 금지"},
+        {"id": "peas", "ko": "완두콩", "safety": "safe", "note": "단백질 보충"},
+        {"id": "kale", "ko": "케일", "safety": "caution", "note": "옥살산 주의, 신장 문제 있으면 피할 것"},
+        {"id": "burdock", "ko": "우엉", "safety": "safe", "note": "익혀서 소량, 식이섬유 풍부"}
+      ]
+    },
+
+    "vegetables_dangerous": {
+      "label": "채소 (위험 - 경고 콘텐츠용)",
+      "count": 5,
+      "topics": [
+        {"id": "onion_danger", "ko": "양파", "safety": "dangerous", "note": "적혈구 파괴, 빈혈"},
+        {"id": "garlic_danger", "ko": "마늘", "safety": "dangerous", "note": "적혈구 파괴"},
+        {"id": "leek_danger", "ko": "대파/쪽파", "safety": "dangerous", "note": "파속 식물 독성"},
+        {"id": "mushroom_wild_danger", "ko": "야생 버섯", "safety": "dangerous", "note": "간부전 유발"},
+        {"id": "rhubarb_danger", "ko": "루바브", "safety": "dangerous", "note": "옥살산 과다"}
+      ]
+    },
+
+    "meat_protein": {
+      "label": "육류/단백질",
+      "count": 15,
+      "topics": [
+        {"id": "chicken", "ko": "닭고기(가슴살)", "safety": "safe", "note": "고단백 저지방"},
+        {"id": "beef", "ko": "소고기", "safety": "safe", "note": "철분 풍부"},
+        {"id": "pork", "ko": "돼지고기", "safety": "safe", "note": "반드시 익혀서"},
+        {"id": "turkey", "ko": "칠면조", "safety": "safe", "note": "저지방 단백질"},
+        {"id": "lamb", "ko": "양고기(램)", "safety": "safe", "note": "알레르기 적음"},
+        {"id": "duck", "ko": "오리고기", "safety": "safe", "note": "오메가 지방산"},
+        {"id": "venison", "ko": "사슴고기", "safety": "safe", "note": "저지방 고단백"},
+        {"id": "rabbit", "ko": "토끼고기", "safety": "safe", "note": "알레르기 적음"},
+        {"id": "egg", "ko": "달걀", "safety": "safe", "note": "완전식품, 익혀서"},
+        {"id": "quail_egg", "ko": "메추리알", "safety": "safe", "note": "소형견 적합"},
+        {"id": "chicken_liver", "ko": "닭간", "safety": "safe", "note": "비타민A, 소량"},
+        {"id": "beef_liver", "ko": "소간", "safety": "safe", "note": "영양 풍부, 소량"},
+        {"id": "heart", "ko": "심장(소/닭)", "safety": "safe", "note": "타우린 풍부"},
+        {"id": "tripe", "ko": "양(위장)", "safety": "safe", "note": "프로바이오틱스"},
+        {"id": "bone_broth", "ko": "사골국물", "safety": "safe", "note": "관절 건강, 무염"}
+      ]
+    },
+
+    "seafood": {
+      "label": "해산물",
+      "count": 10,
+      "topics": [
+        {"id": "salmon", "ko": "연어", "safety": "safe", "note": "오메가3, 반드시 익혀서"},
+        {"id": "tuna", "ko": "참치", "safety": "caution", "note": "수은 주의, 소량"},
+        {"id": "shrimp", "ko": "새우", "safety": "safe", "note": "껍질 제거, 익혀서"},
+        {"id": "cod", "ko": "대구", "safety": "safe", "note": "저지방 고단백"},
+        {"id": "sardine", "ko": "정어리", "safety": "safe", "note": "오메가3 풍부"},
+        {"id": "mackerel", "ko": "고등어", "safety": "safe", "note": "오메가3, 뼈 제거"},
+        {"id": "squid", "ko": "오징어", "safety": "caution", "note": "소량, 소화 어려움"},
+        {"id": "anchovy", "ko": "멸치", "safety": "safe", "note": "칼슘, 무염"},
+        {"id": "seaweed", "ko": "김/미역", "safety": "safe", "note": "무조미, 소량"},
+        {"id": "pollack", "ko": "황태(북어)", "safety": "safe", "note": "단백질 풍부"}
+      ]
+    },
+
+    "grains_carbs": {
+      "label": "곡물/탄수화물",
+      "count": 8,
+      "topics": [
+        {"id": "rice", "ko": "쌀(백미)", "safety": "safe", "note": "소화 용이"},
+        {"id": "brown_rice", "ko": "현미", "safety": "safe", "note": "식이섬유"},
+        {"id": "oatmeal", "ko": "오트밀", "safety": "safe", "note": "식이섬유, 피부 건강"},
+        {"id": "quinoa", "ko": "퀴노아", "safety": "safe", "note": "완전 단백질"},
+        {"id": "potato", "ko": "감자", "safety": "safe", "note": "반드시 익혀서, 싹 제거"},
+        {"id": "pasta", "ko": "파스타(면)", "safety": "safe", "note": "익혀서, 소량"},
+        {"id": "bread", "ko": "식빵(무첨가)", "safety": "safe", "note": "소량 간식으로만"},
+        {"id": "barley", "ko": "보리", "safety": "safe", "note": "식이섬유, 익혀서"}
+      ]
+    },
+
+    "dairy": {
+      "label": "유제품 (주의 필요)",
+      "count": 4,
+      "topics": [
+        {"id": "yogurt", "ko": "플레인 요거트", "safety": "caution", "note": "무당, 소량"},
+        {"id": "cheese", "ko": "치즈(저지방)", "safety": "caution", "note": "유당 적은 것"},
+        {"id": "cottage_cheese", "ko": "코티지 치즈", "safety": "caution", "note": "저지방, 소량"},
+        {"id": "goat_milk", "ko": "산양유", "safety": "caution", "note": "유당 낮음"}
+      ]
+    },
+
+    "nuts_seeds": {
+      "label": "견과류/씨앗",
+      "count": 5,
+      "topics": [
+        {"id": "peanut_butter", "ko": "땅콩버터(무첨가)", "safety": "safe", "note": "자일리톨 무첨가 확인"},
+        {"id": "peanut", "ko": "땅콩", "safety": "safe", "note": "무염, 소량"},
+        {"id": "chestnut", "ko": "밤", "safety": "safe", "note": "익혀서 소량"},
+        {"id": "sunflower_seed", "ko": "해바라기씨", "safety": "safe", "note": "무염, 껍질 제거"},
+        {"id": "pumpkin_seed", "ko": "호박씨", "safety": "safe", "note": "무염, 분쇄"}
+      ]
+    },
+
+    "supplements_superfoods": {
+      "label": "보충제/슈퍼푸드",
+      "count": 5,
+      "topics": [
+        {"id": "honey", "ko": "꿀", "safety": "safe", "note": "소량, 1세 이상"},
+        {"id": "coconut_oil", "ko": "코코넛 오일", "safety": "safe", "note": "피모 건강"},
+        {"id": "turmeric", "ko": "강황", "safety": "safe", "note": "항염, 소량"},
+        {"id": "fish_oil", "ko": "피쉬오일(오메가3)", "safety": "safe", "note": "피모/관절"},
+        {"id": "probiotics", "ko": "프로바이오틱스", "safety": "safe", "note": "장 건강"}
+      ]
+    },
+
+    "dangerous_foods": {
+      "label": "위험 식품 (경고 콘텐츠용)",
+      "count": 5,
+      "topics": [
+        {"id": "chocolate_danger", "ko": "초콜릿", "safety": "dangerous", "note": "테오브로민 독성"},
+        {"id": "xylitol_danger", "ko": "자일리톨", "safety": "dangerous", "note": "저혈당/간부전"},
+        {"id": "caffeine_danger", "ko": "카페인(커피)", "safety": "dangerous", "note": "심장 이상"},
+        {"id": "alcohol_danger", "ko": "술(알코올)", "safety": "dangerous", "note": "간 독성"},
+        {"id": "macadamia_danger", "ko": "마카다미아", "safety": "dangerous", "note": "신경 독성"}
+      ]
+    }
+  },
+
+  "content_strategy": {
+    "safe_topics": {
+      "count": 85,
+      "format": "정보형 (먹여도 OK! + 효능 + 주의사항)",
+      "slides": 10
+    },
+    "dangerous_topics": {
+      "count": 15,
+      "format": "경고형 (절대 금지! + 증상 + 대처법)",
+      "slides": 10,
+      "note": "경고 콘텐츠는 참여율이 높음 (공유/저장 증가)"
+    }
+  },
+
+  "posting_plan": {
+    "daily_posts": 3,
+    "rotation": "safe 2개 + dangerous/caution 1개 (주 2~3회)",
+    "days_coverage": 33,
+    "repeat_interval_days": 30,
+    "priority_order": [
+      "과일 안전 (인기 높음)",
+      "위험 식품 경고 (참여율 높음)",
+      "채소 안전",
+      "육류/단백질",
+      "해산물",
+      "곡물",
+      "견과류/보충제",
+      "유제품"
+    ]
+  }
+}

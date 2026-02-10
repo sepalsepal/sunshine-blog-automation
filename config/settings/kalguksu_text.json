@@ -1,0 +1,14 @@
+{
+  "food_id": "kalguksu",
+  "safety": "caution",
+  "color": "#FFD93D",
+  "font_size": 100,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "KALGUKSU", "subtitle": ""},
+    {"slide": 1, "title": "먹어도 돼요!", "subtitle": "밀가루 면만 급여, 국물은 금지"},
+    {"slide": 2, "title": "주의사항", "subtitle": "나트륨 과다 주의, 소량만 급여"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

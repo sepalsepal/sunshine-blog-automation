@@ -1,0 +1,198 @@
+{
+  "published": [
+    {
+      "id": "001",
+      "topic": "pumpkin",
+      "topic_kr": "호박",
+      "published_date": "2025-12-01",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "001_pumpkin_published"
+    },
+    {
+      "id": "002",
+      "topic": "carrot",
+      "topic_kr": "당근",
+      "published_date": "2025-12-05",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "002_carrot_published"
+    },
+    {
+      "id": "003",
+      "topic": "blueberry",
+      "topic_kr": "블루베리",
+      "published_date": "2025-12-25",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "003_blueberry_published"
+    },
+    {
+      "id": "004",
+      "topic": "cherry",
+      "topic_kr": "체리",
+      "published_date": "2026-01-15",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "004_cherry_published"
+    },
+    {
+      "id": "005",
+      "topic": "sweet_potato",
+      "topic_kr": "고구마",
+      "published_date": "2026-01-20",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "005_sweet_potato_published"
+    },
+    {
+      "id": "006",
+      "topic": "apple",
+      "topic_kr": "사과",
+      "published_date": "2025-12-15",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "006_apple_published"
+    },
+    {
+      "id": "007",
+      "topic": "pineapple",
+      "topic_kr": "파인애플",
+      "published_date": "2026-01-18",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "007_pineapple_published"
+    },
+    {
+      "id": "008",
+      "topic": "banana",
+      "topic_kr": "바나나",
+      "published_date": "2025-12-20",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "008_banana_published"
+    },
+    {
+      "id": "009",
+      "topic": "broccoli",
+      "topic_kr": "브로콜리",
+      "published_date": "2026-01-25",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "009_broccoli_published"
+    },
+    {
+      "id": "010",
+      "topic": "watermelon",
+      "topic_kr": "수박",
+      "published_date": "2026-01-01",
+      "instagram_url": null,
+      "performance": null,
+      "folder": "010_watermelon_published"
+    }
+  ],
+  "produced": [
+    {
+      "id": "011",
+      "topic": "strawberry",
+      "topic_kr": "딸기",
+      "produced_date": "2026-01-22",
+      "status": "ready",
+      "folder": "011_strawberry"
+    },
+    {
+      "id": "012",
+      "topic": "mango",
+      "topic_kr": "망고",
+      "produced_date": "2026-01-23",
+      "status": "ready",
+      "folder": "012_mango"
+    },
+    {
+      "id": "013",
+      "topic": "orange",
+      "topic_kr": "오렌지",
+      "produced_date": "2026-01-24",
+      "status": "ready",
+      "folder": "013_orange"
+    },
+    {
+      "id": "014",
+      "topic": "pear",
+      "topic_kr": "배",
+      "produced_date": "2026-01-25",
+      "status": "ready",
+      "folder": "014_pear"
+    },
+    {
+      "id": "015",
+      "topic": "kiwi",
+      "topic_kr": "키위",
+      "produced_date": "2026-01-26",
+      "status": "ready",
+      "folder": "015_kiwi"
+    },
+    {
+      "id": "016",
+      "topic": "papaya",
+      "topic_kr": "파파야",
+      "produced_date": "2026-01-26",
+      "status": "ready",
+      "folder": "016_papaya"
+    },
+    {
+      "id": "017",
+      "topic": "peach",
+      "topic_kr": "복숭아",
+      "produced_date": "2026-01-27",
+      "status": "ready",
+      "folder": "017_peach"
+    }
+  ],
+  "blacklist": [
+    {
+      "topic": "grape",
+      "topic_kr": "포도",
+      "reason": "강아지에게 독성 (신부전 유발)"
+    },
+    {
+      "topic": "chocolate",
+      "topic_kr": "초콜릿",
+      "reason": "테오브로민 독성"
+    },
+    {
+      "topic": "onion",
+      "topic_kr": "양파",
+      "reason": "적혈구 파괴"
+    },
+    {
+      "topic": "garlic",
+      "topic_kr": "마늘",
+      "reason": "적혈구 파괴"
+    },
+    {
+      "topic": "avocado",
+      "topic_kr": "아보카도",
+      "reason": "퍼신 독성"
+    },
+    {
+      "topic": "macadamia",
+      "topic_kr": "마카다미아",
+      "reason": "근육 약화, 구토 유발"
+    },
+    {
+      "topic": "xylitol",
+      "topic_kr": "자일리톨",
+      "reason": "급격한 혈당 저하, 간 손상"
+    },
+    {
+      "topic": "raisin",
+      "topic_kr": "건포도",
+      "reason": "포도와 동일 (신부전 유발)"
+    }
+  ],
+  "candidates": [],
+  "last_updated": "2026-01-28",
+  "managed_by": "김작가",
+  "verification_method": "Instagram Graph API (토큰 갱신 필요)"
+}

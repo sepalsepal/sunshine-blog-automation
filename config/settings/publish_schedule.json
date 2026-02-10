@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-02-03T21:56:50.574727",
+  "total_pending": 86,
+  "scheduled": 14,
+  "schedule": [
+    {
+      "food_id": "coca",
+      "folder": "023_coca_cola_코카콜라",
+      "planned_date": "2026-02-04",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "zucchini",
+      "folder": "027_zucchini_애호박",
+      "planned_date": "2026-02-06",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "blackberry",
+      "folder": "028_blackberry_블랙베리",
+      "planned_date": "2026-02-08",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "cauliflower",
+      "folder": "028_cauliflower_콜리플라워",
+      "planned_date": "2026-02-10",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "pasta",
+      "folder": "028_pasta_파스타",
+      "planned_date": "2026-02-12",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "chicken",
+      "folder": "029_chicken_닭고기",
+      "planned_date": "2026-02-14",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "oatmeal",
+      "folder": "029_oatmeal_오트밀",
+      "planned_date": "2026-02-16",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "poached",
+      "folder": "030_poached_egg_수란",
+      "planned_date": "2026-02-18",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "nuts",
+      "folder": "031_nuts_견과류",
+      "planned_date": "2026-02-20",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "almonds",
+      "folder": "032_almonds_아몬드",
+      "planned_date": "2026-02-22",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "boiled",
+      "folder": "032_boiled_egg_삶은달걀",
+      "planned_date": "2026-02-24",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "egg",
+      "folder": "032_egg_yolk_달걀노른자",
+      "planned_date": "2026-02-26",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "milk",
+      "folder": "033_milk_우유",
+      "planned_date": "2026-02-28",
+      "status": "scheduled"
+    },
+    {
+      "food_id": "baguette",
+      "folder": "034_baguette_바게트",
+      "planned_date": "2026-03-02",
+      "status": "scheduled"
+    }
+  ],
+  "failed": []
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "QUAIL EGG",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "먹어도 돼요!",
+    "subtitle": "고단백, 비타민B 풍부"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "급여 방법",
+    "subtitle": "익혀서 하루 1~2개"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

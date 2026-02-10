@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-01-26T10:31:21.922096",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "🎬 최종 승인 요청: 수박",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*음식:*\n수박 (watermelon)"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*판정:*\n✅ PASS"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*검수 결과:*\n🟢 기술 검수: *95.0점*\n🟡 크리에이티브: *88.5점*"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "block_id": "approval_final_watermelon_1769391081",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "✅ 게시 승인",
+            "emoji": true
+          },
+          "style": "primary",
+          "action_id": "approve",
+          "value": "final_watermelon_1769391081"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "❌ 반려",
+            "emoji": true
+          },
+          "style": "danger",
+          "action_id": "reject",
+          "value": "final_watermelon_1769391081"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "🖼️ 전체 보기",
+            "emoji": true
+          },
+          "action_id": "view_all_images",
+          "value": "final_watermelon_1769391081"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "🆔 `final_watermelon_1769391081` | 🕐 2026-01-26 10:31"
+        }
+      ]
+    }
+  ]
+}

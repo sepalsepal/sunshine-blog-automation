@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "name": "cover",
+        "type": "cover",
+        "title": "STRAWBERRY",
+        "subtitle": ""
+    },
+    {
+        "slide": 1,
+        "name": "result_benefit",
+        "type": "content_bottom",
+        "title": "먹어도 돼요! ✅",
+        "subtitle": "비타민C 풍부 + 눈 건강에 좋아요!"
+    },
+    {
+        "slide": 2,
+        "name": "caution_amount",
+        "type": "content_bottom",
+        "title": "꼭지 제거, 잘게 잘라서! ⚠️",
+        "subtitle": "소형 1개 | 중형 2개 | 대형 3~4개"
+    },
+    {
+        "slide": 3,
+        "name": "cta",
+        "type": "cta",
+        "title": "저장 필수! 📌",
+        "subtitle": "우리 아이 최애 간식은? 댓글로 알려주세요!"
+    }
+]

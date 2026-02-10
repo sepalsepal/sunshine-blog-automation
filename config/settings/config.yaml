@@ -1,0 +1,198 @@
+# Project Sunshine - Configuration
+# 최기술 대리 작성
+
+global:
+  project_name: "Project Sunshine"
+  version: "0.1.0"
+  debug: false
+
+  # 경로 설정
+  paths:
+    base: "/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine"
+    images: "${base}/images"
+    templates: "${base}/scripts/templates"
+    output: "${base}/output"
+    logs: "${base}/logs"
+
+  # 이미지 설정
+  image:
+    width: 1080
+    height: 1080
+    format: "png"
+    quality: 95
+
+# 에이전트별 설정
+agents:
+  # v5 워크플로우: 주제 탐색/검증 (1~2단계)
+  topic_explorer:
+    enabled: true
+    # 웹서치 설정 (향후 구현)
+    web_search:
+      enabled: false
+      keywords:
+        - "반려견 음식 트렌드 2026"
+        - "강아지 간식 인기"
+        - "dog food trends"
+
+  topic_validator:
+    enabled: true
+    # 주제 검증 기준 (각 20점, 총 100점)
+    # 90점 이상: 승인 → 3단계(팩트체크)
+    # 90점 미만: 반려 → 1단계(주제탐색) 재작업
+    pass_threshold: 90
+
+    criteria:
+      duplicate_check:
+        weight: 20
+        description: "기제작 목록에 없어야 함"
+      trend_score:
+        weight: 20
+        description: "검색량/관심도 있어야 함"
+      safety_score:
+        weight: 20
+        description: "강아지에게 위험하지 않아야 함"
+      content_fit:
+        weight: 20
+        description: "7장 구성 가능해야 함"
+      visual_potential:
+        weight: 20
+        description: "이미지로 표현하기 좋아야 함"
+
+  planner:
+    enabled: true
+    model: "gemini-2.0-flash-exp"
+
+    # v5 워크플로우: 슬라이드 수 설정
+    # 신규 콘텐츠: 7장 (01~07)
+    # 기존 콘텐츠: 가변 장수 유지 (7~10장)
+    slides:
+      default: 7          # 신규 콘텐츠 기본값 (v4)
+
+      # v4 7장 구조:
+      # 01: cover (표지)
+      # 02: result (결론)
+      # 03: benefit1 (효능1)
+      # 04: benefit2 (효능2)
+      # 05: caution (주의사항)
+      # 06: amount (급여량)
+      # 07: cta (CTA)
+
+      deep_dive: 10       # 특집/심층 콘텐츠 (레거시)
+
+      # 안전도별 오버라이드
+      by_safety:
+        safe: 7            # 안전 식품: 7장
+        caution: 7         # 주의 식품: 7장
+        dangerous: 5       # 위험 식품: 5장 (경고는 짧고 강하게)
+
+      # 주제별 오버라이드 (topic_id → 장수)
+      # 여기 등록된 주제는 안전도 설정보다 우선
+      by_topic: {}
+        # 예시: chocolate_danger: 10
+
+  prompt_generator:
+    enabled: true
+    model: "gemini-2.0-flash-exp"
+    style: "8K photorealistic, golden retriever, Korean apartment"
+    negative_prompt: "text, letters, sad expression, 6 fingers, artifacts"
+
+  image_generator:
+    enabled: true
+    provider: "placeholder"  # placeholder | dalle3 | stability
+    api_key: ""  # 환경변수에서 로드 권장
+    batch_size: 10
+    retry_attempts: 3
+
+    # DALL-E 3 설정
+    dalle3:
+      model: "dall-e-3"
+      size: "1024x1024"
+      quality: "hd"
+
+    # Stability AI 설정
+    stability:
+      engine: "stable-diffusion-xl-1024-v1-0"
+      steps: 30
+      cfg_scale: 7
+
+  text_overlay:
+    enabled: true
+    engine: "puppeteer"  # puppeteer | pillow
+    template_path: "${global.paths.templates}/overlay.html"
+
+    # 텍스트 스타일
+    style:
+      font_family: "Noto Sans KR"
+      font_weight: 900
+      font_size: 62
+      color: "#FFFFFF"
+      stroke_width: 2
+      stroke_color: "rgba(0,0,0,0.8)"
+
+    # 들어올리기 효과 (lift effect)
+    lift_shadow:
+      - "0 2px 4px rgba(0,0,0,0.5)"
+      - "0 4px 8px rgba(0,0,0,0.4)"
+      - "0 6px 12px rgba(0,0,0,0.3)"
+      - "0 8px 16px rgba(0,0,0,0.2)"
+
+  quality_checker:
+    enabled: true
+    model: "gemini-2.0-flash-exp"
+
+    # 품질 기준
+    thresholds:
+      pass: 80       # 80점 이상: 통과
+      conditional: 70 # 70-79점: 조건부
+      fail: 60       # 60점 미만: 재작업
+
+    # 검사 항목
+    checks:
+      - no_text_in_image
+      - correct_expression
+      - no_artifacts
+      - food_visible
+      - composition
+
+  publisher:
+    enabled: true
+    platforms:
+      - cloudinary
+      - instagram
+      # - twitter  # 향후 추가
+      # - threads  # 향후 추가
+
+    # Instagram 설정 (Graph API)
+    instagram:
+      user_id: "17841478336612378"
+      # access_token, business_account_id는 환경변수에서 로드
+      # INSTAGRAM_ACCESS_TOKEN
+      # INSTAGRAM_BUSINESS_ACCOUNT_ID
+
+      # 캡션 템플릿 (선택사항)
+      # caption_template이 없으면 publisher.py의 _generate_caption() 함수가
+      # 주제별 상세 캡션 + 해시태그 30개를 자동 생성합니다.
+      # caption_template: ""  # 비워두면 자동 생성
+
+      # 게시 설정
+      max_carousel_items: 10  # 캐러셀 최대 이미지 수
+
+    # Cloudinary 설정
+    cloudinary:
+      cloud_name: "ddzbnrfei"
+      # api_key, api_secret는 환경변수에서 로드
+
+# API 키 (환경변수 사용 권장)
+api_keys:
+  gemini: "${GEMINI_API_KEY}"
+  openai: "${OPENAI_API_KEY}"
+  stability: "${STABILITY_API_KEY}"
+  instagram: "${INSTAGRAM_ACCESS_TOKEN}"
+  cloudinary_key: "${CLOUDINARY_API_KEY}"
+  cloudinary_secret: "${CLOUDINARY_API_SECRET}"
+
+# 로깅 설정
+logging:
+  level: "INFO"
+  format: "[%(asctime)s] %(name)s | %(levelname)s | %(message)s"
+  file: "${global.paths.logs}/sunshine.log"

@@ -1,0 +1,62 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "PUMPKIN",
+        "subtitle": "달콤한 노란 보약"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "소화에 아주 좋아요! 🎃"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "소화 촉진",
+        "subtitle": "식이섬유가 장 운동을 도와요! 🌿"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "변비 예방",
+        "subtitle": "변비/설사 모두에 효과적! 💩"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "눈 건강",
+        "subtitle": "베타카로틴이 풍부해요! 👀"
+    },
+    {
+        "slide": 6,
+        "type": "content_bottom",
+        "title": "씨앗 제거!",
+        "subtitle": "씨앗은 소화가 어려워요 🚫"
+    },
+    {
+        "slide": 7,
+        "type": "content_bottom",
+        "title": "익혀서 급여",
+        "subtitle": "찌거나 삶아서 주세요! 🔥"
+    },
+    {
+        "slide": 8,
+        "type": "content_top",
+        "title": "체중 5kg당",
+        "subtitle": "30g이 적당해요! 🎃"
+    },
+    {
+        "slide": 9,
+        "type": "content_bottom",
+        "title": "달콤 호박",
+        "subtitle": "햇살이도 좋아하는 단호박! 🎃"
+    },
+    {
+        "slide": 10,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "소화에 좋은 단호박 급여법! 🐶"
+    }
+]

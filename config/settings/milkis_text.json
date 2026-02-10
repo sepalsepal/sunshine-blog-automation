@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "MILKIS",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "위험해요!",
+    "subtitle": "탄산+설탕+유당, 복부팽만"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "대처법",
+    "subtitle": "가스, 설사 시 급여 중단"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

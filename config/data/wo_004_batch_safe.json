@@ -1,0 +1,528 @@
+{
+  "work_order": "WO-2026-0205-004",
+  "batch": "SAFE",
+  "executed_at": "2026-02-05T14:05:51.575721",
+  "total": 32,
+  "success": 16,
+  "skipped": 16,
+  "results": [
+    {
+      "food_id": "bean_sprouts",
+      "food_ko": "숙주나물",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "melon",
+      "food_ko": "멜론",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "pomegranate",
+      "food_ko": "석류",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "kimchi",
+      "food_ko": "김치",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "quail_egg",
+      "food_ko": "메추리알",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": false,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "6/8",
+      "errors": [
+        "_03 CTA 실패: \n╔══════════════════════════════════════════════════════════╗\n║  ❌ CTA 검증 실패: AI 이미지 감지                         ║\n╠══════════════════════════════════════════════════════════╣\n║  파일: quail_egg_03_bg.png                            ║\n║  감지된 키워드: ai                                       ║\n║                                                          ║\n║  🚫 CTA는 햇살이 실사진만 허용                            ║\n║  📁 실사진 폴더에서 가져오세요                            ║\n╚══════════════════════════════════════════════════════════╝\n"
+      ],
+      "skipped": false
+    },
+    {
+      "food_id": "fried_chicken",
+      "food_ko": "후라이드치킨",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": false,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "7/9",
+      "errors": [
+        "_03 CTA 실패: \n╔══════════════════════════════════════════════════════════╗\n║  ❌ CTA 검증 실패: 음식 이미지 감지                       ║\n╠══════════════════════════════════════════════════════════╣\n║  파일: fried_chicken_03.png                           ║\n║  감지된 키워드: chicken                                  ║\n║                                                          ║\n║  🚫 CTA는 햇살이 단독 사진만 허용                         ║\n║  🚫 음식이 포함된 이미지 사용 금지                        ║\n╚══════════════════════════════════════════════════════════╝\n"
+      ],
+      "skipped": false
+    },
+    {
+      "food_id": "chicken_skewer",
+      "food_ko": "닭꼬치",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "chicken_breast",
+      "food_ko": "닭가슴살",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": false,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "7/9",
+      "errors": [
+        "_03 CTA 실패: \n╔══════════════════════════════════════════════════════════╗\n║  ❌ CTA 검증 실패: 음식 이미지 감지                       ║\n╠══════════════════════════════════════════════════════════╣\n║  파일: chicken_breast_03.png                          ║\n║  감지된 키워드: chicken                                  ║\n║                                                          ║\n║  🚫 CTA는 햇살이 단독 사진만 허용                         ║\n║  🚫 음식이 포함된 이미지 사용 금지                        ║\n╚══════════════════════════════════════════════════════════╝\n"
+      ],
+      "skipped": false
+    },
+    {
+      "food_id": "raspberry",
+      "food_ko": "라즈베리",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "cranberry",
+      "food_ko": "크랜베리",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "coconut",
+      "food_ko": "코코넛",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "white_fish",
+      "food_ko": "흰살생선",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "lettuce",
+      "food_ko": "상추",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "green_beans",
+      "food_ko": "강낭콩",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "bell_pepper",
+      "food_ko": "파프리카",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "asparagus",
+      "food_ko": "아스파라거스",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "beet",
+      "food_ko": "비트",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "napa_cabbage",
+      "food_ko": "배추",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "radish",
+      "food_ko": "무",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "corn",
+      "food_ko": "옥수수",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "peas",
+      "food_ko": "완두콩",
+      "safety": "SAFE",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "pork",
+      "food_ko": "돼지고기",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "turkey",
+      "food_ko": "칠면조",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "lamb",
+      "food_ko": "양고기",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "venison",
+      "food_ko": "사슴고기",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "rabbit",
+      "food_ko": "토끼고기",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "chicken_liver",
+      "food_ko": "닭간",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "beef_liver",
+      "food_ko": "소간",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "heart",
+      "food_ko": "심장(소/닭)",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "tripe",
+      "food_ko": "양(위장)",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "bone_broth",
+      "food_ko": "사골국물",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "cod",
+      "food_ko": "대구",
+      "safety": "SAFE",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    }
+  ]
+}

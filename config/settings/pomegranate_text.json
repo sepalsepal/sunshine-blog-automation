@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "POMEGRANATE",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "먹어도 돼요!",
+    "subtitle": "항산화 풍부, 면역력 강화"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "급여 방법",
+    "subtitle": "씨 제거, 과육만 소량"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

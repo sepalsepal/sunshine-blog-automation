@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "RAMEN",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "절대 금지!",
+    "subtitle": "나트륨 과다, 양파/마늘 독성"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "증상 & 대처",
+    "subtitle": "구토, 탈수 시 즉시 동물병원"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

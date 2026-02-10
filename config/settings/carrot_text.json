@@ -1,0 +1,62 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "CARROT",
+        "subtitle": "아삭아삭 주황빛 간식"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "생으로도 익혀서도 OK! 🥕"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "눈 건강",
+        "subtitle": "베타카로틴이 시력을 보호해요! 👀"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "치아 건강",
+        "subtitle": "씹으면서 치석 제거 효과! 🦷"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "저칼로리",
+        "subtitle": "다이어트 간식으로 최고! 💪"
+    },
+    {
+        "slide": 6,
+        "type": "content_bottom",
+        "title": "생/익힘 OK",
+        "subtitle": "둘 다 괜찮지만 익히면 흡수율 UP! 🔥"
+    },
+    {
+        "slide": 7,
+        "type": "content_bottom",
+        "title": "작게 썰어서",
+        "subtitle": "목에 걸리지 않게 조심! ⚠️"
+    },
+    {
+        "slide": 8,
+        "type": "content_top",
+        "title": "체중 5kg당",
+        "subtitle": "30g이 적당해요! 🥕"
+    },
+    {
+        "slide": 9,
+        "type": "content_bottom",
+        "title": "아삭 간식",
+        "subtitle": "햇살이도 좋아하는 당근 스틱! 🥕"
+    },
+    {
+        "slide": 10,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "건강한 당근 간식 급여법! 🐶"
+    }
+]

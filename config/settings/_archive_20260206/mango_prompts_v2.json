@@ -1,0 +1,75 @@
+{
+  "topic": "mango",
+  "topic_kr": "망고",
+  "version": "v2_diverse",
+  "date": "2026-01-25",
+  "design_principle": "다양한 앵글과 자연스러운 포즈로 AI 느낌 최소화",
+  "character": "a 10-year-old senior golden retriever with distinctive white muzzle, white fur mixed around the eyes, black eyes, black nose, golden caramel coat color, fluffy healthy body",
+  "quality_tags": "shot on Canon EOS R5 with 85mm f/2.8 lens, Kodak Portra 400 film emulation, subtle film grain, natural window side lighting, shallow depth of field, warm golden tones, authentic candid pet photography",
+  "negative_prompt": "puppy, young dog, dog eating food, dog biting food, dog touching food with paws, food in mouth, tongue touching food, paws near food, looking directly at camera, posed, artificial smile, perfect symmetry, studio lighting, flash, HDR, digital art, illustration, 3d render, text, watermark, low quality, blurry, deformed",
+  "prompts": [
+    {
+      "index": 0,
+      "type": "cover",
+      "angle": "three-quarter front view",
+      "pose": "curious expression with ears slightly forward",
+      "camera_look": true,
+      "composition": "subject in center to lower 80%, top 20% clear for text",
+      "prompt": "Candid photograph of a 10-year-old senior golden retriever with white muzzle and black nose, sitting behind a rustic wooden table with fresh whole mango placed in front, three-quarter front view, curious excited expression with ears slightly perked, head tilted very slightly, warm cozy kitchen with soft morning light, subject positioned in center-lower portion of frame with clean background in top 20% for text overlay, shot on Canon EOS R5 85mm f/2.8, Kodak Portra 400 film emulation, subtle grain, shallow depth of field"
+    },
+    {
+      "index": 1,
+      "type": "content",
+      "angle": "side profile view",
+      "pose": "sniffing food curiously",
+      "camera_look": false,
+      "composition": "dog in upper 70%, text area bottom 30%",
+      "prompt": "Candid photograph of a senior golden retriever with white muzzle, captured in SIDE PROFILE VIEW, nose approaching a plate of sliced mango on wooden table, NOT looking at camera, natural curious sniffing moment, eyes focused on the food, gentle lighting from window, warm kitchen atmosphere, dog positioned in upper portion of frame leaving bottom 30% empty for text, authentic candid moment, Kodak Portra 400 film look, soft film grain"
+    },
+    {
+      "index": 2,
+      "type": "content",
+      "angle": "overhead shot from above",
+      "pose": "sitting next to food, looking up",
+      "camera_look": false,
+      "composition": "bird's eye view, dog and food both visible",
+      "prompt": "Overhead photograph shot from above, bird's eye view of a senior golden retriever with white muzzle sitting on kitchen floor next to a wooden cutting board with fresh mango slices, dog looking slightly to the side NOT directly up at camera, natural top-down composition showing both dog and food, warm wooden floor, soft natural lighting, the dog's golden coat and white facial markings clearly visible, leaving space at bottom edge for text overlay, candid overhead moment, Kodak Portra 400 aesthetic"
+    },
+    {
+      "index": 3,
+      "type": "content",
+      "angle": "three-quarter view with head tilt",
+      "pose": "gentle head tilt, curious",
+      "camera_look": false,
+      "composition": "dog in upper 70%",
+      "prompt": "Candid photograph of a senior golden retriever with white muzzle, captured at three-quarter angle with a gentle HEAD TILT to one side, adorable curious expression, NOT looking directly at camera but gazing slightly off to the side, a small bowl of mango pieces visible in the background, warm golden hour lighting streaming through window, cozy home environment, dog positioned in upper portion leaving bottom area clear for text, authentic moment of curiosity, Kodak Portra 400 film emulation"
+    },
+    {
+      "index": 4,
+      "type": "content",
+      "angle": "food foreground, dog background",
+      "pose": "watching cautiously from distance",
+      "camera_look": false,
+      "composition": "mango in sharp focus foreground, dog soft focus background",
+      "prompt": "Candid photograph with MANGO IN SHARP FOCUS in the foreground on a ceramic plate, a senior golden retriever with white muzzle sitting in the BLURRED BACKGROUND at respectful distance, dog looking at the food not at camera, slightly serious cautious expression, creating depth with foreground food and background dog, moody natural lighting, muted warm tones, dog positioned to allow text space at bottom, Kodak Portra 400 aesthetic, authentic documentary style"
+    },
+    {
+      "index": 5,
+      "type": "content",
+      "angle": "side view",
+      "pose": "looking at scale",
+      "camera_look": false,
+      "composition": "scale with food, dog beside",
+      "prompt": "Candid photograph from SIDE ANGLE showing a kitchen scale with measured mango pieces on it, a senior golden retriever with white muzzle sitting beside the scale, dog looking at the scale NOT at camera, profile view of the dog showing white muzzle and golden coat, informational composition clearly showing portion size, bright clean kitchen, natural daylight, leaving bottom portion clear for text overlay, authentic moment, Kodak Portra 400 film look"
+    },
+    {
+      "index": 6,
+      "type": "cta",
+      "angle": "three-quarter profile",
+      "pose": "relaxed happy expression",
+      "camera_look": "slight glance",
+      "composition": "warm positive ending",
+      "prompt": "Candid photograph of a senior golden retriever with white muzzle, captured at three-quarter profile angle, relaxed happy expression with soft gentle eyes, mouth slightly open in natural comfortable way, a small decorative bowl nearby (no food visible), warm golden sunset lighting, cozy living room atmosphere, the dog giving a subtle glance toward camera direction creating connection, positive warm ending mood, positioned with space at bottom for text, Kodak Portra 400 film aesthetic, authentic pet portrait"
+    }
+  ]
+}

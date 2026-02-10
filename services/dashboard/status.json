@@ -1,0 +1,154 @@
+{
+  "topic": "strawberry",
+  "started_at": "2026-01-28T21:55:35.754152",
+  "current_step": 15,
+  "total_progress": 100,
+  "steps": [
+    {
+      "id": 0,
+      "name": "김부장",
+      "role": "지시",
+      "emoji": "👔",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 1,
+      "name": "김작가",
+      "role": "주제탐색",
+      "emoji": "✍️",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 2,
+      "name": "최검증",
+      "role": "주제검증",
+      "emoji": "🔬",
+      "is_gate": true,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 3,
+      "name": "최검증",
+      "role": "팩트체크",
+      "emoji": "🔬",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 4,
+      "name": "김작가",
+      "role": "기획/글",
+      "emoji": "✍️",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 5,
+      "name": "김감독",
+      "role": "G1 검수",
+      "emoji": "🎬",
+      "is_gate": true,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 6,
+      "name": "이작가",
+      "role": "이미지",
+      "emoji": "🎨",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 7,
+      "name": "김감독",
+      "role": "G2 검수",
+      "emoji": "🎬",
+      "is_gate": true,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 8,
+      "name": "박편집",
+      "role": "합성",
+      "emoji": "✏️",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 9,
+      "name": "김감독",
+      "role": "G3 검수",
+      "emoji": "🎬",
+      "is_gate": true,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 10,
+      "name": "김감독",
+      "role": "최종승인",
+      "emoji": "⭐",
+      "is_gate": true,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 11,
+      "name": "김대리",
+      "role": "업로드",
+      "emoji": "📤",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 12,
+      "name": "김대리",
+      "role": "인스타",
+      "emoji": "📸",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    },
+    {
+      "id": 13,
+      "name": "김대리",
+      "role": "웹페이지",
+      "emoji": "🌐",
+      "is_gate": false,
+      "status": "done",
+      "duration": 2.5,
+      "progress": null
+    }
+  ],
+  "errors": [],
+  "result": {
+    "status": "success",
+    "topic": "strawberry"
+  },
+  "last_updated": "2026-01-28T21:56:36.720636"
+}

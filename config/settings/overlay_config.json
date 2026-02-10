@@ -1,0 +1,87 @@
+{
+    "canvas": {
+        "width": 1080,
+        "height": 1080
+    },
+    "layout": {
+        "type": "blur_gradient",
+        "clear_boundary": 800,
+        "text_area_height": 260,
+        "gradient_range": {
+            "start": 700,
+            "end": 920
+        }
+    },
+    "blur": {
+        "radius": 60,
+        "brightness": 0.75,
+        "scale": 1.2
+    },
+    "dark_overlay": {
+        "opacity": 0.15,
+        "gradient_start": 0.4
+    },
+    "fonts": {
+        "family": "Pretendard",
+        "cover_title": {
+            "size": 58,
+            "weight": 800,
+            "color": "#FFFFFF",
+            "shadow": "0 3px 20px rgba(0,0,0,0.5)",
+            "letter_spacing": "1px"
+        },
+        "title": {
+            "size": 52,
+            "weight": 800,
+            "color": "#FFFFFF",
+            "shadow": "0 2px 20px rgba(0,0,0,0.6)"
+        },
+        "subtitle": {
+            "size": 26,
+            "weight": 500,
+            "color": "rgba(255,255,255,0.9)",
+            "shadow": "0 2px 10px rgba(0,0,0,0.5)"
+        }
+    },
+    "underline": {
+        "cover": {
+            "width": 180,
+            "height": 3,
+            "color": "#FFFFFF",
+            "margin_top": 12
+        }
+    },
+    "styles": {
+        "cover": {
+            "type": "full_image_overlay",
+            "title_position": "top",
+            "title_y": 120,
+            "has_underline": true,
+            "note": "텍스트는 상단 15-20% 영역에 배치, AI 이미지는 강아지/음식을 중앙~하단에 배치하여 텍스트 공간 확보"
+        },
+        "content": {
+            "type": "blur_gradient",
+            "text_position": "bottom",
+            "text_vertical_align": "center"
+        },
+        "cta": {
+            "type": "blur_gradient",
+            "text_position": "bottom",
+            "text_vertical_align": "center"
+        }
+    },
+    "ai_image_rules": {
+        "cover": {
+            "subject_position": "center_to_bottom",
+            "text_safe_zone": "top 20%",
+            "composition": "강아지와 음식은 이미지 중앙~하단에 배치, 상단 20%는 텍스트용 여백 확보",
+            "avoid": "상단에 주요 피사체 배치 금지"
+        },
+        "content": {
+            "subject_position": "upper_70_percent",
+            "text_safe_zone": "bottom 30%",
+            "composition": "강아지와 음식은 상단 70%에 배치, 하단 30%는 텍스트용 여백"
+        }
+    },
+    "render_script": "scripts/render_banana_v2.js"
+}

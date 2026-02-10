@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "FRIED CHICKEN",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "껍질 제거 시 OK!",
+    "subtitle": "기름/양념/뼈 제거 필수"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "급여 방법",
+    "subtitle": "살코기만 소량, 튀김옷 제거"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

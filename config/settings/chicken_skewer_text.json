@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "CHICKEN SKEWER",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "살코기만 OK!",
+    "subtitle": "양념/꼬치 제거 후 급여"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "급여 방법",
+    "subtitle": "무양념 닭고기만 소량"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "description": "봉인 파일 SHA256 해시 기준선. 이 파일들은 수정 금지.",
+  "created_at": "2026-02-05T18:45:00",
+  "work_order": "WO-2026-0205-008",
+  "files": {
+    "pipeline/pillow_overlay.py": "06734e56c5334eb7f55f008caa57bec46cca3b2bc18111b9a9f171e01fe85fa0",
+    "pipeline/validators_strict.py": "c0d98b3cae5895092e0f52e941b25306ea1dba276b9488e7a2dace2477d84351",
+    "services/scripts/reoverlay.py": "592499cd2491a2104162fbe74c8aa3e1539cb21a5b34bef4a6a42613ddb7768e"
+  }
+}

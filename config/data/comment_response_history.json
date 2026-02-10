@@ -1,0 +1,25 @@
+{
+  "responses": [
+    {
+      "comment_id": "12345",
+      "comment_text": "감사해요! 우리 강아지한테 바로 줘봐야겠어요",
+      "username": "dog_lover",
+      "post_id": "post789",
+      "response_text": "응원해주셔서 감사해요! 앞으로도 좋은 콘텐츠 준비할게요!",
+      "response_type": "keyword",
+      "template_key": "thanks",
+      "responded_at": "2026-01-30T10:10:09.810388",
+      "simulated": true
+    }
+  ],
+  "responded_comments": [
+    "12345"
+  ],
+  "user_last_response": {
+    "dog_lover": "2026-01-30T10:10:09.810386"
+  },
+  "daily_counts": {
+    "2026-01-30": 1
+  },
+  "last_updated": "2026-01-30T10:10:09.810410"
+}

@@ -1,0 +1,62 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "BLUEBERRY",
+        "subtitle": "톡톡 터지는 슈퍼푸드"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "강아지 슈퍼푸드로 불려요! 🫐"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "항산화 최고",
+        "subtitle": "안토시아닌이 노화를 방지해요! ✨"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "눈 건강",
+        "subtitle": "시력 보호에 탁월한 효과! 👀"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "뇌 건강",
+        "subtitle": "인지 기능 향상에 도움돼요! 🧠"
+    },
+    {
+        "slide": 6,
+        "type": "content_bottom",
+        "title": "세척 필수!",
+        "subtitle": "농약 잔류물 제거해주세요 🚿"
+    },
+    {
+        "slide": 7,
+        "type": "content_bottom",
+        "title": "냉동도 OK",
+        "subtitle": "냉동 블루베리도 영양 그대로! ❄️"
+    },
+    {
+        "slide": 8,
+        "type": "content_top",
+        "title": "체중 5kg당",
+        "subtitle": "5-6알이 적당해요! 🫐"
+    },
+    {
+        "slide": 9,
+        "type": "content_bottom",
+        "title": "톡톡 간식",
+        "subtitle": "햇살이도 좋아하는 블루베리! 🫐"
+    },
+    {
+        "slide": 10,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "슈퍼푸드 블루베리 급여법! 🐶"
+    }
+]

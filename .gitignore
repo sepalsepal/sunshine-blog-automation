@@ -1,0 +1,31 @@
+.env
+google_service_account.json
+__pycache__/
+*.pyc
+.DS_Store
+app_state.json
+bot_command.json
+launch_ngrok.py
+expose_app.py
+images/
+*.deb
+
+# Sunshine photos (대용량)
+contents/sunshine photos/
+contents/sunshine/
+backup_sync_*/contents/sunshine/
+
+# 대용량 폴더 제외 (push 최적화)
+contents/sunshine photos/
+contents/sunshine/
+*.log
+bot.log
+.venv/
+SNAPSHOT/
+backup_sync_*/
+references/
+config/backups/
+config/fonts/
+assets/fonts/
+logs/
+services/scripts/node_modules/

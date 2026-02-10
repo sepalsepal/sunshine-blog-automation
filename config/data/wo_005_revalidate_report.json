@@ -1,0 +1,588 @@
+{
+  "work_order": "WO-2026-0205-005",
+  "timestamp": "2026-02-05T17:29:20.100266",
+  "total": 70,
+  "pass_15_15": 69,
+  "fail": 1,
+  "v30_executed": true,
+  "v31_executed": true,
+  "results": [
+    {
+      "food_id": "blackberry",
+      "folder": "028_blackberry_블랙베리",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "nuts",
+      "folder": "031_nuts_견과류",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "almonds",
+      "folder": "032_almonds_아몬드",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "milk",
+      "folder": "033_milk_우유",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "baguette",
+      "folder": "034_baguette_바게트",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "mackerel",
+      "folder": "034_mackerel_고등어",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "potato",
+      "folder": "036_potato_감자",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "bean_sprouts",
+      "folder": "039_bean_sprouts_숙주나물",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "yogurt",
+      "folder": "041_yogurt_요거트",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "melon",
+      "folder": "046_melon_멜론",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "pomegranate",
+      "folder": "050_pomegranate_석류",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "tofu",
+      "folder": "052_tofu_두부",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "onion",
+      "folder": "056_onion_양파",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "garlic",
+      "folder": "058_garlic_마늘",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "raisin",
+      "folder": "062_raisin_건포도",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "chocolate",
+      "folder": "064_chocolate_초콜릿",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "kimchi",
+      "folder": "066_kimchi_김치",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "quail_egg",
+      "folder": "069_quail_egg_메추리알",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "fried_chicken",
+      "folder": "072_fried_chicken_후라이드치킨",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "tteokguk",
+      "folder": "077_tteokguk_떡국",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "kimbap",
+      "folder": "080_kimbap_김밥",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "bibimbap",
+      "folder": "081_bibimbap_비빔밥",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "jjajangmyeon",
+      "folder": "082_jjajangmyeon_짜장면",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "udon",
+      "folder": "083_udon_우동",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "naengmyeon",
+      "folder": "085_naengmyeon_냉면",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "ramen",
+      "folder": "086_ramen_라면",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "toast",
+      "folder": "087_toast_토스트",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "sandwich",
+      "folder": "088_sandwich_샌드위치",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "bulgogi",
+      "folder": "090_bulgogi_불고기",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "cake",
+      "folder": "091_cake_케이크",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "donut",
+      "folder": "092_donut_도넛",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "brownie",
+      "folder": "095_brownie_브라우니",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "muffin",
+      "folder": "096_muffin_머핀",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "pancake",
+      "folder": "097_pancake_팬케이크",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "waffle",
+      "folder": "098_waffle_와플",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "cereal",
+      "folder": "099_cereal_시리얼",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "granola",
+      "folder": "100_granola_그래놀라",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "chicken_skewer",
+      "folder": "101_chicken_skewer_닭꼬치",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "dakgangjeong",
+      "folder": "102_dakgangjeong_닭강정",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "meatball",
+      "folder": "103_meatball_미트볼",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "bacon",
+      "folder": "105_bacon_베이컨",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "cheetos",
+      "folder": "109_cheetos_치토스",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "croissant",
+      "folder": "111_croissant_크루아상",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "doritos",
+      "folder": "113_doritos_도리토스",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "fanta",
+      "folder": "114_fanta_환타",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "lays",
+      "folder": "118_lays_레이즈",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "milkis",
+      "folder": "119_milkis_밀키스",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "perrier",
+      "folder": "120_perrier_페리에",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "pizza",
+      "folder": "121_pizza_피자",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "reeses",
+      "folder": "124_reeses_리세스",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "ritz",
+      "folder": "125_ritz_리츠",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "skittles",
+      "folder": "127_skittles_스키틀즈",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "soju",
+      "folder": "128_soju_소주",
+      "safety": "forbidden",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "starburst",
+      "folder": "130_starburst_스타버스트",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "cheese",
+      "folder": "131_cheese_치즈",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "white_fish",
+      "folder": "132_white_fish_흰살생선",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "sprite",
+      "folder": "133_sprite_스프라이트",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "chicken_breast",
+      "folder": "139_chicken_breast_닭가슴살",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "cabbage",
+      "folder": "151_cabbage_양배추",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "plum",
+      "folder": "151_plum_자두",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "banana",
+      "folder": "152_banana_milk_바나나우유",
+      "safety": "safe",
+      "passed": 11,
+      "total": 15,
+      "failures": [
+        [
+          "v3.0 #1 clean_image(body1)",
+          "bg_01 없음: banana_01_bg.png"
+        ],
+        [
+          "v3.0 #3 clean_image(body2)",
+          "bg_02 없음: banana_02_bg.png"
+        ],
+        [
+          "v3.0 #5 clean_image(cta)",
+          "bg_03 없음: banana_03_bg.png"
+        ],
+        [
+          "v3.0 #6 cta_real_photo",
+          "bg_03 없음"
+        ]
+      ]
+    },
+    {
+      "food_id": "raspberry",
+      "folder": "152_raspberry_라즈베리",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "coconut",
+      "folder": "154_coconut_코코넛",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "lemon",
+      "folder": "158_lemon_레몬",
+      "safety": "danger",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "lettuce",
+      "folder": "160_lettuce_상추",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "green_beans",
+      "folder": "163_green_beans_강낭콩",
+      "safety": "SAFE",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "asparagus",
+      "folder": "170_asparagus_아스파라거스",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "peas",
+      "folder": "172_peas_완두콩",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "mushroom",
+      "folder": "175_mushroom_버섯",
+      "safety": "caution",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    },
+    {
+      "food_id": "beet",
+      "folder": "176_beet_비트",
+      "safety": "safe",
+      "passed": 15,
+      "total": 15,
+      "failures": []
+    }
+  ]
+}

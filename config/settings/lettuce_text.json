@@ -1,0 +1,26 @@
+[
+  {
+    "slide": 0,
+    "type": "cover",
+    "title": "LETTUCE",
+    "subtitle": ""
+  },
+  {
+    "slide": 1,
+    "type": "content_bottom",
+    "title": "먹어도 돼요!",
+    "subtitle": "수분+식이섬유, 저칼로리"
+  },
+  {
+    "slide": 2,
+    "type": "content_bottom",
+    "title": "급여 방법",
+    "subtitle": "씻어서 생으로 2~3장"
+  },
+  {
+    "slide": 3,
+    "type": "cta",
+    "title": "저장 & 공유",
+    "subtitle": "주변 견주에게 알려주세요!"
+  }
+]

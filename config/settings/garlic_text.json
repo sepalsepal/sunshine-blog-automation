@@ -1,0 +1,14 @@
+{
+  "food_id": "garlic",
+  "safety": "forbidden",
+  "color": "#FF5252",
+  "font_size": 52,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "GARLIC", "subtitle": ""},
+    {"slide": 1, "title": "급여 금지!", "subtitle": "티오황산염 독성"},
+    {"slide": 2, "title": "위험 성분", "subtitle": "적혈구 파괴, 빈혈 유발"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "type": "cover",
+        "title": "OLIVE",
+        "subtitle": "",
+        "name": "cover"
+    },
+    {
+        "slide": 1,
+        "type": "content_bottom",
+        "title": "급여 가능!",
+        "subtitle": "씨 제거 후 소량만 OK",
+        "name": "result_benefit"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "주의사항",
+        "subtitle": "염분 多, 씨앗 질식 위험",
+        "name": "caution_amount"
+    },
+    {
+        "slide": 3,
+        "type": "cta",
+        "title": "저장하세요!",
+        "subtitle": "나중에 다시 확인하세요",
+        "name": "cta"
+    }
+]

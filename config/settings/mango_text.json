@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "name": "cover",
+        "type": "cover",
+        "title": "MANGO",
+        "subtitle": ""
+    },
+    {
+        "slide": 1,
+        "name": "result_benefit",
+        "type": "content_bottom",
+        "title": "먹어도 돼요! ✅",
+        "subtitle": "비타민 A, C 풍부 + 면역력 강화!"
+    },
+    {
+        "slide": 2,
+        "name": "caution_amount",
+        "type": "content_bottom",
+        "title": "씨앗·껍질 제거 필수! ⚠️",
+        "subtitle": "소형 1~2조각 | 중형 3~4조각 | 대형 5~6조각"
+    },
+    {
+        "slide": 3,
+        "name": "cta",
+        "type": "cta",
+        "title": "저장 필수! 📌",
+        "subtitle": "우리 아이 최애 간식은? 댓글로 알려주세요!"
+    }
+]

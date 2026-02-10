@@ -1,0 +1,14 @@
+{
+  "food_id": "sandwich",
+  "safety": "caution",
+  "color": "#FFD93D",
+  "font_size": 100,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "SANDWICH", "subtitle": ""},
+    {"slide": 1, "title": "먹어도 돼요!", "subtitle": "빵+고기는 OK, 소스 주의"},
+    {"slide": 2, "title": "주의사항", "subtitle": "양파/소스 제거, 소량만 급여"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-30",
+  "description": "Instagram 댓글 자동 응답 템플릿",
+
+  "response_templates": {
+    "thanks": {
+      "keywords": ["감사", "고마워", "좋아요", "좋아", "최고", "짱", "대박", "유용", "도움", "굿", "good", "nice", "great"],
+      "responses": [
+        "감사합니다! 햇살이와 함께 더 유익한 정보로 찾아올게요! :)",
+        "응원해주셔서 감사해요! 앞으로도 좋은 콘텐츠 준비할게요!",
+        "고마워요! 햇살이도 기뻐하고 있어요! :)"
+      ],
+      "priority": 1
+    },
+
+    "question_amount": {
+      "keywords": ["얼마나", "몇개", "몇 개", "양", "급여량", "많이"],
+      "responses": [
+        "급여량은 슬라이드에서 확인해주세요! 소형/중형/대형견별로 정리해뒀어요 :)",
+        "강아지 체중에 따라 달라요! 콘텐츠에 상세 급여량 안내되어 있어요!"
+      ],
+      "priority": 2
+    },
+
+    "question_safe": {
+      "keywords": ["괜찮", "안전", "먹어도", "줘도", "될까", "해도"],
+      "responses": [
+        "자세한 내용은 콘텐츠를 확인해주세요! 주의사항도 꼭 읽어보세요 :)",
+        "포스트에 안전 정보 정리해뒀어요! 슬라이드로 넘기면서 확인해주세요!"
+      ],
+      "priority": 2
+    },
+
+    "emoji_love": {
+      "keywords": ["heart", "love"],
+      "emoji_patterns": ["❤", "🥰", "😍", "💕", "🩷", "💗"],
+      "responses": [
+        "감사합니다! :)",
+        "햇살이가 좋아해요! :)"
+      ],
+      "priority": 3
+    },
+
+    "dog_cute": {
+      "keywords": ["귀여워", "이쁘", "예뻐", "멋져", "사랑스러", "천사"],
+      "responses": [
+        "감사해요! 햇살이에게 전해줄게요! :)",
+        "햇살이가 기뻐할 것 같아요! 감사합니다!",
+        "우리 햇살이 칭찬해주셔서 감사해요! :)"
+      ],
+      "priority": 2
+    },
+
+    "request_topic": {
+      "keywords": ["다음", "다른", "궁금", "알려주", "알고싶"],
+      "responses": [
+        "좋은 제안이에요! 다음 콘텐츠에 참고할게요 :)",
+        "관심 가져주셔서 감사해요! 곧 다양한 주제로 찾아올게요!"
+      ],
+      "priority": 2
+    },
+
+    "follow": {
+      "keywords": ["팔로우", "구독", "팔로잉"],
+      "responses": [
+        "팔로우 감사합니다! 앞으로도 좋은 정보 전해드릴게요! :)",
+        "환영해요! 유익한 콘텐츠로 보답할게요!"
+      ],
+      "priority": 1
+    },
+
+    "save": {
+      "keywords": ["저장", "스크랩", "save"],
+      "responses": [
+        "저장해주셔서 감사해요! 필요할 때 참고해주세요 :)",
+        "감사합니다! 도움이 되셨으면 좋겠어요!"
+      ],
+      "priority": 2
+    }
+  },
+
+  "spam_filters": {
+    "patterns": [
+      "팔로우.*해.*주세요",
+      "팔로우.*부탁",
+      "구독.*부탁",
+      "DM.*주세요",
+      "DM.*보내",
+      "광고.*클릭",
+      "홍보.*링크",
+      "무료.*이벤트",
+      "할인.*코드",
+      "http://",
+      "https://",
+      "www\\.",
+      "bit\\.ly",
+      "@[a-z]{3,}.*@[a-z]"
+    ],
+    "min_length": 1,
+    "max_emoji_ratio": 0.9
+  },
+
+  "default_response": {
+    "enabled": false,
+    "template": "댓글 감사합니다! :)"
+  },
+
+  "settings": {
+    "daily_limit": 50,
+    "cooldown_per_user_hours": 24,
+    "min_comment_length": 2,
+    "skip_own_comments": true,
+    "skip_verified_accounts": false,
+    "response_delay_seconds": [30, 120]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "tests": {},
+  "last_updated": "2026-01-30T10:00:00.000000",
+  "metadata": {
+    "version": "1.0",
+    "description": "A/B Test tracking data for Instagram content optimization",
+    "variables": [
+      "caption",
+      "hashtags",
+      "post_time",
+      "cover_style",
+      "cta_text",
+      "emoji_style"
+    ],
+    "default_duration_days": 7,
+    "auto_complete_enabled": true
+  }
+}

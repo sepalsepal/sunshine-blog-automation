@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "EGG", "subtitle": "완전식품 계란"},
+    {"slide": 2, "type": "content_bottom", "title": "먹어도 돼요!", "subtitle": "익힌 계란 OK! 🥚"},
+    {"slide": 3, "type": "content_bottom", "title": "완전단백질", "subtitle": "필수 아미노산 모두 함유! 💪"},
+    {"slide": 4, "type": "content_bottom", "title": "비오틴", "subtitle": "피부/모질에 최고! ✨"},
+    {"slide": 5, "type": "content_bottom", "title": "비타민 A", "subtitle": "눈 건강에 도움! 👀"},
+    {"slide": 6, "type": "content_bottom", "title": "완숙으로!", "subtitle": "생계란은 살모넬라 위험! 🔥"},
+    {"slide": 7, "type": "content_bottom", "title": "흰자만 NO", "subtitle": "비오틴 흡수 방해해요! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "체중 5kg당", "subtitle": "1개가 적당해요! 🥚"},
+    {"slide": 9, "type": "content_bottom", "title": "영양 만점", "subtitle": "완전식품 계란! 🥚"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "계란 급여법! 🐶"}
+]

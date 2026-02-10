@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-01-26T12:16:02.041646+09:00",
+  "items": [
+    {
+      "topic": "chicken",
+      "scheduled_time": "2026-01-26T07:00:00+09:00",
+      "day_of_week": "Monday",
+      "day_type": "weekday",
+      "status": "pending"
+    },
+    {
+      "topic": "banana",
+      "scheduled_time": "2026-01-27T07:00:00+09:00",
+      "day_of_week": "Tuesday",
+      "day_type": "weekday",
+      "status": "pending"
+    },
+    {
+      "topic": "carrot",
+      "scheduled_time": "2026-01-28T07:00:00+09:00",
+      "day_of_week": "Wednesday",
+      "day_type": "weekday",
+      "status": "pending"
+    }
+  ]
+}

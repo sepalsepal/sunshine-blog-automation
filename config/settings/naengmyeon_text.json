@@ -1,0 +1,14 @@
+{
+  "food_id": "naengmyeon",
+  "safety": "caution",
+  "color": "#FFD93D",
+  "font_size": 100,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "NAENGMYEON", "subtitle": ""},
+    {"slide": 1, "title": "먹어도 돼요!", "subtitle": "면 자체는 안전, 양념 제거 필수"},
+    {"slide": 2, "title": "주의사항", "subtitle": "양념/육수 제거, 소량만 급여"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

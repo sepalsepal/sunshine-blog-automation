@@ -1,0 +1,91 @@
+# Slack App Manifest for Project Sunshine
+# https://api.slack.com/apps 에서 "Create New App" → "From an app manifest" 선택
+#
+# 사용법:
+# 1. Slack API 사이트에서 앱 생성
+# 2. 이 manifest 내용 붙여넣기
+# 3. OAuth 토큰 발급
+# 4. .env 파일에 토큰 설정
+
+display_information:
+  name: Project Sunshine Bot
+  description: 햇살이 콘텐츠 자동화 승인 봇
+  background_color: "#FFD700"
+  long_description: |
+    Project Sunshine 자동화 파이프라인의 승인 프로세스를 관리합니다.
+
+    주요 기능:
+    - 스토리보드 승인 요청
+    - 최종 게시 승인 요청
+    - 파이프라인 상태 조회
+    - 승인/반려 처리
+
+features:
+  bot_user:
+    display_name: 햇살이봇
+    always_online: true
+
+  slash_commands:
+    - command: /sunshine
+      url: https://your-server.com/slack/commands
+      description: 파이프라인 상태 조회 및 승인 관리
+      usage_hint: "[status|pending|approve|reject|help] [args]"
+      should_escape: false
+
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - chat:write.public
+      - commands
+      - users:read
+      - reactions:read
+      - reactions:write
+      - files:write
+      - files:read
+
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://your-server.com/slack/interactions
+
+  event_subscriptions:
+    request_url: https://your-server.com/slack/events
+    bot_events:
+      - message.channels
+      - message.groups
+      - message.im
+      - reaction_added
+
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
+
+# ============================================
+# 설치 후 설정 가이드
+# ============================================
+#
+# 1. Slack 앱 생성 완료 후:
+#    - "OAuth & Permissions" 페이지에서 Bot Token 복사
+#    - "Basic Information" 페이지에서 Signing Secret 복사
+#
+# 2. .env 파일 설정:
+#    SLACK_BOT_TOKEN=xoxb-your-bot-token
+#    SLACK_SIGNING_SECRET=your-signing-secret
+#    SLACK_APPROVAL_CHANNEL=#sunshine-approvals
+#
+# 3. 승인 채널 생성:
+#    - Slack에서 #sunshine-approvals 채널 생성
+#    - 햇살이봇을 채널에 초대: /invite @햇살이봇
+#
+# 4. 서버 실행:
+#    python server/app.py --port 8000
+#
+# 5. ngrok으로 외부 노출 (개발 시):
+#    ngrok http 8000
+#    - 생성된 URL을 위 manifest의 URL로 교체
+#
+# 6. Slack 앱 설정에서 URL 업데이트:
+#    - Interactivity Request URL
+#    - Event Subscriptions Request URL
+#    - Slash Commands Request URL

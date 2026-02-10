@@ -1,0 +1,27 @@
+{
+  "_comment": "음식 안전도 분류 v1.0 (RULES_v1.0.md 참조)",
+  "_color_rules": {
+    "safe": "#4CAF50 (초록)",
+    "caution": "#FFD93D (노랑)",
+    "danger": "#FF6B6B (빨강)"
+  },
+
+  "safe": [
+    "apple", "banana", "blackberry", "blueberry", "boiled_egg", "broccoli",
+    "carrot", "cauliflower", "celery", "chicken", "cucumber",
+    "duck", "kale", "mango", "orange", "papaya", "peach",
+    "pear", "pineapple", "pumpkin", "rice", "salmon", "spinach",
+    "strawberry", "sweet_potato", "tuna", "watermelon", "zucchini",
+    "beef", "mackerel", "potato", "tofu", "yogurt"
+  ],
+
+  "caution": [
+    "avocado", "cherry", "egg_raw", "garlic_small", "milk",
+    "pasta", "pork_belly", "shrimp", "sausage", "olive"
+  ],
+
+  "danger": [
+    "alcohol", "budweiser", "chocolate", "coca_cola", "coffee",
+    "grape", "macadamia", "onion", "pringles", "raisin", "xylitol"
+  ]
+}

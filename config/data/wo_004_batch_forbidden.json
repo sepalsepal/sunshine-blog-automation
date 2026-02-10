@@ -1,0 +1,102 @@
+{
+  "work_order": "WO-2026-0205-004",
+  "batch": "FORBIDDEN",
+  "executed_at": "2026-02-05T14:03:32.574736",
+  "total": 6,
+  "success": 5,
+  "skipped": 1,
+  "results": [
+    {
+      "food_id": "brownie",
+      "food_ko": "브라우니",
+      "safety": "FORBIDDEN",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "reeses",
+      "food_ko": "리세스",
+      "safety": "FORBIDDEN",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "soju",
+      "food_ko": "소주",
+      "safety": "FORBIDDEN",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "green_onion",
+      "food_ko": "대파",
+      "safety": "FORBIDDEN",
+      "text_json": false,
+      "render_01": false,
+      "render_02": false,
+      "render_03": false,
+      "caption_insta": false,
+      "caption_threads": false,
+      "metadata": false,
+      "validators": "N/A",
+      "errors": [
+        "폴더 없음 + 커버소스 없음"
+      ],
+      "skipped": true
+    },
+    {
+      "food_id": "pizza",
+      "food_ko": "피자",
+      "safety": "FORBIDDEN",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    },
+    {
+      "food_id": "ramen",
+      "food_ko": "라면",
+      "safety": "FORBIDDEN",
+      "text_json": true,
+      "render_01": true,
+      "render_02": true,
+      "render_03": true,
+      "caption_insta": true,
+      "caption_threads": true,
+      "metadata": true,
+      "validators": "9/9",
+      "errors": [],
+      "skipped": false
+    }
+  ]
+}

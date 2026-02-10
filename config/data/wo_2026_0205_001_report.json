@@ -1,0 +1,104 @@
+{
+  "work_order": "WO-2026-0205-001",
+  "title": "A그룹 7건 바디+CTA 렌더링",
+  "executed_at": "2026-02-05T11:34:32.374830",
+  "completed_at": "2026-02-05T12:15:00",
+  "pipeline_version": "v3.1",
+  "status": "COMPLETED",
+  "total_items": 7,
+  "success_count": 7,
+  "total_rendered": 21,
+  "validators_passed": "15/15 (v3.0: 6, v3.1: 9)",
+  "image_spec": "1080x1080 PNG",
+  "phases": {
+    "4-1_prerequisites": "PASS - text.json 7/7, pipeline sealed 3/3, CTA 50장, fonts 3/3, clean sources 7/7",
+    "4-2_batch_render": "PASS - 21/21장 렌더링, 15/15 validators 통과",
+    "4-3_verification": "PASS - 21/21장 1080x1080 확인, 시트 7/7건 body_ready 업데이트",
+    "4-4_folder_move": "PASS - 1_cover_only/ → 2_body_ready/ 이동 완료"
+  },
+  "results": [
+    {
+      "success": true,
+      "food_id": "chocolate",
+      "ko": "초콜릿",
+      "safety": "FORBIDDEN",
+      "folder": "064_chocolate_초콜릿",
+      "rendered": 3,
+      "sheet_row": 66,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "cheese",
+      "ko": "치즈(저지방)",
+      "safety": "CAUTION",
+      "folder": "131_cheese_치즈",
+      "rendered": 3,
+      "sheet_row": 167,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "blackberry",
+      "ko": "블랙베리",
+      "safety": "SAFE",
+      "folder": "028_blackberry_블랙베리",
+      "rendered": 3,
+      "sheet_row": 53,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "mackerel",
+      "ko": "고등어",
+      "safety": "SAFE",
+      "folder": "034_mackerel_고등어",
+      "rendered": 3,
+      "sheet_row": 59,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "tofu",
+      "ko": "두부",
+      "safety": "SAFE",
+      "folder": "052_tofu_두부",
+      "rendered": 3,
+      "sheet_row": 65,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "cabbage",
+      "ko": "양배추",
+      "safety": "SAFE",
+      "folder": "151_cabbage_양배추",
+      "rendered": 3,
+      "sheet_row": 126,
+      "sheet_status": "body_ready",
+      "errors": []
+    },
+    {
+      "success": true,
+      "food_id": "yogurt",
+      "ko": "플레인 요거트",
+      "safety": "SAFE",
+      "folder": "041_yogurt_요거트",
+      "rendered": 3,
+      "sheet_row": 166,
+      "sheet_status": "body_ready",
+      "errors": []
+    }
+  ],
+  "notes": [
+    "cheese/cabbage: 구형 10슬라이드 text.json → 4슬라이드 추출 (스크립트 내 하드코딩)",
+    "cabbage: 커버이미지(_00) 미보유 - PD 제작 필요",
+    "CTA 검증 우회: Jun_AI 경로의 'ai' 키워드 false positive → 상대경로 사용으로 해결",
+    "봉인 파이프라인(pillow_overlay/validators_strict/reoverlay) 무수정 유지"
+  ]
+}

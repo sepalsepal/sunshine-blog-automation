@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "topic_en": "test",
+      "topic_kr": "테스트",
+      "platform": "x",
+      "success": true,
+      "post_url": "https://x.com/sunshinedogfood/status/mock",
+      "timestamp": "2026-01-30T12:13:50.648080",
+      "error": null
+    },
+    {
+      "topic_en": "test",
+      "topic_kr": "테스트",
+      "platform": "threads",
+      "success": true,
+      "post_url": "https://threads.net/@sunshinedogfood/post/mock",
+      "timestamp": "2026-01-30T12:13:50.648093",
+      "error": null
+    }
+  ]
+}

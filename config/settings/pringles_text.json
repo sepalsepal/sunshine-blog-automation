@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "type": "cover",
+        "title": "PRINGLES",
+        "subtitle": "강아지에게 위험한 간식",
+        "name": "cover"
+    },
+    {
+        "slide": 1,
+        "type": "content_bottom",
+        "title": "절대 금지!",
+        "subtitle": "고염분 + 양념 = 강아지에게 독",
+        "name": "result_benefit"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "왜 위험할까?",
+        "subtitle": "나트륨 과다 · 양파/마늘 분말 · 인공첨가물",
+        "name": "caution_amount"
+    },
+    {
+        "slide": 3,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "사람 과자는 강아지에게 독이에요",
+        "name": "cta"
+    }
+]

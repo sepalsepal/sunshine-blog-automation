@@ -1,0 +1,175 @@
+{
+  "food_name": "watermelon",
+  "food_name_kr": "수박",
+  "status": "failed",
+  "current_phase": "quality_loop",
+  "storyboard_path": "/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/storyboards/watermelon_storyboard.md",
+  "storyboard_json_path": "/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/storyboards/watermelon_storyboard.json",
+  "slides": [
+    {
+      "index": 0,
+      "type": "cover",
+      "purpose": "표지 - 호기심 유발",
+      "pose": "sitting",
+      "angle": "front",
+      "background": "kitchen",
+      "human_appearance": false,
+      "food_form": "whole",
+      "text": {
+        "title": "수박",
+        "subtitle": null
+      },
+      "emotion": "호기심",
+      "prompt_hint": "정면 앉기, 눈맞춤"
+    },
+    {
+      "index": 1,
+      "type": "result",
+      "purpose": "결과 - 먹어도 돼요/안돼요",
+      "pose": "looking_up",
+      "angle": "front",
+      "background": "kitchen",
+      "human_appearance": false,
+      "food_form": "whole",
+      "text": {
+        "title": "수박, 먹어도 돼요!",
+        "subtitle": "안전하게 급여 가능해요"
+      },
+      "emotion": "안심",
+      "prompt_hint": "올려다보기, 기대감"
+    },
+    {
+      "index": 2,
+      "type": "benefit1",
+      "purpose": "효능1 - 주요 영양소",
+      "pose": "sitting",
+      "angle": "side_45",
+      "background": "kitchen",
+      "human_appearance": false,
+      "food_form": "sliced",
+      "text": {
+        "title": "수분 보충",
+        "subtitle": "92% 수분 함량, 여름철 탈수 예방"
+      },
+      "emotion": "기대감",
+      "prompt_hint": "측면 앉기, 음식 응시"
+    },
+    {
+      "index": 3,
+      "type": "benefit2",
+      "purpose": "효능2 - 건강 효과",
+      "pose": "standing",
+      "angle": "side_90",
+      "background": "kitchen",
+      "human_appearance": true,
+      "food_form": "prepared",
+      "text": {
+        "title": "비타민 풍부",
+        "subtitle": "비타민 A, C가 면역력 강화"
+      },
+      "emotion": "기대감",
+      "prompt_hint": "서서 기다리기"
+    },
+    {
+      "index": 4,
+      "type": "caution",
+      "purpose": "주의사항 - 조심할 점",
+      "pose": "sitting",
+      "angle": "blur_effect",
+      "background": "living_room",
+      "human_appearance": false,
+      "food_form": "prepared",
+      "text": {
+        "title": "주의하세요!",
+        "subtitle": "씨와 껍질은 반드시 제거"
+      },
+      "emotion": "조심",
+      "prompt_hint": "블러 효과, 음식 강조"
+    },
+    {
+      "index": 5,
+      "type": "amount",
+      "purpose": "적정량 - 급여량",
+      "pose": "looking_up",
+      "angle": "front",
+      "background": "kitchen",
+      "human_appearance": true,
+      "food_form": "sliced",
+      "text": {
+        "title": "적정량",
+        "subtitle": "체중 1kg당 10~20g"
+      },
+      "emotion": "신뢰",
+      "prompt_hint": "올려다보기, 급여 장면"
+    },
+    {
+      "index": 6,
+      "type": "cta",
+      "purpose": "CTA - 저장하세요",
+      "pose": "lying",
+      "angle": "side_45",
+      "background": "kitchen",
+      "human_appearance": true,
+      "food_form": null,
+      "text": {
+        "title": "저장해두세요!",
+        "subtitle": "우리 아이 건강 간식 정보"
+      },
+      "emotion": "행동유도",
+      "prompt_hint": "소파 눕기, 편안함"
+    }
+  ],
+  "prompts": [
+    {
+      "index": 0,
+      "type": "cover",
+      "prompt": "A golden retriever dog named Sunshine, sitting calmly, front view, eye contact with camera, in a bright modern kitchen, natural lighting from window, fresh whole watermelon nearby, HEAD POSITIONED IN CENTER OF FRAME, TOP 30% OF IMAGE IS EMPTY NEGATIVE SPACE for text overlay, warm natural lighting, professional pet photography, 8k resolution, photorealistic, NOT AI-looking"
+    },
+    {
+      "index": 1,
+      "type": "result",
+      "prompt": "A golden retriever dog named Sunshine, looking up expectantly at camera, front view, eye contact with camera, in a bright modern kitchen, natural lighting from window, fresh whole watermelon nearby, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    },
+    {
+      "index": 2,
+      "type": "benefit1",
+      "prompt": "A golden retriever dog named Sunshine, sitting calmly, 45 degree side angle view, in a bright modern kitchen, natural lighting from window, sliced watermelon pieces on a plate, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    },
+    {
+      "index": 3,
+      "type": "benefit2",
+      "prompt": "A golden retriever dog named Sunshine, standing attentively, profile view, 90 degree side angle, in a bright modern kitchen, natural lighting from window, prepared watermelon in a dog-safe bowl, human hand visible giving food to dog, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    },
+    {
+      "index": 4,
+      "type": "caution",
+      "prompt": "A golden retriever dog named Sunshine, sitting calmly, shallow depth of field, dog slightly blurred, food in sharp focus, in a cozy living room with warm lighting, prepared watermelon in a dog-safe bowl, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    },
+    {
+      "index": 5,
+      "type": "amount",
+      "prompt": "A golden retriever dog named Sunshine, looking up expectantly at camera, front view, eye contact with camera, in a bright modern kitchen, natural lighting from window, sliced watermelon pieces on a plate, human hand visible giving food to dog, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    },
+    {
+      "index": 6,
+      "type": "cta",
+      "prompt": "A golden retriever dog named Sunshine, lying down relaxed, 45 degree side angle view, in a bright modern kitchen, natural lighting from window, human hand visible giving food to dog, warm natural lighting, authentic pet photography style, 8k resolution, photorealistic, cozy atmosphere, NOT stock photo"
+    }
+  ],
+  "raw_images_dir": null,
+  "final_images_dir": null,
+  "tech_review_score": 0.0,
+  "tech_review_grade": "",
+  "creative_review_score": 0.0,
+  "creative_review_grade": "",
+  "instagram_url": null,
+  "instagram_post_id": null,
+  "error_message": "품질 검사 실패: max_retries_exceeded",
+  "phase_durations": {
+    "storyboard": 0.001119852066040039,
+    "quality_loop": 0.017546892166137695,
+    "quality_loop_attempts": 3
+  },
+  "created_at": "2026-01-26T12:07:39.428933",
+  "updated_at": "2026-01-26T12:07:39.447618"
+}

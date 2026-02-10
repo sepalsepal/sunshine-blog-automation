@@ -1,0 +1,14 @@
+{
+  "food_id": "cheetos",
+  "safety": "danger",
+  "color": "#FF6B6B",
+  "font_size": 100,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "CHEETOS", "subtitle": ""},
+    {"slide": 1, "title": "급여 주의!", "subtitle": "나트륨 과다, 인공첨가물"},
+    {"slide": 2, "title": "위험 성분", "subtitle": "소금/향료 과다, 소화불량 유발"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

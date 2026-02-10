@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "type": "cover",
+        "title": "COCA-COLA",
+        "subtitle": "",
+        "name": "cover"
+    },
+    {
+        "slide": 1,
+        "type": "content_bottom",
+        "title": "절대 금지!",
+        "subtitle": "카페인 + 설탕 + 탄산 NG",
+        "name": "result_benefit"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "고창증 위험",
+        "subtitle": "위 팽창, 과민반응 주의!",
+        "name": "caution_amount"
+    },
+    {
+        "slide": 3,
+        "type": "cta",
+        "title": "공유 필수!",
+        "subtitle": "다른 견주에게도 알려주세요",
+        "name": "cta"
+    }
+]

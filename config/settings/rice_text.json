@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "name": "cover",
+        "type": "cover",
+        "title": "RICE",
+        "subtitle": ""
+    },
+    {
+        "slide": 1,
+        "name": "result_benefit",
+        "type": "content_bottom",
+        "title": "먹어도 돼요! ✅",
+        "subtitle": "소화력 좋은 탄수화물 에너지원"
+    },
+    {
+        "slide": 2,
+        "name": "caution_amount",
+        "type": "content_bottom",
+        "title": "쌀죽 추천! ⚠️",
+        "subtitle": "소형 1~2T | 중형 2~3T | 대형 3~4T"
+    },
+    {
+        "slide": 3,
+        "name": "cta",
+        "type": "cta",
+        "title": "저장 필수! 📌",
+        "subtitle": "배탈 났을 때 쌀죽으로! 댓글로 알려주세요!"
+    }
+]

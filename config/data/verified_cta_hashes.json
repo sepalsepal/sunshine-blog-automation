@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "description": "수동 검증된 실사 CTA 해시 화이트리스트",
+    "purpose": "F8 검증 시 false positive 방지",
+    "updated": "2026-02-01"
+  },
+  "hashes": [
+    "ff1b1fb44e9a9c7ddacdf8f769b77400",
+    "ea29c776982d793eb7b3a71a71115c16",
+    "c6cbdd1c4d5450fcb22e1b87df3470e1"
+  ],
+  "verified_files": [
+    {
+      "hash": "ff1b1fb44e9a9c7ddacdf8f769b77400",
+      "file": "potato_03.png",
+      "verified_date": "2026-02-01",
+      "verified_by": "최부장 시각 검수"
+    },
+    {
+      "hash": "ea29c776982d793eb7b3a71a71115c16",
+      "file": "burdock_03.png",
+      "verified_date": "2026-02-01",
+      "verified_by": "최부장 시각 검수"
+    },
+    {
+      "hash": "c6cbdd1c4d5450fcb22e1b87df3470e1",
+      "file": "shrimp_03.png",
+      "verified_date": "2026-02-01",
+      "verified_by": "최부장 시각 검수"
+    }
+  ]
+}

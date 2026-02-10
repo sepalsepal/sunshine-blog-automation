@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "name": "cover",
+        "type": "cover",
+        "title": "CUCUMBER",
+        "subtitle": ""
+    },
+    {
+        "slide": 1,
+        "name": "result_benefit",
+        "type": "content_bottom",
+        "title": "먹어도 돼요! ✅",
+        "subtitle": "수분 95% 저칼로리 간식"
+    },
+    {
+        "slide": 2,
+        "name": "caution_amount",
+        "type": "content_bottom",
+        "title": "껍질째 OK! ⚠️",
+        "subtitle": "소형 2조각 | 중형 3조각 | 대형 4조각"
+    },
+    {
+        "slide": 3,
+        "name": "cta",
+        "type": "cta",
+        "title": "저장 필수! 📌",
+        "subtitle": "피클/양념 오이는 금지! 댓글로 알려주세요!"
+    }
+]

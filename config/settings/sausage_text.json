@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "type": "cover",
+        "title": "SAUSAGE",
+        "subtitle": "강아지에게 위험한 음식",
+        "name": "cover"
+    },
+    {
+        "slide": 1,
+        "type": "content_bottom",
+        "title": "주지 마세요!",
+        "subtitle": "고염분 + 아질산나트륨 = 건강 위협",
+        "name": "result_benefit"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "왜 위험할까?",
+        "subtitle": "나트륨 과다 · 발색제 · 양파/마늘 함유",
+        "name": "caution_amount"
+    },
+    {
+        "slide": 3,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "가공육은 강아지에게 해로워요",
+        "name": "cta"
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "KIWI", "subtitle": "초록빛 비타민 보석"},
+    {"slide": 2, "type": "content_bottom", "title": "먹어도 돼요!", "subtitle": "과육만 소량 급여 OK! 🥝"},
+    {"slide": 3, "type": "content_bottom", "title": "비타민C 최고", "subtitle": "오렌지보다 2배 많아요! ✨"},
+    {"slide": 4, "type": "content_bottom", "title": "소화 효소", "subtitle": "단백질 소화를 도와요! 🌿"},
+    {"slide": 5, "type": "content_bottom", "title": "항산화 성분", "subtitle": "노화 방지에 효과적! 💪"},
+    {"slide": 6, "type": "content_bottom", "title": "껍질 제거!", "subtitle": "껍질은 소화 어려워요! 🚫"},
+    {"slide": 7, "type": "content_bottom", "title": "알레르기 주의", "subtitle": "처음엔 소량만 테스트! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "체중 5kg당", "subtitle": "1-2조각이 적당해요! 🥝"},
+    {"slide": 9, "type": "content_bottom", "title": "상큼 키위", "subtitle": "비타민 가득 간식! 🥝"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "키위 안전 급여법! 🐶"}
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "slide": 0,
+        "name": "cover",
+        "type": "cover",
+        "title": "DUCK",
+        "subtitle": ""
+    },
+    {
+        "slide": 1,
+        "name": "result_benefit",
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "고단백 저알레르기 + 피부/모질 개선!"
+    },
+    {
+        "slide": 2,
+        "name": "caution_amount",
+        "type": "content_bottom",
+        "title": "뼈 제거, 익혀서 급여!",
+        "subtitle": "소형 30g | 중형 50g | 대형 80g"
+    },
+    {
+        "slide": 3,
+        "name": "cta",
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "우리 아이 최애 단백질은? 댓글로 알려주세요!"
+    }
+]

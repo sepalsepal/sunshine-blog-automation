@@ -1,0 +1,49 @@
+{
+  "work_order": "WO-2026-0205-002",
+  "batch": "FORBIDDEN",
+  "executed_at": "2026-02-05T12:10:57.398421",
+  "total_items": 5,
+  "success_count": 5,
+  "total_rendered": 15,
+  "skipped": 1,
+  "results": [
+    {
+      "food_id": "brownie",
+      "success": true,
+      "rendered": 3,
+      "errors": []
+    },
+    {
+      "food_id": "reeses",
+      "success": true,
+      "rendered": 3,
+      "errors": []
+    },
+    {
+      "food_id": "soju",
+      "success": true,
+      "rendered": 3,
+      "errors": []
+    },
+    {
+      "food_id": "pizza",
+      "success": true,
+      "rendered": 3,
+      "errors": []
+    },
+    {
+      "food_id": "ramen",
+      "success": true,
+      "rendered": 3,
+      "errors": []
+    }
+  ],
+  "skipped_items": [
+    {
+      "food_id": "green_onion",
+      "food_ko": "대파",
+      "safety": "forbidden",
+      "reason": "커버 소스 없음"
+    }
+  ]
+}

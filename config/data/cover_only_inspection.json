@@ -1,0 +1,1127 @@
+{
+  "summary": {
+    "total_cover_only": 147,
+    "group_a_text_ready": 7,
+    "group_b_text_needed": 75,
+    "no_folder": 65,
+    "has_bg_source": 0,
+    "has_clean_source": 0
+  },
+  "group_a": [
+    {
+      "no": "028",
+      "en": "blackberry",
+      "ko": "블랙베리",
+      "safety": "SAFE",
+      "text_file": "config/settings/blackberry_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "034",
+      "en": "mackerel",
+      "ko": "고등어",
+      "safety": "SAFE",
+      "text_file": "config/settings/mackerel_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "052",
+      "en": "tofu",
+      "ko": "두부",
+      "safety": "SAFE",
+      "text_file": "config/settings/tofu_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "064",
+      "en": "chocolate",
+      "ko": "초콜릿",
+      "safety": "FORBIDDEN",
+      "text_file": "config/settings/chocolate_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "151",
+      "en": "cabbage",
+      "ko": "양배추",
+      "safety": "SAFE",
+      "text_file": "config/settings/cabbage_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "192",
+      "en": "yogurt",
+      "ko": "플레인 요거트",
+      "safety": "SAFE",
+      "text_file": "config/settings/yogurt_text.json",
+      "bg_count": 0
+    },
+    {
+      "no": "193",
+      "en": "cheese",
+      "ko": "치즈(저지방)",
+      "safety": "CAUTION",
+      "text_file": "config/settings/cheese_text.json",
+      "bg_count": 0
+    }
+  ],
+  "group_b": [
+    {
+      "no": "031",
+      "en": "nuts",
+      "ko": "견과류",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "031",
+      "en": "nuts_견과류",
+      "ko": "",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "032",
+      "en": "almonds",
+      "ko": "아몬드",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "032",
+      "en": "egg_yolk",
+      "ko": "달걀노른자",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "034",
+      "en": "baguette",
+      "ko": "바게트",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "035",
+      "en": "red_bean_bread",
+      "ko": "단팥빵",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "037",
+      "en": "bean_sprouts",
+      "ko": "숙주나물",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "042",
+      "en": "lotus_root",
+      "ko": "연근",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "046",
+      "en": "melon",
+      "ko": "멜론",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "050",
+      "en": "pomegranate",
+      "ko": "석류",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "066",
+      "en": "kimchi",
+      "ko": "김치",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "068",
+      "en": "dog_food",
+      "ko": "사료",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "070",
+      "en": "quail_egg",
+      "ko": "메추리알",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "072",
+      "en": "fried_chicken",
+      "ko": "후라이드치킨",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "076",
+      "en": "tteokguk",
+      "ko": "떡국",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "078",
+      "en": "dried_fish",
+      "ko": "북어",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "080",
+      "en": "kimbap",
+      "ko": "김밥",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "081",
+      "en": "bibimbap",
+      "ko": "비빔밥",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "082",
+      "en": "jjajangmyeon",
+      "ko": "짜장면",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "083",
+      "en": "udon",
+      "ko": "우동",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "087",
+      "en": "toast",
+      "ko": "토스트",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "090",
+      "en": "bulgogi",
+      "ko": "불고기",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "091",
+      "en": "cake",
+      "ko": "케이크",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "095",
+      "en": "brownie",
+      "ko": "브라우니",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "096",
+      "en": "muffin",
+      "ko": "머핀",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "097",
+      "en": "pancake",
+      "ko": "팬케이크",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "098",
+      "en": "waffle",
+      "ko": "와플",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "099",
+      "en": "cereal",
+      "ko": "시리얼",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "100",
+      "en": "granola",
+      "ko": "그래놀라",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "101",
+      "en": "chicken_skewer",
+      "ko": "닭꼬치",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "102",
+      "en": "dakgangjeong",
+      "ko": "닭강정",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "103",
+      "en": "meatball",
+      "ko": "미트볼",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "106",
+      "en": "milk",
+      "ko": "바나나우유",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "108",
+      "en": "cass_beer",
+      "ko": "카스맥주",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "111",
+      "en": "croissant",
+      "ko": "크루아상",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "112",
+      "en": "dayspo_healthy_treat",
+      "ko": "데이스포",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "113",
+      "en": "doritos",
+      "ko": "도리토스",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "114",
+      "en": "fanta",
+      "ko": "환타",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "115",
+      "en": "horangi_chicken_stick",
+      "ko": "호랑이치킨스틱",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "116",
+      "en": "jolly_jolie_treat",
+      "ko": "졸리졸리",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "118",
+      "en": "lays",
+      "ko": "레이즈",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "119",
+      "en": "milkis",
+      "ko": "밀키스",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "120",
+      "en": "perrier",
+      "ko": "페리에",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "122",
+      "en": "poptarts",
+      "ko": "팝타르트",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "124",
+      "en": "reeses",
+      "ko": "리세스",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "125",
+      "en": "ritz",
+      "ko": "리츠",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "126",
+      "en": "seoul_paws_duck_treat",
+      "ko": "서울포오즈덕",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "127",
+      "en": "skittles",
+      "ko": "스키틀즈",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "128",
+      "en": "soju",
+      "ko": "소주",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "129",
+      "en": "starbucks_coffee",
+      "ko": "스타벅스커피",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "130",
+      "en": "starburst",
+      "ko": "스타버스트",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "132",
+      "en": "white_fish",
+      "ko": "흰살생선",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "133",
+      "en": "sprite",
+      "ko": "스프라이트",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "134",
+      "en": "dr_nutricore",
+      "ko": "닥터뉴트리코어",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "135",
+      "en": "iskhan",
+      "ko": "이스칸",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "136",
+      "en": "hills",
+      "ko": "힐스",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "139",
+      "en": "chicken_breast",
+      "ko": "닭가슴살",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "143",
+      "en": "stick",
+      "ko": "닭고기스틱",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "148",
+      "en": "raisin",
+      "ko": "건포도",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "148",
+      "en": "royal_canin",
+      "ko": "로얄캐닌",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "154",
+      "en": "sweet_pumpkin",
+      "ko": "단호박",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "155",
+      "en": "asparagus",
+      "ko": "아스파라거스",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "156",
+      "en": "beet",
+      "ko": "비트",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "160",
+      "en": "peas",
+      "ko": "완두콩",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "165",
+      "en": "mushroom",
+      "ko": "버섯",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "171",
+      "en": "tteok",
+      "ko": "떡",
+      "safety": "CAUTION",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "177",
+      "en": "green_onion",
+      "ko": "대파",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "187",
+      "en": "oatmeal",
+      "ko": "오트밀",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "190",
+      "en": "bread",
+      "ko": "식빵(무첨가)",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "212",
+      "en": "cauliflower",
+      "ko": "콜리플라워",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "213",
+      "en": "korean_melon",
+      "ko": "참외",
+      "safety": "SAFE",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "222",
+      "en": "bacon",
+      "ko": "베이컨",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "225",
+      "en": "pizza",
+      "ko": "피자",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "226",
+      "en": "donut",
+      "ko": "도넛",
+      "safety": "DANGER",
+      "bg_count": 0,
+      "has_cover": true
+    },
+    {
+      "no": "227",
+      "en": "ramen",
+      "ko": "라면",
+      "safety": "FORBIDDEN",
+      "bg_count": 0,
+      "has_cover": true
+    }
+  ],
+  "no_folder": [
+    {
+      "no": "141",
+      "en": "raspberry",
+      "ko": "라즈베리",
+      "safety": "SAFE",
+      "sheet_folder": "141_raspberry_라즈베리"
+    },
+    {
+      "no": "142",
+      "en": "lid",
+      "ko": "헬시트릿LID",
+      "safety": "SAFE",
+      "sheet_folder": "142_lid_헬시트릿LID_published"
+    },
+    {
+      "no": "143",
+      "en": "cranberry",
+      "ko": "크랜베리",
+      "safety": "SAFE",
+      "sheet_folder": "143_cranberry_크랜베리"
+    },
+    {
+      "no": "144",
+      "en": "coconut",
+      "ko": "코코넛",
+      "safety": "SAFE",
+      "sheet_folder": "144_coconut_코코넛"
+    },
+    {
+      "no": "146",
+      "en": "persimmon_ripe",
+      "ko": "홍시(연시)",
+      "safety": "CAUTION",
+      "sheet_folder": "146_persimmon_ripe_홍시(연시)"
+    },
+    {
+      "no": "147",
+      "en": "plum",
+      "ko": "자두",
+      "safety": "CAUTION",
+      "sheet_folder": "147_plum_자두"
+    },
+    {
+      "no": "147",
+      "en": "diet",
+      "ko": "힐스사료",
+      "safety": "SAFE",
+      "sheet_folder": "147_diet_힐스사료_published"
+    },
+    {
+      "no": "149",
+      "en": "grapefruit",
+      "ko": "자몽",
+      "safety": "DANGER",
+      "sheet_folder": "149_grapefruit_자몽"
+    },
+    {
+      "no": "150",
+      "en": "lemon",
+      "ko": "레몬",
+      "safety": "DANGER",
+      "sheet_folder": "150_lemon_레몬"
+    },
+    {
+      "no": "152",
+      "en": "lettuce",
+      "ko": "상추",
+      "safety": "SAFE",
+      "sheet_folder": "152_lettuce_상추"
+    },
+    {
+      "no": "153",
+      "en": "green_beans",
+      "ko": "강낭콩(그린빈)",
+      "safety": "SAFE",
+      "sheet_folder": "153_green_beans_강낭콩(그린빈)"
+    },
+    {
+      "no": "154",
+      "en": "bell_pepper",
+      "ko": "파프리카",
+      "safety": "SAFE",
+      "sheet_folder": "154_bell_pepper_파프리카"
+    },
+    {
+      "no": "157",
+      "en": "napa_cabbage",
+      "ko": "배추",
+      "safety": "SAFE",
+      "sheet_folder": "157_napa_cabbage_배추"
+    },
+    {
+      "no": "158",
+      "en": "radish",
+      "ko": "무",
+      "safety": "SAFE",
+      "sheet_folder": "158_radish_무"
+    },
+    {
+      "no": "159",
+      "en": "corn",
+      "ko": "옥수수",
+      "safety": "SAFE",
+      "sheet_folder": "159_corn_옥수수"
+    },
+    {
+      "no": "163",
+      "en": "leek",
+      "ko": "대파/쪽파",
+      "safety": "DANGER",
+      "sheet_folder": "163_leek_대파/쪽파"
+    },
+    {
+      "no": "163",
+      "en": "beans",
+      "ko": "그린빈",
+      "safety": "SAFE",
+      "sheet_folder": "163_beans_그린빈_published"
+    },
+    {
+      "no": "164",
+      "en": "mushroom_wild",
+      "ko": "야생 버섯",
+      "safety": "DANGER",
+      "sheet_folder": "164_mushroom_wild_야생 버섯"
+    },
+    {
+      "no": "165",
+      "en": "rhubarb",
+      "ko": "루바브",
+      "safety": "DANGER",
+      "sheet_folder": "165_rhubarb_루바브"
+    },
+    {
+      "no": "166",
+      "en": "pork",
+      "ko": "돼지고기",
+      "safety": "SAFE",
+      "sheet_folder": "166_pork_돼지고기"
+    },
+    {
+      "no": "167",
+      "en": "turkey",
+      "ko": "칠면조",
+      "safety": "SAFE",
+      "sheet_folder": "167_turkey_칠면조"
+    },
+    {
+      "no": "168",
+      "en": "lamb",
+      "ko": "양고기(램)",
+      "safety": "SAFE",
+      "sheet_folder": "168_lamb_양고기(램)"
+    },
+    {
+      "no": "170",
+      "en": "venison",
+      "ko": "사슴고기",
+      "safety": "SAFE",
+      "sheet_folder": "170_venison_사슴고기"
+    },
+    {
+      "no": "171",
+      "en": "rabbit",
+      "ko": "토끼고기",
+      "safety": "SAFE",
+      "sheet_folder": "171_rabbit_토끼고기"
+    },
+    {
+      "no": "173",
+      "en": "dried_pollack",
+      "ko": "황태",
+      "safety": "SAFE",
+      "sheet_folder": "173_dried_pollack_황태_published"
+    },
+    {
+      "no": "174",
+      "en": "chicken_liver",
+      "ko": "닭간",
+      "safety": "SAFE",
+      "sheet_folder": "174_chicken_liver_닭간"
+    },
+    {
+      "no": "175",
+      "en": "beef_liver",
+      "ko": "소간",
+      "safety": "SAFE",
+      "sheet_folder": "175_beef_liver_소간"
+    },
+    {
+      "no": "176",
+      "en": "heart",
+      "ko": "심장(소/닭)",
+      "safety": "SAFE",
+      "sheet_folder": "176_heart_심장(소/닭)"
+    },
+    {
+      "no": "177",
+      "en": "tripe",
+      "ko": "양(위장)",
+      "safety": "SAFE",
+      "sheet_folder": "177_tripe_양(위장)"
+    },
+    {
+      "no": "178",
+      "en": "bone_broth",
+      "ko": "사골국물",
+      "safety": "SAFE",
+      "sheet_folder": "178_bone_broth_사골국물"
+    },
+    {
+      "no": "179",
+      "en": "cod",
+      "ko": "대구",
+      "safety": "SAFE",
+      "sheet_folder": "179_cod_대구"
+    },
+    {
+      "no": "180",
+      "en": "sardine",
+      "ko": "정어리",
+      "safety": "SAFE",
+      "sheet_folder": "180_sardine_정어리"
+    },
+    {
+      "no": "182",
+      "en": "squid",
+      "ko": "오징어",
+      "safety": "CAUTION",
+      "sheet_folder": "182_squid_오징어"
+    },
+    {
+      "no": "183",
+      "en": "anchovy",
+      "ko": "멸치",
+      "safety": "SAFE",
+      "sheet_folder": "183_anchovy_멸치"
+    },
+    {
+      "no": "184",
+      "en": "seaweed",
+      "ko": "김/미역",
+      "safety": "SAFE",
+      "sheet_folder": "184_seaweed_김/미역"
+    },
+    {
+      "no": "185",
+      "en": "pollack",
+      "ko": "황태(북어)",
+      "safety": "SAFE",
+      "sheet_folder": "185_pollack_황태(북어)"
+    },
+    {
+      "no": "186",
+      "en": "brown_rice",
+      "ko": "현미",
+      "safety": "SAFE",
+      "sheet_folder": "186_brown_rice_현미"
+    },
+    {
+      "no": "188",
+      "en": "quinoa",
+      "ko": "퀴노아",
+      "safety": "SAFE",
+      "sheet_folder": "188_quinoa_퀴노아"
+    },
+    {
+      "no": "191",
+      "en": "barley",
+      "ko": "보리",
+      "safety": "SAFE",
+      "sheet_folder": "191_barley_보리"
+    },
+    {
+      "no": "194",
+      "en": "cottage_cheese",
+      "ko": "코티지 치즈",
+      "safety": "CAUTION",
+      "sheet_folder": "194_cottage_cheese_코티지 치즈"
+    },
+    {
+      "no": "195",
+      "en": "goat_milk",
+      "ko": "산양유",
+      "safety": "CAUTION",
+      "sheet_folder": "195_goat_milk_산양유"
+    },
+    {
+      "no": "196",
+      "en": "peanut_butter",
+      "ko": "땅콩버터(무첨가)",
+      "safety": "SAFE",
+      "sheet_folder": "196_peanut_butter_땅콩버터(무첨가)"
+    },
+    {
+      "no": "197",
+      "en": "peanut",
+      "ko": "땅콩",
+      "safety": "SAFE",
+      "sheet_folder": "197_peanut_땅콩"
+    },
+    {
+      "no": "198",
+      "en": "chestnut",
+      "ko": "밤",
+      "safety": "SAFE",
+      "sheet_folder": "198_chestnut_밤"
+    },
+    {
+      "no": "199",
+      "en": "sunflower_seed",
+      "ko": "해바라기씨",
+      "safety": "SAFE",
+      "sheet_folder": "199_sunflower_seed_해바라기씨"
+    },
+    {
+      "no": "200",
+      "en": "pumpkin_seed",
+      "ko": "호박씨",
+      "safety": "SAFE",
+      "sheet_folder": "200_pumpkin_seed_호박씨"
+    },
+    {
+      "no": "201",
+      "en": "honey",
+      "ko": "꿀",
+      "safety": "SAFE",
+      "sheet_folder": "201_honey_꿀"
+    },
+    {
+      "no": "202",
+      "en": "coconut_oil",
+      "ko": "코코넛 오일",
+      "safety": "SAFE",
+      "sheet_folder": "202_coconut_oil_코코넛 오일"
+    },
+    {
+      "no": "203",
+      "en": "turmeric",
+      "ko": "강황",
+      "safety": "SAFE",
+      "sheet_folder": "203_turmeric_강황"
+    },
+    {
+      "no": "204",
+      "en": "fish_oil",
+      "ko": "피쉬오일(오메가3)",
+      "safety": "SAFE",
+      "sheet_folder": "204_fish_oil_피쉬오일(오메가3)"
+    },
+    {
+      "no": "205",
+      "en": "probiotics",
+      "ko": "프로바이오틱스",
+      "safety": "SAFE",
+      "sheet_folder": "205_probiotics_프로바이오틱스"
+    },
+    {
+      "no": "206",
+      "en": "xylitol",
+      "ko": "자일리톨",
+      "safety": "FORBIDDEN",
+      "sheet_folder": "206_xylitol_자일리톨"
+    },
+    {
+      "no": "207",
+      "en": "caffeine",
+      "ko": "카페인(커피)",
+      "safety": "DANGER",
+      "sheet_folder": "207_caffeine_카페인(커피)"
+    },
+    {
+      "no": "208",
+      "en": "alcohol",
+      "ko": "술(알코올)",
+      "safety": "DANGER",
+      "sheet_folder": "208_alcohol_술(알코올)"
+    },
+    {
+      "no": "209",
+      "en": "macadamia",
+      "ko": "마카다미아",
+      "safety": "DANGER",
+      "sheet_folder": "209_macadamia_마카다미아"
+    },
+    {
+      "no": "210",
+      "en": "tomato",
+      "ko": "토마토",
+      "safety": "CAUTION",
+      "sheet_folder": "210_tomato_토마토"
+    },
+    {
+      "no": "211",
+      "en": "eggplant",
+      "ko": "가지",
+      "safety": "CAUTION",
+      "sheet_folder": "211_eggplant_가지"
+    },
+    {
+      "no": "215",
+      "en": "fig",
+      "ko": "무화과",
+      "safety": "SAFE",
+      "sheet_folder": "215_fig_무화과"
+    },
+    {
+      "no": "217",
+      "en": "crab",
+      "ko": "게",
+      "safety": "CAUTION",
+      "sheet_folder": "217_crab_게"
+    },
+    {
+      "no": "218",
+      "en": "clam",
+      "ko": "조개",
+      "safety": "CAUTION",
+      "sheet_folder": "218_clam_조개"
+    },
+    {
+      "no": "219",
+      "en": "lobster",
+      "ko": "랍스터",
+      "safety": "CAUTION",
+      "sheet_folder": "219_lobster_랍스터"
+    },
+    {
+      "no": "220",
+      "en": "popcorn",
+      "ko": "팝콘",
+      "safety": "CAUTION",
+      "sheet_folder": "220_popcorn_팝콘"
+    },
+    {
+      "no": "223",
+      "en": "potato_chips",
+      "ko": "감자칩",
+      "safety": "DANGER",
+      "sheet_folder": "223_potato_chips_감자칩"
+    },
+    {
+      "no": "224",
+      "en": "hotdog",
+      "ko": "핫도그",
+      "safety": "DANGER",
+      "sheet_folder": "224_hotdog_핫도그"
+    },
+    {
+      "no": "229",
+      "en": "dumpling",
+      "ko": "만두",
+      "safety": "CAUTION",
+      "sheet_folder": "229_dumpling_만두"
+    }
+  ]
+}

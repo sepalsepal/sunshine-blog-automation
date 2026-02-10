@@ -1,0 +1,62 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "WATERMELON",
+        "subtitle": "시원달콤 여름 간식"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "여름철 수분 보충 최고! 🍉"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "수분 보충",
+        "subtitle": "92%가 수분이에요! 💧"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "비타민 풍부",
+        "subtitle": "비타민 A, B6, C가 들어있어요! 🌟"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "저칼로리",
+        "subtitle": "다이어트 중인 댕댕이에게 굿! 👍"
+    },
+    {
+        "slide": 6,
+        "type": "content_bottom",
+        "title": "씨앗 제거!",
+        "subtitle": "장폐색 위험이 있어요 🚫"
+    },
+    {
+        "slide": 7,
+        "type": "content_bottom",
+        "title": "껍질 금지",
+        "subtitle": "소화가 어렵고 질식 위험! ⚠️"
+    },
+    {
+        "slide": 8,
+        "type": "content_top",
+        "title": "체중 5kg당",
+        "subtitle": "과육 50g이 적당해요! 🍉"
+    },
+    {
+        "slide": 9,
+        "type": "content_bottom",
+        "title": "시원한 간식",
+        "subtitle": "더운 여름 햇살이 최애 간식! 🍉"
+    },
+    {
+        "slide": 10,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "여름엔 수박으로 수분 충전! 🐶"
+    }
+]

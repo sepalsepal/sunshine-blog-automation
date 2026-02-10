@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "PAPAYA", "subtitle": "열대의 소화제 과일"},
+    {"slide": 2, "type": "content_bottom", "title": "먹어도 돼요!", "subtitle": "잘 익은 과육만 OK! 🍈"},
+    {"slide": 3, "type": "content_bottom", "title": "소화 효소", "subtitle": "파파인이 소화를 도와요! 🌿"},
+    {"slide": 4, "type": "content_bottom", "title": "비타민 풍부", "subtitle": "비타민 A, C, E 듬뿍! ✨"},
+    {"slide": 5, "type": "content_bottom", "title": "장 건강", "subtitle": "변비 예방에 효과적! 💪"},
+    {"slide": 6, "type": "content_bottom", "title": "씨앗 금지!", "subtitle": "씨앗은 독성이 있어요! 🚫"},
+    {"slide": 7, "type": "content_bottom", "title": "덜 익은 것 NO", "subtitle": "덜 익은 파파야는 위험! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "체중 5kg당", "subtitle": "2-3조각이 적당해요! 🍈"},
+    {"slide": 9, "type": "content_bottom", "title": "열대 간식", "subtitle": "소화에 좋은 파파야! 🍈"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "파파야 올바르게 급여! 🐶"}
+]

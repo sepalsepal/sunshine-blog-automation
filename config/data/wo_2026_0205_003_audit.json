@@ -1,0 +1,119 @@
+{
+  "work_order": "WO-2026-0205-003",
+  "title": "body_ready 전수조사 (SHA256 해시 비교)",
+  "executed_at": "2026-02-05T15:30:00",
+  "status": "COMPLETED",
+  "target_dir": "contents/2_body_ready",
+  "total_folders": 34,
+
+  "summary": {
+    "rendered_slides_check": {
+      "description": "렌더링 후 최종 이미지(텍스트 오버레이 포함) 해시 비교",
+      "cover_vs_body1": "34/34 PASS (모두 상이)",
+      "cover_vs_body2": "34/34 PASS (모두 상이)",
+      "body1_vs_body2": "34/34 PASS (모두 상이)",
+      "conclusion": "렌더링 후 이미지는 텍스트 오버레이로 인해 모두 고유함"
+    },
+    "background_source_check": {
+      "description": "렌더링 전 배경 원본(archive/*_bg.png) 해시 비교",
+      "body1_bg_equals_body2_bg": "28/34 (82%)",
+      "all_unique_bg": "6/34 (18%)",
+      "conclusion": "28건에서 body1과 body2의 배경 원본이 동일 (커버 소스 재사용)"
+    }
+  },
+
+  "categories": {
+    "A_bg_duplicated": {
+      "description": "body1_bg == body2_bg (커버소스를 바디 배경으로 재사용)",
+      "count": 28,
+      "items": [
+        "028_blackberry_블랙베리",
+        "034_mackerel_고등어",
+        "041_yogurt_요거트",
+        "052_tofu_두부",
+        "064_chocolate_초콜릿",
+        "066_kimchi_김치",
+        "081_bibimbap_비빔밥",
+        "082_jjajangmyeon_짜장면",
+        "086_ramen_라면",
+        "090_bulgogi_불고기",
+        "091_cake_케이크",
+        "092_donut_도넛",
+        "095_brownie_브라우니",
+        "102_dakgangjeong_닭강정",
+        "105_bacon_베이컨",
+        "113_doritos_도리토스",
+        "114_fanta_환타",
+        "118_lays_레이즈",
+        "119_milkis_밀키스",
+        "121_pizza_피자",
+        "124_reeses_리세스",
+        "127_skittles_스키틀즈",
+        "128_soju_소주",
+        "130_starburst_스타버스트",
+        "131_cheese_치즈",
+        "133_sprite_스프라이트",
+        "151_cabbage_양배추",
+        "152_banana_milk_바나나우유"
+      ],
+      "sub_groups": {
+        "A그룹_WO001": ["028_blackberry_블랙베리", "034_mackerel_고등어", "041_yogurt_요거트", "052_tofu_두부", "064_chocolate_초콜릿", "131_cheese_치즈"],
+        "A그룹_기존": ["066_kimchi_김치"],
+        "B그룹_FORBIDDEN_WO002": ["086_ramen_라면", "095_brownie_브라우니", "121_pizza_피자", "124_reeses_리세스", "128_soju_소주"],
+        "B그룹_DANGER_WO002": ["081_bibimbap_비빔밥", "082_jjajangmyeon_짜장면", "090_bulgogi_불고기", "091_cake_케이크", "092_donut_도넛", "102_dakgangjeong_닭강정", "105_bacon_베이컨", "113_doritos_도리토스", "114_fanta_환타", "118_lays_레이즈", "119_milkis_밀키스", "127_skittles_스키틀즈", "130_starburst_스타버스트", "133_sprite_스프라이트", "152_banana_milk_바나나우유"]
+      },
+      "note": "cabbage는 cover_bg도 body_bg와 동일 (3-way match)"
+    },
+    "B_all_unique": {
+      "description": "모든 bg가 고유 (이상적 패턴)",
+      "count": 6,
+      "items": [
+        "036_potato_감자",
+        "056_onion_양파",
+        "058_garlic_마늘",
+        "085_naengmyeon_냉면",
+        "088_sandwich_샌드위치",
+        "109_cheetos_치토스"
+      ],
+      "note": "수동 제작 또는 개별 이미지 생성으로 bg가 모두 다름"
+    }
+  },
+
+  "root_cause": {
+    "description": "batch_render 스크립트 설계 문제",
+    "detail": "batch_render_a_group.py와 batch_render_b_group.py 모두 커버 소스 1장을 body1_bg, body2_bg에 복사하여 사용. 렌더링 후 텍스트는 다르지만 배경 사진이 동일하여 시각적으로 단조로움.",
+    "affected_scripts": [
+      "services/scripts/batch_render_a_group.py",
+      "services/scripts/batch_render_b_group.py",
+      "services/scripts/rework_cabbage.py"
+    ]
+  },
+
+  "impact": {
+    "visual_monotony": "바디 2장의 배경이 동일하여 슬라이드 간 시각적 다양성 부족",
+    "quality_perception": "같은 사진에 다른 텍스트만 올린 것처럼 보여 콘텐츠 품질 저하 우려",
+    "cta_is_ok": "CTA(03번)는 best_cta 폴더에서 별도 소스 사용하므로 문제 없음",
+    "cover_is_ok": "커버(00번)는 PD 제작이므로 고유함 (cabbage 예외)"
+  },
+
+  "recommendation": {
+    "option_A": {
+      "name": "커버소스 변형 활용",
+      "description": "동일 커버소스에 크롭/줌/밝기 조정 등 변형 적용하여 body1, body2 차별화",
+      "pros": "추가 이미지 불필요, 빠른 적용",
+      "cons": "근본적 해결은 아님"
+    },
+    "option_B": {
+      "name": "바디 전용 배경 이미지 생성",
+      "description": "각 음식별 바디1, 바디2 전용 배경 이미지를 별도 생성/제작",
+      "pros": "시각적 다양성 극대화",
+      "cons": "이미지 제작/수급 필요"
+    },
+    "option_C": {
+      "name": "현행 유지 (텍스트 차별화만)",
+      "description": "배경은 동일하되, 텍스트 스타일/레이아웃 변화로 차별화",
+      "pros": "즉시 적용 가능",
+      "cons": "시각적 동질감 해소 제한적"
+    }
+  }
+}

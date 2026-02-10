@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-01-30T07:46:28.982671",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "🎬 최종 승인 요청: 바나나",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*음식:*\n바나나 (banana)"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*판정:*\n⚠️ CONDITIONAL"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*검수 결과:*\n🔴 기술 검수: *75.0점*\n🔴 크리에이티브: *70.0점*"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "block_id": "approval_final_banana_1769726788",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "✅ 게시 승인",
+            "emoji": true
+          },
+          "style": "primary",
+          "action_id": "approve",
+          "value": "final_banana_1769726788"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "❌ 반려",
+            "emoji": true
+          },
+          "style": "danger",
+          "action_id": "reject",
+          "value": "final_banana_1769726788"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "🖼️ 전체 보기",
+            "emoji": true
+          },
+          "action_id": "view_all_images",
+          "value": "final_banana_1769726788"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "🆔 `final_banana_1769726788` | 🕐 2026-01-30 07:46"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+[
+    {
+        "slide": 1,
+        "type": "cover",
+        "title": "BANANA",
+        "subtitle": "달콤한 영양 만점 바나나"
+    },
+    {
+        "slide": 2,
+        "type": "content_bottom",
+        "title": "먹어도 돼요!",
+        "subtitle": "껍질만 잘 벗기면 OK! 🍌"
+    },
+    {
+        "slide": 3,
+        "type": "content_bottom",
+        "title": "에너지 보충",
+        "subtitle": "천연 당분으로 활력 충전! ⚡"
+    },
+    {
+        "slide": 4,
+        "type": "content_bottom",
+        "title": "칼륨 풍부",
+        "subtitle": "심장과 근육 건강에 도움! 💓"
+    },
+    {
+        "slide": 5,
+        "type": "content_bottom",
+        "title": "껍질 제거!",
+        "subtitle": "소화가 어렵고 막힐 수 있어요 🚫"
+    },
+    {
+        "slide": 6,
+        "type": "content_top",
+        "title": "체중 5kg당",
+        "subtitle": "바나나 1/4개가 적당해요! 🍌"
+    },
+    {
+        "slide": 7,
+        "type": "cta",
+        "title": "저장 필수!",
+        "subtitle": "바나나로 건강 간식 주세요! 🐶"
+    }
+]

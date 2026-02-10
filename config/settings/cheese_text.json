@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "CHEESE", "subtitle": "고소한 치즈"},
+    {"slide": 2, "type": "content_bottom", "title": "조건부 OK!", "subtitle": "저염/저지방 치즈만! 🧀"},
+    {"slide": 3, "type": "content_bottom", "title": "칼슘 풍부", "subtitle": "뼈와 치아 건강에! 🦴"},
+    {"slide": 4, "type": "content_bottom", "title": "단백질", "subtitle": "양질의 단백질 공급! 💪"},
+    {"slide": 5, "type": "content_bottom", "title": "비타민 A", "subtitle": "눈 건강에 도움! ✨"},
+    {"slide": 6, "type": "content_bottom", "title": "저염 치즈만!", "subtitle": "나트륨 과다 주의! ⚠️"},
+    {"slide": 7, "type": "content_bottom", "title": "소량만 급여", "subtitle": "지방이 많아요! 🚫"},
+    {"slide": 8, "type": "content_top", "title": "유당불내증 체크", "subtitle": "설사할 수 있어요! ⚠️"},
+    {"slide": 9, "type": "content_bottom", "title": "훈련 간식으로", "subtitle": "조금씩 보상으로! 🧀"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "치즈 급여법! 🐶"}
+]

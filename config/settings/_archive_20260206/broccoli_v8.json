@@ -1,0 +1,73 @@
+{
+  "topic": "broccoli",
+  "version": "v8",
+  "title": "브로콜리, 강아지 먹어도 될까?",
+  "safe": true,
+
+  "info": {
+    "benefits": ["비타민C 풍부", "식이섬유", "항산화 성분", "면역력 강화"],
+    "cautions": ["생으로 주면 소화 어려움", "살짝 익혀서 급여"],
+    "amount": "체중 5kg당 1~2송이"
+  },
+
+  "slides": [
+    {
+      "index": 0,
+      "type": "cover",
+      "title": "브로콜리,",
+      "subtitle": "강아지 먹어도 될까? 🥦"
+    },
+    {
+      "index": 1,
+      "type": "content",
+      "title": "먹어도 돼요!",
+      "subtitle": "익혀서 주면 안전해요 ✅"
+    },
+    {
+      "index": 2,
+      "type": "content",
+      "title": "비타민C 풍부",
+      "subtitle": "면역력 강화에 도움을 줘요"
+    },
+    {
+      "index": 3,
+      "type": "content",
+      "title": "식이섬유",
+      "subtitle": "장 건강과 소화를 돕습니다"
+    },
+    {
+      "index": 4,
+      "type": "content",
+      "title": "항산화 성분",
+      "subtitle": "노화 방지와 세포 보호"
+    },
+    {
+      "index": 5,
+      "type": "content",
+      "title": "⚠️ 주의사항",
+      "subtitle": "생으로 주면 소화가 어려워요"
+    },
+    {
+      "index": 6,
+      "type": "content",
+      "title": "📏 적정량",
+      "subtitle": "체중 5kg당 1~2송이"
+    }
+  ],
+
+  "prompts": {
+    "cover": "A happy golden retriever named Sunshine sitting in a bright modern kitchen, looking excitedly at a bowl of fresh green broccoli florets in the foreground. The broccoli bowl is prominent, taking up 25% of the frame, positioned in the lower third. The dog is centered with a joyful expression, tongue out, smiling. Soft natural lighting from a window, clean white countertops. Top 25% of the image is clear for text overlay. Professional pet photography style, 8k quality, vibrant colors.",
+
+    "content_01": "A golden retriever looking curious and happy at steamed broccoli florets on a white plate. The dog is tilting head slightly, ears perked up. Bright kitchen background with natural light. Close-up shot showing dog's excited expression. Professional pet food photography, warm tones.",
+
+    "content_02": "A golden retriever with bright healthy coat sitting next to fresh broccoli. Visual metaphor for vitamin C and immunity. Sparkle effect around the broccoli. Dog looking healthy and energetic. Bright cheerful lighting, clean background.",
+
+    "content_03": "A happy golden retriever near a bowl of chopped broccoli pieces. Focus on digestive health concept. Dog has content expression. Kitchen setting with wooden cutting board. Natural daylight, warm atmosphere.",
+
+    "content_04": "A golden retriever looking youthful and vibrant next to broccoli florets with a subtle glow effect. Representing antioxidant benefits. Dog in playful pose. Modern kitchen background, professional lighting.",
+
+    "content_05": "A golden retriever watching attentively as broccoli is being steamed in a pot. Educational angle showing cooking process. Steam rising gently. Dog waiting patiently. Kitchen scene, warm lighting.",
+
+    "content_06": "A golden retriever sitting politely next to a small measured portion of broccoli (1-2 florets). Portion control visual. Dog looking satisfied. Clean white background with subtle kitchen elements. Professional pet photography."
+  }
+}

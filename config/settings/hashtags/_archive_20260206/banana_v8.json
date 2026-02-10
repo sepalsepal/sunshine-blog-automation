@@ -1,0 +1,79 @@
+{
+  "topic": "banana",
+  "version": "v8",
+  "total_count": 38,
+  "languages": ["ko", "en", "ja"],
+
+  "categories": {
+    "brand": {
+      "count": 4,
+      "tags": [
+        "#sunshinedogfood",
+        "#햇살이",
+        "#선샤인독푸드",
+        "#햇살이간식"
+      ]
+    },
+    "topic_ko": {
+      "count": 10,
+      "tags": [
+        "#바나나",
+        "#강아지바나나",
+        "#강아지간식",
+        "#반려견간식",
+        "#강아지먹어도될까",
+        "#강아지음식",
+        "#펫푸드",
+        "#반려견영양",
+        "#강아지과일",
+        "#건강간식"
+      ]
+    },
+    "topic_en": {
+      "count": 10,
+      "tags": [
+        "#dogfood",
+        "#dogtreat",
+        "#bananasfordogs",
+        "#caninenutrition",
+        "#dogdiet",
+        "#healthydogtreats",
+        "#dogsnack",
+        "#petnutrition",
+        "#dogsofinstagram",
+        "#goldenretriever"
+      ]
+    },
+    "topic_ja": {
+      "count": 5,
+      "tags": [
+        "#犬のおやつ",
+        "#ゴールデンレトリバー",
+        "#犬の食事",
+        "#ペットフード",
+        "#犬スタグラム"
+      ]
+    },
+    "petstagram": {
+      "count": 6,
+      "tags": [
+        "#펫스타그램",
+        "#멍스타그램",
+        "#골든리트리버",
+        "#대형견",
+        "#반려견일상",
+        "#dogstagram"
+      ]
+    },
+    "education": {
+      "count": 3,
+      "tags": [
+        "#강아지정보",
+        "#반려견정보",
+        "#dogfacts"
+      ]
+    }
+  },
+
+  "full_hashtags": "#sunshinedogfood #햇살이 #선샤인독푸드 #햇살이간식 #바나나 #강아지바나나 #강아지간식 #반려견간식 #강아지먹어도될까 #강아지음식 #펫푸드 #반려견영양 #강아지과일 #건강간식 #dogfood #dogtreat #bananasfordogs #caninenutrition #dogdiet #healthydogtreats #dogsnack #petnutrition #dogsofinstagram #goldenretriever #犬のおやつ #ゴールデンレトリバー #犬の食事 #ペットフード #犬スタグラム #펫스타그램 #멍스타그램 #골든리트리버 #대형견 #반려견일상 #dogstagram #강아지정보 #반려견정보 #dogfacts"
+}

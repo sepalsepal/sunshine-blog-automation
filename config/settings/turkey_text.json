@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "TURKEY", "subtitle": "담백한 칠면조"},
+    {"slide": 2, "type": "content_bottom", "title": "먹어도 돼요!", "subtitle": "익힌 살코기만 OK! 🦃"},
+    {"slide": 3, "type": "content_bottom", "title": "초저지방", "subtitle": "닭가슴살보다 지방 적어요! 💪"},
+    {"slide": 4, "type": "content_bottom", "title": "고단백", "subtitle": "양질의 단백질 공급! ✨"},
+    {"slide": 5, "type": "content_bottom", "title": "트립토판", "subtitle": "마음 안정에 도움! 🌟"},
+    {"slide": 6, "type": "content_bottom", "title": "뼈 절대 금지!", "subtitle": "익힌 뼈는 날카로워요! 🚫"},
+    {"slide": 7, "type": "content_bottom", "title": "껍질 제거", "subtitle": "지방이 많은 껍질 주의! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "양념 없이", "subtitle": "소금/향신료 절대 금지! 🔥"},
+    {"slide": 9, "type": "content_bottom", "title": "다이어트 간식", "subtitle": "저지방 고단백 칠면조! 🦃"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "칠면조 급여법! 🐶"}
+]

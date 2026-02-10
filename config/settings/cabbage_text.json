@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "CABBAGE", "subtitle": "아삭아삭 양배추"},
+    {"slide": 2, "type": "content_bottom", "title": "먹어도 돼요!", "subtitle": "익혀서 소량 급여 OK! 🥬"},
+    {"slide": 3, "type": "content_bottom", "title": "위 건강", "subtitle": "비타민 U가 위를 보호해요! 💚"},
+    {"slide": 4, "type": "content_bottom", "title": "식이섬유", "subtitle": "장 건강에 좋아요! 🌿"},
+    {"slide": 5, "type": "content_bottom", "title": "비타민 K", "subtitle": "혈액 응고에 필수! ✨"},
+    {"slide": 6, "type": "content_bottom", "title": "익혀서 급여", "subtitle": "생으로는 소화 어려워요! 🔥"},
+    {"slide": 7, "type": "content_bottom", "title": "가스 주의", "subtitle": "과다 급여 시 가스 발생! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "체중 5kg당", "subtitle": "잎 1-2장이 적당해요!"},
+    {"slide": 9, "type": "content_bottom", "title": "위에 좋은", "subtitle": "소화를 돕는 양배추! 🥬"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "양배추 급여법! 🐶"}
+]

@@ -1,0 +1,14 @@
+{
+  "food_id": "potato",
+  "safety": "caution",
+  "color": "#FFD93D",
+  "font_size": 100,
+  "position": "bottom_center",
+  "shadow": true,
+  "slides": [
+    {"slide": 0, "title": "POTATO", "subtitle": ""},
+    {"slide": 1, "title": "먹어도 돼요!", "subtitle": "탄수화물과 비타민C 풍부"},
+    {"slide": 2, "title": "주의사항", "subtitle": "껍질/싹 제거, 익혀서만"},
+    {"slide": 3, "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+  ]
+}

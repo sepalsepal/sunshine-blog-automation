@@ -1,0 +1,162 @@
+{
+  "watermelon": {
+    "name": "watermelon",
+    "name_kr": "수박",
+    "safe": true,
+    "benefits": [
+      {"title": "수분 보충", "description": "92% 수분 함량, 여름철 탈수 예방"},
+      {"title": "비타민 풍부", "description": "비타민 A, C가 면역력 강화"},
+      {"title": "저칼로리", "description": "칼로리가 낮아 다이어트에 도움"}
+    ],
+    "cautions": [
+      "씨와 껍질은 반드시 제거",
+      "당분이 있어 과다 급여 주의"
+    ],
+    "amount": "체중 1kg당 10~20g",
+    "preparation": ["씨 제거", "껍질 제거", "작게 잘라서 급여"]
+  },
+  "strawberry": {
+    "name": "strawberry",
+    "name_kr": "딸기",
+    "safe": true,
+    "benefits": [
+      {"title": "항산화 효과", "description": "안토시아닌이 세포 노화 방지"},
+      {"title": "비타민 C", "description": "면역력 강화에 도움"},
+      {"title": "치아 건강", "description": "천연 치아 미백 효과"}
+    ],
+    "cautions": [
+      "꼭지 제거 후 급여",
+      "처음엔 소량으로 알러지 확인"
+    ],
+    "amount": "소형견 1~2개, 중형견 3~4개",
+    "preparation": ["깨끗이 세척", "꼭지 제거", "반으로 잘라서 급여"]
+  },
+  "apple": {
+    "name": "apple",
+    "name_kr": "사과",
+    "safe": true,
+    "benefits": [
+      {"title": "식이섬유", "description": "장 건강과 소화 촉진"},
+      {"title": "비타민 A, C", "description": "피부와 털 건강에 도움"},
+      {"title": "구강 건강", "description": "치석 제거에 도움"}
+    ],
+    "cautions": [
+      "씨와 심 반드시 제거 (시안화물 함유)",
+      "껍질은 소화 어려울 수 있음"
+    ],
+    "amount": "체중 1kg당 5~10g",
+    "preparation": ["씨와 심 제거", "작은 조각으로 자르기"]
+  },
+  "banana": {
+    "name": "banana",
+    "name_kr": "바나나",
+    "safe": true,
+    "benefits": [
+      {"title": "칼륨 풍부", "description": "심장 건강과 근육 기능에 도움"},
+      {"title": "에너지 보충", "description": "천연 당분으로 활력 제공"},
+      {"title": "소화 촉진", "description": "식이섬유가 장 건강에 도움"}
+    ],
+    "cautions": [
+      "껍질 제거 후 급여",
+      "당분이 높아 적정량만"
+    ],
+    "amount": "소형견 2~3조각, 중형견 반개",
+    "preparation": ["껍질 제거", "동그랗게 썰어서 급여"]
+  },
+  "blueberry": {
+    "name": "blueberry",
+    "name_kr": "블루베리",
+    "safe": true,
+    "benefits": [
+      {"title": "항산화 효과", "description": "안토시아닌이 노화 방지"},
+      {"title": "눈 건강", "description": "시력 보호에 도움"},
+      {"title": "뇌 건강", "description": "인지 기능 향상에 도움"}
+    ],
+    "cautions": [
+      "처음엔 소량으로 시작",
+      "너무 많이 주면 설사 가능"
+    ],
+    "amount": "소형견 5~6개, 중형견 10개 내외",
+    "preparation": ["깨끗이 세척", "통째로 또는 반으로 잘라 급여"]
+  },
+  "carrot": {
+    "name": "carrot",
+    "name_kr": "당근",
+    "safe": true,
+    "benefits": [
+      {"title": "베타카로틴", "description": "눈 건강과 면역력 강화"},
+      {"title": "치아 건강", "description": "씹으면서 치석 제거 효과"},
+      {"title": "저칼로리", "description": "다이어트 간식으로 적합"}
+    ],
+    "cautions": [
+      "큰 조각은 질식 위험",
+      "생으로 급여 시 소화 어려울 수 있음"
+    ],
+    "amount": "체중 1kg당 10~15g",
+    "preparation": ["깨끗이 세척", "작게 잘라서 급여", "살짝 익혀도 좋음"]
+  },
+  "pumpkin": {
+    "name": "pumpkin",
+    "name_kr": "호박",
+    "safe": true,
+    "benefits": [
+      {"title": "소화 촉진", "description": "식이섬유가 변비와 설사에 도움"},
+      {"title": "면역력 강화", "description": "비타민 A, C, E 풍부"},
+      {"title": "체중 관리", "description": "저칼로리 포만감"}
+    ],
+    "cautions": [
+      "씨와 껍질 제거",
+      "익혀서 급여 권장"
+    ],
+    "amount": "체중 1kg당 10~20g",
+    "preparation": ["껍질과 씨 제거", "익혀서 으깨어 급여"]
+  },
+  "broccoli": {
+    "name": "broccoli",
+    "name_kr": "브로콜리",
+    "safe": true,
+    "benefits": [
+      {"title": "항암 효과", "description": "설포라판 성분이 암 예방에 도움"},
+      {"title": "뼈 건강", "description": "칼슘과 비타민 K 풍부"},
+      {"title": "면역력 강화", "description": "비타민 C가 면역 체계 강화"}
+    ],
+    "cautions": [
+      "과다 섭취 시 가스 발생",
+      "익혀서 급여 권장"
+    ],
+    "amount": "체중 1kg당 5~10g",
+    "preparation": ["깨끗이 세척", "작게 잘라서 살짝 익힘"]
+  },
+  "cherries": {
+    "name": "cherries",
+    "name_kr": "체리",
+    "safe": true,
+    "benefits": [
+      {"title": "항산화 효과", "description": "안토시아닌이 세포 보호"},
+      {"title": "관절 건강", "description": "항염증 효과로 관절에 도움"},
+      {"title": "수면 개선", "description": "멜라토닌 함유"}
+    ],
+    "cautions": [
+      "씨 반드시 제거 (시안화물 함유)",
+      "줄기와 잎도 제거"
+    ],
+    "amount": "소형견 1~2개, 중형견 3~4개",
+    "preparation": ["씨 완전히 제거", "반으로 잘라서 급여"]
+  },
+  "pineapple": {
+    "name": "pineapple",
+    "name_kr": "파인애플",
+    "safe": true,
+    "benefits": [
+      {"title": "소화 효소", "description": "브로멜린이 단백질 소화 도움"},
+      {"title": "면역력 강화", "description": "비타민 C 풍부"},
+      {"title": "항염 효과", "description": "관절 건강에 도움"}
+    ],
+    "cautions": [
+      "껍질과 심 제거 필수",
+      "산성이 강해 소량만"
+    ],
+    "amount": "체중 1kg당 5~10g",
+    "preparation": ["껍질과 심 제거", "작은 조각으로 자르기"]
+  }
+}

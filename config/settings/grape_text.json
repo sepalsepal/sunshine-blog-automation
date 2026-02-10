@@ -1,0 +1,6 @@
+[
+    {"slide": 0, "type": "cover", "title": "GRAPE", "subtitle": ""},
+    {"slide": 1, "type": "danger", "title": "⚠️ 절대 금지!", "subtitle": "소량으로도 급성 신부전 위험"},
+    {"slide": 2, "type": "danger", "title": "⚠️ 증상 & 대처", "subtitle": "구토, 무기력 → 즉시 병원!"},
+    {"slide": 3, "type": "cta", "title": "저장 & 공유", "subtitle": "주변 견주에게 알려주세요!"}
+]

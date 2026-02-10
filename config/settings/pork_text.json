@@ -1,0 +1,12 @@
+[
+    {"slide": 1, "type": "cover", "title": "PORK", "subtitle": "부드러운 돼지고기"},
+    {"slide": 2, "type": "content_bottom", "title": "조건부 OK!", "subtitle": "완전히 익힌 살코기만! 🥓"},
+    {"slide": 3, "type": "content_bottom", "title": "비타민 B1", "subtitle": "티아민이 풍부해요! ✨"},
+    {"slide": 4, "type": "content_bottom", "title": "단백질", "subtitle": "양질의 단백질 공급! 💪"},
+    {"slide": 5, "type": "content_bottom", "title": "아연 함유", "subtitle": "피부 건강에 도움! 🌟"},
+    {"slide": 6, "type": "content_bottom", "title": "완전히 익혀서!", "subtitle": "기생충/세균 위험! 🔥"},
+    {"slide": 7, "type": "content_bottom", "title": "지방 제거", "subtitle": "삼겹살 등 지방 부위 주의! ⚠️"},
+    {"slide": 8, "type": "content_top", "title": "베이컨/햄 NO", "subtitle": "가공육은 나트륨 폭탄! 🚫"},
+    {"slide": 9, "type": "content_bottom", "title": "부드러운 고기", "subtitle": "잘 익힌 돼지고기! 🥓"},
+    {"slide": 10, "type": "cta", "title": "저장 필수!", "subtitle": "돼지고기 급여법! 🐶"}
+]

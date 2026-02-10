@@ -1,0 +1,317 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "created": "2026-02-01",
+    "updated": "2026-02-02",
+    "description": "CONTENT_MAP - 모든 콘텐츠 폴더 및 상태 관리 (옵션 D' 적용)"
+  },
+  "contents": {
+    "pumpkin": {
+      "folder": "001_pumpkin",
+      "status": "published",
+      "safety": "safe"
+    },
+    "carrot": {
+      "folder": "002_carrot",
+      "status": "published",
+      "safety": "safe"
+    },
+    "blueberry": {
+      "folder": "003_blueberry",
+      "status": "published",
+      "safety": "safe"
+    },
+    "cherry": {
+      "folder": "004_cherry",
+      "status": "published",
+      "safety": "safe"
+    },
+    "sweet_potato": {
+      "folder": "005_sweet_potato",
+      "status": "published",
+      "safety": "safe"
+    },
+    "apple": {
+      "folder": "006_apple",
+      "status": "published",
+      "safety": "safe"
+    },
+    "pineapple": {
+      "folder": "007_pineapple",
+      "status": "published",
+      "safety": "safe"
+    },
+    "banana": {
+      "folder": "008_banana",
+      "status": "published",
+      "safety": "safe"
+    },
+    "broccoli": {
+      "folder": "009_broccoli",
+      "status": "published",
+      "safety": "safe"
+    },
+    "watermelon": {
+      "folder": "010_watermelon",
+      "status": "published",
+      "safety": "safe"
+    },
+    "strawberry": {
+      "folder": "011_strawberry",
+      "status": "published",
+      "safety": "safe"
+    },
+    "mango": {
+      "folder": "012_mango",
+      "status": "published",
+      "safety": "safe"
+    },
+    "orange": {
+      "folder": "013_orange",
+      "status": "published",
+      "safety": "safe"
+    },
+    "pear": {
+      "folder": "014_pear",
+      "status": "published",
+      "safety": "safe"
+    },
+    "kiwi": {
+      "folder": "015_kiwi",
+      "status": "published",
+      "safety": "safe"
+    },
+    "papaya": {
+      "folder": "016_papaya",
+      "status": "published",
+      "safety": "safe"
+    },
+    "peach": {
+      "folder": "017_peach",
+      "status": "published",
+      "safety": "safe"
+    },
+    "rice": {
+      "folder": "018_rice",
+      "status": "published",
+      "safety": "safe"
+    },
+    "cucumber": {
+      "folder": "019_cucumber",
+      "status": "published",
+      "safety": "safe"
+    },
+    "pringles": {
+      "folder": "020_pringles_프링글스",
+      "status": "published",
+      "safety": "forbidden"
+    },
+    "sausage": {
+      "folder": "021_sausage_소시지",
+      "status": "published",
+      "safety": "caution"
+    },
+    "avocado": {
+      "folder": "022_avocado_아보카도",
+      "status": "published",
+      "safety": "danger",
+      "note": "chocolate GOLDEN_SAMPLE 지정 후 DANGER 규칙 적용 가능 - 정책 개입 불필요"
+    },
+    "coca_cola": {
+      "folder": "023_coca_cola_코카콜라",
+      "status": "published",
+      "safety": "forbidden"
+    },
+    "beef": {
+      "folder": "024_beef_소고기",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEFhdk1OE/",
+      "instagram_post_id": "18349351987229764"
+    },
+    "olive": {
+      "folder": "024_olive_올리브",
+      "status": "published",
+      "safety": "safe"
+    },
+    "kale": {
+      "folder": "026_kale_케일",
+      "status": "published",
+      "safety": "caution",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUOIklECUZS/",
+      "instagram_post_id": "18114065239624721"
+    },
+    "spinach": {
+      "folder": "026_spinach_시금치",
+      "status": "published",
+      "safety": "safe"
+    },
+    "celery": {
+      "folder": "027_celery_셀러리",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEL8oE9Ur/",
+      "instagram_post_id": "18119735626514233"
+    },
+    "zucchini": {
+      "folder": "027_zucchini_애호박",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEZVIEzZa/",
+      "instagram_post_id": "18051256385479760"
+    },
+    "chicken": {
+      "folder": "029_chicken_닭고기",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEgm4E5n-/",
+      "instagram_post_id": "18106700212691963"
+    },
+    "salmon": {
+      "folder": "054_salmon_연어",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEnrPk5vo/",
+      "instagram_post_id": "18185403781362583"
+    },
+    "tuna": {
+      "folder": "036_tuna_참치",
+      "status": "published",
+      "safety": "caution",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPFyJACf3u/",
+      "instagram_post_id": "17953419306060345"
+    },
+    "potato": {
+      "folder": "036_potato_감자",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-01"
+    },
+    "burdock": {
+      "folder": "044_burdock_우엉",
+      "status": "published",
+      "safety": "caution",
+      "published_date": "2026-02-01"
+    },
+    "grape": {
+      "folder": "060_grape_포도",
+      "status": "published",
+      "safety": "forbidden"
+    },
+    "onion": {
+      "folder": "056_onion_양파",
+      "status": "blocked",
+      "safety": "forbidden",
+      "block_reason": "F3 - 이미지 미완성"
+    },
+    "garlic": {
+      "folder": "058_garlic_마늘",
+      "status": "blocked",
+      "safety": "forbidden",
+      "block_reason": "F3 - 이미지 미완성"
+    },
+    "chocolate": {
+      "folder": "064_chocolate_초콜릿",
+      "status": "blocked",
+      "safety": "forbidden",
+      "block_reason": "F3 - 이미지 미완성"
+    },
+    "raisin": {
+      "folder": "062_raisin_건포도",
+      "status": "blocked",
+      "safety": "forbidden",
+      "block_reason": "F3 - 이미지 미완성"
+    },
+    "kitkat": {
+      "folder": "117_kitkat_킷캣",
+      "status": "published",
+      "safety": "forbidden",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPHwrxiUTZ/",
+      "instagram_post_id": "17905867443183087"
+    },
+    "icecream": {
+      "folder": "094_icecream_아이스크림",
+      "status": "published",
+      "safety": "danger",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPHqEgCSsX/",
+      "instagram_post_id": "18011242142817747"
+    },
+    "samgyeopsal": {
+      "folder": "089_samgyeopsal_삼겹살",
+      "status": "published",
+      "safety": "caution",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPHjCTido8/",
+      "instagram_post_id": "17991544160916188"
+    },
+    "budweiser": {
+      "folder": "107_budweiser_버드와이저",
+      "status": "published",
+      "safety": "forbidden",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPH3AyiYBO/",
+      "instagram_post_id": "18099291716494066"
+    },
+    "yangnyeom_chicken": {
+      "folder": "074_yangnyeom_chicken_양념치킨",
+      "status": "published",
+      "safety": "forbidden",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPH_8pCbH5/",
+      "instagram_post_id": "18085242175921763"
+    },
+    "poached_egg": {
+      "folder": "030_poached_egg_수란",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPEuydE2Vo/",
+      "instagram_post_id": "18066306167639600"
+    },
+    "boiled_egg": {
+      "folder": "032_boiled_egg_삶은달걀",
+      "status": "published",
+      "safety": "safe",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUPLGaBCeIw/",
+      "instagram_post_id": "18055983752384318",
+      "note": "Day 12 재제작 - F-TEXT-RENDER 이슈 수정"
+    },
+    "shrimp": {
+      "folder": "140_shrimp_새우",
+      "status": "published",
+      "safety": "caution",
+      "published_date": "2026-02-02",
+      "instagram_url": "https://www.instagram.com/p/DUOGdNODl4N/",
+      "instagram_post_id": "18097313882478491",
+      "note": "Day 12 GOLDEN_SAMPLE - CAUTION 기준"
+    },
+    "duck": {
+      "folder": "169_duck_오리고기",
+      "status": "ready",
+      "safety": "safe",
+      "note": "오메가 지방산 풍부, 알레르기 적음"
+    },
+    "cabbage": {
+      "folder": "151_cabbage_양배추",
+      "status": "ready",
+      "safety": "safe",
+      "note": "익혀서 급여, 소화 촉진"
+    }
+  },
+  "status_definitions": {
+    "published": "게시 완료",
+    "ready": "제작 완료, 게시 가능",
+    "blocked": "차단됨, 게시 불가",
+    "in_progress": "제작 중"
+  }
+}
