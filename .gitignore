@@ -29,3 +29,9 @@ config/fonts/
 assets/fonts/
 logs/
 services/scripts/node_modules/
+
+# 백업 시스템 제외
+*.backup
+*.bak
+temp_backup/
+debug/
