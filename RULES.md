@@ -1,6 +1,6 @@
 # PROJECT SUNSHINE – RULES.md
 
-**버전:** 4.0
+**버전:** 4.1
 **최종 업데이트:** 2026-02-11
 **성격:** 헌법. 최상위 규칙. 이 문서에 없으면 존재하지 않는다.
 
@@ -1538,6 +1538,139 @@ python3 scripts/distribute_clean_images.py --dry-run  # 미리보기
 | 2026-02-11 | 3.8 | §14 원자 트랜잭션 전면 개정, §16 햇살이 표지 프롬프트 v2.0 추가, 변경 이력 §17로 이동 |
 | 2026-02-11 | 3.9 | §17 클린 이미지 관리 규칙 추가, 변경 이력 §18로 이동 |
 | 2026-02-11 | 4.0 | §19 노션 자동 업데이트 규칙 추가 (필드 매핑, 상태 매핑, 동기화 스크립트, 자동화 규칙, 검증 프로토콜), notion_sync.py 캡션 체크박스 동기화 기능 추가, 변경 이력 §20으로 이동 |
+| 2026-02-11 | 4.1 | §22.11~13 안전도 분기 파이프라인 추가: ENUM 단일 판정, 금지 키워드 차단, 이미지-캡션 일치 검증, 게이트 컨트롤러 |
+
+---
+
+## 22. 안전도 분기 파이프라인 🔒 (v4.1 신규)
+
+### 22.11 캡션 안전도 분기 규칙 🔒
+
+#### 22.11.1 ENUM 단일 판정 원칙
+
+```
+Safety ENUM: SAFE | CAUTION | FORBIDDEN
+```
+
+| 원칙 | 설명 |
+|------|------|
+| 단일 source | `food_data.json`만 안전도 판정 source |
+| 1회 판정 | 파이프라인 시작 시 1회만 판정 |
+| ENUM만 허용 | 문자열 조건문 금지, Safety ENUM 사용 필수 |
+| 오타 방지 | `get_safety()` 함수로 변환, 유효하지 않은 값 예외 발생 |
+
+**코드 위치:** `pipeline/enums/safety.py`
+
+```python
+from pipeline.enums.safety import Safety, get_safety
+
+safety = get_safety("FORBIDDEN")  # → Safety.FORBIDDEN
+```
+
+#### 22.11.2 안전도별 캡션 구조
+
+| 슬라이드 | SAFE/CAUTION | FORBIDDEN |
+|---------|--------------|-----------|
+| 3번 | 영양 정보 | **위험 성분** |
+| 4번 | 급여 방법 | **절대 급여 금지** |
+| 5번 | 급여량 표 | **0g 강조** |
+| 6번 | 주의사항 | **응급 대처법** |
+| 7번 | 조리 방법 | **수의사 상담** |
+
+**FORBIDDEN 필수 헤더:**
+```
+[이미지 3번: 위험 성분]
+[이미지 4번: 절대 급여 금지]
+[이미지 5번: 급여량 표]
+[이미지 6번: 응급 대처법]
+[이미지 7번: 수의사 상담]
+```
+
+---
+
+### 22.12 금지 키워드 차단 🔒
+
+**FORBIDDEN 캡션에서 절대 사용 금지:**
+
+| 카테고리 | 금지 키워드 |
+|---------|------------|
+| 긍정 표현 | 건강에 좋, 영양 가득, 맛있어요, 좋아요 |
+| 급여 권장 | 급여 방법, 조리 방법, 권장량, 드셔도 됩니다, 먹여도 됩니다 |
+| 급여량 | 체중별 급여량, 소형견 급여량, 중형견 급여량, 대형견 급여량 |
+| 영양 정보 | 영양 정보, 영양정보, 영양소 |
+
+**금지 헤더 패턴:**
+```
+[이미지 3번: 영양 정보]  ← FORBIDDEN에서 금지
+[이미지 4번: 급여 방법]  ← FORBIDDEN에서 금지
+[이미지 6번: 조리 방법]  ← FORBIDDEN에서 금지
+```
+
+**검증 방법:**
+```bash
+python3 scripts/caption_safety_validator.py --check {food_id}
+```
+
+**위반 시:** 즉시 FAIL + 재작성 필수
+
+---
+
+### 22.13 이미지-캡션 일치 검증 🔒
+
+#### 22.13.1 구조 ID 규칙
+
+**형식:** `{food_id}_{safety}_{version}_{date}`
+
+**예시:**
+```
+127_FORBIDDEN_v3.1_20260211
+001_SAFE_v3.1_20260211
+```
+
+| 필드 | 설명 |
+|------|------|
+| food_id | 음식 ID (3자리 숫자) |
+| safety | Safety ENUM 값 |
+| version | 파이프라인 버전 |
+| date | 생성 날짜 (YYYYMMDD) |
+
+#### 22.13.2 검증 로그
+
+**위치:** `/logs/validation/{date}/{food_id}_caption_validation.log`
+
+**로그 내용:**
+- Food ID, Safety, Structure ID
+- PASS/FAIL 상태
+- 에러 목록 (금지 키워드, 헤더 위반)
+- 경고 목록 (필수 내용 부족)
+
+#### 22.13.3 게이트 컨트롤러
+
+**6단계 파이프라인:**
+
+```
+1. INIT → 2. LOAD_DATA → 3. PRE_VALIDATE → 4. GENERATE → 5. POST_VALIDATE → 6. GATE_CHECK
+```
+
+| 단계 | 검증 내용 | 실패 시 |
+|------|----------|--------|
+| PRE_VALIDATE | FORBIDDEN + 긍정 데이터 조합 차단 | PRE_FAIL |
+| POST_VALIDATE | §22.12 금지 키워드, 필수 헤더 | POST_FAIL |
+| GATE_CHECK | 최종 PASS/FAIL 판정 | 저장 차단 |
+
+**코드 위치:**
+- `pipeline/validators/pre_validator.py`
+- `pipeline/validators/post_validator.py`
+- `pipeline/validators/gate_controller.py`
+
+**사용법:**
+```python
+from pipeline.validators import gate_check, can_save
+
+gate = gate_check(food_id=127, safety=Safety.FORBIDDEN, food_data=data, caption=caption)
+if can_save(gate):
+    save_content(...)
+```
 
 ---
 
