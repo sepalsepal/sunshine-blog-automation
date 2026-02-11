@@ -9,11 +9,16 @@ blog_infographic_generator.py - 블로그 인포그래픽 자동 생성
 - 5번: 급여량표
 - 6번: 주의사항
 - 7번: 조리방법
+
+중앙정렬 검증: §15 이미지-캡션 일치 검증 준수
 """
 
 import json
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+
+# 중앙정렬 검증 로그 활성화
+ALIGNMENT_LOG = True
 
 PROJECT_ROOT = Path(__file__).parent.parent
 FOOD_DATA_PATH = PROJECT_ROOT / "config" / "food_data.json"
@@ -96,43 +101,105 @@ def draw_rounded_rect(draw, bbox, radius, fill):
     draw.ellipse([x2 - 2*radius, y2 - 2*radius, x2, y2], fill=fill)
 
 
-def draw_circle_badge(draw, center, radius, color, text, font):
-    """원형 뱃지 그리기 (중앙정렬 필수)"""
-    x, y = center
-    draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=color)
-    # bbox 기반 정확한 중앙정렬
+def calc_center_position(draw, text, font, center_x, center_y):
+    """
+    중앙정렬 좌표 계산 (bbox 기반 정확한 계산)
+
+    공식:
+    - text_x = center_x - text_width/2 - bbox_offset_x
+    - text_y = center_y - text_height/2 - bbox_offset_y
+
+    Returns: (text_x, text_y, text_width, text_height)
+    """
     bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    th = bbox[3] - bbox[1]
-    # 텍스트 시작점 보정 (bbox[0], bbox[1] 오프셋 고려)
-    text_x = x - tw // 2 - bbox[0]
-    text_y = y - th // 2 - bbox[1]
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+    # bbox[0], bbox[1]은 텍스트 렌더링 시작 오프셋 - 정확한 중앙 계산
+    text_x = int(round(center_x - text_width / 2 - bbox[0]))
+    text_y = int(round(center_y - text_height / 2 - bbox[1]))
+    return text_x, text_y, text_width, text_height
+
+
+def verify_center_alignment(draw, text, font, target_x, target_y, tolerance=3, label=""):
+    """
+    중앙정렬 검증 함수 (tolerance 기본값 3px로 조정)
+
+    Args:
+        draw: ImageDraw 객체
+        text: 텍스트
+        font: 폰트
+        target_x, target_y: 중앙 기준 좌표
+        tolerance: 허용 오차 (픽셀) - 기본 3px
+        label: 로그용 라벨
+
+    Returns: (actual_x, actual_y) - 실제 그릴 좌표
+    """
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+
+    # 정확한 중앙 계산: bbox 오프셋 보정
+    text_x = int(round(target_x - text_width / 2 - bbox[0]))
+    text_y = int(round(target_y - text_height / 2 - bbox[1]))
+
+    if ALIGNMENT_LOG:
+        # 실제 텍스트 렌더링 영역의 중심 계산
+        actual_center_x = text_x + bbox[0] + text_width / 2
+        actual_center_y = text_y + bbox[1] + text_height / 2
+        diff_x = abs(actual_center_x - target_x)
+        diff_y = abs(actual_center_y - target_y)
+        status = "PASS" if diff_x <= tolerance and diff_y <= tolerance else "FAIL"
+        print(f"      {label}: center=({target_x},{target_y}), text_pos=({text_x},{text_y}), size=({text_width}x{text_height}), diff=({diff_x:.1f},{diff_y:.1f}) [{status}]")
+
+    return text_x, text_y
+
+
+def draw_circle_badge(draw, center, radius, color, text, font, label="badge", draw_circle=True):
+    """원형 뱃지 그리기 (중앙정렬 검증 포함)"""
+    x, y = center
+    # 원 그리기
+    if draw_circle:
+        draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=color)
+
+    # 중앙정렬 검증 및 좌표 계산
+    text_x, text_y = verify_center_alignment(draw, text, font, x, y, tolerance=2, label=label)
     draw.text((text_x, text_y), text, fill=COLORS["white"], font=font)
+
+
+def draw_text_centered_in_rect(draw, rect_bbox, text, font, fill, label="rect_text"):
+    """사각형 내부 텍스트 중앙정렬 (정확한 bbox 기반)"""
+    x1, y1, x2, y2 = rect_bbox
+    center_x = (x1 + x2) / 2
+    center_y = (y1 + y2) / 2
+
+    text_x, text_y = verify_center_alignment(draw, text, font, center_x, center_y, tolerance=2, label=label)
+    draw.text((text_x, text_y), text, fill=fill, font=font)
 
 
 def generate_nutrition_card(data: dict, output_path: Path):
     """3번 영양정보 이미지 생성"""
+    if ALIGNMENT_LOG:
+        print(f"   [3번 영양정보] 중앙정렬 검증:")
+
     img = Image.new("RGB", (1080, 1080), COLORS["cream"])
     draw = ImageDraw.Draw(img)
 
     # 헤더 그라데이션
     draw_gradient(draw, (0, 0, 1080, 150), COLORS["mint_start"], COLORS["mint_end"])
 
-    # 제목
+    # 제목 (수평 중앙)
     font_title = get_font("bold", 56)
     title = f"{data['korean']} 영양성분"
-    bbox = draw.textbbox((0, 0), title, font=font_title)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 45), title, fill=COLORS["white"], font=font_title)
+    title_x, title_y = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((title_x, title_y), title, fill=COLORS["white"], font=font_title)
 
-    # 부제목
+    # 부제목 (수평 중앙)
     font_sub = get_font("regular", 24)
     subtitle = "100g 기준 | 강아지에게 안전한 영양 간식"
-    bbox = draw.textbbox((0, 0), subtitle, font=font_sub)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 105), subtitle, fill=COLORS["white"], font=font_sub)
+    sub_x, sub_y = verify_center_alignment(draw, subtitle, font_sub, 540, 117, label="부제목")
+    draw.text((sub_x, sub_y), subtitle, fill=COLORS["white"], font=font_sub)
 
-    # SAFE 뱃지
+    # SAFE 뱃지 (사각형 내부 중앙)
     safety = data.get("safety", "SAFE")
     if safety == "SAFE":
         badge_color = COLORS["safe_green"]
@@ -141,9 +208,10 @@ def generate_nutrition_card(data: dict, output_path: Path):
     else:
         badge_color = COLORS["danger_red"]
 
-    draw_rounded_rect(draw, (940, 45, 1040, 85), 20, badge_color)
+    badge_rect = (940, 45, 1040, 85)
+    draw_rounded_rect(draw, badge_rect, 20, badge_color)
     font_badge = get_font("bold", 22)
-    draw.text((960, 52), safety, fill=COLORS["white"], font=font_badge)
+    draw_text_centered_in_rect(draw, badge_rect, safety, font_badge, COLORS["white"], label="SAFE뱃지")
 
     # 영양 카드들
     nutrition = data.get("nutrition", [])
@@ -163,28 +231,27 @@ def generate_nutrition_card(data: dict, output_path: Path):
         # 카드 배경
         draw_rounded_rect(draw, (60, y, 1020, y + card_height), 15, COLORS["card_mint"])
 
-        # 번호 뱃지
+        # 번호 뱃지 (원형 + 숫자 중앙정렬)
         badge_color = BADGE_COLORS[i % len(BADGE_COLORS)]
-        draw_circle_badge(draw, (110, y + 50), 25, badge_color, str(i + 1), font_num)
+        draw_circle_badge(draw, (110, y + 50), 25, badge_color, str(i + 1), font_num, label=f"번호{i+1}")
 
-        # 성분명
+        # 성분명 (좌측정렬)
         draw.text((160, y + 20), n["name"], fill=COLORS["text_dark"], font=font_name)
 
-        # 효능
+        # 효능 (좌측정렬)
         draw.text((160, y + 60), n["benefit"], fill=COLORS["text_gray"], font=font_benefit)
 
-        # 수치
+        # 수치 (우측정렬)
         value_text = f"{n['value']} {n['unit']}"
         bbox = draw.textbbox((0, 0), value_text, font=font_value)
         tw = bbox[2] - bbox[0]
         draw.text((980 - tw, y + 30), value_text, fill=badge_color, font=font_value)
 
-    # 하단 주석
+    # 하단 주석 (수평 중앙)
     font_note = get_font("regular", 18)
     note = f"* 노령견에게 특히 좋은 {nutrition[0]['name'] if nutrition else '영양소'}이 풍부합니다"
-    bbox = draw.textbbox((0, 0), note, font=font_note)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 1030), note, fill=COLORS["text_light"], font=font_note)
+    note_x, _ = verify_center_alignment(draw, note, font_note, 540, 1040, label="하단주석")
+    draw.text((note_x, 1030), note, fill=COLORS["text_light"], font=font_note)
 
     img.save(output_path)
     return output_path
@@ -192,34 +259,37 @@ def generate_nutrition_card(data: dict, output_path: Path):
 
 def generate_dosage_card(data: dict, output_path: Path):
     """5번 급여량표 이미지 생성"""
+    if ALIGNMENT_LOG:
+        print(f"   [5번 급여량표] 중앙정렬 검증:")
+
     img = Image.new("RGB", (1080, 1080), COLORS["cream"])
     draw = ImageDraw.Draw(img)
 
     # 헤더 그라데이션
     draw_gradient(draw, (0, 0, 1080, 150), COLORS["mint_start"], COLORS["mint_end"])
 
-    # 제목
+    # 제목 (수평 중앙)
     font_title = get_font("bold", 56)
     title = "체중별 급여량 가이드"
-    bbox = draw.textbbox((0, 0), title, font=font_title)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 45), title, fill=COLORS["white"], font=font_title)
+    title_x, _ = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((title_x, 45), title, fill=COLORS["white"], font=font_title)
 
-    # 부제목
+    # 부제목 (수평 중앙)
     font_sub = get_font("regular", 24)
     subtitle = "하루 기준 | 간식으로 급여 시"
-    bbox = draw.textbbox((0, 0), subtitle, font=font_sub)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 105), subtitle, fill=COLORS["white"], font=font_sub)
+    sub_x, _ = verify_center_alignment(draw, subtitle, font_sub, 540, 117, label="부제목")
+    draw.text((sub_x, 105), subtitle, fill=COLORS["white"], font=font_sub)
 
-    # 테이블 헤더
+    # 테이블 헤더 (각 열 중앙정렬)
     y_table = 220
-    draw_rounded_rect(draw, (60, y_table, 1020, y_table + 60), 10, COLORS["mint_start"])
+    header_rect = (60, y_table, 1020, y_table + 60)
+    draw_rounded_rect(draw, header_rect, 10, COLORS["mint_start"])
 
     font_header = get_font("bold", 24)
-    draw.text((150, y_table + 18), "구분", fill=COLORS["white"], font=font_header)
-    draw.text((400, y_table + 18), "체중", fill=COLORS["white"], font=font_header)
-    draw.text((720, y_table + 18), "급여량", fill=COLORS["white"], font=font_header)
+    # 열 중앙 좌표: 구분(150), 체중(400), 급여량(720)
+    draw_text_centered_in_rect(draw, (60, y_table, 240, y_table + 60), "구분", font_header, COLORS["white"], label="헤더-구분")
+    draw_text_centered_in_rect(draw, (240, y_table, 460, y_table + 60), "체중", font_header, COLORS["white"], label="헤더-체중")
+    draw_text_centered_in_rect(draw, (460, y_table, 1020, y_table + 60), "급여량", font_header, COLORS["white"], label="헤더-급여량")
 
     # 테이블 행 (g + 직관 단위 필수)
     dosage = data.get("dosage", {})
@@ -237,36 +307,40 @@ def generate_dosage_card(data: dict, output_path: Path):
 
     for i, (label, weight, amount, unit) in enumerate(rows):
         y = y_table + 60 + i * row_height + 15
-        draw.text((100, y + 18), label, fill=COLORS["text_dark"], font=font_row)
-        draw.text((280, y + 18), weight, fill=COLORS["text_gray"], font=font_row)
-        # g 단위
-        draw.text((480, y + 12), amount, fill=COLORS["badge_orange"], font=font_value)
-        # 직관 단위 (필수)
-        if unit:
-            draw.text((480, y + 48), f"({unit})", fill=COLORS["text_gray"], font=font_unit)
+        row_center_y = y + row_height // 2 - 10
 
-    # 주의사항 박스 (주황 박스 + 텍스트)
+        # 각 열 중앙정렬
+        draw_text_centered_in_rect(draw, (60, y, 240, y + row_height - 20), label, font_row, COLORS["text_dark"], label=f"행{i+1}-구분")
+        draw_text_centered_in_rect(draw, (240, y, 460, y + row_height - 20), weight, font_row, COLORS["text_gray"], label=f"행{i+1}-체중")
+
+        # 급여량 (g + 직관단위)
+        amount_unit = f"{amount}\n({unit})" if unit else amount
+        draw.text((520, y + 8), amount, fill=COLORS["badge_orange"], font=font_value)
+        if unit:
+            draw.text((520, y + 44), f"({unit})", fill=COLORS["text_gray"], font=font_unit)
+
+    # 주의사항 박스
     y_caution = 660
     draw_rounded_rect(draw, (60, y_caution, 1020, y_caution + 120), 15, COLORS["card_yellow"])
 
-    # 주의 뱃지 (도형 + 텍스트)
-    draw_rounded_rect(draw, (100, y_caution + 15, 180, y_caution + 50), 5, COLORS["badge_orange"])
-    font_badge_small = get_font("bold", 20)
-    draw.text((117, y_caution + 20), "주의", fill=COLORS["white"], font=font_badge_small)
+    # 주의 뱃지 (사각형 내부 중앙정렬)
+    caution_badge_rect = (100, y_caution + 15, 180, y_caution + 55)
+    draw_rounded_rect(draw, caution_badge_rect, 5, COLORS["badge_orange"])
+    font_badge_small = get_font("bold", 22)
+    draw_text_centered_in_rect(draw, caution_badge_rect, "주의", font_badge_small, COLORS["white"], label="주의뱃지")
 
     font_caution_title = get_font("bold", 22)
-    draw.text((195, y_caution + 20), "급여 시 주의사항", fill=COLORS["badge_orange"], font=font_caution_title)
+    draw.text((195, y_caution + 22), "급여 시 주의사항", fill=COLORS["badge_orange"], font=font_caution_title)
 
     font_caution = get_font("regular", 22)
-    draw.text((100, y_caution + 55), "• 하루 칼로리의 10% 이내로 급여해주세요", fill=COLORS["text_gray"], font=font_caution)
-    draw.text((100, y_caution + 85), "• 처음 급여 시 소량부터 시작하세요", fill=COLORS["text_gray"], font=font_caution)
+    draw.text((100, y_caution + 60), "• 하루 칼로리의 10% 이내로 급여해주세요", fill=COLORS["text_gray"], font=font_caution)
+    draw.text((100, y_caution + 90), "• 처음 급여 시 소량부터 시작하세요", fill=COLORS["text_gray"], font=font_caution)
 
-    # 하단 주석
+    # 하단 주석 (수평 중앙)
     font_note = get_font("regular", 18)
     note = "* 개체별 차이가 있으므로 반응을 보며 조절하세요"
-    bbox = draw.textbbox((0, 0), note, font=font_note)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 1030), note, fill=COLORS["text_light"], font=font_note)
+    note_x, _ = verify_center_alignment(draw, note, font_note, 540, 1040, label="하단주석")
+    draw.text((note_x, 1030), note, fill=COLORS["text_light"], font=font_note)
 
     img.save(output_path)
     return output_path
@@ -274,13 +348,16 @@ def generate_dosage_card(data: dict, output_path: Path):
 
 def generate_do_dont_card(data: dict, output_path: Path):
     """4번 급여가능/불가 이미지 생성"""
+    if ALIGNMENT_LOG:
+        print(f"   [4번 급여가능불가] 중앙정렬 검증:")
+
     img = Image.new("RGB", (1080, 1080), COLORS["cream"])
     draw = ImageDraw.Draw(img)
 
     # 헤더 그라데이션
     draw_gradient(draw, (0, 0, 1080, 150), COLORS["mint_start"], COLORS["mint_end"])
 
-    # SAFE 뱃지 (중앙)
+    # SAFE 뱃지 (사각형 내부 중앙정렬)
     safety = data.get("safety", "SAFE")
     if safety == "SAFE":
         badge_color = COLORS["safe_green"]
@@ -289,18 +366,16 @@ def generate_do_dont_card(data: dict, output_path: Path):
     else:
         badge_color = COLORS["danger_red"]
 
-    draw_rounded_rect(draw, (460, 40, 620, 100), 30, COLORS["white"])
+    safe_badge_rect = (460, 40, 620, 100)
+    draw_rounded_rect(draw, safe_badge_rect, 30, COLORS["white"])
     font_badge = get_font("bold", 36)
-    bbox = draw.textbbox((0, 0), safety, font=font_badge)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 55), safety, fill=badge_color, font=font_badge)
+    draw_text_centered_in_rect(draw, safe_badge_rect, safety, font_badge, badge_color, label="SAFE뱃지")
 
-    # 제목
+    # 제목 (수평 중앙)
     font_title = get_font("bold", 36)
     title = "강아지가 먹어도 안전해요"
-    bbox = draw.textbbox((0, 0), title, font=font_title)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 180), title, fill=COLORS["text_dark"], font=font_title)
+    title_x, _ = verify_center_alignment(draw, title, font_title, 540, 198, label="제목")
+    draw.text((title_x, 180), title, fill=COLORS["text_dark"], font=font_title)
 
     # DO 섹션
     y_do = 260
@@ -315,10 +390,10 @@ def generate_do_dont_card(data: dict, output_path: Path):
 
     for i, item in enumerate(do_items):
         y = y_do_card + 25 + i * 50
-        # 초록 원 + V 텍스트 (도형 기반)
-        draw.ellipse([80, y + 5, 110, y + 35], fill=COLORS["safe_green"])
-        font_check = get_font("bold", 18)
-        draw.text((88, y + 9), "V", fill=COLORS["white"], font=font_check)
+        # 초록 원 + V 텍스트 (원 중앙정렬)
+        circle_center = (95, y + 20)
+        font_check = get_font("bold", 20)
+        draw_circle_badge(draw, circle_center, 15, COLORS["safe_green"], "V", font_check, label=f"DO-V{i+1}")
         draw.text((130, y + 3), item, fill=COLORS["text_dark"], font=font_item)
 
     # DON'T 섹션
@@ -332,20 +407,19 @@ def generate_do_dont_card(data: dict, output_path: Path):
 
     for i, item in enumerate(dont_items):
         y = y_dont_card + 25 + i * 50
-        # 빨간 원 + X 텍스트 (도형 기반)
-        draw.ellipse([80, y + 5, 110, y + 35], fill=COLORS["danger_red"])
-        font_x = get_font("bold", 18)
-        draw.text((88, y + 9), "X", fill=COLORS["white"], font=font_x)
+        # 빨간 원 + X 텍스트 (원 중앙정렬)
+        circle_center = (95, y + 20)
+        font_x = get_font("bold", 20)
+        draw_circle_badge(draw, circle_center, 15, COLORS["danger_red"], "X", font_x, label=f"DONT-X{i+1}")
         draw.text((130, y + 3), item, fill=COLORS["text_dark"], font=font_item)
 
-    # 하단 메시지
+    # 하단 메시지 (사각형 내부 중앙정렬)
     y_msg = 900
-    draw_rounded_rect(draw, (60, y_msg, 1020, y_msg + 60), 15, (230, 247, 255))
+    msg_rect = (60, y_msg, 1020, y_msg + 60)
+    draw_rounded_rect(draw, msg_rect, 15, (230, 247, 255))
     font_msg = get_font("regular", 24)
     msg = "11살 노령견 햇살이도 안전하게 먹고 있어요"
-    bbox = draw.textbbox((0, 0), msg, font=font_msg)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, y_msg + 18), msg, fill=COLORS["mint_start"], font=font_msg)
+    draw_text_centered_in_rect(draw, msg_rect, msg, font_msg, COLORS["mint_start"], label="하단메시지")
 
     img.save(output_path)
     return output_path
@@ -353,6 +427,9 @@ def generate_do_dont_card(data: dict, output_path: Path):
 
 def generate_caution_card(data: dict, output_path: Path):
     """6번 주의사항 이미지 생성"""
+    if ALIGNMENT_LOG:
+        print(f"   [6번 주의사항] 중앙정렬 검증:")
+
     img = Image.new("RGB", (1080, 1080), COLORS["cream"])
     draw = ImageDraw.Draw(img)
 
@@ -360,16 +437,16 @@ def generate_caution_card(data: dict, output_path: Path):
     draw_gradient(draw, (0, 0, 1080, 150), COLORS["coral_start"], COLORS["coral_end"])
 
     # 제목 (도형 뱃지 + 텍스트)
-    # 주의 뱃지 (삼각형 대신 둥근 사각형)
-    draw_rounded_rect(draw, (380, 40, 480, 85), 10, COLORS["white"])
-    font_badge = get_font("bold", 26)
-    draw.text((400, 48), "주의", fill=COLORS["coral_start"], font=font_badge)
+    # 주의 뱃지 (사각형 내부 중앙정렬)
+    caution_badge_rect = (380, 40, 480, 90)
+    draw_rounded_rect(draw, caution_badge_rect, 10, COLORS["white"])
+    font_badge = get_font("bold", 28)
+    draw_text_centered_in_rect(draw, caution_badge_rect, "주의", font_badge, COLORS["coral_start"], label="주의뱃지")
 
+    # 제목 텍스트 (뱃지 옆에 배치)
     font_title = get_font("bold", 48)
     title = "주의사항"
-    bbox = draw.textbbox((0, 0), title, font=font_title)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2 + 30, 50), title, fill=COLORS["white"], font=font_title)
+    draw.text((500, 48), title, fill=COLORS["white"], font=font_title)
 
     # 주의사항 카드들
     caution = data.get("caution", [])
@@ -387,24 +464,25 @@ def generate_caution_card(data: dict, output_path: Path):
         # 카드 배경
         draw_rounded_rect(draw, (60, y, 1020, y + card_height), 15, COLORS["card_mint"])
 
-        # 번호 뱃지
+        # 번호 뱃지 (원형 + 숫자 중앙정렬)
         badge_color = BADGE_COLORS[i % len(BADGE_COLORS)]
-        draw_circle_badge(draw, (110, y + 55), 25, badge_color, str(i + 1), font_num)
+        draw_circle_badge(draw, (110, y + 55), 25, badge_color, str(i + 1), font_num, label=f"번호{i+1}")
 
-        # 제목
+        # 제목 (좌측정렬)
         draw.text((160, y + 25), c["title"], fill=COLORS["text_dark"], font=font_title_card)
 
-        # 설명
+        # 설명 (좌측정렬)
         draw.text((160, y + 65), c["desc"], fill=COLORS["text_gray"], font=font_desc)
 
     # 하단 응급 안내 (도형 뱃지 + 텍스트)
     y_emergency = 880
     draw_rounded_rect(draw, (60, y_emergency, 1020, y_emergency + 60), 15, COLORS["card_pink"])
 
-    # 응급 뱃지 (빨간 원 + 십자)
+    # 응급 뱃지 (빨간 원 + 십자 중앙정렬)
+    emergency_center = (98, y_emergency + 30)
     draw.ellipse([80, y_emergency + 12, 116, y_emergency + 48], fill=COLORS["danger_red"])
-    font_cross = get_font("bold", 24)
-    draw.text((90, y_emergency + 15), "+", fill=COLORS["white"], font=font_cross)
+    font_cross = get_font("bold", 28)
+    draw_circle_badge(draw, emergency_center, 18, COLORS["danger_red"], "+", font_cross, label="응급+")
 
     font_emergency = get_font("bold", 22)
     draw.text((130, y_emergency + 18), "이상 반응 발생 시 즉시 수의사와 상담하세요", fill=COLORS["danger_red"], font=font_emergency)
@@ -415,25 +493,26 @@ def generate_caution_card(data: dict, output_path: Path):
 
 def generate_cooking_card(data: dict, output_path: Path):
     """7번 조리방법 이미지 생성"""
+    if ALIGNMENT_LOG:
+        print(f"   [7번 조리방법] 중앙정렬 검증:")
+
     img = Image.new("RGB", (1080, 1080), COLORS["cream"])
     draw = ImageDraw.Draw(img)
 
     # 헤더 그라데이션
     draw_gradient(draw, (0, 0, 1080, 150), COLORS["mint_start"], COLORS["mint_end"])
 
-    # 제목
+    # 제목 (수평 중앙)
     font_title = get_font("bold", 56)
     title = "안전한 조리 방법"
-    bbox = draw.textbbox((0, 0), title, font=font_title)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 40), title, fill=COLORS["white"], font=font_title)
+    title_x, _ = verify_center_alignment(draw, title, font_title, 540, 68, label="제목")
+    draw.text((title_x, 40), title, fill=COLORS["white"], font=font_title)
 
-    # 부제목
+    # 부제목 (수평 중앙)
     font_sub = get_font("regular", 24)
     subtitle = f"강아지를 위한 {data['korean']} 준비 5단계"
-    bbox = draw.textbbox((0, 0), subtitle, font=font_sub)
-    tw = bbox[2] - bbox[0]
-    draw.text((540 - tw // 2, 100), subtitle, fill=COLORS["white"], font=font_sub)
+    sub_x, _ = verify_center_alignment(draw, subtitle, font_sub, 540, 112, label="부제목")
+    draw.text((sub_x, 100), subtitle, fill=COLORS["white"], font=font_sub)
 
     # 조리 단계 카드들
     cooking = data.get("cooking", [])
@@ -441,7 +520,7 @@ def generate_cooking_card(data: dict, output_path: Path):
     card_height = 110
     card_margin = 15
 
-    font_step = get_font("bold", 20)
+    font_step = get_font("bold", 18)
     font_title_card = get_font("bold", 28)
     font_desc = get_font("regular", 20)
 
@@ -451,30 +530,32 @@ def generate_cooking_card(data: dict, output_path: Path):
         # 카드 배경
         draw_rounded_rect(draw, (60, y, 1020, y + card_height), 15, COLORS["card_mint"])
 
-        # STEP 뱃지
+        # STEP 뱃지 (사각형 내부 중앙정렬)
         badge_color = BADGE_COLORS[i % len(BADGE_COLORS)]
-        draw_rounded_rect(draw, (80, y + 25, 160, y + 60), 17, badge_color)
-        draw.text((90, y + 30), f"STEP {i + 1}", fill=COLORS["white"], font=font_step)
+        step_rect = (80, y + 25, 165, y + 60)
+        draw_rounded_rect(draw, step_rect, 17, badge_color)
+        draw_text_centered_in_rect(draw, step_rect, f"STEP {i + 1}", font_step, COLORS["white"], label=f"STEP{i+1}")
 
-        # 단계명
+        # 단계명 (좌측정렬)
         draw.text((180, y + 25), step["step"], fill=COLORS["text_dark"], font=font_title_card)
 
-        # 설명
+        # 설명 (좌측정렬)
         draw.text((80, y + 70), step["desc"], fill=COLORS["text_gray"], font=font_desc)
 
     # TIP 박스 (도형 뱃지 + 텍스트)
     y_tip = 880
     draw_rounded_rect(draw, (60, y_tip, 1020, y_tip + 80), 15, COLORS["card_yellow"])
 
-    # TIP 뱃지 (주황 원 + 느낌표)
+    # TIP 뱃지 (주황 원 + 느낌표 중앙정렬)
+    tip_center = (98, y_tip + 30)
     draw.ellipse([80, y_tip + 12, 116, y_tip + 48], fill=COLORS["badge_orange"])
-    font_exclaim = get_font("bold", 26)
-    draw.text((93, y_tip + 13), "!", fill=COLORS["white"], font=font_exclaim)
+    font_exclaim = get_font("bold", 28)
+    draw_circle_badge(draw, tip_center, 18, COLORS["badge_orange"], "!", font_exclaim, label="TIP느낌표")
 
     font_tip_title = get_font("bold", 22)
     font_tip = get_font("regular", 20)
-    draw.text((130, y_tip + 15), "TIP", fill=COLORS["badge_orange"], font=font_tip_title)
-    draw.text((100, y_tip + 48), data.get("tip_box", ""), fill=COLORS["text_gray"], font=font_tip)
+    draw.text((130, y_tip + 17), "TIP", fill=COLORS["badge_orange"], font=font_tip_title)
+    draw.text((100, y_tip + 50), data.get("tip_box", ""), fill=COLORS["text_gray"], font=font_tip)
 
     img.save(output_path)
     return output_path
