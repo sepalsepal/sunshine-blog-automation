@@ -1225,7 +1225,130 @@ def triple_check():
 
 ---
 
-## 16. 변경 이력
+## 16. 햇살이 표지 이미지 생성 규칙 🔒 (v2.0)
+
+### 16.1 프롬프트 v2.0 (전문)
+
+```
+[FOOD_NAME]
+
+High-quality photograph. A senior 11-year-old Golden Retriever female named 'Haetsal', with a significantly white muzzle and face, golden fur, black nose and eyes, smiling brightly looking at the item above on a dining table.
+
+CONTAINER RULE:
+- Fresh Food/Fruit/Vegetable → dog bowl from pet brands (Le Creuset Pet, Diggs, MiaCara, Cloud7, Fable Pets, PETKIT, HARIO WAN, Waggo, Harry Barker, Messy Mutts, Kong, Outward Hound, PetRageous, Loving Pets, Frisco, 바잇미, 페슬러, 브리더랩, 뽀시래기, 아르르)
+- Beverage → iconic container or cup from premium brands (Riedel, Baccarat, Zwiesel, Duralex, Le Creuset, Iittala, Hasami, Kinto, Acme, Loveramics, Fellow, Wedgwood, Noritake, Bodum, Hario)
+- Branded drink (Sprite, Coca-Cola, etc.) → original brand can/bottle
+- Packaged snack/food (KitKat, Oreo, Pepero, etc.) → original brand packaging clearly visible, no plate or bowl
+- Dog treats/food (Orijen, Acana, Ziwi Peak, etc.) → original brand packaging clearly visible, no bowl
+
+Background is a trendy 2026 Korean apartment living room with warm indirect lighting. Ceiling fan with 3 blades. Indoor plants: monstera, bird of paradise, peace lily, and areca palm. Floor standing lamp. Mr. Maria Brown lamp placed by the window.
+
+VARIATION: Randomly vary time of day, lighting mood, bowl brand selection, dog's expression, slight head angle, camera angle (front, slightly left, slightly right), dog's gaze (at camera, at food, at window), weather outside window (sunny, cloudy, rainy, snowy), table style (white marble, natural oak, walnut, white lacquer, terrazzo, concrete, glass with gold legs, Scandinavian birch, black marble, ceramic tile top), season hints, and occasionally add a cute bandana or scarf on the dog each generation.
+
+Background slightly defocused, focus on dog and item.
+
+(Layout Constraint: Top of dog's head at 40% from top. Container bottom at 90% from top. Item realistically sized.)
+```
+
+### 16.2 사용법
+
+```
+맨 윗줄의 [FOOD_NAME]만 변경 → 나머지 AI 자동 생성
+```
+
+| 예시 변경 | 비고 |
+|----------|------|
+| CHERRY | 과일 |
+| BANANA MILK | 음료 |
+| KITKAT | 포장 과자 |
+| ORIJEN | 반려견 사료 |
+
+**제작 도구:** Higgsfield + 레퍼런스 이미지 첨부
+
+### 16.3 CONTAINER RULE (용기 규칙)
+
+| 카테고리 | 용기 | 예시 |
+|----------|------|------|
+| 신선 식품/과일/채소 | 반려견 식기 브랜드 | 사과, 당근, 브로콜리 |
+| 음료 | 해당 음료 대표 용기 | 커피→컵, 바나나우유→노란병 |
+| 브랜드 음료 | 원래 브랜드 캔/병 | 스프라이트, 코카콜라 |
+| 포장 과자/식품 | 원래 포장 그대로 | 킷캣, 오레오, 빼빼로 |
+| 반려견 간식/사료 | 원래 포장 그대로 | 오리젠, 아카나, 지위픽 |
+
+### 16.4 반려견 식기 브랜드 (20개)
+
+| 등급 | 브랜드 |
+|------|--------|
+| **프리미엄** | Le Creuset Pet, Diggs, MiaCara, Cloud7, Fable Pets |
+| **중고가** | PETKIT, HARIO WAN, Waggo, Harry Barker, Messy Mutts |
+| **인기** | Kong, Outward Hound, PetRageous, Loving Pets, Frisco |
+| **한국** | 바잇미, 페슬러, 브리더랩, 뽀시래기, 아르르 |
+
+### 16.5 VARIATION 요소 (자동 변화)
+
+| 요소 | 변화 범위 |
+|------|-----------|
+| 시간대/조명 | 아침 골든아워, 한낮 자연광, 오후, 저녁 램프, 밤 실내조명 |
+| 강아지 표정 | 혀 내밀기, 입 다문 미소, 호기심 표정 |
+| 머리 각도 | 정면, 약간 왼쪽 기울임, 약간 오른쪽 기울임 |
+| 카메라 앵글 | 정면, 약간 왼쪽에서, 약간 오른쪽에서 |
+| 시선 | 카메라 응시, 음식 바라보기, 창밖 보기 |
+| 창밖 날씨 | 맑음, 흐림, 비, 눈 |
+| 테이블 스타일 | 흰 대리석, 오크, 월넛, 테라조, 콘크리트, 유리, 블랙 대리석 등 10종 |
+| 계절 힌트 | 봄꽃, 여름 녹음, 가을 단풍, 겨울 눈 |
+| 액세서리 | 가끔 반다나/스카프 착용 |
+
+### 16.6 고정 배경 요소
+
+| 카테고리 | 요소 |
+|----------|------|
+| 천장 | 3날개 팬 |
+| 식물 | 몬스테라, 여인초, 스파티필름, 아레카 야자 |
+| 조명 | 스탠드 램프, Mr. Maria Brown 램프 (창가) |
+
+### 16.7 레이아웃 규격
+
+```
+┌─────────────────────────────┐
+│                             │ ← 상단 40% (여백/텍스트)
+│        [텍스트 공간]         │
+├─────────────────────────────┤
+│                             │
+│       강아지 머리 위치       │ ← 40% 위치
+│                             │
+│                             │
+│       음식/용기 하단         │ ← 90% 위치
+└─────────────────────────────┘
+```
+
+| 구분 | 강아지 머리 | 용기 하단 | 적용 상황 |
+|------|:----------:|:--------:|----------|
+| **기본 규칙** | 40% | 90% | 일반 표지 |
+| 클로즈업 컷 | 50% | 95% | 음식 강조 필요 시 |
+| 세로 콘텐츠 | 35% | 85% | 스토리/릴스용 |
+| 브랜드 PPL | 45% | 88% | 로고 가독성 확보 |
+
+### 16.8 품질 기준
+
+| 항목 | 기준 | FAIL 조건 |
+|------|------|----------|
+| 해상도 | 1080x1080 이상 | 저해상도 |
+| 햇살이 얼굴 | 흰 주둥이, 골든 털 | 다른 개 생성 |
+| 음식 위치 | 테이블 위 | 공중 부유 |
+| 배경 | 한국 아파트 거실 | 야외, 펫샵 |
+| 포커스 | 햇살이 + 음식 | 배경에 포커스 |
+
+### 16.9 버전 이력
+
+| 버전 | 날짜 | 주요 변경 |
+|------|------|----------|
+| v1.0 | 2026-01-15 | 최초 작성 |
+| v1.5 | 2026-01-22 | CONTAINER RULE 추가 |
+| v2.0 | 2026-01-29 | VARIATION 요소, 레이아웃 규격, 브랜드 목록 확장 |
+
+---
+
+## 17. 변경 이력
 
 | 날짜 | 버전 | 내용 |
 |------|------|------|
@@ -1240,6 +1363,7 @@ def triple_check():
 | 2026-02-10 | 3.5 | §13.5 폴더 삭제 금지 규칙 추가: rm -rf PD 승인 필수, backup 검증, 마이그레이션 diff 확인 |
 | 2026-02-11 | 3.6 | §2.5 콘텐츠 핵심 정보, §2.7 인스타 캡션 템플릿, §2.8 블로그 캡션 템플릿, §14 상태 동기화 원칙 추가 |
 | 2026-02-11 | 3.7 | §15 이미지-캡션 일치 검증 추가: 급여량 일치, 안전도 일치, 특수문자 금지, 직관 단위 필수 |
+| 2026-02-11 | 3.8 | §14 원자 트랜잭션 전면 개정, §16 햇살이 표지 프롬프트 v2.0 추가, 변경 이력 §17로 이동 |
 
 ---
 
