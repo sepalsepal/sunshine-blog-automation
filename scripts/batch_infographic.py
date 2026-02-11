@@ -98,7 +98,7 @@ def get_default_data(food_name: str, safety: str = "SAFE") -> Dict:
     }
 
 
-def find_content_folders() -> List[Dict]:
+def find_content_folders(food_data: Dict = None) -> List[Dict]:
     """모든 콘텐츠 폴더 찾기"""
     contents = []
 
@@ -111,9 +111,9 @@ def find_content_folders() -> List[Dict]:
             if not folder.is_dir() or folder.name.startswith('.'):
                 continue
 
-            # 폴더명 파싱: 001_apple_사과
+            # 폴더명 파싱: 033_baguette 또는 001_apple_사과
             parts = folder.name.split('_')
-            if len(parts) < 3:
+            if len(parts) < 2:
                 continue
 
             try:
@@ -121,8 +121,18 @@ def find_content_folders() -> List[Dict]:
             except ValueError:
                 continue
 
-            # 한글명 추출 (마지막 부분)
-            korean_name = parts[-1]
+            # 한글명: food_data.json에서 가져오기, 없으면 영문명 사용
+            korean_name = None
+            if food_data and str(num) in food_data:
+                korean_name = food_data[str(num)].get("name")
+
+            if not korean_name:
+                # 폴더명에 한글이 있으면 사용 (예: 001_apple_사과)
+                if len(parts) >= 3:
+                    korean_name = parts[-1]
+                else:
+                    # 영문명을 사용
+                    korean_name = '_'.join(parts[1:])
 
             contents.append({
                 "num": num,
@@ -290,8 +300,8 @@ def main():
     # 음식 데이터 로드
     food_data = load_food_data()
 
-    # 콘텐츠 폴더 찾기
-    contents = find_content_folders()
+    # 콘텐츠 폴더 찾기 (food_data에서 한글명 참조)
+    contents = find_content_folders(food_data)
     print(f"\n📁 발견된 콘텐츠: {len(contents)}개")
 
     # 범위 필터링
