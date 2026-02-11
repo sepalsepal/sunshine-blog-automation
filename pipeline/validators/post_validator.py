@@ -33,6 +33,73 @@ from pipeline.enums.safety import Safety, get_safety, SafetyError
 
 LOGS_DIR = PROJECT_ROOT / "logs" / "validation"
 VERSION = "v3.1"
+TEMPLATE_VERSION = "v3.1"
+
+
+# =============================================================================
+# A-1: 템플릿 버전 검증
+# =============================================================================
+
+class VersionMismatchError(Exception):
+    """버전 불일치 예외"""
+    pass
+
+
+def validate_version(
+    image_version: str,
+    caption_version: str,
+    validator_version: str,
+) -> bool:
+    """
+    A-1: 템플릿 버전 3중 검증
+
+    Args:
+        image_version: 이미지 템플릿 버전
+        caption_version: 캡션 템플릿 버전
+        validator_version: 검증기 버전
+
+    Returns:
+        True if all match
+
+    Raises:
+        VersionMismatchError: 버전 불일치 시
+    """
+    if not (image_version == caption_version == validator_version == TEMPLATE_VERSION):
+        raise VersionMismatchError(
+            f"버전 불일치: image={image_version}, caption={caption_version}, "
+            f"validator={validator_version}, expected={TEMPLATE_VERSION}"
+        )
+    return True
+
+
+# =============================================================================
+# A-3: 구조 ID 3중 검증
+# =============================================================================
+
+def validate_structure_ids(
+    image_id: str,
+    caption_id: str,
+    validator_id: str,
+) -> Dict:
+    """
+    A-3: 구조 ID 3중 검증
+
+    Args:
+        image_id: 이미지 구조 ID
+        caption_id: 캡션 구조 ID
+        validator_id: 검증기 구조 ID
+
+    Returns:
+        {"status": "PASS"|"FAIL", "violations": [...]}
+    """
+    if not (image_id == caption_id == validator_id):
+        return {
+            "status": "FAIL",
+            "violations": [
+                f"구조 ID 불일치: img={image_id}, cap={caption_id}, val={validator_id}"
+            ]
+        }
+    return {"status": "PASS", "violations": []}
 
 
 # =============================================================================

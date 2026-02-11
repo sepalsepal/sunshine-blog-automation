@@ -16,6 +16,11 @@ from .post_validator import (
     PostValidationResult,
     generate_structure_id,
     check_forbidden_keywords,
+    # A-1, A-3: 버전/구조 ID 검증
+    validate_version,
+    validate_structure_ids,
+    VersionMismatchError,
+    TEMPLATE_VERSION,
 )
 
 from .gate_controller import (
@@ -24,6 +29,11 @@ from .gate_controller import (
     GateError,
     gate_check,
     can_save,
+    # A-2: 3회 위반 자동 중단
+    BatchLockError,
+    ViolationTracker,
+    reset_violation_tracker,
+    get_violation_count,
 )
 
 __all__ = [

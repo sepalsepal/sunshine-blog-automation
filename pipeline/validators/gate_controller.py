@@ -50,6 +50,78 @@ from pipeline.validators.post_validator import (
 # =============================================================================
 
 LOGS_DIR = PROJECT_ROOT / "logs" / "gate"
+MAX_VIOLATIONS = 3  # 최대 위반 허용 횟수
+
+
+# =============================================================================
+# A-2: 배치 락 에러 (3회 위반 시 자동 중단)
+# =============================================================================
+
+class BatchLockError(Exception):
+    """3회 위반 시 배치 자동 중단"""
+
+    def __init__(self, message: str, violation_count: int, violations: list):
+        super().__init__(message)
+        self.violation_count = violation_count
+        self.violations = violations
+
+
+class ViolationTracker:
+    """
+    A-2: 위반 횟수 추적기
+
+    3회 이상 위반 시 BatchLockError 발생
+    """
+
+    def __init__(self, max_violations: int = MAX_VIOLATIONS):
+        self.max_violations = max_violations
+        self.violation_count = 0
+        self.violations = []
+
+    def record_violation(self, food_id: int, errors: list):
+        """위반 기록"""
+        self.violation_count += 1
+        self.violations.append({
+            "food_id": food_id,
+            "count": self.violation_count,
+            "errors": errors,
+        })
+
+        self._log_violation(food_id, errors)
+
+        if self.violation_count >= self.max_violations:
+            raise BatchLockError(
+                f"3회 위반 - 배치 자동 중단. 수동 점검 필요.\n"
+                f"위반 항목: {[v['food_id'] for v in self.violations]}",
+                self.violation_count,
+                self.violations,
+            )
+
+    def reset(self):
+        """카운터 리셋"""
+        self.violation_count = 0
+        self.violations = []
+
+    def _log_violation(self, food_id: int, errors: list):
+        """위반 로그 기록"""
+        from datetime import datetime
+
+        date_str = datetime.now().strftime("%Y%m%d")
+        log_dir = LOGS_DIR / date_str
+        log_dir.mkdir(parents=True, exist_ok=True)
+
+        log_path = log_dir / "violation_tracker.log"
+
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().strftime('%H:%M:%S')}] "
+                   f"Violation #{self.violation_count}: food_id={food_id}\n")
+            for err in errors[:3]:
+                f.write(f"  - {err}\n")
+            f.write("\n")
+
+
+# 전역 위반 추적기 (배치 실행 시 사용)
+_violation_tracker = ViolationTracker()
 
 
 # =============================================================================
@@ -357,9 +429,10 @@ def gate_check(
     food_data: Dict,
     caption: str,
     strict: bool = True,
+    track_violations: bool = False,
 ) -> GateController:
     """
-    원스텝 게이트 체크
+    원스텝 게이트 체크 (A-2: 3회 위반 시 자동 중단)
 
     Args:
         food_id: 음식 ID
@@ -367,18 +440,38 @@ def gate_check(
         food_data: 음식 데이터
         caption: 캡션
         strict: True면 실패 시 예외
+        track_violations: True면 위반 추적 (3회 시 BatchLockError)
 
     Returns:
         GateController (상태 확인용)
+
+    Raises:
+        BatchLockError: track_violations=True이고 3회 위반 시
     """
     if isinstance(safety, str):
         safety = get_safety(safety)
 
     gate = GateController(food_id=food_id, safety=safety)
-    gate.pre_check(food_data, strict=strict)
-    gate.post_check(caption, strict=strict)
+
+    try:
+        gate.pre_check(food_data, strict=strict)
+        gate.post_check(caption, strict=strict)
+    except GateError as e:
+        if track_violations:
+            _violation_tracker.record_violation(food_id, e.errors)
+        raise
 
     return gate
+
+
+def reset_violation_tracker():
+    """위반 추적기 리셋 (배치 시작 시 호출)"""
+    _violation_tracker.reset()
+
+
+def get_violation_count() -> int:
+    """현재 위반 횟수 조회"""
+    return _violation_tracker.violation_count
 
 
 def can_save(gate: GateController) -> bool:
