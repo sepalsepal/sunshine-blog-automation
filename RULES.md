@@ -1021,7 +1021,7 @@ FAIL 발생
 
 ---
 
-## 14. 상태 동기화 원칙 🔒 (v3.6 신규)
+## 14. 상태 동기화 원칙 🔒 (v3.8 전면 개정)
 
 ### 14.1 Source of Truth
 
@@ -1060,6 +1060,101 @@ if 인스타_게시됨 and 로컬_상태 != "4_posted":
 1. 인스타 전수 스캔
 2. 불일치 자동 수정 (묻지 않음)
 3. 결과 리포트 출력
+
+### 14.5 원자 트랜잭션 (Atomic Transaction)
+
+```python
+def sync_post_atomic(content_id, instagram_url):
+    """원자적 동기화 - 전부 성공하거나 전부 실패"""
+
+    log = {
+        "content_id": content_id,
+        "instagram_url": instagram_url,
+        "local_move": None,
+        "notion_update": None,
+        "final_status": None,
+        "timestamp": datetime.now().isoformat()
+    }
+
+    try:
+        # Step 1: 로컬 이동
+        original_path = move_to_posted(content_id)
+        log["local_move"] = "success"
+
+        # Step 2: 노션 업데이트 (재시도 로직 포함)
+        for attempt in range(3):
+            try:
+                update_notion_status(content_id, "게시완료", instagram_url)
+                log["notion_update"] = "success"
+                break
+            except RateLimitError:
+                time.sleep(60)
+            except Exception as e:
+                if attempt == 2:
+                    raise e
+
+        log["final_status"] = "POSTED_SYNCED"
+        save_sync_log(log)
+        return True
+
+    except Exception as e:
+        # 롤백: 로컬 원위치
+        if log["local_move"] == "success":
+            rollback_local_move(content_id, original_path)
+            log["local_move"] = "rolled_back"
+
+        log["final_status"] = "FAILED"
+        log["error"] = str(e)
+        save_sync_log(log)
+        return False
+```
+
+### 14.6 상태 전이 규칙
+
+```
+┌─────────────┐     게시 성공      ┌─────────────┐
+│ 3_approved  │ ─────────────────→ │  4_posted   │
+└─────────────┘                    └─────────────┘
+       │                                  │
+       │ 실패 시 롤백                      │ 인스타 확인
+       ↓                                  ↓
+┌─────────────┐                    ┌─────────────┐
+│  원위치     │                    │  게시완료   │
+└─────────────┘                    └─────────────┘
+```
+
+### 14.7 3중 검증 (Triple Check)
+
+```python
+def triple_check():
+    insta_count = get_instagram_post_count()  # 인스타 게시물 수
+    notion_posted = get_notion_posted_count()  # 노션 게시완료 수
+    local_posted = count_local_4_posted()      # 로컬 4_posted 수
+
+    # 3중 일치 확인
+    assert insta_count == notion_posted == local_posted
+
+    # 노션 게시완료 중 인스타 미존재 확인
+    orphan = find_notion_without_insta()
+    assert len(orphan) == 0
+```
+
+**실행:** `python3 scripts/notion_check.py`
+
+### 14.8 동기화 로그
+
+모든 동기화 작업은 `config/logs/sync_YYYYMMDD.jsonl`에 기록:
+
+```json
+{
+  "content_id": 35,
+  "instagram_url": "https://...",
+  "local_move": "success",
+  "notion_update": "success",
+  "final_status": "POSTED_SYNCED",
+  "timestamp": "2026-02-11T11:30:00"
+}
+```
 
 ---
 
