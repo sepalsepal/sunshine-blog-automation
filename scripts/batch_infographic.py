@@ -26,8 +26,9 @@ from scripts.infographic_generator import (
 )
 
 # 콘텐츠 폴더
-CONTENTS_DIR = PROJECT_ROOT / "contents"
-STATUS_DIRS = ["1_cover_only", "2_body_ready", "3_approved", "4_posted"]
+CONTENTS_DIR = PROJECT_ROOT / "01_contents"
+# 2026-02-13: 플랫 구조로 변경 - STATUS_DIRS 제거
+# 이제 contents/ 직접 스캔
 
 # 콘텐츠 데이터 파일
 FOOD_DATA_FILE = PROJECT_ROOT / "config" / "food_data.json"
@@ -98,48 +99,66 @@ def get_default_data(food_name: str, safety: str = "SAFE") -> Dict:
     }
 
 
+def build_english_name_map(food_data: Dict) -> Dict[str, str]:
+    """영문명 → food_data 번호 매핑 생성"""
+    en_to_id = {}
+    for food_id, data in food_data.items():
+        en_name = data.get("english_name", "")
+        if en_name:
+            en_to_id[en_name] = food_id
+    return en_to_id
+
+
 def find_content_folders(food_data: Dict = None) -> List[Dict]:
-    """모든 콘텐츠 폴더 찾기"""
+    """모든 콘텐츠 폴더 찾기 (플랫 구조)"""
     contents = []
 
-    for status_dir in STATUS_DIRS:
-        status_path = CONTENTS_DIR / status_dir
-        if not status_path.exists():
+    # 영문명 매핑 생성
+    en_to_id = build_english_name_map(food_data) if food_data else {}
+
+    # 2026-02-13: contents/ 직접 스캔 (플랫 구조)
+    for folder in CONTENTS_DIR.iterdir():
+        if not folder.is_dir() or folder.name.startswith('.'):
             continue
 
-        for folder in status_path.iterdir():
-            if not folder.is_dir() or folder.name.startswith('.'):
-                continue
+        # 폴더명 파싱: 001_Pumpkin (PascalCase)
+        parts = folder.name.split('_')
+        if len(parts) < 2:
+            continue
 
-            # 폴더명 파싱: 033_baguette 또는 001_apple_사과
-            parts = folder.name.split('_')
-            if len(parts) < 2:
-                continue
+        try:
+            num = int(parts[0])
+        except ValueError:
+            continue
 
-            try:
-                num = int(parts[0])
-            except ValueError:
-                continue
+        # 영문명 추출 (PascalCase)
+        english_name = parts[1] if len(parts) >= 2 else ""
 
-            # 한글명: food_data.json에서 가져오기, 없으면 영문명 사용
-            korean_name = None
-            if food_data and str(num) in food_data:
-                korean_name = food_data[str(num)].get("name")
+        # 한글명과 food_data 번호 찾기
+        korean_name = None
+        food_data_id = None
 
-            if not korean_name:
-                # 폴더명에 한글이 있으면 사용 (예: 001_apple_사과)
-                if len(parts) >= 3:
-                    korean_name = parts[-1]
-                else:
-                    # 영문명을 사용
-                    korean_name = '_'.join(parts[1:])
+        # 1. 영문명으로 food_data 매핑 시도
+        if english_name in en_to_id:
+            food_data_id = en_to_id[english_name]
+            korean_name = food_data[food_data_id].get("name")
 
-            contents.append({
-                "num": num,
-                "folder": folder,
-                "korean_name": korean_name,
-                "status": status_dir,
-            })
+        # 2. 폴더 번호로 food_data 직접 조회
+        if not korean_name and food_data and str(num) in food_data:
+            food_data_id = str(num)
+            korean_name = food_data[str(num)].get("name")
+
+        # 3. 영문명 사용
+        if not korean_name:
+            korean_name = english_name
+
+        contents.append({
+            "num": num,
+            "folder": folder,
+            "korean_name": korean_name,
+            "english_name": english_name,
+            "food_data_id": food_data_id,  # food_data.json에서의 실제 ID
+        })
 
     return sorted(contents, key=lambda x: x["num"])
 
@@ -152,7 +171,7 @@ def generate_infographics_for_content(
     """단일 콘텐츠의 인포그래픽 생성"""
     results = {}
     folder = content["folder"]
-    blog_dir = folder / "blog"
+    blog_dir = folder / "02_Blog"  # 2026-02-13: 새 폴더 구조
 
     # blog 폴더 확인/생성
     if not blog_dir.exists():
@@ -161,25 +180,35 @@ def generate_infographics_for_content(
         else:
             blog_dir.mkdir(parents=True, exist_ok=True)
 
-    # 음식 데이터 가져오기
+    # 음식 데이터 가져오기 (영문명 매핑 우선)
     food_name = content["korean_name"]
-    data = food_data.get(str(content["num"]), get_default_data(food_name))
+    food_data_id = content.get("food_data_id")
 
-    # 이미 존재하는 이미지 확인
+    if food_data_id and food_data_id in food_data:
+        data = food_data[food_data_id]
+    elif str(content["num"]) in food_data:
+        data = food_data[str(content["num"])]
+    else:
+        data = get_default_data(food_name)
+
+    # 영문명 가져오기
+    english_name = content.get("english_name", "Food")
+
+    # 이미 존재하는 이미지 확인 (PascalCase 파일명)
     existing = {
-        "3_영양정보.png": (blog_dir / "3_영양정보.png").exists(),
-        "4_급여가능불가.png": (blog_dir / "4_급여가능불가.png").exists(),
-        "5_급여량표.png": (blog_dir / "5_급여량표.png").exists(),
-        "6_주의사항.png": (blog_dir / "6_주의사항.png").exists(),
-        "7_조리방법.png": (blog_dir / "7_조리방법.png").exists(),
+        "Blog_03_Nutrition.png": (blog_dir / f"{english_name}_Blog_03_Nutrition.png").exists(),
+        "Blog_04_Feeding.png": (blog_dir / f"{english_name}_Blog_04_Feeding.png").exists(),
+        "Blog_05_Amount.png": (blog_dir / f"{english_name}_Blog_05_Amount.png").exists(),
+        "Blog_06_Caution.png": (blog_dir / f"{english_name}_Blog_06_Caution.png").exists(),
+        "Blog_07_Cooking.png": (blog_dir / f"{english_name}_Blog_07_Cooking.png").exists(),
     }
 
-    # 3. 영양정보
-    if not existing["3_영양정보.png"]:
-        output_path = None if dry_run else blog_dir / "3_영양정보.png"
+    # 3. 영양정보 (PascalCase)
+    if not existing["Blog_03_Nutrition.png"]:
+        output_path = None if dry_run else blog_dir / f"{english_name}_Blog_03_Nutrition.png"
         if dry_run:
-            print(f"   [DRY-RUN] 생성 예정: 3_영양정보.png")
-            results["3_영양정보"] = True
+            print(f"   [DRY-RUN] 생성 예정: {english_name}_Blog_03_Nutrition.png")
+            results["Blog_03_Nutrition"] = True
         else:
             try:
                 generate_nutrition_info(
@@ -189,96 +218,100 @@ def generate_infographics_for_content(
                     data.get("nutrition_footnote", ""),
                     output_path
                 )
-                results["3_영양정보"] = True
+                results["Blog_03_Nutrition"] = True
             except Exception as e:
-                print(f"   ❌ 3_영양정보 실패: {e}")
-                results["3_영양정보"] = False
+                print(f"   ❌ Blog_03_Nutrition 실패: {e}")
+                results["Blog_03_Nutrition"] = False
     else:
-        results["3_영양정보"] = "skip"
+        results["Blog_03_Nutrition"] = "skip"
 
-    # 4. 급여 DO/DON'T
-    if not existing["4_급여가능불가.png"]:
-        output_path = None if dry_run else blog_dir / "4_급여가능불가.png"
+    # 4. 급여 DO/DON'T (PascalCase)
+    if not existing["Blog_04_Feeding.png"]:
+        output_path = None if dry_run else blog_dir / f"{english_name}_Blog_04_Feeding.png"
         if dry_run:
-            print(f"   [DRY-RUN] 생성 예정: 4_급여가능불가.png")
-            results["4_급여가능불가"] = True
+            print(f"   [DRY-RUN] 생성 예정: {english_name}_Blog_04_Feeding.png")
+            results["Blog_04_Feeding"] = True
         else:
             try:
                 generate_do_dont(
                     food_name,
                     data.get("do_items", []),
                     data.get("dont_items", []),
+                    data.get("safety", "SAFE"),
                     output_path
                 )
-                results["4_급여가능불가"] = True
+                results["Blog_04_Feeding"] = True
             except Exception as e:
-                print(f"   ❌ 4_급여가능불가 실패: {e}")
-                results["4_급여가능불가"] = False
+                print(f"   ❌ Blog_04_Feeding 실패: {e}")
+                results["Blog_04_Feeding"] = False
     else:
-        results["4_급여가능불가"] = "skip"
+        results["Blog_04_Feeding"] = "skip"
 
-    # 5. 급여량표
-    if not existing["5_급여량표.png"]:
-        output_path = None if dry_run else blog_dir / "5_급여량표.png"
+    # 5. 급여량표 (PascalCase)
+    if not existing["Blog_05_Amount.png"]:
+        output_path = None if dry_run else blog_dir / f"{english_name}_Blog_05_Amount.png"
         if dry_run:
-            print(f"   [DRY-RUN] 생성 예정: 5_급여량표.png")
-            results["5_급여량표"] = True
+            print(f"   [DRY-RUN] 생성 예정: {english_name}_Blog_05_Amount.png")
+            results["Blog_05_Amount"] = True
         else:
             try:
                 generate_dosage_table(
                     data.get("dosages", {}),
                     data.get("dosage_warning", []),
                     data.get("dosage_footnote", ""),
+                    data.get("safety", "SAFE"),
                     output_path
                 )
-                results["5_급여량표"] = True
+                results["Blog_05_Amount"] = True
             except Exception as e:
-                print(f"   ❌ 5_급여량표 실패: {e}")
-                results["5_급여량표"] = False
+                print(f"   ❌ Blog_05_Amount 실패: {e}")
+                results["Blog_05_Amount"] = False
     else:
-        results["5_급여량표"] = "skip"
+        results["Blog_05_Amount"] = "skip"
 
-    # 6. 주의사항
-    if not existing["6_주의사항.png"]:
-        output_path = None if dry_run else blog_dir / "6_주의사항.png"
+    # 6. 주의사항 (PascalCase)
+    if not existing["Blog_06_Caution.png"]:
+        output_path = None if dry_run else blog_dir / f"{english_name}_Blog_06_Caution.png"
         if dry_run:
-            print(f"   [DRY-RUN] 생성 예정: 6_주의사항.png")
-            results["6_주의사항"] = True
+            print(f"   [DRY-RUN] 생성 예정: {english_name}_Blog_06_Caution.png")
+            results["Blog_06_Caution"] = True
         else:
             try:
                 generate_precautions(
                     food_name,
                     data.get("precautions", []),
                     data.get("precaution_emergency", ""),
+                    data.get("safety", "SAFE"),
                     output_path
                 )
-                results["6_주의사항"] = True
+                results["Blog_06_Caution"] = True
             except Exception as e:
-                print(f"   ❌ 6_주의사항 실패: {e}")
-                results["6_주의사항"] = False
+                print(f"   ❌ Blog_06_Caution 실패: {e}")
+                results["Blog_06_Caution"] = False
     else:
-        results["6_주의사항"] = "skip"
+        results["Blog_06_Caution"] = "skip"
 
-    # 7. 조리방법
-    if not existing["7_조리방법.png"]:
-        output_path = None if dry_run else blog_dir / "7_조리방법.png"
+    # 7. 조리방법 (PascalCase)
+    if not existing["Blog_07_Cooking.png"]:
+        output_path = None if dry_run else blog_dir / f"{english_name}_Blog_07_Cooking.png"
         if dry_run:
-            print(f"   [DRY-RUN] 생성 예정: 7_조리방법.png")
-            results["7_조리방법"] = True
+            print(f"   [DRY-RUN] 생성 예정: {english_name}_Blog_07_Cooking.png")
+            results["Blog_07_Cooking"] = True
         else:
             try:
                 generate_cooking_method(
                     food_name,
                     data.get("cooking_steps", []),
                     data.get("cooking_tip", ""),
+                    data.get("safety", "SAFE"),
                     output_path
                 )
-                results["7_조리방법"] = True
+                results["Blog_07_Cooking"] = True
             except Exception as e:
-                print(f"   ❌ 7_조리방법 실패: {e}")
-                results["7_조리방법"] = False
+                print(f"   ❌ Blog_07_Cooking 실패: {e}")
+                results["Blog_07_Cooking"] = False
     else:
-        results["7_조리방법"] = "skip"
+        results["Blog_07_Cooking"] = "skip"
 
     return results
 

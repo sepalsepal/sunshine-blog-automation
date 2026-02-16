@@ -24,16 +24,10 @@ load_dotenv(PROJECT_ROOT / ".env")
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID")
 NOTION_API_VERSION = "2022-06-28"
-CONTENTS_DIR = PROJECT_ROOT / "contents"
+CONTENTS_DIR = PROJECT_ROOT / "01_contents"
 
-# 폴더 → 상태 매핑
-FOLDER_STATUS_MAP = {
-    "1_cover_only": "표지완료",
-    "2_body_ready": "본문완료",
-    "3_approved": "승인완료",
-    "4_posted": "게시완료",
-    "5_archived": "아카이브",
-}
+# 2026-02-13: 플랫 구조 - 상태는 폴더명이 아닌 별도 로직으로 판단
+# FOLDER_STATUS_MAP 제거됨
 
 
 def get_headers():
@@ -46,82 +40,38 @@ def get_headers():
 
 
 def scan_local_contents():
-    """로컬 콘텐츠 폴더 스캔"""
+    """로컬 콘텐츠 폴더 스캔 (플랫 구조)"""
     contents = {}
 
-    for folder_name, status in FOLDER_STATUS_MAP.items():
-        folder_path = CONTENTS_DIR / folder_name
-        if not folder_path.exists():
+    # 2026-02-13: contents/ 직접 스캔 (플랫 구조)
+    for item in CONTENTS_DIR.iterdir():
+        if not item.is_dir() or item.name.startswith('.'):
             continue
 
-        for item in folder_path.iterdir():
-            if not item.is_dir() or item.name.startswith('.'):
-                continue
+        # 폴더명에서 번호 추출 (예: 001_Pumpkin)
+        match = re.match(r'^(\d{3})_([A-Za-z]+)', item.name)
+        if not match:
+            continue
 
-            # 폴더명에서 번호 추출 (예: 060_fried_chicken_후라이드치킨)
-            match = re.match(r'^(\d{3})_', item.name)
-            if not match:
-                continue
+        content_num = int(match.group(1))  # 정수로 변환
 
-            content_num = int(match.group(1))  # 정수로 변환
+        # 캡션 파일 존재 여부 확인 (새 폴더 구조)
+        insta_dir = item / "01_Insta&Thread"
+        blog_dir = item / "02_Blog"
 
-            # 게시 URL 확인
-            permalink = ""
-            permalink_file = item / "permalink.txt"
-            if permalink_file.exists():
-                permalink = permalink_file.read_text().strip()
+        # PascalCase 캡션 파일 찾기
+        insta_caption = any(insta_dir.glob("*_Insta_Caption.txt")) if insta_dir.exists() else False
+        blog_caption = any(blog_dir.glob("*_Blog_Caption.txt")) if blog_dir.exists() else False
+        thread_caption = any(insta_dir.glob("*_Threads_Caption.txt")) if insta_dir.exists() else False
 
-            # Validator 상태 확인
-            validator_pass = check_validator_status(item)
-
-            # 캡션 파일 존재 여부 확인
-            insta_dir = item / "insta"
-            blog_dir = item / "blog"
-            insta_caption = (insta_dir / "caption.txt").exists() if insta_dir.exists() else False
-            blog_caption = (blog_dir / "caption.txt").exists() if blog_dir.exists() else False
-
-            # 이미지 개수 확인
-            insta_images = 0
-            blog_images = 0
-            if insta_dir.exists():
-                insta_images = len([f for f in insta_dir.iterdir()
-                                   if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']])
-            if blog_dir.exists():
-                blog_images = len([f for f in blog_dir.iterdir()
-                                  if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']])
-
-            contents[content_num] = {
-                "번호": content_num,
-                "상태": status,
-                "폴더경로": str(item),
-                "게시URL": permalink,
-                "Validator": "PASS" if validator_pass else "FAIL",
-                "insta_caption": insta_caption,
-                "blog_caption": blog_caption,
-                "insta_images": insta_images,
-                "blog_images": blog_images,
-            }
+        contents[content_num] = {
+            "번호": content_num,
+            "insta_caption": insta_caption,
+            "blog_caption": blog_caption,
+            "thread_caption": thread_caption,
+        }
 
     return contents
-
-
-def check_validator_status(content_path: Path) -> bool:
-    """콘텐츠 폴더의 Validator 상태 확인"""
-    blog_dir = content_path / "blog"
-    if not blog_dir.exists():
-        return False
-
-    # 8장 이미지 확인
-    image_count = len(list(blog_dir.glob("*.png")))
-    if image_count < 8:
-        return False
-
-    # 캡션 파일 확인
-    caption_file = content_path / "caption_instagram.txt"
-    if not caption_file.exists():
-        return False
-
-    return True
 
 
 def fetch_all_notion_pages():
@@ -160,30 +110,24 @@ def fetch_all_notion_pages():
 
 
 def update_notion_page(page_id: str, local_data: dict, debug: bool = False):
-    """Notion 페이지 업데이트"""
-    # 상태 매핑: 폴더명 → 노션 인스타상태 값
-    status_map = {
-        "표지완료": "표지완료",
-        "본문완료": "본문완료",
-        "승인완료": "승인완료",
-        "게시완료": "게시완료",
-        "아카이브": "게시완료",  # 아카이브는 게시완료로 처리
-    }
+    """Notion 페이지 업데이트
 
-    notion_status = status_map.get(local_data["상태"], "표지완료")
-
+    WO-2026-0216-NOTION-SYNC: 스키마 싱크 수정
+    - 삭제된 속성 제거: 인스타상태, Validator, insta_images, blog_images, 인스타URL
+    - 타입 변경: insta_caption, blog_caption (checkbox → status)
+    - 신규 추가: Thread_caption
+    """
     properties = {
-        "인스타상태": {"select": {"name": notion_status}},
-        "Validator": {"select": {"name": local_data["Validator"]}},
-        "insta_caption": {"checkbox": local_data.get("insta_caption", False)},
-        "blog_caption": {"checkbox": local_data.get("blog_caption", False)},
-        "insta_images": {"number": local_data.get("insta_images", 0)},
-        "blog_images": {"number": local_data.get("blog_images", 0)},
+        "insta_caption": {
+            "status": {"name": "완료" if local_data.get("insta_caption") else "시작 전"}
+        },
+        "blog_caption": {
+            "status": {"name": "완료" if local_data.get("blog_caption") else "시작 전"}
+        },
+        "Thread_caption": {
+            "status": {"name": "완료" if local_data.get("thread_caption") else "시작 전"}
+        },
     }
-
-    permalink = local_data.get("게시URL")
-    if permalink:
-        properties["인스타URL"] = {"url": permalink}
 
     url = f"https://api.notion.com/v1/pages/{page_id}"
     response = requests.patch(url, headers=get_headers(), json={"properties": properties})
@@ -219,11 +163,12 @@ def sync_to_notion():
     not_found = 0
 
     print("\n🔄 동기화 실행 중...")
-    insta_cap_updated = 0
-    blog_cap_updated = 0
+    insta_cap_count = 0
+    blog_cap_count = 0
+    thread_cap_count = 0
 
     first_error = True
-    for content_num, local_data in local_contents.items():
+    for content_num, local_data in sorted(local_contents.items()):
         if content_num in notion_pages:
             notion_page = notion_pages[content_num]
             success = update_notion_page(
@@ -234,10 +179,17 @@ def sync_to_notion():
             if success:
                 updated += 1
                 if local_data.get("insta_caption"):
-                    insta_cap_updated += 1
+                    insta_cap_count += 1
                 if local_data.get("blog_caption"):
-                    blog_cap_updated += 1
-                print(f"   ✅ {content_num:03d}: {local_data['상태']} | 인스타캡션:{local_data.get('insta_caption')} 블로그캡션:{local_data.get('blog_caption')}")
+                    blog_cap_count += 1
+                if local_data.get("thread_caption"):
+                    thread_cap_count += 1
+
+                # 캡션 상태 표시
+                i_stat = "✅" if local_data.get("insta_caption") else "⬜"
+                b_stat = "✅" if local_data.get("blog_caption") else "⬜"
+                t_stat = "✅" if local_data.get("thread_caption") else "⬜"
+                print(f"   ✅ {content_num:03d}: I{i_stat} B{b_stat} T{t_stat}")
             else:
                 print(f"   ❌ {content_num:03d}: 업데이트 실패")
                 first_error = False  # Only show debug for first error
@@ -251,10 +203,12 @@ def sync_to_notion():
     print("━" * 50)
     print(f"📁 로컬 콘텐츠: {len(local_contents)}개")
     print(f"📋 Notion 전체: {len(notion_pages)}개")
-    print(f"✅ 업데이트: {updated}개")
-    print(f"   ├─ 인스타캡션 ✅: {insta_cap_updated}개")
-    print(f"   └─ 블로그캡션 ✅: {blog_cap_updated}개")
-    print(f"⚠️ Notion에 없음: {not_found}개")
+    print(f"✅ 업데이트 성공: {updated}개")
+    print(f"   ├─ 인스타캡션 완료: {insta_cap_count}개")
+    print(f"   ├─ 블로그캡션 완료: {blog_cap_count}개")
+    print(f"   └─ 쓰레드캡션 완료: {thread_cap_count}개")
+    if not_found > 0:
+        print(f"⚠️ Notion에 없음: {not_found}개")
     print("━" * 50)
 
     return True

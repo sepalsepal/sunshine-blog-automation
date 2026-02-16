@@ -98,7 +98,7 @@ agents:
 
   image_generator:
     enabled: true
-    provider: "placeholder"  # placeholder | dalle3 | stability
+    provider: "dalle3"  # placeholder | dalle3 | stability
     api_key: ""  # 환경변수에서 로드 권장
     batch_size: 10
     retry_attempts: 3

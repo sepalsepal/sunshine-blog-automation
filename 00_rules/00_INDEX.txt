@@ -1,0 +1,175 @@
+# Project Sunshine 규칙 인덱스
+
+**버전:** 2.5
+**최종 업데이트:** 2026-02-15
+**성격:** PD 전용 규칙 맵
+
+---
+
+## 작업별 참조 가이드
+
+| 작업 | 참조 폴더 | 핵심 문서 |
+|------|----------|----------|
+| 캡션 작성 | 01_Caption/ | CAPTION_RULE.md, SAFETY_MATRIX.md |
+| 커버 생성 | 02_Image/ | COVER_RULE.md |
+| 슬라이드 생성 | 02_Image/ | INFOGRAPHIC_RULE.md, SLIDE_NAMING_BY_SAFETY.md, BLOG_SLIDE_DESIGN_RULE.md |
+| 햇살이 실사 | 02_Image/ | HAETSAL_REAL_RULE.md |
+| 폴더/파일 관리 | 03_Folder/ | FOLDER_STRUCTURE.md, NAMING_RULE.md |
+| 골든↔생산 매핑 | 03_Folder/ | GOLDEN_PRODUCTION_MAPPING.md |
+| 품질 검수 | 04_QC/ | QC_CHECKLIST.md |
+| 파이프라인 | 05_Pipeline/ | PIPELINE_STANDARD.md |
+| 버전 관리 | 06_Version/ | RULE_VERSIONING.md |
+
+---
+
+## 골든 샘플 위치
+
+| 유형 | 경로 |
+|------|------|
+| 캡션 템플릿 | 01_Caption/{Platform}/{Safety}/Golden_{Platform}_{Safety}_Template.txt |
+| 표지 이미지 | 02_Image/01_Cover/Golden_Cover_Sample.png |
+| 음식 이미지 | 02_Image/02_Food/Golden_Food_Sample.png |
+| 햇살이+음식 | 02_Image/03_DogWithFood/Golden_DogWithFood_Sample.png |
+| 햇살이 실사 | 02_Image/08_HaetsalReal/Golden_HaetsalReal_Sample.png |
+| 블로그 슬라이드 | 02_Image/Blog_04-07/{Safety}/Golden_Blog_{Safety}_03~07.png |
+
+---
+
+## 폴더 구조
+
+```
+00_rules/
+├── 00_INDEX.md + .txt                    ← 이 문서
+├── RULES.md                              ← 메인 규칙 (헌법)
+│
+├── 01_Caption_rules/
+│   ├── CAPTION_RULE.md + .txt            ← 플랫폼 공통 캡션 규칙 (통합)
+│   ├── SAFETY_MATRIX.md + .txt           ← 안전도 정의 SSOT
+│   ├── Blog/
+│   │   ├── SAFE/Golden_Blog_Safe_Template.txt
+│   │   ├── CAUTION/Golden_Blog_Caution_Template.txt
+│   │   ├── DANGER/Golden_Blog_Danger_Template.txt
+│   │   └── FORBIDDEN/Golden_Blog_Forbidden_Template.txt
+│   ├── Insta/
+│   │   ├── SAFE/Golden_Insta_Safe_Template.txt
+│   │   ├── CAUTION/Golden_Insta_Caution_Template.txt
+│   │   ├── DANGER/Golden_Insta_Danger_Template.txt
+│   │   └── FORBIDDEN/Golden_Insta_Forbidden_Template.txt
+│   └── Thread/
+│       ├── SAFE/Golden_Thread_Safe_Template.txt
+│       ├── CAUTION/Golden_Thread_Caution_Template.txt
+│       ├── DANGER/Golden_Thread_Danger_Template.txt
+│       └── FORBIDDEN/Golden_Thread_Forbidden_Template.txt
+│
+├── 02_Image_rules/
+│   ├── COVER_RULE.md + .txt              ← 커버 레이아웃/텍스트/색상
+│   ├── INFOGRAPHIC_RULE.md + .txt        ← 슬라이드 03~07 규칙
+│   ├── SLIDE_NAMING_BY_SAFETY.md + .txt  ← 안전도별 슬라이드 네이밍 (레드2)
+│   ├── TEXT_OVERLAY_RULE.md + .txt       ← 텍스트 합성 규칙
+│   ├── HAETSAL_REAL_RULE.md + .txt       ← 햇살이 실사 규칙 (구 CTA)
+│   ├── 01_Cover/
+│   │   └── Golden_Cover_Sample.png
+│   ├── 02_Food/
+│   │   └── Golden_Food_Sample.png
+│   ├── 03_DogWithFood/
+│   │   └── Golden_DogWithFood_Sample.png
+│   ├── 08_HaetsalReal/
+│   │   └── Golden_HaetsalReal_Sample.png
+│   └── Blog_04-07/
+│       ├── BLOG_SLIDE_DESIGN_RULE.md + .txt  ← 블로그 슬라이드 디자인 규칙
+│       ├── SAFE/Golden_Blog_Safe_03~07.png
+│       ├── CAUTION/Golden_Blog_Caution_03~07.png
+│       ├── DANGER/Golden_Blog_Danger_03~07.png
+│       └── FORBIDDEN/Golden_Blog_Forbidden_03~07.png
+│
+├── 03_Folder_rules/
+│   ├── FOLDER_STRUCTURE.md + .txt        ← 폴더 구조 (플랫 + PascalCase)
+│   ├── NAMING_RULE.md + .txt             ← 파일 네이밍 규칙
+│   ├── FILE_MANAGEMENT_RULE.md + .txt    ← 생성/백업/덮어쓰기 정책
+│   ├── CLOUDINARY_RULE.md + .txt         ← Cloudinary 업로드 규칙
+│   └── GOLDEN_PRODUCTION_MAPPING.md + .txt ← 골든↔생산 파일 매핑 (레드2)
+├── 04_QC_rules/
+│   ├── QC_CHECKLIST.md + .txt            ← QC 체크리스트 전체
+│   ├── REJECTION_CASES.md + .txt         ← 불합격 사례 모음
+│   └── TEXT_OVERLAY_QA_RULES.md          ← 텍스트 오버레이 QA 규칙
+│
+├── 05_Pipeline_rules/
+│   ├── PIPELINE_STANDARD.md + .txt       ← v2.8
+│   ├── AGENT_STANDARD.md + .txt          ← v2.2
+│   └── SESSION_PROTOCOL.md + .txt        ← 세션 관리 규칙
+│
+├── 06_Version_rules/
+│   └── RULE_VERSIONING.md                ← 규칙 버전 관리 정책
+│
+└── 99_rules_backup/                      ← 레거시/아카이브 규칙 백업
+    ├── RULES_v1.0.md
+    ├── FOLDER_RULES_legacy.md
+    ├── PHASE2_RULES.md
+    └── RULES_ARCHIVE.md
+```
+
+---
+
+## 규칙 우선순위
+
+```
+00_rules/RULES.md > 00_rules/ 폴더 문서 > 개별 설정 파일
+```
+
+충돌 시 상위 문서가 우선한다.
+
+---
+
+## 공장형 전환 핵심 문서
+
+### 안전도 정의 (SSOT)
+`01_Caption/SAFETY_MATRIX.md`
+- SAFE / CAUTION / DANGER / FORBIDDEN 정의
+- FORBIDDEN 하드블록 규칙
+- 색상 코드
+- Validator 안전도 검증 기준
+
+### 캡션 규칙 (통합)
+`01_Caption/CAPTION_RULE.md`
+- 3플랫폼 공통 규칙
+- 플랫폼별 섹션 (인스타/쓰레드/블로그)
+- Validator 체크리스트
+
+### 템플릿 파일
+`01_Caption/{Platform}/{Safety}/Golden_{Platform}_{Safety}_Template.txt`
+- 12개 템플릿 (3플랫폼 × 4안전도)
+- 변수 목록 + 체크리스트 포함
+- FORBIDDEN 템플릿은 급여량/조리법 섹션 하드 제거
+
+---
+
+## 빠른 참조
+
+### 캡션 생성 시 (공장형)
+1. `01_Caption/SAFETY_MATRIX.md` 안전도 확인
+2. `01_Caption/CAPTION_RULE.md` 규칙 확인
+3. `01_Caption/{Platform}/{Safety}/Golden_{Platform}_{Safety}_Template.txt` 템플릿 사용
+4. Validator 3단계 통과 확인
+
+### 이미지 생성 시
+1. `02_Image/COVER_RULE.md` 또는 `INFOGRAPHIC_RULE.md` 확인
+2. 해당 폴더 골든 샘플 참조 (01_Cover/, 02_Food/, 03_DogWithFood/, Blog_04-07/{Safety}/ 등)
+3. Validator 체크리스트 확인
+
+### QC 수행 시
+1. `04_QC/QC_CHECKLIST.md` 전체 읽기
+2. 불합격 사례 `REJECTION_CASES.md` 확인
+
+---
+
+## 변경 이력
+
+| 버전 | 날짜 | 변경 내용 |
+|------|------|----------|
+| 1.0 | 2026-02-14 | 최초 작성 |
+| 2.0 | 2026-02-14 | 공장형 전환: SAFETY_MATRIX, CAPTION_RULE, 12개 템플릿 추가 |
+| 2.1 | 2026-02-14 | 템플릿 파일명 변경, 02_Image 구조 재구성 (CTA→HaetsalReal) |
+| 2.2 | 2026-02-14 | 레드2 리스크 대응: GOLDEN_PRODUCTION_MAPPING, SLIDE_NAMING_BY_SAFETY 추가 |
+| 2.3 | 2026-02-14 | Blog→Blog_04-07 변경, BLOG_SLIDE_DESIGN_RULE 추가, 안전도별 골든 샘플 20개 구축 |
+| 2.4 | 2026-02-14 | 폴더명 rules→00_rules 변경 |
+| 2.5 | 2026-02-15 | 모든 규칙 00_rules로 통합, 06_Version_rules 추가, 레거시 99_rules_backup 이동 |

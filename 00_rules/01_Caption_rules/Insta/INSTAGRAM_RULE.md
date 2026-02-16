@@ -1,0 +1,224 @@
+# 인스타그램 캡션 골든 샘플 v1.0
+# Golden Samples for Instagram Caption Rule
+
+> **용도:** 안전도별 캡션 작성 기준 문서
+> **작성일:** 2026-02-16
+> **확정:** PD 승인 (B안 — 걱정 공감형 후킹)
+
+---
+
+## 공통 규칙
+
+### 후킹 문구 패턴 (B안 확정)
+| 안전도 | 후킹 (한) | 후킹 (영) |
+|--------|-----------|-----------|
+| SAFE | "이거 줘도 되나?" 검색해본 적 있다면, 당신은 좋은 보호자예요. | If you've ever googled "can my dog eat this?" — you're a great pet parent. |
+| CAUTION | 사랑하니까 한 번 더 확인하는 거예요. | You double-check because you care. |
+| DANGER | 알고 있는 것과 모르는 것, 그 차이가 우리 아이를 지켜요. | What you know can protect your dog. |
+| FORBIDDEN | 몰랐다면 괜찮아요. 지금 알았으니까요. | It's okay you didn't know — now you do. |
+
+### 캡션 구조
+```
+[1] 감성 후킹 (한 → 영)
+[2] 질문 + 결론 (한 → 영)
+[3] 주의사항 or 위험성 (한 → 영)
+[4] 급여량 or 증상 (한 → 영)
+[5] 감성 마무리 — 햇살이 에피소드 (한 → 영)
+[6] CTA + 해시태그 (한영 혼합)
+```
+
+### 해시태그 규칙
+- 총 15개 (영문 10 + 한글 5)
+- 영문 필수: #dogfood #caninenutrition #petcare #goldenretriever + 음식태그
+- 한글 필수: #강아지[음식] #반려견음식 #햇살이네음식연구소 + 2개 자유
+
+### 이미지 규칙
+- **01_Cover (표지):** 텍스트 오버레이 적용 (음식명 한/영 표기)
+- **02~09 슬라이드:** 텍스트 오버레이 미적용 (이미지 원본 유지)
+- 이유: 인스타그램은 시각 중심 플랫폼, 캡션으로 정보 전달
+
+### 급여량 단계 규칙
+| 플랫폼 | 단계 수 | 분류 |
+|--------|---------|------|
+| 인스타그램 | 3단계 | 소형견 / 중형견 / 대형견 |
+| 블로그 | 4단계 | 소형견 / 중형견 / 대형견 / 초대형견 |
+
+※ 인스타그램은 짧은 가독성을 위해 3단계로 통합
+
+---
+
+## ✅ SAFE 골든 샘플 — 사과 (Apple)
+
+```
+"이거 줘도 되나?" 검색해본 적 있다면, 당신은 좋은 보호자예요.
+If you've ever googled "can my dog eat this?" — you're a great pet parent.
+
+🍎 사과, 강아지가 먹어도 될까요?
+Can dogs eat apples?
+
+✅ 안전합니다!
+✅ Yes, it's safe!
+
+🟡 주의사항 Tips
+• 씨와 심 제거 필수 Remove seeds & core
+• 작게 잘라서 급여 Cut into small pieces
+• 껍질째 OK, 단 깨끗이 세척 Skin OK if washed
+
+❌ 금지 항목 Never
+• 씨앗 (시안화물 성분) Seeds contain cyanide
+• 과다 급여 Overfeeding
+
+📏 급여량 Serving Size
+• 소형견 Small: 15~20g (2~3 pieces)
+• 중형견 Medium: 30~40g (1/4 apple)
+• 대형견 Large: 50~70g (1/3 apple)
+
+우리 햇살이는 사과 깎는 소리만 들어도 달려와요 🐾
+Haetsal comes running just hearing me peel an apple 🐾
+
+💾 Save & Share!
+
+#dogfood #caninenutrition #applesfordogs #petcare #goldenretriever #seniordogs #doghealth #dogtreats #safefoodfordogs #pethealth #강아지사과 #강아지간식 #반려견음식 #골든리트리버 #햇살이네음식연구소
+```
+
+---
+
+## 🟡 CAUTION 골든 샘플 — 바나나 (Banana)
+
+```
+사랑하니까 한 번 더 확인하는 거예요.
+You double-check because you care.
+
+🍌 바나나, 강아지가 먹어도 될까요?
+Can dogs eat bananas?
+
+🟡 조건부 안전 — 적당량만!
+🟡 Safe in moderation!
+
+✅ 좋은 점 Benefits
+• 칼륨, 비타민B6, 식이섬유 풍부 Rich in potassium, vitamin B6 & fiber
+• 훈련 간식으로 활용 가능 Great as a training treat
+
+⚠️ 주의사항 Caution
+• 당분이 높아 소량만 급여 High sugar — small amounts only
+• 껍질 절대 금지 (소화 불가) Never feed the peel
+• 과다 시 변비·설사 유발 Too much causes constipation or diarrhea
+
+📏 급여량 Serving Size
+• 소형견 Small: 1~2 조각 slices (10g)
+• 중형견 Medium: 3~4 조각 slices (20g)
+• 대형견 Large: 반 개 이하 half banana max (40g)
+※ 주 2~3회 이하 No more than 2-3 times/week
+
+햇살이는 바나나만 보면 꼬리가 프로펠러가 돼요. 하지만 엄마는 냉정하게 두 조각만 🐾
+Haetsal's tail goes full helicopter mode for bananas. But mom stays strong — two slices only 🐾
+
+💾 Save & Share!
+
+#dogfood #caninenutrition #bananasfordogs #petcare #goldenretriever #doghealth #dogtreats #dognutrition #pethealth #dogdiet #강아지바나나 #강아지간식 #반려견음식 #골든리트리버 #햇살이네음식연구소
+```
+
+---
+
+## 🔴 DANGER 골든 샘플 — 체리 (Cherry)
+
+```
+알고 있는 것과 모르는 것, 그 차이가 우리 아이를 지켜요.
+What you know can protect your dog.
+
+🍒 체리, 강아지가 먹어도 될까요?
+Can dogs eat cherries?
+
+🔴 위험 — 과육만 소량 가능, 씨·줄기·잎은 독성!
+🔴 Dangerous — flesh only in tiny amounts. Seeds, stems & leaves are toxic!
+
+⚠️ 왜 위험한가요? Why is it dangerous?
+• 씨앗·줄기·잎에 시안화물(청산가리) 성분 포함 Seeds, stems & leaves contain cyanide
+• 씨앗 삼키면 장폐색 위험 Swallowed pits can cause intestinal blockage
+• 소형견은 소량으로도 위험 Even small amounts risky for small dogs
+
+🚨 중독 증상 Symptoms of poisoning
+• 호흡 곤란 Difficulty breathing
+• 붉은 잇몸 Bright red gums
+• 동공 확대 Dilated pupils
+• 구토·무기력 Vomiting & lethargy
+
+🆘 응급 대처 Emergency
+• 씨앗 삼킨 경우 즉시 동물병원 If pit swallowed → vet immediately
+• 증상 발현 시 골든타임 4시간 이내 Golden time: within 4 hours of symptoms
+
+✅ 그래도 주고 싶다면 If you still want to feed
+• 과육만 분리, 아주 소량 (1~2알 분량) Flesh only, very small amount (1-2 cherries worth)
+• 블루베리가 훨씬 안전한 대안 Blueberries are a much safer alternative
+
+햇살이 앞에서 체리 먹을 때면 눈빛이 간절해지지만, 이건 엄마가 지켜야 할 선이에요 🐾
+When I eat cherries in front of Haetsal, her eyes beg. But this is a line mom has to hold 🐾
+
+💾 Save & Share!
+
+#dogfood #caninenutrition #cherriesfordogs #petcare #goldenretriever #doghealth #dogsafety #toxicfoodfordogs #pethealth #dogdiet #강아지체리 #강아지위험음식 #반려견음식 #골든리트리버 #햇살이네음식연구소
+```
+
+---
+
+## ⛔ FORBIDDEN 골든 샘플 — 양파 (Onion)
+
+```
+몰랐다면 괜찮아요. 지금 알았으니까요.
+It's okay you didn't know — now you do.
+
+🧅 양파, 강아지가 먹어도 될까요?
+Can dogs eat onions?
+
+⛔ 절대 금지! 소량도 위험합니다.
+⛔ Absolutely NOT! Even small amounts are dangerous.
+
+☠️ 왜 위험한가요? Why is it dangerous?
+• 티오설페이트 성분 → 적혈구 파괴 Thiosulfate destroys red blood cells
+• 익혀도, 말려도, 가루여도 전부 독성 Toxic in ALL forms: raw, cooked, powdered, dried
+• 체중 1kg당 5g으로 치명적 As little as 5g per 1kg body weight can be fatal
+
+🚨 중독 증상 Symptoms (1~3일 후 나타남 / appear 1-3 days later)
+• 무기력·식욕 감소 Lethargy & loss of appetite
+• 소변 색 변화 (짙은 갈색·붉은색) Dark brown or red urine
+• 구토·설사 Vomiting & diarrhea
+• 빈혈 (잇몸 창백) Anemia (pale gums)
+
+🆘 응급 대처 Emergency
+• 섭취 확인 즉시 동물병원 If ingested → vet immediately
+• 구토 유도 절대 금지 (수의사 판단) Do NOT induce vomiting without vet guidance
+• 증상 늦게 나타나도 즉시 병원 Even if no immediate symptoms → still go to vet
+
+⚠️ 숨어있는 양파 주의 Hidden onions to watch for
+• 국물·소스·양념 Broth, sauces, seasonings
+• 이유식·간편식 Baby food & ready meals
+• 양파가루 (파우더) Onion powder (more concentrated = more toxic)
+
+이건 '조금이면 괜찮겠지'가 통하지 않는 음식이에요. 햇살이를 위해, 부엌에서 양파 만질 때면 손부터 씻어요 🐾
+This is one food where "just a little" doesn't apply. For Haetsal, I always wash my hands after touching onions 🐾
+
+💾 Save & Share!
+
+#dogfood #caninenutrition #onionsfordogs #petcare #goldenretriever #doghealth #toxicfoodfordogs #dogsafety #pethealth #dogdiet #강아지양파 #강아지위험음식 #반려견음식 #골든리트리버 #햇살이네음식연구소
+```
+
+---
+
+## 안전도별 구조 차이 요약
+
+| 항목 | SAFE | CAUTION | DANGER | FORBIDDEN |
+|------|------|---------|--------|-----------|
+| 결론 이모지 | ✅ | 🟡 | 🔴 | ⛔ |
+| 급여량 | ✅ 포함 | ✅ 포함 (횟수 제한 추가) | ⚠️ 대안 제시 | ❌ 없음 |
+| 중독 증상 | ❌ 없음 | ❌ 없음 | ✅ 포함 | ✅ 포함 (상세) |
+| 응급 대처 | ❌ 없음 | ❌ 없음 | ✅ 포함 | ✅ 포함 (상세) |
+| 대안 식품 | ❌ 없음 | ❌ 없음 | ✅ 제시 | ❌ 없음 |
+| 숨은 위험 | ❌ 없음 | ❌ 없음 | ❌ 없음 | ✅ 포함 |
+| 톤 | 밝고 긍정적 | 긍정 + 절제 | 경고 + 보호 | 경고 + 공감 |
+
+---
+
+**문서 버전:** v1.1
+**변경 이력:**
+- v1.1 (2026-02-16): 이미지 규칙, 급여량 단계 규칙 추가 (WO-2026-0216-OVERLAY-R1)
+- v1.0 (2026-02-16): 초안 작성, PD 승인 완료

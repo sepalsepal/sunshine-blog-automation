@@ -22,8 +22,9 @@ ALIGNMENT_LOG = True
 
 PROJECT_ROOT = Path(__file__).parent.parent
 FOOD_DATA_PATH = PROJECT_ROOT / "config" / "food_data.json"
-CONTENTS_DIR = PROJECT_ROOT / "contents"
-STATUS_DIRS = ["4_posted", "3_approved", "2_body_ready", "1_cover_only"]
+CONTENTS_DIR = PROJECT_ROOT / "01_contents"
+# 2026-02-13: 플랫 구조로 변경 - STATUS_DIRS 제거
+# 이제 contents/ 직접 스캔
 
 # 색상 정의
 COLORS = {
@@ -48,6 +49,12 @@ COLORS = {
     "caution_yellow": (255, 193, 7),    # CAUTION 뱃지
     "danger_red": (244, 67, 54),        # DANGER 뱃지
     "white": (255, 255, 255),
+    # FORBIDDEN 색상 (§2.4 규칙)
+    "forbidden_start": (239, 83, 80),   # FORBIDDEN 그라데이션 시작
+    "forbidden_end": (229, 115, 115),   # FORBIDDEN 그라데이션 끝
+    "forbidden_title": (198, 40, 40),   # FORBIDDEN 제목 (#C62828)
+    "forbidden_card": (255, 235, 238),  # FORBIDDEN 카드 배경 (#FFEBEE)
+    "forbidden_badge": (211, 47, 47),   # FORBIDDEN 배지 (#D32F2F)
 }
 
 # 뱃지 색상 순서
@@ -176,6 +183,31 @@ def draw_text_centered_in_rect(draw, rect_bbox, text, font, fill, label="rect_te
     draw.text((text_x, text_y), text, fill=fill, font=font)
 
 
+def draw_right_aligned_badge(draw, right_x, center_y, text, font, color, label="badge"):
+    """우측 정렬 뱃지 (우측 끝 기준)"""
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+
+    # 패딩 추가
+    padding_x = 20
+    padding_y = 10
+    rect_width = text_width + padding_x * 2
+    rect_height = text_height + padding_y * 2
+
+    # 우측 정렬 기준으로 좌표 계산
+    rect_x1 = right_x - rect_width
+    rect_y1 = center_y - rect_height / 2
+    rect_x2 = right_x
+    rect_y2 = center_y + rect_height / 2
+
+    # 뱃지 배경
+    draw_rounded_rect(draw, (rect_x1, rect_y1, rect_x2, rect_y2), 15, color)
+
+    # 텍스트 중앙정렬
+    draw_text_centered_in_rect(draw, (rect_x1, rect_y1, rect_x2, rect_y2), text, font, COLORS["white"], label=label)
+
+
 def generate_nutrition_card(data: dict, output_path: Path):
     """3번 영양정보 이미지 생성"""
     if ALIGNMENT_LOG:
@@ -199,7 +231,7 @@ def generate_nutrition_card(data: dict, output_path: Path):
     sub_x, sub_y = verify_center_alignment(draw, subtitle, font_sub, 540, 117, label="부제목")
     draw.text((sub_x, sub_y), subtitle, fill=COLORS["white"], font=font_sub)
 
-    # SAFE 뱃지 (사각형 내부 중앙)
+    # SAFE 뱃지 (사각형 내부 중앙) - 텍스트 길이에 맞게 동적 크기
     safety = data.get("safety", "SAFE")
     if safety == "SAFE":
         badge_color = COLORS["safe_green"]
@@ -208,9 +240,14 @@ def generate_nutrition_card(data: dict, output_path: Path):
     else:
         badge_color = COLORS["danger_red"]
 
-    badge_rect = (940, 45, 1040, 85)
-    draw_rounded_rect(draw, badge_rect, 20, badge_color)
     font_badge = get_font("bold", 22)
+    bbox = draw.textbbox((0, 0), safety, font=font_badge)
+    text_width = bbox[2] - bbox[0]
+    badge_width = text_width + 40  # 좌우 패딩 20px씩
+    badge_right = 1040
+    badge_left = badge_right - badge_width
+    badge_rect = (badge_left, 45, badge_right, 85)
+    draw_rounded_rect(draw, badge_rect, 20, badge_color)
     draw_text_centered_in_rect(draw, badge_rect, safety, font_badge, COLORS["white"], label="SAFE뱃지")
 
     # 영양 카드들
@@ -294,10 +331,10 @@ def generate_dosage_card(data: dict, output_path: Path):
     # 테이블 행 (g + 직관 단위 필수)
     dosage = data.get("dosage", {})
     rows = [
-        ("소형견", "5kg 이하", dosage.get("small", {}).get("g", "-"), dosage.get("small", {}).get("unit", "")),
-        ("중형견", "5~15kg", dosage.get("medium", {}).get("g", "-"), dosage.get("medium", {}).get("unit", "")),
-        ("대형견", "15~30kg", dosage.get("large", {}).get("g", "-"), dosage.get("large", {}).get("unit", "")),
-        ("초대형견", "30kg 이상", dosage.get("xlarge", {}).get("g", "-"), dosage.get("xlarge", {}).get("unit", "")),
+        ("소형견", dosage.get("소형견", {}).get("weight", "5kg 이하"), dosage.get("소형견", {}).get("amount", "-"), dosage.get("소형견", {}).get("desc", "")),
+        ("중형견", dosage.get("중형견", {}).get("weight", "5~15kg"), dosage.get("중형견", {}).get("amount", "-"), dosage.get("중형견", {}).get("desc", "")),
+        ("대형견", dosage.get("대형견", {}).get("weight", "15~30kg"), dosage.get("대형견", {}).get("amount", "-"), dosage.get("대형견", {}).get("desc", "")),
+        ("초대형견", dosage.get("초대형견", {}).get("weight", "30kg 이상"), dosage.get("초대형견", {}).get("amount", "-"), dosage.get("초대형견", {}).get("desc", "")),
     ]
 
     font_row = get_font("regular", 26)
@@ -313,11 +350,16 @@ def generate_dosage_card(data: dict, output_path: Path):
         draw_text_centered_in_rect(draw, (60, y, 240, y + row_height - 20), label, font_row, COLORS["text_dark"], label=f"행{i+1}-구분")
         draw_text_centered_in_rect(draw, (240, y, 460, y + row_height - 20), weight, font_row, COLORS["text_gray"], label=f"행{i+1}-체중")
 
-        # 급여량 (g + 직관단위)
-        amount_unit = f"{amount}\n({unit})" if unit else amount
-        draw.text((520, y + 8), amount, fill=COLORS["badge_orange"], font=font_value)
+        # 급여량 (g + 직관단위) - 열 중앙정렬
+        dosage_col_center_x = (460 + 1020) / 2  # 740
+        # g 금액 중앙정렬
+        amount_x, _ = verify_center_alignment(draw, amount, font_value, dosage_col_center_x, y + 28, label=f"행{i+1}-급여량g")
+        draw.text((amount_x, y + 8), amount, fill=COLORS["badge_orange"], font=font_value)
         if unit:
-            draw.text((520, y + 44), f"({unit})", fill=COLORS["text_gray"], font=font_unit)
+            # 직관단위 중앙정렬
+            unit_text = f"({unit})"
+            unit_x, _ = verify_center_alignment(draw, unit_text, font_unit, dosage_col_center_x, y + 54, label=f"행{i+1}-급여량unit")
+            draw.text((unit_x, y + 44), unit_text, fill=COLORS["text_gray"], font=font_unit)
 
     # 주의사항 박스
     y_caution = 660
@@ -561,81 +603,477 @@ def generate_cooking_card(data: dict, output_path: Path):
     return output_path
 
 
+# ===== FORBIDDEN 안전도 전용 함수들 =====
+
+def generate_toxicity_card(data, output_path):
+    """03번: 독성 성분 카드 (FORBIDDEN)"""
+    img = Image.new("RGB", (1080, 1080), COLORS["cream"])
+    draw = ImageDraw.Draw(img)
+
+    # 헤더 그라데이션 (빨강 계열)
+    draw_gradient(draw, (0, 0, 1080, 130), COLORS["forbidden_start"], COLORS["forbidden_end"])
+
+    font_title = get_font("bold", 48)
+    font_subtitle = get_font("regular", 22)
+    font_badge = get_font("bold", 18)
+
+    # 제목
+    title = f"{data['korean']} 독성 성분"
+    tx, ty = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((tx, ty), title, fill=COLORS["white"], font=font_title)
+
+    # 부제
+    subtitle = "강아지에게 치명적인 성분 경고"
+    sx, sy = verify_center_alignment(draw, subtitle, font_subtitle, 540, 117, label="부제목")
+    draw.text((sx, sy), subtitle, fill=COLORS["white"], font=font_subtitle)
+
+    # FORBIDDEN 배지
+    badge_text = "FORBIDDEN"
+    draw_right_aligned_badge(draw, 990, 65, badge_text, font_badge, COLORS["forbidden_badge"], label="FORBIDDEN뱃지")
+
+    # 독성 성분 카드들
+    font_title_card = get_font("bold", 28)
+    font_desc = get_font("regular", 20)
+    font_num = get_font("bold", 22)
+
+    toxicity_items = [
+        {"title": "나트륨 과다", "desc": "심장, 신장에 심각한 부담"},
+        {"title": "인공 조미료", "desc": "소화 장애 및 독성 반응 유발"},
+        {"title": "양파/마늘 분말", "desc": "적혈구 파괴, 빈혈 유발 가능"},
+        {"title": "지방 과다", "desc": "췌장염, 비만, 소화 장애"},
+    ]
+
+    for i, item in enumerate(toxicity_items):
+        y = 180 + i * 120
+        draw_rounded_rect(draw, (60, y, 1020, y + 100), 12, COLORS["forbidden_card"])
+
+        # 번호 원
+        badge_color = COLORS["forbidden_badge"]
+        draw.ellipse([80, y + 30, 140, y + 70], fill=badge_color)
+        nx, ny = verify_center_alignment(draw, str(i + 1), font_num, 110, y + 50, label=f"번호{i+1}")
+        draw.text((nx, ny), str(i + 1), fill=COLORS["white"], font=font_num)
+
+        # 제목/설명
+        draw.text((160, y + 25), item["title"], fill=COLORS["forbidden_title"], font=font_title_card)
+        draw.text((160, y + 60), item["desc"], fill=COLORS["text_gray"], font=font_desc)
+
+    # 경고 박스
+    draw_rounded_rect(draw, (60, 680, 1020, 760), 12, COLORS["forbidden_card"])
+    font_warning = get_font("bold", 24)
+    draw.text((100, 705), "경고: 이 음식은 강아지에게 절대 급여해서는 안 됩니다", fill=COLORS["forbidden_title"], font=font_warning)
+
+    # 하단 주석
+    font_footnote = get_font("regular", 16)
+    footnote = f"{data['korean']}은 강아지에게 독성이 있습니다"
+    fx, fy = verify_center_alignment(draw, footnote, font_footnote, 540, 1040, label="하단주석")
+    draw.text((fx, fy), footnote, fill=COLORS["text_light"], font=font_footnote)
+
+    img.save(output_path)
+    return output_path
+
+
+def generate_symptoms_card(data, output_path):
+    """04번: 섭취 시 증상 카드 (FORBIDDEN)"""
+    img = Image.new("RGB", (1080, 1080), COLORS["cream"])
+    draw = ImageDraw.Draw(img)
+
+    # 헤더 그라데이션
+    draw_gradient(draw, (0, 0, 1080, 130), COLORS["forbidden_start"], COLORS["forbidden_end"])
+
+    font_title = get_font("bold", 48)
+    font_subtitle = get_font("regular", 22)
+    font_badge = get_font("bold", 18)
+
+    # 제목
+    title = "섭취 시 증상"
+    tx, ty = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((tx, ty), title, fill=COLORS["white"], font=font_title)
+
+    # 부제
+    subtitle = f"{data['korean']} 섭취 후 나타날 수 있는 증상"
+    sx, sy = verify_center_alignment(draw, subtitle, font_subtitle, 540, 117, label="부제목")
+    draw.text((sx, sy), subtitle, fill=COLORS["white"], font=font_subtitle)
+
+    # FORBIDDEN 배지
+    badge_text = "FORBIDDEN"
+    draw_right_aligned_badge(draw, 990, 65, badge_text, font_badge, COLORS["forbidden_badge"], label="FORBIDDEN뱃지")
+
+    # 증상 카드들
+    font_title_card = get_font("bold", 26)
+    font_desc = get_font("regular", 18)
+    font_num = get_font("bold", 20)
+
+    symptoms = [
+        {"title": "구토/설사", "desc": "섭취 후 30분~2시간 내 발생"},
+        {"title": "무기력/기력 저하", "desc": "활동량 감소, 축 처짐"},
+        {"title": "과도한 갈증", "desc": "나트륨 과다로 인한 탈수"},
+        {"title": "복부 팽만", "desc": "소화 장애, 복통"},
+        {"title": "경련/발작", "desc": "심각한 경우 신경 증상"},
+    ]
+
+    for i, item in enumerate(symptoms):
+        y = 160 + i * 100
+        draw_rounded_rect(draw, (60, y, 1020, y + 85), 12, COLORS["forbidden_card"])
+
+        # 번호 원
+        draw.ellipse([80, y + 22, 130, y + 62], fill=COLORS["forbidden_badge"])
+        nx, ny = verify_center_alignment(draw, str(i + 1), font_num, 105, y + 42, label=f"번호{i+1}")
+        draw.text((nx, ny), str(i + 1), fill=COLORS["white"], font=font_num)
+
+        # 제목/설명
+        draw.text((150, y + 18), item["title"], fill=COLORS["forbidden_title"], font=font_title_card)
+        draw.text((150, y + 50), item["desc"], fill=COLORS["text_gray"], font=font_desc)
+
+    # 응급 박스
+    draw_rounded_rect(draw, (60, 680, 1020, 780), 12, COLORS["forbidden_card"])
+    font_emergency = get_font("bold", 22)
+    draw.text((100, 700), "응급: 위 증상 발견 시 즉시 동물병원 방문", fill=COLORS["forbidden_badge"], font=font_emergency)
+    font_tel = get_font("regular", 20)
+    draw.text((100, 740), "24시간 동물병원 또는 수의사 상담 필요", fill=COLORS["text_gray"], font=font_tel)
+
+    img.save(output_path)
+    return output_path
+
+
+def generate_emergency_card(data, output_path):
+    """05번: 응급 대처 카드 (FORBIDDEN)"""
+    img = Image.new("RGB", (1080, 1080), COLORS["cream"])
+    draw = ImageDraw.Draw(img)
+
+    # 헤더 그라데이션
+    draw_gradient(draw, (0, 0, 1080, 130), COLORS["forbidden_start"], COLORS["forbidden_end"])
+
+    font_title = get_font("bold", 48)
+    font_subtitle = get_font("regular", 22)
+    font_badge = get_font("bold", 18)
+
+    # 제목
+    title = "응급 대처 가이드"
+    tx, ty = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((tx, ty), title, fill=COLORS["white"], font=font_title)
+
+    # 부제
+    subtitle = "섭취 시 즉시 행동 지침"
+    sx, sy = verify_center_alignment(draw, subtitle, font_subtitle, 540, 117, label="부제목")
+    draw.text((sx, sy), subtitle, fill=COLORS["white"], font=font_subtitle)
+
+    # FORBIDDEN 배지
+    badge_text = "FORBIDDEN"
+    draw_right_aligned_badge(draw, 990, 65, badge_text, font_badge, COLORS["forbidden_badge"], label="FORBIDDEN뱃지")
+
+    # 응급 단계들
+    font_step = get_font("bold", 14)
+    font_title_card = get_font("bold", 26)
+    font_desc = get_font("regular", 18)
+
+    steps = [
+        {"step": "즉시", "title": "섭취량 확인", "desc": "얼마나 먹었는지 파악"},
+        {"step": "5분 내", "title": "동물병원 연락", "desc": "상황 설명, 내원 준비"},
+        {"step": "10분 내", "title": "병원 이동", "desc": "제품 포장지 지참"},
+        {"step": "도착 후", "title": "수의사 진료", "desc": "정확한 섭취량, 시간 전달"},
+    ]
+
+    for i, step in enumerate(steps):
+        y = 170 + i * 120
+        draw_rounded_rect(draw, (60, y, 1020, y + 100), 12, COLORS["forbidden_card"])
+
+        # 시간 뱃지
+        step_rect = (80, y + 25, 165, y + 60)
+        draw_rounded_rect(draw, step_rect, 17, COLORS["forbidden_badge"])
+        draw_text_centered_in_rect(draw, step_rect, step["step"], font_step, COLORS["white"], label=f"시간{i+1}")
+
+        # 제목/설명
+        draw.text((180, y + 22), step["title"], fill=COLORS["forbidden_title"], font=font_title_card)
+        draw.text((180, y + 58), step["desc"], fill=COLORS["text_gray"], font=font_desc)
+
+    # 긴급 연락처 박스
+    draw_rounded_rect(draw, (60, 680, 1020, 780), 12, COLORS["forbidden_card"])
+    font_emergency = get_font("bold", 24)
+    draw.text((100, 700), "긴급: 가까운 24시간 동물병원 검색", fill=COLORS["forbidden_badge"], font=font_emergency)
+    font_tip = get_font("regular", 18)
+    draw.text((100, 740), "구토 유발은 수의사 지시 없이 하지 마세요", fill=COLORS["text_gray"], font=font_tip)
+
+    img.save(output_path)
+    return output_path
+
+
+def generate_alternative_card(data, output_path):
+    """06번: 대체 간식 카드 (FORBIDDEN)"""
+    img = Image.new("RGB", (1080, 1080), COLORS["cream"])
+    draw = ImageDraw.Draw(img)
+
+    # 헤더 그라데이션 (초록 계열 - 긍정적 대안)
+    draw_gradient(draw, (0, 0, 1080, 130), COLORS["mint_start"], COLORS["mint_end"])
+
+    font_title = get_font("bold", 48)
+    font_subtitle = get_font("regular", 22)
+    font_badge = get_font("bold", 18)
+
+    # 제목
+    title = "대체 간식 추천"
+    tx, ty = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((tx, ty), title, fill=COLORS["white"], font=font_title)
+
+    # 부제
+    subtitle = f"{data['korean']} 대신 안전한 간식"
+    sx, sy = verify_center_alignment(draw, subtitle, font_subtitle, 540, 117, label="부제목")
+    draw.text((sx, sy), subtitle, fill=COLORS["white"], font=font_subtitle)
+
+    # SAFE 배지
+    badge_text = "SAFE 대안"
+    draw_right_aligned_badge(draw, 990, 65, badge_text, font_badge, COLORS["safe_green"], label="SAFE뱃지")
+
+    # 대체 간식 카드들
+    font_title_card = get_font("bold", 28)
+    font_desc = get_font("regular", 18)
+    font_num = get_font("bold", 22)
+
+    alternatives = [
+        {"name": "당근", "desc": "비타민A, 저칼로리, 치아 건강"},
+        {"name": "사과", "desc": "비타민C, 식이섬유, 씨 제거 후 급여"},
+        {"name": "삶은 고구마", "desc": "식이섬유, 베타카로틴, 소량씩"},
+        {"name": "오이", "desc": "수분 보충, 저칼로리, 시원한 간식"},
+        {"name": "삶은 닭가슴살", "desc": "단백질, 무염, 양념 없이"},
+    ]
+
+    for i, item in enumerate(alternatives):
+        y = 160 + i * 100
+        draw_rounded_rect(draw, (60, y, 1020, y + 85), 12, COLORS["card_green"])
+
+        # 번호 원
+        draw.ellipse([80, y + 22, 130, y + 62], fill=COLORS["safe_green"])
+        nx, ny = verify_center_alignment(draw, str(i + 1), font_num, 105, y + 42, label=f"번호{i+1}")
+        draw.text((nx, ny), str(i + 1), fill=COLORS["white"], font=font_num)
+
+        # 이름/설명
+        draw.text((150, y + 18), item["name"], fill=COLORS["text_dark"], font=font_title_card)
+        draw.text((150, y + 50), item["desc"], fill=COLORS["text_gray"], font=font_desc)
+
+    # 하단 TIP
+    draw_rounded_rect(draw, (60, 680, 1020, 760), 12, COLORS["card_yellow"])
+    font_tip_title = get_font("bold", 22)
+    font_tip = get_font("regular", 18)
+    draw.text((100, 700), "TIP: 새 간식은 소량부터 시작, 반응 관찰 후 급여량 조절", fill=COLORS["badge_orange"], font=font_tip_title)
+
+    img.save(output_path)
+    return output_path
+
+
+def generate_warning_card(data, output_path):
+    """07번: 최종 경고 카드 (FORBIDDEN)"""
+    img = Image.new("RGB", (1080, 1080), COLORS["cream"])
+    draw = ImageDraw.Draw(img)
+
+    # 헤더 그라데이션 (빨강)
+    draw_gradient(draw, (0, 0, 1080, 130), COLORS["forbidden_start"], COLORS["forbidden_end"])
+
+    font_title = get_font("bold", 48)
+    font_subtitle = get_font("regular", 22)
+    font_badge = get_font("bold", 18)
+
+    # 제목
+    title = "최종 경고"
+    tx, ty = verify_center_alignment(draw, title, font_title, 540, 73, label="제목")
+    draw.text((tx, ty), title, fill=COLORS["white"], font=font_title)
+
+    # 부제
+    subtitle = f"{data['korean']}은 강아지에게 절대 금지 음식입니다"
+    sx, sy = verify_center_alignment(draw, subtitle, font_subtitle, 540, 117, label="부제목")
+    draw.text((sx, sy), subtitle, fill=COLORS["white"], font=font_subtitle)
+
+    # FORBIDDEN 배지
+    badge_text = "FORBIDDEN"
+    draw_right_aligned_badge(draw, 990, 65, badge_text, font_badge, COLORS["forbidden_badge"], label="FORBIDDEN뱃지")
+
+    # 경고 내용
+    font_warning_big = get_font("bold", 36)
+    font_warning = get_font("bold", 24)
+    font_desc = get_font("regular", 20)
+
+    # 큰 경고 박스
+    draw_rounded_rect(draw, (60, 180, 1020, 350), 20, COLORS["forbidden_card"])
+    warning_text = "절대 급여하지 마세요"
+    wx, wy = verify_center_alignment(draw, warning_text, font_warning_big, 540, 230, label="경고문구")
+    draw.text((wx, wy), warning_text, fill=COLORS["forbidden_badge"], font=font_warning_big)
+
+    desc_text = f"{data['korean']}은 강아지에게 독성이 있습니다"
+    dx, dy = verify_center_alignment(draw, desc_text, font_desc, 540, 290, label="설명")
+    draw.text((dx, dy), desc_text, fill=COLORS["text_dark"], font=font_desc)
+
+    # 위험 요약 카드들
+    warnings = [
+        "나트륨, 지방, 인공 조미료 과다",
+        "구토, 설사, 무기력 유발",
+        "심한 경우 응급 상황 가능",
+    ]
+
+    for i, w in enumerate(warnings):
+        y = 380 + i * 70
+        draw_rounded_rect(draw, (60, y, 1020, y + 55), 12, COLORS["forbidden_card"])
+        draw.ellipse([80, y + 12, 110, y + 42], fill=COLORS["forbidden_badge"])
+        font_x = get_font("bold", 18)
+        draw.text((88, y + 15), "X", fill=COLORS["white"], font=font_x)
+        draw.text((130, y + 15), w, fill=COLORS["forbidden_title"], font=font_warning)
+
+    # 응급 연락처 박스
+    draw_rounded_rect(draw, (60, 620, 1020, 750), 20, COLORS["forbidden_card"])
+    font_emergency_title = get_font("bold", 28)
+    font_emergency = get_font("regular", 22)
+
+    draw.text((100, 640), "섭취 시 즉시 동물병원 방문", fill=COLORS["forbidden_badge"], font=font_emergency_title)
+    draw.text((100, 685), "24시간 동물병원 또는 수의사 상담", fill=COLORS["text_dark"], font=font_emergency)
+    draw.text((100, 715), "구토 유발은 수의사 지시 없이 금지", fill=COLORS["text_gray"], font=font_desc)
+
+    # 하단 주석
+    font_footnote = get_font("regular", 16)
+    footnote = "우리 아이를 위해 안전한 간식만 급여해주세요"
+    fx, fy = verify_center_alignment(draw, footnote, font_footnote, 540, 1040, label="하단주석")
+    draw.text((fx, fy), footnote, fill=COLORS["text_light"], font=font_footnote)
+
+    img.save(output_path)
+    return output_path
+
+
 def generate_all_infographics(num: int, dry_run: bool = False):
     """모든 인포그래픽 생성 (3~7번)"""
     with open(FOOD_DATA_PATH, "r", encoding="utf-8") as f:
         food_data = json.load(f)
 
-    num_str = f"{num:03d}"
-    if num_str not in food_data:
+    num_str = f"{num:03d}"  # 폴더 찾기용 (예: "011")
+    data_key = str(num)      # food_data.json 키용 (예: "11")
+
+    if data_key not in food_data:
         print(f"❌ #{num_str} 데이터 없음")
         return None
 
-    data = food_data[num_str]
+    raw_data = food_data[data_key]
 
-    # 폴더 찾기
+    # 키 변환 어댑터: food_data.json 구조 → 스크립트 기대 구조
+    # cooking_steps 변환: title → step
+    cooking_converted = [
+        {"step": item.get("title", ""), "desc": item.get("desc", "")}
+        for item in raw_data.get("cooking_steps", [])
+    ]
+
+    data = {
+        "korean": raw_data.get("name", "음식"),
+        "safety": raw_data.get("safety", "SAFE"),
+        "nutrition": raw_data.get("nutrients", []),
+        "dosage": raw_data.get("dosages", {}),
+        "do": raw_data.get("do_items", []),
+        "dont": raw_data.get("dont_items", []),
+        "caution": raw_data.get("precautions", []),
+        "cooking": cooking_converted,
+        "tip_box": raw_data.get("cooking_tip", ""),
+        # FORBIDDEN 전용 필드
+        "toxicity": raw_data.get("toxicity", []),
+        "symptoms": raw_data.get("symptoms", []),
+        "emergency": raw_data.get("emergency", []),
+        "alternatives": raw_data.get("alternatives", []),
+        "warning": raw_data.get("warning", ""),
+    }
+
+    # 폴더 찾기 (플랫 구조)
     folder = None
-    for status_dir in STATUS_DIRS:
-        status_path = CONTENTS_DIR / status_dir
-        if not status_path.exists():
-            continue
-        for item in status_path.iterdir():
-            if item.is_dir() and item.name.startswith(num_str):
-                folder = item
-                break
-        if folder:
+    # 2026-02-13: contents/ 직접 스캔 (플랫 구조)
+    for item in CONTENTS_DIR.iterdir():
+        if item.is_dir() and item.name.startswith(num_str):
+            folder = item
             break
 
     if not folder:
         print(f"❌ #{num_str} 폴더 없음")
         return None
 
-    blog_dir = folder / "blog"
+    blog_dir = folder / "02_Blog"  # 2026-02-13: 새 구조
     blog_dir.mkdir(exist_ok=True)
 
-    print(f"📊 #{num_str} {data['korean']} 인포그래픽 생성")
+    # 2026-02-13: 폴더명에서 food_en 추출 (PascalCase)
+    food_en = folder.name.split("_")[1] if "_" in folder.name else "Food"
+
+    safety = data.get("safety", "SAFE")
+    print(f"📊 #{num_str} {data['korean']} [{safety}] 인포그래픽 생성")
 
     results = []
 
-    # 3번: 영양정보
-    if data.get("nutrition"):
-        output_3 = blog_dir / "3_영양정보.png"
+    # FORBIDDEN 등급: 별도 슬라이드 세트
+    if safety == "FORBIDDEN":
+        # 04: 독성/위험성 (Toxicity)
+        output_4 = blog_dir / f"{food_en}_Blog_04_Toxicity.png"
         if not dry_run:
-            generate_nutrition_card(data, output_3)
-        print(f"   ✅ 3번 영양정보")
-        results.append(output_3)
-
-    # 4번: 급여가능/불가
-    if data.get("do") or data.get("dont"):
-        output_4 = blog_dir / "4_급여가능불가.png"
-        if not dry_run:
-            generate_do_dont_card(data, output_4)
-        print(f"   ✅ 4번 급여가능불가")
+            generate_toxicity_card(data, output_4)
+        print(f"   ✅ 4번 독성/위험성")
         results.append(output_4)
 
-    # 5번: 급여량표
-    if data.get("dosage"):
-        output_5 = blog_dir / "5_급여량표.png"
+        # 05: 증상 (Symptoms)
+        output_5 = blog_dir / f"{food_en}_Blog_05_Symptoms.png"
         if not dry_run:
-            generate_dosage_card(data, output_5)
-        print(f"   ✅ 5번 급여량표")
+            generate_symptoms_card(data, output_5)
+        print(f"   ✅ 5번 증상")
         results.append(output_5)
 
-    # 6번: 주의사항
-    if data.get("caution"):
-        output_6 = blog_dir / "6_주의사항.png"
+        # 06: 응급처치 (Emergency)
+        output_6 = blog_dir / f"{food_en}_Blog_06_Emergency.png"
         if not dry_run:
-            generate_caution_card(data, output_6)
-        print(f"   ✅ 6번 주의사항")
+            generate_emergency_card(data, output_6)
+        print(f"   ✅ 6번 응급처치")
         results.append(output_6)
 
-    # 7번: 조리방법
-    if data.get("cooking"):
-        output_7 = blog_dir / "7_조리방법.png"
+        # 07: 대체식품 (Alternative)
+        output_7 = blog_dir / f"{food_en}_Blog_07_Alternative.png"
         if not dry_run:
-            generate_cooking_card(data, output_7)
-        print(f"   ✅ 7번 조리방법")
+            generate_alternative_card(data, output_7)
+        print(f"   ✅ 7번 대체식품")
         results.append(output_7)
+
+        # 08: 경고 (Warning)
+        output_8 = blog_dir / f"{food_en}_Blog_08_Warning.png"
+        if not dry_run:
+            generate_warning_card(data, output_8)
+        print(f"   ✅ 8번 경고")
+        results.append(output_8)
+
+    else:
+        # SAFE/CAUTION 등급: 기존 슬라이드 세트
+        # 4번: 영양정보 (PascalCase)
+        if data.get("nutrition"):
+            output_4 = blog_dir / f"{food_en}_Blog_04_Nutrition.png"
+            if not dry_run:
+                generate_nutrition_card(data, output_4)
+            print(f"   ✅ 4번 영양정보")
+            results.append(output_4)
+
+        # 5번: 급여가능/불가 (PascalCase)
+        if data.get("do") or data.get("dont"):
+            output_5 = blog_dir / f"{food_en}_Blog_05_Feeding.png"
+            if not dry_run:
+                generate_do_dont_card(data, output_5)
+            print(f"   ✅ 5번 급여가능불가")
+            results.append(output_5)
+
+        # 6번: 급여량표 (PascalCase)
+        if data.get("dosage"):
+            output_6 = blog_dir / f"{food_en}_Blog_06_Amount.png"
+            if not dry_run:
+                generate_dosage_card(data, output_6)
+            print(f"   ✅ 6번 급여량표")
+            results.append(output_6)
+
+        # 7번: 주의사항 (PascalCase)
+        if data.get("caution"):
+            output_7 = blog_dir / f"{food_en}_Blog_07_Caution.png"
+            if not dry_run:
+                generate_caution_card(data, output_7)
+            print(f"   ✅ 7번 주의사항")
+            results.append(output_7)
+
+        # 8번: 조리방법 (PascalCase)
+        if data.get("cooking"):
+            output_8 = blog_dir / f"{food_en}_Blog_08_Cooking.png"
+            if not dry_run:
+                generate_cooking_card(data, output_8)
+            print(f"   ✅ 8번 조리방법")
+            results.append(output_8)
 
     return results
 
