@@ -1,0 +1,171 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "WO-STRATEGY-MATRIX: 3축 전략 매트릭스",
+    "created": "2026-02-12",
+    "author": "김부장"
+  },
+
+  "axes": {
+    "intent": {
+      "description": "목적 축",
+      "values": {
+        "AUTHORITY": {
+          "label": "정보 전달 / 전문성",
+          "kpi": ["dwell_time", "trust_score"],
+          "emotion": "trust"
+        },
+        "TRUST": {
+          "label": "경고 / 안전",
+          "kpi": ["save_rate", "share_rate"],
+          "emotion": "fear"
+        },
+        "ENGAGEMENT": {
+          "label": "참여 유도",
+          "kpi": ["comment_count", "reaction_rate"],
+          "emotion": "curiosity"
+        },
+        "SAVE": {
+          "label": "저장 유도",
+          "kpi": ["save_rate"],
+          "emotion": "urgency"
+        },
+        "CTA": {
+          "label": "전환 유도",
+          "kpi": ["click_rate", "profile_visit"],
+          "emotion": "curiosity"
+        }
+      }
+    },
+
+    "platform": {
+      "description": "플랫폼 축",
+      "values": {
+        "BLOG": {
+          "label": "네이버 블로그",
+          "characteristics": ["SEO", "dwell_time", "search_traffic"],
+          "max_length": 10000,
+          "image_slots": 8
+        },
+        "INSTA": {
+          "label": "인스타그램",
+          "characteristics": ["save", "share", "visual_first"],
+          "max_length": 2200,
+          "image_slots": 10
+        },
+        "THREAD": {
+          "label": "쓰레드",
+          "characteristics": ["conversation", "viral", "short_text"],
+          "max_length": 500,
+          "image_slots": 1
+        }
+      }
+    },
+
+    "format": {
+      "description": "포맷 축",
+      "values": {
+        "CHECKLIST": {
+          "label": "체크리스트형",
+          "structure": ["intro", "checklist_items", "save_cta"],
+          "markers": ["checkbox", "bullet"]
+        },
+        "WARNING": {
+          "label": "경고 강조형",
+          "structure": ["alert", "danger_detail", "emergency_action"],
+          "markers": ["warning_emoji", "danger_keywords"]
+        },
+        "STORY": {
+          "label": "스토리텔링형",
+          "structure": ["hook", "narrative", "lesson", "cta"],
+          "markers": ["햇살이_voice", "personal_experience"]
+        },
+        "DATA": {
+          "label": "데이터 팩트형",
+          "structure": ["fact", "evidence", "conclusion"],
+          "markers": ["numbers", "citations", "expert_tone"]
+        },
+        "QNA": {
+          "label": "Q&A형",
+          "structure": ["question", "answer", "follow_up"],
+          "markers": ["question_format", "direct_answer"]
+        }
+      }
+    }
+  },
+
+  "matrix": {
+    "BLOG": {
+      "AUTHORITY": {
+        "recommended_format": "DATA",
+        "structure": "문제→과학근거→증상→FAQ",
+        "tone": "expert_friendly"
+      },
+      "TRUST": {
+        "recommended_format": "WARNING",
+        "alt_format": "DATA",
+        "structure": "위험강조→독성메커니즘→응급대처",
+        "tone": "urgent_caring"
+      },
+      "SAVE": {
+        "recommended_format": "CHECKLIST",
+        "structure": "핵심요약→체크리스트→저장CTA",
+        "tone": "practical"
+      },
+      "CTA": {
+        "recommended_format": "STORY",
+        "structure": "후킹→위험강조→행동가이드",
+        "tone": "persuasive"
+      }
+    },
+    "INSTA": {
+      "AUTHORITY": {
+        "recommended_format": "DATA",
+        "structure": "팩트→수치→전문가톤→신뢰",
+        "tone": "confident"
+      },
+      "TRUST": {
+        "recommended_format": "WARNING",
+        "structure": "이거 모르면 위험→증상3→저장",
+        "tone": "urgent"
+      },
+      "ENGAGEMENT": {
+        "recommended_format": "QNA",
+        "structure": "퀴즈형→정답공개→댓글유도",
+        "tone": "playful"
+      },
+      "SAVE": {
+        "recommended_format": "CHECKLIST",
+        "structure": "핵심3가지→저장CTA",
+        "tone": "concise"
+      },
+      "CTA": {
+        "recommended_format": "STORY",
+        "structure": "스와이프→프로필링크",
+        "tone": "inviting"
+      }
+    },
+    "THREAD": {
+      "AUTHORITY": {
+        "recommended_format": "DATA",
+        "structure": "팩트체크형→사실은...",
+        "tone": "myth_buster"
+      },
+      "TRUST": {
+        "recommended_format": "WARNING",
+        "structure": "이거 진짜 위험합니다",
+        "tone": "direct_urgent"
+      },
+      "ENGAGEMENT": {
+        "recommended_format": "QNA",
+        "structure": "이거 먹여도 된다?→논쟁유도",
+        "tone": "provocative"
+      },
+      "SAVE": {
+        "recommended_format": "CHECKLIST",
+        "structure": "짧은 리스트→프로필",
+        "tone": "snappy"
+      }
+    }
+  }
+}

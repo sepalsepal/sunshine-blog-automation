@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "template_id": "INSTA_SAVE_CHECKLIST_v1",
+    "platform": "INSTA",
+    "intent": "SAVE",
+    "format": "CHECKLIST",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["SAFE", "CAUTION"],
+  "tone": "concise",
+  "emotion": "urgency",
+
+  "carousel": {
+    "card_count": 5,
+    "cards": [
+      {
+        "card_num": 1,
+        "type": "title",
+        "content": {
+          "headline": "{topic} 급여 체크리스트",
+          "subtext": "이것만 확인하세요!",
+          "visual": "checklist_cover"
+        }
+      },
+      {
+        "card_num": 2,
+        "type": "checklist_1",
+        "content": {
+          "items": [
+            "[ ] 체크항목 1",
+            "[ ] 체크항목 2",
+            "[ ] 체크항목 3"
+          ],
+          "visual": "checklist_visual"
+        }
+      },
+      {
+        "card_num": 3,
+        "type": "checklist_2",
+        "content": {
+          "items": [
+            "[ ] 체크항목 4",
+            "[ ] 체크항목 5",
+            "[ ] 체크항목 6"
+          ],
+          "visual": "checklist_visual"
+        }
+      },
+      {
+        "card_num": 4,
+        "type": "bonus_tip",
+        "content": {
+          "headline": "보너스 팁!",
+          "tip": "실전 꿀팁 하나",
+          "visual": "bonus_graphic"
+        }
+      },
+      {
+        "card_num": 5,
+        "type": "save_cta",
+        "content": {
+          "headline": "저장해두세요!",
+          "message": "나중에 급여할 때 다시 보세요",
+          "햇살이_voice": "햇살이 엄마도 저장해뒀어요!",
+          "visual": "save_button_graphic",
+          "cta": "🔖 저장"
+        }
+      }
+    ]
+  },
+
+  "caption": {
+    "max_length": 2200,
+    "structure": [
+      "value_hook",
+      "checklist_preview",
+      "save_benefit",
+      "햇살이_voice",
+      "save_cta",
+      "hashtags"
+    ],
+    "hashtag_count": {"min": 15, "max": 25}
+  },
+
+  "tone_markers": {
+    "required": ["~요", "~하세요", "저장"],
+    "emoji": ["✅", "🔖", "📌", "💡"],
+    "forbidden": []
+  },
+
+  "save_cta_variations": [
+    "저장해두면 나중에 유용해요!",
+    "급여 전에 다시 확인하세요!",
+    "저장 = 우리 아이 건강 지킴이!"
+  ]
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Project Sunshine{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --sunshine-yellow: #FFD700;
+            --sunshine-orange: #FFA500;
+            --sunshine-warm: #FFF8DC;
+        }
+
+        body {
+            background-color: var(--sunshine-warm);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--sunshine-yellow), var(--sunshine-orange));
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #333 !important;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-sunshine {
+            background: linear-gradient(135deg, var(--sunshine-yellow), var(--sunshine-orange));
+            border: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .btn-sunshine:hover {
+            background: linear-gradient(135deg, var(--sunshine-orange), #FF8C00);
+            color: #fff;
+        }
+
+        .progress-stage {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .progress-stage.completed {
+            border-left: 4px solid #28a745;
+        }
+
+        .progress-stage.running {
+            border-left: 4px solid var(--sunshine-orange);
+            animation: pulse 1.5s infinite;
+        }
+
+        .progress-stage.pending {
+            border-left: 4px solid #ccc;
+            opacity: 0.6;
+        }
+
+        .progress-stage.failed {
+            border-left: 4px solid #dc3545;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .quality-badge {
+            font-size: 1.2em;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .quality-badge.pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .quality-badge.fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .dog-emoji {
+            font-size: 2em;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="dog-emoji">🐕</span> Project Sunshine
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house"></i> 대시보드</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create"><i class="bi bi-plus-circle"></i> 콘텐츠 제작</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history"><i class="bi bi-clock-history"></i> 제작 이력</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="text-center py-3 text-muted">
+        <small>Project Sunshine v5.0 | 햇살이와 함께하는 반려견 음식 정보</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1080">
+  <title>Project Sunshine - Text Overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Noto Sans KR Local';
+      src: local('Noto Sans KR Black'), local('NotoSansKR-Black');
+      font-weight: 900;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .canvas {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      background: #1a1a2e;
+    }
+
+    /* 배경 이미지 */
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* 그라데이션 오버레이 - 하단 */
+    .gradient-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.6) 30%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    /* 그라데이션 오버레이 - 상단 */
+    .gradient-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.6) 30%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    /* 텍스트 컨테이너 - 기본 */
+    .text-container {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 0 60px;
+      z-index: 10;
+    }
+
+    /* 레이아웃: 하단 */
+    .layout-bottom .text-container {
+      bottom: 120px;
+    }
+
+    /* 레이아웃: 상단 */
+    .layout-top .text-container {
+      top: 120px;
+    }
+
+    /* 레이아웃: 중앙 (기본) */
+    .layout-center .text-container {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* 레이아웃: 커버 (v9 확정 - top 150px) */
+    .layout-cover-top .text-container {
+      top: 150px !important;
+      bottom: auto !important;
+      transform: none !important;
+    }
+
+    /* ============================================
+       고퀄리티 텍스트 효과 - Canva 스타일 "들어올리기"
+       ============================================ */
+
+    .title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: -0.01em;
+    }
+
+    /* 들어올리기 효과 (Lift) - 프리미엄 버전 */
+    .lift-effect {
+      text-shadow:
+        /* 3D 깊이감 - 부드러운 단계 */
+        0 1px 0 rgba(0,0,0,0.15),
+        0 2px 0 rgba(0,0,0,0.13),
+        0 3px 0 rgba(0,0,0,0.11),
+        0 4px 0 rgba(0,0,0,0.09),
+        0 5px 0 rgba(0,0,0,0.07),
+        /* 소프트 글로우 */
+        0 0 1px rgba(255,255,255,0.1),
+        /* 중간 그림자 */
+        0 5px 10px rgba(0,0,0,0.25),
+        0 8px 15px rgba(0,0,0,0.2),
+        /* 바닥 그림자 */
+        0 15px 30px rgba(0,0,0,0.25),
+        0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    /* 강조 효과 (더 강한 그림자) */
+    .lift-strong {
+      text-shadow:
+        0 2px 0 rgba(80,80,80,0.3),
+        0 4px 0 rgba(60,60,60,0.25),
+        0 6px 0 rgba(40,40,40,0.2),
+        0 8px 0 rgba(20,20,20,0.15),
+        0 0 2px rgba(255,255,255,0.15),
+        0 8px 16px rgba(0,0,0,0.35),
+        0 16px 32px rgba(0,0,0,0.25),
+        0 32px 64px rgba(0,0,0,0.15);
+    }
+
+    /* 서브타이틀용 가벼운 효과 */
+    .lift-light {
+      text-shadow:
+        0 1px 2px rgba(0,0,0,0.3),
+        0 4px 8px rgba(0,0,0,0.2),
+        0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    /* ============================================
+       커버 전용 스타일 (v9 확정 - PD 승인)
+       - 폰트: Arial Black 114px
+       - 위치: top: 150px
+       - 언더라인: 없음
+       ============================================ */
+    .style-cover .title {
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 114px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    }
+
+    .style-cover .underline {
+      display: none !important;  /* v9: 언더라인 없음 */
+    }
+
+    .style-cover .subtitle {
+      display: none;  /* 커버에서 서브타이틀 숨김 */
+    }
+
+    /* ============================================
+       CTA 스타일
+       ============================================ */
+    .style-cta .title {
+      font-size: 64px;
+      color: #FFD93D;
+    }
+
+    .style-cta .subtitle {
+      font-size: 40px;
+    }
+
+    /* ============================================
+       위험 음식 스타일 (danger) - 소시지/포도/초콜릿 등
+       ============================================ */
+    .style-danger .title {
+      font-size: 72px;
+      color: #FF6B6B;  /* 코랄/살몬 레드 */
+    }
+
+    .style-danger .subtitle {
+      font-size: 36px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    /* ============================================
+       이모지 스타일링
+       ============================================ */
+    .emoji {
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+      font-style: normal;
+    }
+
+    /* 이모지가 포함된 텍스트의 정렬 보정 */
+    .has-emoji {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas layout-bottom" id="canvas">
+    <div class="background-image" id="bgImage"></div>
+    <div class="gradient-bottom" id="gradient"></div>
+    <div class="text-container" id="textContainer">
+      <div class="title lift-effect" id="title"></div>
+      <div class="underline" id="underline" style="display: none;"></div>
+      <div class="subtitle lift-light" id="subtitle"></div>
+    </div>
+  </div>
+
+  <script>
+    // URL 파라미터 또는 window.CONFIG에서 설정 로드
+    function getConfig() {
+      // Puppeteer에서 주입한 CONFIG 사용
+      if (window.SLIDE_CONFIG) {
+        return window.SLIDE_CONFIG;
+      }
+
+      // URL 파라미터 폴백 (테스트용) - 기본값 비움
+      const params = new URLSearchParams(window.location.search);
+      return {
+        title: params.get('title') || '',
+        subtitle: params.get('subtitle') || '',
+        bgImage: params.get('bgImage') || '',
+        style: params.get('style') || 'content_bottom',
+        titleSize: params.get('titleSize') || null,
+        subtitleSize: params.get('subtitleSize') || null
+      };
+    }
+
+    function applyConfig() {
+      const config = getConfig();
+      const canvas = document.getElementById('canvas');
+      const bgImage = document.getElementById('bgImage');
+      const gradient = document.getElementById('gradient');
+      const textContainer = document.getElementById('textContainer');
+      const title = document.getElementById('title');
+      const subtitle = document.getElementById('subtitle');
+      const underline = document.getElementById('underline');
+
+      // 스타일 적용
+      canvas.className = 'canvas';
+
+      switch (config.style) {
+        case 'cover':
+          canvas.classList.add('layout-cover-top', 'style-cover');
+          gradient.className = '';  // 커버는 그라데이션 없음 또는 약하게
+          gradient.style.display = 'none';
+          underline.style.display = 'block';
+          break;
+        case 'content_top':
+          canvas.classList.add('layout-top');
+          gradient.className = 'gradient-top';
+          break;
+        case 'content_bottom':
+          canvas.classList.add('layout-bottom');
+          gradient.className = 'gradient-bottom';
+          break;
+        case 'cta':
+          canvas.classList.add('layout-bottom', 'style-cta');
+          gradient.className = 'gradient-bottom';
+          break;
+        case 'danger':
+          canvas.classList.add('layout-bottom', 'style-danger');
+          gradient.className = 'gradient-bottom';
+          break;
+        default:
+          canvas.classList.add('layout-bottom');
+          gradient.className = 'gradient-bottom';
+      }
+
+      // 배경 이미지
+      if (config.bgImage) {
+        bgImage.style.backgroundImage = `url('${config.bgImage}')`;
+      }
+
+      // 제목
+      if (config.title) {
+        title.innerHTML = config.title;
+      }
+
+      // 부제목
+      if (config.subtitle) {
+        subtitle.innerHTML = config.subtitle;
+        subtitle.style.opacity = '1';
+      } else {
+        subtitle.style.display = 'none';
+      }
+
+      // 폰트 크기 커스텀
+      if (config.titleSize) {
+        title.style.fontSize = config.titleSize + 'px';
+      }
+      if (config.subtitleSize) {
+        subtitle.style.fontSize = config.subtitleSize + 'px';
+      }
+    }
+
+    // 페이지 로드 시 적용
+    applyConfig();
+  </script>
+</body>
+</html>

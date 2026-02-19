@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sunshine.nightworker</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>cd /Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine && /usr/bin/python3 services/scripts/night_worker.py --source=local</string>
+    </array>
+
+    <!-- 로컬은 23:05 실행 (GitHub보다 5분 늦게) -->
+    <!-- GitHub가 먼저 실행되면 lock으로 스킵됨 -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>23</integer>
+        <key>Minute</key>
+        <integer>5</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/logs/night_worker_stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/logs/night_worker_stderr.log</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>TELEGRAM_BOT_TOKEN</key>
+        <string>8344040306:AAGRwuHyId1DxDKSQ6kGLxmtSpFvZzBAS24</string>
+        <key>TELEGRAM_CHAT_ID</key>
+        <string>5360443525</string>
+        <key>GOOGLE_SHEET_ID</key>
+        <string>199IQPmPsOfydw73Yf3OhjVZJvdK1GnAd8C2hzy-2LcY</string>
+        <key>GOOGLE_CREDENTIALS_PATH</key>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/google-credentials.json</string>
+        <key>CLOUDINARY_CLOUD_NAME</key>
+        <string>ddzbnrfei</string>
+        <key>CLOUDINARY_API_KEY</key>
+        <string>873749328429167</string>
+        <key>CLOUDINARY_API_SECRET</key>
+        <string>EQ_ZtHiD-IEX8pzqKsxlVPndk4E</string>
+    </dict>
+</dict>
+</plist>

@@ -1,0 +1,123 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "2026-02-12",
+    "description": "쓰레드(Threads) 플랫폼 캡션 템플릿 - 텍스트 위주 짧은 형식",
+    "platform": "threads",
+    "max_length": 500,
+    "style": "conversational"
+  },
+
+  "templates": {
+    "SAFE": {
+      "name": "안전 음식 템플릿",
+      "structure": {
+        "hook": "{food_name}, 반려견에게 줘도 될까요?",
+        "verdict": "✅ 안전해요!",
+        "key_point": "{main_benefit} 효과가 있어요.",
+        "tip": "💡 {dosage_tip}",
+        "cta": "자세한 급여량은 프로필 링크에서 확인하세요!"
+      },
+      "example": "🥕 당근, 반려견에게 줘도 될까요?\n\n✅ 안전해요!\n\n베타카로틴이 풍부해서 눈 건강에 좋아요.\n\n💡 소형견 기준 하루 10~20g 정도가 적당해요.\n\n자세한 급여량은 프로필 링크에서 확인하세요!",
+      "hashtags": ["#반려견", "#강아지간식", "#강아지음식", "#펫푸드", "#{food_name_tag}"],
+      "tone": "친근하고 긍정적"
+    },
+
+    "CAUTION": {
+      "name": "주의 음식 템플릿",
+      "structure": {
+        "hook": "{food_name}, 반려견에게 줘도 될까요?",
+        "verdict": "⚠️ 조심해서 급여하세요!",
+        "key_point": "{caution_reason}",
+        "tip": "💡 {safe_feeding_tip}",
+        "cta": "자세한 주의사항은 프로필 링크에서!"
+      },
+      "example": "🍎 사과, 반려견에게 줘도 될까요?\n\n⚠️ 조심해서 급여하세요!\n\n씨앗과 씨방에는 시안화물이 있어서 반드시 제거해야 해요.\n\n💡 껍질 벗기고 씨 제거 후 소량만 급여하세요.\n\n자세한 주의사항은 프로필 링크에서!",
+      "hashtags": ["#반려견", "#강아지음식", "#강아지건강", "#주의음식", "#펫케어"],
+      "tone": "주의를 환기하되 과하지 않게"
+    },
+
+    "FORBIDDEN": {
+      "name": "금지 음식 템플릿",
+      "structure": {
+        "hook": "🚨 {food_name}, 반려견에게 절대 주지 마세요!",
+        "verdict": "❌ 위험해요!",
+        "key_point": "{toxin_name}이 들어있어서 {danger_symptom}을 유발해요.",
+        "emergency": "🆘 섭취 시 즉시 수의사에게 연락하세요!",
+        "cta": "위험 성분 상세 정보 → 프로필 링크"
+      },
+      "example": "🚨 초콜릿, 반려견에게 절대 주지 마세요!\n\n❌ 위험해요!\n\n테오브로민 성분이 심장 독성을 유발해요.\n소량도 위험할 수 있어요!\n\n🆘 섭취 시 즉시 수의사에게 연락하세요!\n\n위험 성분 상세 정보 → 프로필 링크",
+      "hashtags": ["#반려견", "#강아지위험음식", "#펫안전", "#수의사상담", "#응급"],
+      "tone": "경고, 긴급함 강조"
+    }
+  },
+
+  "format_rules": {
+    "length": {
+      "hook": "30자 이내",
+      "verdict": "10자 이내",
+      "key_point": "50자 이내",
+      "tip": "40자 이내",
+      "emergency": "30자 이내",
+      "cta": "30자 이내"
+    },
+    "emoji_usage": {
+      "SAFE": "✅ 💡 🥕 🍠 🥦 등 음식 이모지",
+      "CAUTION": "⚠️ 💡 🔔",
+      "FORBIDDEN": "🚨 ❌ 🆘 ☠️"
+    },
+    "line_breaks": "각 섹션 사이 빈 줄 1개",
+    "hashtag_count": "5개 고정"
+  },
+
+  "series_templates": {
+    "daily_tip": {
+      "name": "오늘의 급여 팁",
+      "format": "💡 오늘의 급여 팁\n\n{tip_content}\n\n#반려견일상 #펫케어팁",
+      "use_case": "시리즈 콘텐츠로 활용"
+    },
+    "myth_buster": {
+      "name": "오해와 진실",
+      "format": "❓ {myth}\n\n✅ 진실: {truth}\n\n#반려견상식 #펫팩트체크",
+      "use_case": "잘못된 정보 바로잡기"
+    },
+    "emergency_reminder": {
+      "name": "응급 상황 대처",
+      "format": "🚨 응급 상황 체크리스트\n\n{emergency_steps}\n\n#펫응급 #수의사상담",
+      "use_case": "FORBIDDEN 음식 섭취 시 대처법"
+    }
+  },
+
+  "platform_specific": {
+    "max_characters": 500,
+    "image_support": true,
+    "link_in_post": false,
+    "reply_threading": true,
+    "best_posting_time": ["07:00-09:00", "12:00-13:00", "19:00-22:00"],
+    "engagement_tips": [
+      "질문형 hook으로 시작",
+      "짧고 읽기 쉽게 작성",
+      "이모지로 가독성 향상",
+      "CTA로 프로필 링크 유도"
+    ]
+  },
+
+  "variable_mapping": {
+    "{food_name}": "음식 한글명 (from food_data.json)",
+    "{food_name_tag}": "해시태그용 음식명 (띄어쓰기 제거)",
+    "{main_benefit}": "주요 효능 (SAFE/CAUTION용)",
+    "{dosage_tip}": "급여량 팁 (소형견 기준)",
+    "{caution_reason}": "주의 이유 (CAUTION용)",
+    "{safe_feeding_tip}": "안전 급여 팁 (CAUTION용)",
+    "{toxin_name}": "독성 물질명 (FORBIDDEN용, from toxicity_mapping.json)",
+    "{danger_symptom}": "위험 증상 (from toxicity_mapping.json)"
+  },
+
+  "generation_rules": {
+    "1_safety_first": "Safety ENUM에 맞는 템플릿만 사용",
+    "2_no_positive_for_forbidden": "FORBIDDEN에 긍정적 표현 금지",
+    "3_toxicity_accuracy": "toxicity_mapping.json 정보와 일치",
+    "4_concise_writing": "500자 이내 유지",
+    "5_emoji_consistency": "Safety별 이모지 규칙 준수"
+  }
+}

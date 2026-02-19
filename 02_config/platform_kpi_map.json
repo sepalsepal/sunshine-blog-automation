@@ -1,0 +1,198 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "플랫폼별 KPI 정의",
+    "purpose": "플랫폼 특성에 맞는 성과 지표 관리",
+    "created": "2026-02-12",
+    "author": "김부장"
+  },
+
+  "platforms": {
+    "blog": {
+      "name": "네이버 블로그",
+      "primary_kpi": "avg_time_on_page",
+      "metrics": {
+        "page_views": {
+          "label": "조회수",
+          "description": "페이지 조회 횟수",
+          "goal": "높을수록 좋음",
+          "unit": "회"
+        },
+        "avg_time_on_page": {
+          "label": "체류시간",
+          "description": "페이지 평균 체류 시간",
+          "goal": "120초+",
+          "goal_value": 120,
+          "unit": "초"
+        },
+        "scroll_depth": {
+          "label": "스크롤 깊이",
+          "description": "페이지 스크롤 비율",
+          "goal": "70%+",
+          "goal_value": 70,
+          "unit": "%"
+        },
+        "bounce_rate": {
+          "label": "이탈률",
+          "description": "바로 이탈한 비율",
+          "goal": "낮을수록 좋음",
+          "goal_value": 40,
+          "inverse": true,
+          "unit": "%"
+        },
+        "search_impressions": {
+          "label": "검색 노출",
+          "description": "검색 결과 노출 횟수",
+          "goal": "SEO 효과 측정",
+          "unit": "회"
+        },
+        "search_clicks": {
+          "label": "검색 클릭",
+          "description": "검색 결과에서 클릭",
+          "goal": "높을수록 좋음",
+          "unit": "회"
+        }
+      },
+      "calculated_metrics": {
+        "search_CTR": {
+          "formula": "search_clicks / search_impressions * 100",
+          "unit": "%"
+        }
+      }
+    },
+
+    "insta": {
+      "name": "인스타그램",
+      "primary_kpi": "save_rate",
+      "metrics": {
+        "impressions": {
+          "label": "노출수",
+          "description": "콘텐츠가 보여진 총 횟수",
+          "goal": "도달 범위 측정",
+          "unit": "회"
+        },
+        "reach": {
+          "label": "도달",
+          "description": "콘텐츠를 본 고유 계정 수",
+          "goal": "높을수록 좋음",
+          "unit": "명"
+        },
+        "saves": {
+          "label": "저장수",
+          "description": "콘텐츠 저장 횟수",
+          "goal": "핵심 KPI",
+          "unit": "회"
+        },
+        "shares": {
+          "label": "공유수",
+          "description": "DM/스토리 공유 횟수",
+          "goal": "확산력 측정",
+          "unit": "회"
+        },
+        "comments": {
+          "label": "댓글수",
+          "description": "댓글 개수",
+          "goal": "참여도 측정",
+          "unit": "개"
+        },
+        "likes": {
+          "label": "좋아요",
+          "description": "좋아요 개수",
+          "goal": "기본 반응",
+          "unit": "개"
+        },
+        "profile_clicks": {
+          "label": "프로필 클릭",
+          "description": "프로필 방문 횟수",
+          "goal": "전환 지표",
+          "unit": "회"
+        },
+        "link_clicks": {
+          "label": "링크 클릭",
+          "description": "바이오 링크 클릭",
+          "goal": "전환 지표",
+          "unit": "회"
+        }
+      },
+      "calculated_metrics": {
+        "save_rate": {
+          "formula": "saves / reach * 100",
+          "goal": "3%+",
+          "goal_value": 3.0,
+          "unit": "%"
+        },
+        "engagement_rate": {
+          "formula": "(saves + comments + shares) / reach * 100",
+          "goal": "5%+",
+          "goal_value": 5.0,
+          "unit": "%"
+        },
+        "CTR": {
+          "formula": "profile_clicks / reach * 100",
+          "unit": "%"
+        }
+      }
+    },
+
+    "thread": {
+      "name": "쓰레드",
+      "primary_kpi": "replies",
+      "metrics": {
+        "impressions": {
+          "label": "노출수",
+          "description": "콘텐츠가 보여진 총 횟수",
+          "goal": "도달 범위",
+          "unit": "회"
+        },
+        "replies": {
+          "label": "답글수",
+          "description": "답글 개수",
+          "goal": "핵심 KPI (대화 유도)",
+          "unit": "개"
+        },
+        "reposts": {
+          "label": "리포스트",
+          "description": "리포스트 횟수",
+          "goal": "확산력",
+          "unit": "회"
+        },
+        "likes": {
+          "label": "좋아요",
+          "description": "좋아요 개수",
+          "goal": "기본 반응",
+          "unit": "개"
+        },
+        "quote_posts": {
+          "label": "인용 게시",
+          "description": "인용 게시물 수",
+          "goal": "논쟁/공감 지표",
+          "unit": "개"
+        }
+      },
+      "calculated_metrics": {
+        "reply_rate": {
+          "formula": "replies / impressions * 100",
+          "unit": "%"
+        },
+        "viral_rate": {
+          "formula": "(reposts + quote_posts) / impressions * 100",
+          "unit": "%"
+        }
+      }
+    }
+  },
+
+  "intent_kpi_priority": {
+    "AUTHORITY": ["avg_time_on_page", "scroll_depth", "search_impressions"],
+    "TRUST": ["saves", "shares", "save_rate"],
+    "ENGAGEMENT": ["comments", "replies", "engagement_rate"],
+    "SAVE": ["saves", "save_rate"],
+    "CTA": ["profile_clicks", "link_clicks", "CTR"]
+  },
+
+  "safety_kpi_focus": {
+    "SAFE": ["engagement_rate", "comments"],
+    "CAUTION": ["saves", "shares"],
+    "FORBIDDEN": ["saves", "shares", "save_rate"]
+  }
+}

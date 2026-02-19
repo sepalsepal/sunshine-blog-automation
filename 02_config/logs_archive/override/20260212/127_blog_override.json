@@ -1,0 +1,21 @@
+{
+  "food_id": 127,
+  "food_name": "대파",
+  "platform": "blog",
+  "auto_score": {
+    "structure": 5,
+    "tone": 3,
+    "accuracy": 5,
+    "naturalness": 5,
+    "total": 18
+  },
+  "auto_result": "FAIL",
+  "auto_fail_reason": "TONE_MISMATCH",
+  "override_by": "김부장",
+  "override_result": "PASS",
+  "override_reason": "톤 알고리즘 오탐 - 경고 마커 '절대', '위험', '금지', '독성' 모두 존재하나 패턴 미인식",
+  "override_evidence": "캡션 내 '절대 급여 금지', '정말 위험', '치명적인 독', '독성 성분' 표현 확인",
+  "timestamp": "2026-02-12T09:30:00",
+  "algorithm_update_required": true,
+  "notes": "§22.17에 따라 톤 검출 패턴 업데이트 권장. 현재 알고리즘은 단순 키워드 카운트(2개 이상)만 체크하나, 복합 표현('절대 급여 금지' 등)을 개별 키워드로 분리 인식하지 못함."
+}

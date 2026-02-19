@@ -1,0 +1,31 @@
+{
+  "content_id": "TEST_002",
+  "food_id": 2,
+  "food_name": "업데이트 테스트",
+  "strategy": {
+    "safety": "SAFE",
+    "intent": "AUTHORITY",
+    "format": "DATA",
+    "emotion_axis": "trust"
+  },
+  "platform": "insta",
+  "post_url": null,
+  "published_at": "2026-02-12T09:49:20.753464",
+  "metrics": {
+    "impressions": 5000,
+    "reach": 4200,
+    "saves": 150,
+    "shares": 45,
+    "comments": 28,
+    "likes": 0,
+    "profile_clicks": 0,
+    "link_clicks": 0
+  },
+  "calculated": {
+    "save_rate": 3.57,
+    "engagement_rate": 5.31,
+    "CTR": 0.0
+  },
+  "measured_at": "2026-02-12T09:49:20.753861",
+  "measurement_count": 1
+}

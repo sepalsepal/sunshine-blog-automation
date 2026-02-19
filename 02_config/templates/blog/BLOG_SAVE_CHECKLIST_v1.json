@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "template_id": "BLOG_SAVE_CHECKLIST_v1",
+    "platform": "BLOG",
+    "intent": "SAVE",
+    "format": "CHECKLIST",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["SAFE", "CAUTION"],
+  "tone": "practical",
+  "emotion": "urgency",
+
+  "structure": {
+    "sections": [
+      {
+        "id": "summary",
+        "label": "핵심 요약",
+        "required": true,
+        "word_range": [80, 150],
+        "elements": ["topic_intro", "value_proposition", "checklist_preview"]
+      },
+      {
+        "id": "checklist",
+        "label": "체크리스트",
+        "required": true,
+        "word_range": [300, 500],
+        "elements": ["checklist_items", "item_descriptions"],
+        "item_count": {"min": 5, "max": 10}
+      },
+      {
+        "id": "tips",
+        "label": "추가 팁",
+        "required": true,
+        "word_range": [150, 250],
+        "elements": ["pro_tips", "common_mistakes", "quick_reference"]
+      },
+      {
+        "id": "save_cta",
+        "label": "저장 유도",
+        "required": true,
+        "word_range": [50, 100],
+        "elements": ["save_benefit", "햇살이_reminder", "bookmark_cta"]
+      }
+    ]
+  },
+
+  "slide_mapping": {
+    "1": {"section": "summary", "image_type": "cover_checklist"},
+    "2": {"section": "summary", "image_type": "food_overview"},
+    "3": {"section": "checklist", "image_type": "checklist_1_3"},
+    "4": {"section": "checklist", "image_type": "checklist_4_6"},
+    "5": {"section": "checklist", "image_type": "checklist_7_10"},
+    "6": {"section": "tips", "image_type": "pro_tips"},
+    "7": {"section": "tips", "image_type": "mistakes"},
+    "8": {"section": "save_cta", "image_type": "햇살이_save_cta"}
+  },
+
+  "checklist_format": {
+    "marker": "checkbox",
+    "style": "actionable",
+    "examples": [
+      "[ ] 급여 전 씨 제거하기",
+      "[ ] 소량으로 테스트하기",
+      "[ ] 익혀서 급여하기"
+    ]
+  },
+
+  "tone_markers": {
+    "required": ["~요", "~하세요", "~해보세요"],
+    "recommended": ["저장", "체크", "확인"],
+    "forbidden": []
+  },
+
+  "seo": {
+    "title_template": "{topic} 급여 체크리스트 - 이것만 확인하세요!",
+    "meta_keywords": ["{topic}", "강아지", "체크리스트", "급여", "확인"],
+    "heading_structure": ["H2", "H2", "H3", "H2"]
+  }
+}

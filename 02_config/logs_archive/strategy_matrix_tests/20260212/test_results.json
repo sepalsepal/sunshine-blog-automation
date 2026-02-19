@@ -1,0 +1,113 @@
+{
+  "work_order": "WO-STRATEGY-MATRIX",
+  "timestamp": "2026-02-12T09:32:36.794470",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "pass_rate": "4/4",
+  "all_pass": true,
+  "results": [
+    {
+      "name": "Safety × Intent 매핑",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "FORBIDDEN+CTA 차단",
+          "passed": true,
+          "details": "IntentSafetyViolationError 정상 발생"
+        },
+        {
+          "name": "FORBIDDEN+ENGAGEMENT 차단",
+          "passed": true,
+          "details": "IntentSafetyViolationError 정상 발생"
+        },
+        {
+          "name": "FORBIDDEN+TRUST 허용",
+          "passed": true,
+          "details": "정상 통과"
+        },
+        {
+          "name": "SAFE+CTA 허용",
+          "passed": true,
+          "details": "정상 통과"
+        }
+      ],
+      "details": "4/4 통과",
+      "error": null
+    },
+    {
+      "name": "FORBIDDEN + TRUST + WARNING",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "생성 상태",
+          "passed": true,
+          "details": "GENERATED 정상"
+        },
+        {
+          "name": "Intent 적용",
+          "passed": true,
+          "details": "TRUST 정상"
+        },
+        {
+          "name": "경고 톤 적용",
+          "passed": true,
+          "details": "경고 키워드 6개 감지"
+        },
+        {
+          "name": "긍정 표현 없음",
+          "passed": true,
+          "details": "FORBIDDEN 콘텐츠에 긍정 표현 없음"
+        }
+      ],
+      "details": "4/4 통과",
+      "error": null
+    },
+    {
+      "name": "템플릿 선택",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "BLOG+TRUST→WARNING",
+          "passed": true,
+          "details": "템플릿: BLOG_TRUST_WARNING_v1"
+        },
+        {
+          "name": "INSTA+ENGAGEMENT→QNA",
+          "passed": true,
+          "details": "템플릿: INSTA_ENGAGEMENT_QNA_v1"
+        },
+        {
+          "name": "INSTA+SAVE→CHECKLIST",
+          "passed": true,
+          "details": "템플릿: INSTA_SAVE_CHECKLIST_v1"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    },
+    {
+      "name": "플랫폼별 렌더링",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "BLOG 렌더링 (SAFE)",
+          "passed": true,
+          "details": "슬라이드 구조 + 햇살이 톤"
+        },
+        {
+          "name": "INSTA 렌더링",
+          "passed": true,
+          "details": "카드/캡션 구조"
+        },
+        {
+          "name": "THREAD 글자수 제한",
+          "passed": true,
+          "details": "59자 (≤500)"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    }
+  ]
+}

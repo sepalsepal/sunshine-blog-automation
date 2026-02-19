@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+
+{% block title %}파이널 승인 - {{ topic | upper }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .preview-header {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+
+    .score-display {
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    .score-pass {
+        color: #28a745;
+    }
+
+    .score-warning {
+        color: #ffc107;
+    }
+
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .image-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .image-card:hover {
+        transform: scale(1.02);
+    }
+
+    .image-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .image-card .badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .caption-box {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        white-space: pre-wrap;
+        font-family: inherit;
+    }
+
+    .approval-section {
+        position: sticky;
+        bottom: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-approve {
+        background: #28a745;
+        color: white;
+        padding: 15px 40px;
+        font-size: 1.2em;
+    }
+
+    .btn-reject {
+        background: #dc3545;
+        color: white;
+        padding: 15px 40px;
+        font-size: 1.2em;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="preview-header text-center">
+    <h1>🎬 파이널 승인 요청</h1>
+    <p class="lead mb-0">{{ topic | upper }} 콘텐츠 미리보기</p>
+</div>
+
+<!-- 요약 정보 -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="small text-muted">콘텐츠</div>
+                <div class="fs-3 fw-bold">{{ topic | upper }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="small text-muted">최종 점수</div>
+                <div class="score-display {{ 'score-pass' if score >= 90 else 'score-warning' }}">
+                    {{ score }}점
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="small text-muted">이미지</div>
+                <div class="fs-3 fw-bold">{{ images | length }}장</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 이미지 미리보기 -->
+<div class="card mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-images"></i> 이미지 미리보기</h5>
+    </div>
+    <div class="card-body">
+        <div class="image-grid">
+            {% for image in images %}
+            <div class="image-card position-relative">
+                <span class="badge bg-dark">{{ loop.index }}/{{ images | length }}</span>
+                <img src="/api/images/{{ topic }}/{{ image }}" alt="Slide {{ loop.index }}"
+                     onclick="showFullImage(this.src)">
+            </div>
+            {% else %}
+            <div class="text-center text-muted p-4">
+                <i class="bi bi-image fs-1"></i>
+                <p>이미지를 불러오는 중...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- 캡션 미리보기 -->
+<div class="card mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-chat-quote"></i> 캡션</h5>
+    </div>
+    <div class="card-body">
+        <div class="caption-box">{{ caption or '캡션 없음' }}</div>
+        {% if hashtags %}
+        <div class="mt-3">
+            <strong>해시태그:</strong>
+            {% for tag in hashtags %}
+            <span class="badge bg-primary me-1">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 품질 점수 상세 -->
+<div class="card mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-clipboard-check"></i> 검수 점수 상세</h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="text-center p-3 rounded {{ 'bg-success text-white' if quality_scores.G1 >= 90 else 'bg-warning' }}">
+                    <div class="small">G1 글검수</div>
+                    <div class="fs-3 fw-bold">{{ quality_scores.G1 or '-' }}점</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center p-3 rounded {{ 'bg-success text-white' if quality_scores.G2 >= 90 else 'bg-warning' }}">
+                    <div class="small">G2 이미지</div>
+                    <div class="fs-3 fw-bold">{{ quality_scores.G2 or '-' }}점</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center p-3 rounded {{ 'bg-success text-white' if quality_scores.G3 >= 90 else 'bg-warning' }}">
+                    <div class="small">G3 합성</div>
+                    <div class="fs-3 fw-bold">{{ quality_scores.G3 or '-' }}점</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 승인 섹션 -->
+<div class="approval-section">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <p class="mb-0">
+                <strong>파이프라인 ID:</strong> <code>{{ pipeline_id }}</code>
+            </p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-approve me-2" onclick="approve()">
+                <i class="bi bi-check-lg"></i> 승인 (게시 진행)
+            </button>
+            <button class="btn btn-reject" onclick="showRejectForm()">
+                <i class="bi bi-pencil"></i> 수정 요청
+            </button>
+        </div>
+    </div>
+
+    <!-- 수정 요청 폼 -->
+    <div id="reject-form" class="mt-3" style="display: none;">
+        <div class="input-group">
+            <textarea id="feedback" class="form-control" rows="2"
+                      placeholder="수정 요청 내용을 입력하세요..."></textarea>
+            <button class="btn btn-danger" onclick="reject()">
+                <i class="bi bi-send"></i> 전송
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 전체 이미지 모달 -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <img id="modalImage" src="" class="w-100">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const pipelineId = "{{ pipeline_id }}";
+
+function showFullImage(src) {
+    document.getElementById('modalImage').src = src;
+    new bootstrap.Modal(document.getElementById('imageModal')).show();
+}
+
+function showRejectForm() {
+    document.getElementById('reject-form').style.display = 'block';
+    document.getElementById('feedback').focus();
+}
+
+async function approve() {
+    if (!confirm('승인하시겠습니까? 게시가 진행됩니다.')) return;
+
+    try {
+        const response = await fetch(`/api/pipeline/${pipelineId}/approve`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pipeline_id: pipelineId,
+                approved: true
+            })
+        });
+
+        if (response.ok) {
+            alert('승인되었습니다! 게시가 진행됩니다.');
+            window.location.href = '/';
+        } else {
+            alert('승인 처리 실패');
+        }
+    } catch (e) {
+        alert('오류: ' + e.message);
+    }
+}
+
+async function reject() {
+    const feedback = document.getElementById('feedback').value.trim();
+    if (!feedback) {
+        alert('수정 요청 내용을 입력해주세요.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/pipeline/${pipelineId}/approve`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pipeline_id: pipelineId,
+                approved: false,
+                feedback: feedback
+            })
+        });
+
+        if (response.ok) {
+            alert('수정 요청이 전송되었습니다.');
+            window.location.href = '/';
+        } else {
+            alert('처리 실패');
+        }
+    } catch (e) {
+        alert('오류: ' + e.message);
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,117 @@
+{
+  "test_name": "GOLDEN_SAMPLE_SPEC",
+  "timestamp": "2026-02-12T10:43:15.047112",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "all_pass": true,
+  "results": [
+    {
+      "name": "해상도",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "WIDTH",
+          "passed": true,
+          "details": "1080px"
+        },
+        {
+          "name": "HEIGHT",
+          "passed": true,
+          "details": "1080px"
+        }
+      ],
+      "details": "2/2"
+    },
+    {
+      "name": "한글 텍스트",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "폰트 크기",
+          "passed": true,
+          "details": "120px"
+        },
+        {
+          "name": "Y 위치",
+          "passed": true,
+          "details": "30px"
+        }
+      ],
+      "details": "2/2"
+    },
+    {
+      "name": "영어 텍스트",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "폰트 크기",
+          "passed": true,
+          "details": "80px"
+        },
+        {
+          "name": "Y 위치",
+          "passed": true,
+          "details": "170px"
+        }
+      ],
+      "details": "2/2"
+    },
+    {
+      "name": "그라데이션",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "높이 비율",
+          "passed": true,
+          "details": "35.0%"
+        },
+        {
+          "name": "알파 시작",
+          "passed": true,
+          "details": "180"
+        }
+      ],
+      "details": "2/2"
+    },
+    {
+      "name": "드롭 쉐도우",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "Offset X",
+          "passed": true,
+          "details": "3px"
+        },
+        {
+          "name": "Offset Y",
+          "passed": true,
+          "details": "3px"
+        },
+        {
+          "name": "Blur",
+          "passed": true,
+          "details": "4px"
+        }
+      ],
+      "details": "3/3"
+    },
+    {
+      "name": "폰트 로드",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "한글 폰트",
+          "passed": true,
+          "details": "size=120"
+        },
+        {
+          "name": "영어 폰트",
+          "passed": true,
+          "details": "size=80"
+        }
+      ],
+      "details": "2/2"
+    }
+  ]
+}

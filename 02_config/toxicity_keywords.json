@@ -1,0 +1,66 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "정보 일치 판정용 핵심 키워드 중앙 관리",
+    "usage": "§22.14.3 정보 일치 판정에 사용",
+    "created_at": "2026-02-12",
+    "created_by": "WO-RULE-SUPPLEMENT-FINAL"
+  },
+  "categories": {
+    "ALLIUM": {
+      "toxin_name": ["알리신", "티오설페이트", "N-프로필 이황화물"],
+      "symptoms": ["용혈성 빈혈", "적혈구 파괴", "산화 스트레스"],
+      "severity": "치명적"
+    },
+    "GRAPE_TOXIN": {
+      "toxin_name": ["타르타르산", "탄닌", "미확인 독소"],
+      "symptoms": ["급성 신부전", "구토", "무기력"],
+      "severity": "치명적"
+    },
+    "THEOBROMINE": {
+      "toxin_name": ["테오브로민", "카페인"],
+      "symptoms": ["심장 부정맥", "경련", "과흥분"],
+      "severity": "치명적"
+    },
+    "CAFFEINE": {
+      "toxin_name": ["카페인", "테오필린"],
+      "symptoms": ["심박수 증가", "떨림", "경련"],
+      "severity": "위험"
+    },
+    "ALCOHOL": {
+      "toxin_name": ["에탄올"],
+      "symptoms": ["중추신경 억제", "저체온증", "호흡 곤란"],
+      "severity": "치명적"
+    },
+    "XYLITOL": {
+      "toxin_name": ["자일리톨"],
+      "symptoms": ["저혈당 쇼크", "간부전", "경련"],
+      "severity": "치명적"
+    },
+    "PERSIN": {
+      "toxin_name": ["퍼신"],
+      "symptoms": ["심근 손상", "호흡 곤란", "구토"],
+      "severity": "위험"
+    },
+    "LACTOSE": {
+      "toxin_name": ["유당"],
+      "symptoms": ["소화 장애", "설사", "복통"],
+      "severity": "주의"
+    },
+    "HIGH_SODIUM_FAT": {
+      "toxin_name": ["나트륨", "포화지방"],
+      "symptoms": ["췌장염", "탈수", "심장 부담"],
+      "severity": "주의"
+    },
+    "SUGAR_ADDITIVES": {
+      "toxin_name": ["과당", "인공 착색료"],
+      "symptoms": ["비만", "당뇨", "충치"],
+      "severity": "주의"
+    },
+    "CITRUS_TOXIN": {
+      "toxin_name": ["푸라노쿠마린", "시트르산", "리모넨"],
+      "symptoms": ["소화 장애", "구토", "피부 자극"],
+      "severity": "주의"
+    }
+  }
+}

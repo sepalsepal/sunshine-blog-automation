@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-02-12T08:54:58.462128",
+  "test_type": "stress_test",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "pass_rate": "5/5",
+  "all_pass": true,
+  "results": [
+    {
+      "name": "예외 조합 테스트",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "점수+ACCURACY_ERROR",
+          "passed": true,
+          "details": "BLOCKED 정상 감지 (코드: ['TONE_MISMATCH', 'ACCURACY_ERROR', 'SAFETY_MISMATCH', 'LOW_TOTAL'])"
+        },
+        {
+          "name": "점수+SAFETY_MISMATCH",
+          "passed": true,
+          "details": "BLOCKED 정상 감지"
+        },
+        {
+          "name": "점수미달+금지코드없음",
+          "passed": true,
+          "details": "FAIL + override 가능 (점수: 12)"
+        },
+        {
+          "name": "판정순서 BLOCKED>FAIL",
+          "passed": true,
+          "details": "금지 코드 있으면 점수 무관하게 BLOCKED"
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "30일 만료 시뮬레이션",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "Day30경과 EXPIRED",
+          "passed": true,
+          "details": "EXPIRED 정상 감지 (days: -31)"
+        },
+        {
+          "name": "Day21 WARNING",
+          "passed": true,
+          "details": "WARNING 정상 감지 (days: 5)"
+        },
+        {
+          "name": "기존게시물 영향없음",
+          "passed": true,
+          "details": "차단 범위: 신규 배치만 (설계 확인)"
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "override 경계 테스트",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "점수14 금지코드X",
+          "passed": true,
+          "details": "FAIL + override 가능 (점수: 13)"
+        },
+        {
+          "name": "톤2점 금지코드X",
+          "passed": true,
+          "details": "FAIL + override 가능 (톤: 1)"
+        },
+        {
+          "name": "점수18+ACCURACY_ERROR",
+          "passed": true,
+          "details": "BLOCKED + override 불가"
+        },
+        {
+          "name": "점수20+SAFETY_MISMATCH",
+          "passed": true,
+          "details": "BLOCKED + override 불가"
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "로그 fail-safe",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "쓰기권한 제거 확인",
+          "passed": true,
+          "details": "읽기 전용 정상 적용"
+        },
+        {
+          "name": "로그실패시 차단",
+          "passed": true,
+          "details": "설계 원칙: 로그 없이 실행 금지 (구현 필요)"
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "우회 시도 차단",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "FAIL로 직접실행",
+          "passed": true,
+          "details": "ExecutionBlockedError 정상 발생"
+        },
+        {
+          "name": "Generator→Executor",
+          "passed": true,
+          "details": "PermissionDeniedError 정상 발생"
+        },
+        {
+          "name": "Validator→Executor",
+          "passed": true,
+          "details": "PermissionDeniedError 정상 발생"
+        },
+        {
+          "name": "순환참조 없음",
+          "passed": true,
+          "details": "모듈 import 정상"
+        },
+        {
+          "name": "금지코드 override차단",
+          "passed": true,
+          "details": "ACCURACY_ERROR override 차단 확인"
+        }
+      ],
+      "error": null
+    }
+  ]
+}

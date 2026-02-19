@@ -1,0 +1,144 @@
+{
+  "system_version": "v2.2",
+  "_metadata": {
+    "version": "2.0",
+    "description": "표지 오버레이 골든 샘플 스펙",
+    "reference": "baguette_up50.png",
+    "confirmed_date": "2026-02-12",
+    "approved_by": "PD 박세준",
+    "locked": true,
+    "modification_requires": "PD 승인",
+    "changelog": {
+      "v1.1": "영어 Y 위치 160→170, 영어 UPPERCASE 적용",
+      "v2.0": "anchor 명시, 폰트 SHA256 검증, Pillow 버전 고정, Golden Regression 테스트",
+      "v2.2": "system_version 분리, golden_hashes.py 신설, anchor 검증 강화"
+    }
+  },
+
+  "resolution": {
+    "width": 1080,
+    "height": 1080,
+    "format": "PNG",
+    "color_mode": "RGBA",
+    "locked": true
+  },
+
+  "korean_text": {
+    "description": "음식명 한글 (윗줄)",
+    "font": "NotoSansCJK-Black.ttc",
+    "font_size": 120,
+    "position_y": 30,
+    "position_x": "center",
+    "anchor": "mt",
+    "color": "#FFFFFF",
+    "opacity": 100,
+    "locked": true
+  },
+
+  "english_text": {
+    "description": "음식명 영어 (아랫줄)",
+    "font": "NotoSansCJK-Black.ttc",
+    "font_size": 80,
+    "position_y": 170,
+    "position_x": "center",
+    "anchor": "mt",
+    "color": "#FFFFFF",
+    "opacity": 100,
+    "text_transform": "uppercase",
+    "locked": true
+  },
+
+  "gradient": {
+    "type": "linear",
+    "direction": "top_to_bottom",
+    "height_percent": 35,
+    "height_px": 378,
+    "alpha_start": 180,
+    "alpha_end": 0,
+    "color": "#000000",
+    "interpolation": "linear",
+    "locked": true
+  },
+
+  "drop_shadow": {
+    "offset_x": 3,
+    "offset_y": 3,
+    "color": "#000000",
+    "alpha": 120,
+    "blur": 4,
+    "locked": true
+  },
+
+  "layer_order": [
+    "1. 배경 이미지 (클린 소스)",
+    "2. 상단 그라데이션 오버레이",
+    "3. 한글 드롭 쉐도우",
+    "4. 한글 텍스트",
+    "5. 영어 드롭 쉐도우",
+    "6. 영어 텍스트"
+  ],
+
+  "input_requirements": {
+    "min_resolution": "1024x1024",
+    "auto_resize": true,
+    "target_size": [1080, 1080],
+    "allowed_formats": ["PNG", "JPG", "WEBP"],
+    "naming_pattern": "{food_id}_{food_name_en}_clean.png"
+  },
+
+  "output": {
+    "path_pattern": "/contents/{상태폴더}/{콘텐츠폴더}/{영어명}_cover.png",
+    "naming_pattern": "{food_name_en}_cover.png",
+    "examples": [
+      "/contents/1_cover_only/035_potato_감자/potato_cover.png",
+      "/contents/2_approved/043_melon_멜론/melon_cover.png"
+    ],
+    "locked": true
+  },
+
+  "validation_checklist": [
+    {"item": "출력 해상도", "expected": "1080x1080"},
+    {"item": "한글 폰트 크기", "expected": "120px"},
+    {"item": "영어 폰트 크기", "expected": "80px"},
+    {"item": "한글 Y 위치", "expected": "30px"},
+    {"item": "영어 Y 위치", "expected": "170px"},
+    {"item": "영어 표기", "expected": "UPPERCASE"},
+    {"item": "그라데이션 높이", "expected": "35%"},
+    {"item": "드롭 쉐도우 offset", "expected": "3px"},
+    {"item": "골든 샘플 육안 비교", "expected": "일치"}
+  ],
+
+  "environment": {
+    "pillow_version": "12.1.0",
+    "font_sha256": {
+      "BlackHanSans-Regular.ttf": "31960809284026681774a8e52dc19ebcad26cf69b0ad9d560f288296fbb52739",
+      "NanumGothic-ExtraBold.ttf": "5c4568e5295a8c52bc30e7efa1ea6d2de43556268ef42daba93540a1ece691ae"
+    },
+    "locked": true
+  },
+
+  "golden_regression": {
+    "min_ssim": 0.995,
+    "max_pixel_diff_percent": 0.5,
+    "log_path": "/logs/cover_regression/YYYYMMDD/",
+    "output_files": ["diff.png", "ssim_score.txt", "validation_report.txt"],
+    "locked": true
+  },
+
+  "golden_sample": {
+    "filename": "baguette_up50.png",
+    "path": "/contents/0_Golden sample/Cover/",
+    "sha256": null
+  },
+
+  "forbidden": [
+    "해상도 변경 (1080x1080 고정)",
+    "폰트 변경 (NotoSansCJK-Black만 허용)",
+    "폰트 크기 변경 (한글 120px, 영어 80px)",
+    "Y 위치 변경 (한글 30, 영어 170)",
+    "그라데이션 파라미터 변경",
+    "드롭 쉐도우 파라미터 변경",
+    "레이어 순서 변경",
+    "소문자 영어 사용 (UPPERCASE만 허용)"
+  ]
+}

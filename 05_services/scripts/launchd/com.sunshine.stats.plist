@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- 작업 식별자 -->
+    <key>Label</key>
+    <string>com.sunshine.stats</string>
+
+    <!-- 설명 -->
+    <key>Comment</key>
+    <string>Project Sunshine - Instagram 통계 자동 수집 (24시간마다)</string>
+
+    <!-- 실행할 프로그램 -->
+    <key>ProgramArguments</key>
+    <array>
+        <!-- Python 경로 (시스템 또는 가상환경) -->
+        <string>/usr/bin/env</string>
+        <string>python3</string>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/services/scripts/stats_collector_daemon.py</string>
+        <string>--notify</string>
+    </array>
+
+    <!-- 작업 디렉토리 -->
+    <key>WorkingDirectory</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+
+    <!-- 스케줄: 매일 오전 9시 -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- 환경변수 -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+    </dict>
+
+    <!-- 표준 출력 로그 -->
+    <key>StandardOutPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/stats/launchd_stdout.log</string>
+
+    <!-- 표준 에러 로그 -->
+    <key>StandardErrorPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/stats/launchd_stderr.log</string>
+
+    <!-- 로그인 시 즉시 실행하지 않음 -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- 부팅 시에도 실행 (로그인 전) - 필요시 true로 변경 -->
+    <key>KeepAlive</key>
+    <false/>
+
+    <!-- 실행 타임아웃 (초) -->
+    <key>TimeOut</key>
+    <integer>300</integer>
+
+    <!-- 리소스 제한 -->
+    <key>SoftResourceLimits</key>
+    <dict>
+        <key>NumberOfFiles</key>
+        <integer>1024</integer>
+    </dict>
+
+    <!-- Nice 값 (우선순위, 높을수록 낮은 우선순위) -->
+    <key>Nice</key>
+    <integer>10</integer>
+</dict>
+</plist>

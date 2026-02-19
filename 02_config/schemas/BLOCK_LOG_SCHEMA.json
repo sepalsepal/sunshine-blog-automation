@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Block Log Schema",
+  "description": "콘텐츠 차단/실패 로그 스키마 - 실패를 자산화하여 반복 방지",
+  "version": "1.0.0",
+  
+  "type": "object",
+  "required": ["blocked", "reason_code", "detected_by", "timestamp"],
+  
+  "properties": {
+    "blocked": {
+      "type": "boolean",
+      "description": "차단 여부",
+      "example": true
+    },
+    
+    "reason_code": {
+      "type": "string",
+      "description": "차단 사유 코드",
+      "enum": [
+        "MISSING_METADATA",
+        "RULE_MISMATCH",
+        "RULE_HASH_MISMATCH",
+        "RULE_VERSION_MISMATCH",
+        "UNSUPPORTED_RULE_VERSION",
+        "PD_NOT_APPROVED",
+        "PD_REJECTED",
+        "INVALID_SAFETY_LEVEL",
+        "INVALID_COLOR_CODE",
+        "FILE_NOT_FOUND",
+        "FOLDER_STRUCTURE_ERROR",
+        "DUPLICATE_CONTENT",
+        "API_ERROR",
+        "UNKNOWN_ERROR"
+      ]
+    },
+    
+    "reason_detail": {
+      "type": "string",
+      "description": "차단 사유 상세 설명",
+      "example": "rule_hash 불일치: 기대값 1b1c6f1a, 실제값 9x8y7z6w"
+    },
+    
+    "food_id": {
+      "type": "string",
+      "description": "콘텐츠 식별자",
+      "example": "celery"
+    },
+    
+    "rule_name": {
+      "type": "string",
+      "description": "적용된 규칙 이름",
+      "example": "cover_v1"
+    },
+    
+    "rule_version": {
+      "type": "string",
+      "description": "적용된 규칙 버전",
+      "example": "1.0.0"
+    },
+    
+    "detected_by": {
+      "type": "string",
+      "description": "차단을 감지한 모듈",
+      "enum": [
+        "pre_check",
+        "cover_verifier",
+        "body_verifier",
+        "folder_cleaner",
+        "publish_gate",
+        "pd_approval",
+        "instagram_api",
+        "manual"
+      ]
+    },
+    
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "차단 발생 시각",
+      "example": "2026-02-03T14:22:00"
+    },
+    
+    "recovery_action": {
+      "type": "string",
+      "description": "복구 조치",
+      "enum": [
+        "auto_retry",
+        "regenerate",
+        "manual_fix",
+        "skip",
+        "none"
+      ]
+    },
+    
+    "recovery_status": {
+      "type": "string",
+      "description": "복구 상태",
+      "enum": [
+        "pending",
+        "in_progress",
+        "resolved",
+        "failed",
+        "skipped"
+      ]
+    },
+    
+    "retry_count": {
+      "type": "integer",
+      "description": "재시도 횟수",
+      "minimum": 0,
+      "maximum": 3,
+      "example": 1
+    }
+  },
+  
+  "examples": [
+    {
+      "blocked": true,
+      "reason_code": "RULE_MISMATCH",
+      "reason_detail": "생성 규칙 cover_v1, 검증 규칙 cover_v2 불일치",
+      "food_id": "celery",
+      "rule_name": "cover_v1",
+      "rule_version": "1.0.0",
+      "detected_by": "cover_verifier",
+      "timestamp": "2026-02-03T14:22:00",
+      "recovery_action": "regenerate",
+      "recovery_status": "pending",
+      "retry_count": 0
+    },
+    {
+      "blocked": true,
+      "reason_code": "PD_NOT_APPROVED",
+      "reason_detail": "PD 승인 없이 게시 시도",
+      "food_id": "spinach",
+      "rule_name": "cover_v1",
+      "rule_version": "1.0.0",
+      "detected_by": "publish_gate",
+      "timestamp": "2026-02-03T15:30:00",
+      "recovery_action": "none",
+      "recovery_status": "pending",
+      "retry_count": 0
+    },
+    {
+      "blocked": true,
+      "reason_code": "MISSING_METADATA",
+      "reason_detail": "rule_hash 필드 누락",
+      "food_id": "almond",
+      "rule_name": null,
+      "rule_version": null,
+      "detected_by": "pre_check",
+      "timestamp": "2026-02-03T16:00:00",
+      "recovery_action": "regenerate",
+      "recovery_status": "resolved",
+      "retry_count": 1
+    }
+  ],
+  
+  "reason_code_descriptions": {
+    "MISSING_METADATA": "필수 메타데이터 필드 누락 (rule_name, rule_hash 등)",
+    "RULE_MISMATCH": "생성 규칙과 검증 규칙 불일치",
+    "RULE_HASH_MISMATCH": "규칙 파일 해시 불일치 (규칙 변조 의심)",
+    "RULE_VERSION_MISMATCH": "규칙 버전 불일치",
+    "UNSUPPORTED_RULE_VERSION": "지원하지 않는 규칙 버전",
+    "PD_NOT_APPROVED": "PD 승인 없이 게시 시도",
+    "PD_REJECTED": "PD가 콘텐츠 반려",
+    "INVALID_SAFETY_LEVEL": "잘못된 안전 등급 (SAFE/CAUTION/DANGER 외)",
+    "INVALID_COLOR_CODE": "안전 등급과 색상 코드 불일치",
+    "FILE_NOT_FOUND": "필수 파일 누락",
+    "FOLDER_STRUCTURE_ERROR": "폴더 구조 오류 (파이널 4장 아님)",
+    "DUPLICATE_CONTENT": "중복 콘텐츠 감지",
+    "API_ERROR": "외부 API 오류 (Instagram, Flux 등)",
+    "UNKNOWN_ERROR": "분류되지 않은 오류"
+  }
+}

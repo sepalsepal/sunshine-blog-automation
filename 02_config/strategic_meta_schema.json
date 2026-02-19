@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Strategic Meta Schema",
+  "description": "WO-STRATEGY-MATRIX: 콘텐츠 전략 메타데이터 스키마 v1",
+  "type": "object",
+  "required": ["content_id", "topic", "category", "safety", "strategic_meta", "platform_config"],
+  "properties": {
+    "content_id": {
+      "type": "string",
+      "description": "콘텐츠 고유 ID (예: ALLIUM_127)",
+      "pattern": "^[A-Z]+_[0-9]+$"
+    },
+    "topic": {
+      "type": "string",
+      "description": "주제명 (예: 대파)"
+    },
+    "category": {
+      "type": "string",
+      "description": "독성 카테고리",
+      "enum": ["ALLIUM", "XYLITOL", "THEOBROMINE", "GRAPE", "MACADAMIA", "ALCOHOL", "CAFFEINE", "AVOCADO", "NIGHTSHADE", "BONE", "SALT", "SAFE", "CAUTION_GENERAL"]
+    },
+    "safety": {
+      "type": "string",
+      "description": "안전 등급",
+      "enum": ["SAFE", "CAUTION", "FORBIDDEN"]
+    },
+    "strategic_meta": {
+      "type": "object",
+      "required": ["intent", "primary_goal", "emotion_axis", "risk_level"],
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "콘텐츠 목적",
+          "enum": ["AUTHORITY", "TRUST", "ENGAGEMENT", "SAVE", "CTA"]
+        },
+        "primary_goal": {
+          "type": "string",
+          "description": "핵심 KPI 목표",
+          "enum": ["dwell_time", "save", "share", "comment", "click", "profile_visit"]
+        },
+        "emotion_axis": {
+          "type": "string",
+          "description": "감정 축",
+          "enum": ["trust", "fear", "curiosity", "urgency", "relief"]
+        },
+        "risk_level": {
+          "type": "string",
+          "description": "리스크 수준",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "experiment_flag": {
+          "type": "boolean",
+          "description": "실험 모드 여부",
+          "default": false
+        }
+      }
+    },
+    "platform_config": {
+      "type": "object",
+      "properties": {
+        "blog": {
+          "$ref": "#/definitions/platformEntry"
+        },
+        "insta": {
+          "$ref": "#/definitions/platformEntry"
+        },
+        "thread": {
+          "$ref": "#/definitions/platformEntry"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "platformEntry": {
+      "type": "object",
+      "required": ["format", "template_id"],
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": ["CHECKLIST", "WARNING", "STORY", "DATA", "QNA"]
+        },
+        "template_id": {
+          "type": "string",
+          "pattern": "^(BLOG|INSTA|THREAD)_[A-Z]+_[A-Z]+_v[0-9]+$"
+        },
+        "override": {
+          "type": "object",
+          "description": "플랫폼별 오버라이드 설정"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sunshine.scheduler</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/services/scripts/auto_scheduler.py</string>
+        <string>run</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+
+    <!-- 07:00 KST (UTC+9 = 22:00 UTC 전날) -->
+    <!-- 19:00 KST (UTC+9 = 10:00 UTC) -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <!-- 07:00 KST 게시 -->
+        <dict>
+            <key>Hour</key>
+            <integer>7</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <!-- 19:00 KST 게시 -->
+        <dict>
+            <key>Hour</key>
+            <integer>19</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/scheduler_stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/scheduler_stderr.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

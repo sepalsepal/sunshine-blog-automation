@@ -1,0 +1,27 @@
+{
+  "content_id": "FOOD_999",
+  "food_id": 999,
+  "food_name": "Executor 테스트",
+  "strategy": {
+    "safety": "SAFE",
+    "intent": "AUTHORITY",
+    "format": "DATA",
+    "emotion_axis": "trust"
+  },
+  "platform": "insta",
+  "post_url": null,
+  "published_at": "2026-02-12T09:49:20.757668",
+  "metrics": {
+    "impressions": 0,
+    "reach": 0,
+    "saves": 0,
+    "shares": 0,
+    "comments": 0,
+    "likes": 0,
+    "profile_clicks": 0,
+    "link_clicks": 0
+  },
+  "calculated": {},
+  "measured_at": null,
+  "measurement_count": 0
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://claude.ai/schemas/mcp.json",
+  "mcpServers": {
+    "cloudinary": {
+      "command": "npx",
+      "args": ["@felores/cloudinary-mcp-server@latest"],
+      "env": {
+        "CLOUDINARY_CLOUD_NAME": "ddzbnrfei",
+        "CLOUDINARY_API_KEY": "873749328429167",
+        "CLOUDINARY_API_SECRET": "${CLOUDINARY_API_SECRET}"
+      },
+      "description": "이미지 업로드, 변환, 태깅 자동화"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["puppeteer-mcp-claude"],
+      "description": "브라우저 자동화, 스크린샷, 텍스트 오버레이 렌더링"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-playwright"],
+      "description": "브라우저 테스트 (Puppeteer 백업)"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem"],
+      "env": {
+        "ALLOWED_PATHS": "/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine"
+      },
+      "description": "로컬 파일 시스템 접근"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub 연동 (PR, Issues, 코드 리뷰)"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-sequential-thinking"],
+      "description": "복잡한 문제 단계별 해결"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-memory"],
+      "description": "대화/컨텍스트 장기 유지"
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-youtube-transcript"],
+      "description": "YouTube 자막 추출 (음식 안전성 리서치)"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "description": "최신 라이브러리 문서 자동 주입"
+    },
+    "rube": {
+      "transport": "http",
+      "url": "https://rube.app/mcp",
+      "scope": "user",
+      "description": "500+ 앱 통합 (Gmail, Calendar 등)"
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["@anthropic-ai/mcp-server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}"
+      },
+      "description": "Slack 메시지/PD 승인 요청"
+    },
+    "fal-ai": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-fal-ai"],
+      "env": {
+        "FAL_KEY": "${FAL_KEY}"
+      },
+      "description": "AI 이미지 생성 (FLUX.2 Pro)"
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "웹 검색 (음식 안전성 팩트체크)"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-fetch"],
+      "description": "HTTP 요청 (Instagram API 테스트)"
+    },
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-time"],
+      "description": "시간/타임존 (게시 시간 계산)"
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-sqlite", "--db-path", "./data/local.db"],
+      "description": "SQLite 데이터베이스 (게시 이력 확장용)"
+    },
+    "todoist": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-todoist"],
+      "env": {
+        "TODOIST_API_TOKEN": "${TODOIST_API_TOKEN}"
+      },
+      "description": "Todoist 할일 관리"
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      },
+      "description": "Notion 콘텐츠 캘린더"
+    },
+    "google-sheets": {
+      "command": "npx",
+      "args": ["-y", "mcp-google-sheets"],
+      "env": {
+        "GOOGLE_CREDENTIALS_PATH": "${GOOGLE_CREDENTIALS_PATH}",
+        "GOOGLE_SHEETS_ID": "${GOOGLE_SHEETS_ID}"
+      },
+      "description": "Google Sheets 콘텐츠 상태 관리"
+    },
+    "telegram": {
+      "command": "node",
+      "args": ["mcp/servers/telegram.js"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}",
+        "TELEGRAM_CHAT_ID": "${TELEGRAM_CHAT_ID}"
+      },
+      "description": "Telegram 알림 전송"
+    }
+  },
+  "defaultServers": [
+    "cloudinary",
+    "filesystem",
+    "github",
+    "memory",
+    "context7",
+    "fal-ai",
+    "sequential-thinking"
+  ],
+  "autoConnect": true
+}

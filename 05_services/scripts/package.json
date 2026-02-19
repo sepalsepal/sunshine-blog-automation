@@ -1,0 +1,15 @@
+{
+  "name": "project-sunshine-overlay",
+  "version": "1.0.0",
+  "description": "Puppeteer 기반 고퀄리티 텍스트 오버레이 - Project Sunshine",
+  "type": "module",
+  "scripts": {
+    "overlay": "node add_text_overlay_puppeteer.js",
+    "overlay:apple": "node add_text_overlay_puppeteer.js apple",
+    "overlay:banana": "node add_text_overlay_puppeteer.js banana",
+    "overlay:all": "node run_all_overlays.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}

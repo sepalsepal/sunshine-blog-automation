@@ -1,0 +1,31 @@
+{
+  "content_id": "AGG_001",
+  "food_id": 10,
+  "food_name": "음식10",
+  "strategy": {
+    "safety": "SAFE",
+    "intent": "AUTHORITY",
+    "format": "DATA",
+    "emotion_axis": "trust"
+  },
+  "platform": "insta",
+  "post_url": null,
+  "published_at": "2026-02-12T09:49:20.754170",
+  "metrics": {
+    "impressions": 0,
+    "reach": 3000,
+    "saves": 100,
+    "shares": 0,
+    "comments": 0,
+    "likes": 0,
+    "profile_clicks": 0,
+    "link_clicks": 0
+  },
+  "calculated": {
+    "save_rate": 3.33,
+    "engagement_rate": 3.33,
+    "CTR": 0.0
+  },
+  "measured_at": "2026-02-12T09:49:20.754516",
+  "measurement_count": 1
+}

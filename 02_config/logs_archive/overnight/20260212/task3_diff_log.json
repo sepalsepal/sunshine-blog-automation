@@ -1,0 +1,1375 @@
+{
+  "created_at": "2026-02-12T03:50:44.026951",
+  "description": "FORBIDDEN 36건 food_data.json 수정 diff 로그",
+  "total_modified": 36,
+  "items": [
+    {
+      "food_id": "20",
+      "food_name": "프링글스",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.026965"
+    },
+    {
+      "food_id": "22",
+      "food_name": "아보카도",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "퍼신",
+            "benefit": "심근 독성",
+            "value": "함유",
+            "unit": ""
+          },
+          {
+            "name": "지방산",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > PERSIN",
+      "timestamp": "2026-02-12T03:50:44.026970"
+    },
+    {
+      "food_id": "23",
+      "food_name": "콜라",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "탄닌",
+            "benefit": "소화 장애",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > CAFFEINE",
+      "timestamp": "2026-02-12T03:50:44.026973"
+    },
+    {
+      "food_id": "32",
+      "food_name": "우유",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "유당",
+            "benefit": "소화 장애",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "유지방",
+            "benefit": "비만 위험",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > LACTOSE",
+      "timestamp": "2026-02-12T03:50:44.026976"
+    },
+    {
+      "food_id": "51",
+      "food_name": "양파",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026980"
+    },
+    {
+      "food_id": "53",
+      "food_name": "마늘",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026982"
+    },
+    {
+      "food_id": "55",
+      "food_name": "이미지",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "타르타르산",
+            "benefit": "급성 신부전 유발",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "탄닌",
+            "benefit": "소화기 손상",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > GRAPE_TOXIN",
+      "timestamp": "2026-02-12T03:50:44.026984"
+    },
+    {
+      "food_id": "56",
+      "food_name": "건포도",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "타르타르산",
+            "benefit": "급성 신부전 유발",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "탄닌",
+            "benefit": "소화기 손상",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > GRAPE_TOXIN",
+      "timestamp": "2026-02-12T03:50:44.026986"
+    },
+    {
+      "food_id": "57",
+      "food_name": "초콜릿",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "테오브로민",
+            "benefit": "심장 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > THEOBROMINE",
+      "timestamp": "2026-02-12T03:50:44.026988"
+    },
+    {
+      "food_id": "61",
+      "food_name": "양념치킨",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026990"
+    },
+    {
+      "food_id": "65",
+      "food_name": "비빔밥",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026993"
+    },
+    {
+      "food_id": "66",
+      "food_name": "짜장면",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026994"
+    },
+    {
+      "food_id": "70",
+      "food_name": "라면",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.026997"
+    },
+    {
+      "food_id": "74",
+      "food_name": "불고기",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.026999"
+    },
+    {
+      "food_id": "75",
+      "food_name": "케이크",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027003"
+    },
+    {
+      "food_id": "76",
+      "food_name": "도넛",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027005"
+    },
+    {
+      "food_id": "77",
+      "food_name": "아이스크림",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "유당",
+            "benefit": "소화 장애",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "유지방",
+            "benefit": "비만 위험",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > LACTOSE",
+      "timestamp": "2026-02-12T03:50:44.027006"
+    },
+    {
+      "food_id": "78",
+      "food_name": "브라우니",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "테오브로민",
+            "benefit": "심장 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > THEOBROMINE",
+      "timestamp": "2026-02-12T03:50:44.027008"
+    },
+    {
+      "food_id": "85",
+      "food_name": "닭강정",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.027011"
+    },
+    {
+      "food_id": "87",
+      "food_name": "베이컨",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.027015"
+    },
+    {
+      "food_id": "88",
+      "food_name": "버드와이저",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "에탄올",
+            "benefit": "중추신경 억제",
+            "value": "고농도",
+            "unit": "%"
+          },
+          {
+            "name": "아세트알데히드",
+            "benefit": "간 독성",
+            "value": "대사산물",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALCOHOL",
+      "timestamp": "2026-02-12T03:50:44.027016"
+    },
+    {
+      "food_id": "89",
+      "food_name": "카스맥주",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "에탄올",
+            "benefit": "중추신경 억제",
+            "value": "고농도",
+            "unit": "%"
+          },
+          {
+            "name": "아세트알데히드",
+            "benefit": "간 독성",
+            "value": "대사산물",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALCOHOL",
+      "timestamp": "2026-02-12T03:50:44.027018"
+    },
+    {
+      "food_id": "92",
+      "food_name": "도리토스",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.027021"
+    },
+    {
+      "food_id": "93",
+      "food_name": "환타",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027022"
+    },
+    {
+      "food_id": "94",
+      "food_name": "킷캣",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "테오브로민",
+            "benefit": "심장 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > THEOBROMINE",
+      "timestamp": "2026-02-12T03:50:44.027024"
+    },
+    {
+      "food_id": "95",
+      "food_name": "레이즈",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "나트륨",
+            "benefit": "신장/심장 부담",
+            "value": "과다",
+            "unit": "mg"
+          },
+          {
+            "name": "포화지방",
+            "benefit": "췌장염 위험",
+            "value": "고함량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > HIGH_SODIUM_FAT",
+      "timestamp": "2026-02-12T03:50:44.027026"
+    },
+    {
+      "food_id": "96",
+      "food_name": "밀키스",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "유당",
+            "benefit": "소화 장애",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "유지방",
+            "benefit": "비만 위험",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > LACTOSE",
+      "timestamp": "2026-02-12T03:50:44.027028"
+    },
+    {
+      "food_id": "98",
+      "food_name": "피자",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "알리신",
+            "benefit": "적혈구 파괴",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "티오설페이트",
+            "benefit": "용혈성 빈혈 유발",
+            "value": "다량",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALLIUM",
+      "timestamp": "2026-02-12T03:50:44.027031"
+    },
+    {
+      "food_id": "99",
+      "food_name": "리세스",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "테오브로민",
+            "benefit": "심장 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > THEOBROMINE",
+      "timestamp": "2026-02-12T03:50:44.027033"
+    },
+    {
+      "food_id": "101",
+      "food_name": "스키틀즈",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027035"
+    },
+    {
+      "food_id": "102",
+      "food_name": "소주",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "에탄올",
+            "benefit": "중추신경 억제",
+            "value": "고농도",
+            "unit": "%"
+          },
+          {
+            "name": "아세트알데히드",
+            "benefit": "간 독성",
+            "value": "대사산물",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > ALCOHOL",
+      "timestamp": "2026-02-12T03:50:44.027037"
+    },
+    {
+      "food_id": "103",
+      "food_name": "스타벅스커피",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "카페인",
+            "benefit": "신경 독성",
+            "value": "고농도",
+            "unit": ""
+          },
+          {
+            "name": "탄닌",
+            "benefit": "소화 장애",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > CAFFEINE",
+      "timestamp": "2026-02-12T03:50:44.027039"
+    },
+    {
+      "food_id": "104",
+      "food_name": "스타버스트",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027041"
+    },
+    {
+      "food_id": "107",
+      "food_name": "스프라이트",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "과당",
+            "benefit": "비만/당뇨 위험",
+            "value": "고함량",
+            "unit": ""
+          },
+          {
+            "name": "인공 착색료",
+            "benefit": "알레르기 유발 가능",
+            "value": "함유",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > SUGAR_ADDITIVES",
+      "timestamp": "2026-02-12T03:50:44.027043"
+    },
+    {
+      "food_id": "112",
+      "food_name": "자몽",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "푸라노쿠마린",
+            "benefit": "약물 대사 방해",
+            "value": "함유",
+            "unit": ""
+          },
+          {
+            "name": "시트르산",
+            "benefit": "위장 자극",
+            "value": "고농도",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > CITRUS_TOXIN",
+      "timestamp": "2026-02-12T03:50:44.027046"
+    },
+    {
+      "food_id": "113",
+      "food_name": "레몬",
+      "before": {
+        "nutrients": [
+          {
+            "name": "수분",
+            "benefit": "수분 보충",
+            "value": "85",
+            "unit": "%"
+          },
+          {
+            "name": "식이섬유",
+            "benefit": "장 건강",
+            "value": "2",
+            "unit": "g"
+          }
+        ]
+      },
+      "after": {
+        "nutrients": [
+          {
+            "name": "푸라노쿠마린",
+            "benefit": "약물 대사 방해",
+            "value": "함유",
+            "unit": ""
+          },
+          {
+            "name": "시트르산",
+            "benefit": "위장 자극",
+            "value": "고농도",
+            "unit": ""
+          }
+        ]
+      },
+      "source_ref": "toxicity_mapping.json > CITRUS_TOXIN",
+      "timestamp": "2026-02-12T03:50:44.027048"
+    }
+  ]
+}

@@ -1,0 +1,636 @@
+{
+  "total": 104,
+  "by_safety": {
+    "SAFE": 40,
+    "CAUTION": 21,
+    "DANGER": 0,
+    "FORBIDDEN": 23,
+    "UNKNOWN": 20
+  },
+  "folders": [
+    {
+      "name": "033_baguette",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "034_red_bean_bread",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "037_cauliflower",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "038_bean_sprouts",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "039_yogurt",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "040_lotus_root",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "042_oatmeal",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "046_pomegranate",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "047_mackerel",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "048_tofu",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "058_kimchi",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "059_quail_egg",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "063_dried_fish",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "106_white_fish",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "108_chicken_breast",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "110_raspberry",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "111_coconut",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "114_cabbage",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "115_asparagus",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "116_beet",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "117_napa_cabbage",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "118_lettuce",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "121_green_beans",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "124_peas",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "125_dried_pollack",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "129_anchovy",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "130_seaweed",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "131_pollack",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "134_bread",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "135_coconut_oil",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "136_korean_melon",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "137_baguette_바게트",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "138_sweet_bread_소보루빵",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "139_cauliflower_콜리플라워",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "140_yogurt_요거트",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "141_bean_sprouts_콩나물",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "162_potato_salad_감자샐러드",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "167_cheetos_치토스",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "169_green_peas_완두콩",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "171_strawberry_smoothie_딸기스무디",
+      "safety": "SAFE",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "044_almonds",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "045_egg_yolk",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "050_plum",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "062_tteokguk",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "064_kimbap",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "067_udon",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "079_muffin",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "081_waffle",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "082_cereal",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "083_granola",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "086_meatball",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "091_croissant",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "097_perrier",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "100_ritz",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "123_tteok",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "128_squid",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "142_almonds_아몬드",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "144_hotteok_호떡",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "146_kimbap_김밥",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "157_fried_shrimp_새우튀김",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "161_olive_oil_올리브오일",
+      "safety": "CAUTION",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "057_chocolate",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "065_bibimbap",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "070_ramen",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "074_bulgogi",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "075_cake",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "078_brownie",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "080_pancake",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "085_dakgangjeong",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "087_bacon",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "089_cass_beer",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "092_doritos",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "095_lays",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "098_pizza",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "099_reeses",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "101_skittles",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "103_starbucks_coffee",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "104_starburst",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "107_sprite",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "112_grapefruit",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "113_lemon",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "127_green_onion",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "149_pizza_피자",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "150_chocolate_cake_초콜릿케이크",
+      "safety": "FORBIDDEN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "143_raw_egg_날달걀",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "145_seolleongtang_설렁탕",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "147_yakgwa_약과",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "148_chicken_nuggets_치킨너겟",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "151_bossam_보쌈",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "152_hot_cheetos_핫체토스",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "153_sundae_순대",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "154_odeng_어묵",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "155_mandu_만두",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "156_fried_dumplings_군만두",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "158_wasabi_와사비",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "159_soy_sauce_간장",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "160_lamb_chops_양갈비",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "163_fried_egg_계란후라이",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "164_steamed_egg_계란찜",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "165_scrambled_eggs_스크램블에그",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "166_cookies_쿠키",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "168_edamame_에다마메",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "170_pajeon_파전",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    },
+    {
+      "name": "172_samgyetang_삼계탕",
+      "safety": "UNKNOWN",
+      "needs_caption": true,
+      "needs_images": true
+    }
+  ]
+}

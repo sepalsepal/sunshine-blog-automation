@@ -1,0 +1,21 @@
+[WO-NIGHT-001 완료 보고]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+| 항목 | 완료 | 실패 | 재작업 |
+|------|------|------|--------|
+| 캡션 | 1건 | 0건 | 0건 |
+| 블로그 이미지 | 0건 | 1건 | 1건 |
+| 표지 | 0건 | 0건 | 0건 |
+| CTA 이미지 | 0건 | 0건 | 0건 |
+
+총 소요 시간: 0.0시간
+생성 시각: 2026-02-12 23:04:55
+
+실패 목록:
+  - 033_baguette: 이미지 - generate_nutrition_info() got an unexpected keyword argument 'safety'
+  - 033_baguette: 검수 - 이미지 누락: blog_03_nutrition.png
+  - 033_baguette: 검수 - 이미지 누락: blog_04_dodont.png
+  - 033_baguette: 검수 - 이미지 누락: blog_05_dosage.png
+  - 033_baguette: 검수 - 이미지 누락: blog_06_precautions.png
+  - 033_baguette: 검수 - 이미지 누락: blog_07_cooking.png
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

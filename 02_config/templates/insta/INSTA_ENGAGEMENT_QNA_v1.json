@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "template_id": "INSTA_ENGAGEMENT_QNA_v1",
+    "platform": "INSTA",
+    "intent": "ENGAGEMENT",
+    "format": "QNA",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["SAFE", "CAUTION"],
+  "tone": "playful",
+  "emotion": "curiosity",
+
+  "carousel": {
+    "card_count": 6,
+    "cards": [
+      {
+        "card_num": 1,
+        "type": "question",
+        "content": {
+          "headline": "강아지에게 {topic}",
+          "question": "줘도 될까요? ⭕️ ❌",
+          "visual": "quiz_cover",
+          "engagement_hook": "정답은 다음 장에!"
+        }
+      },
+      {
+        "card_num": 2,
+        "type": "reveal",
+        "content": {
+          "answer": "⭕️ / ❌ / 🔺 (조건부)",
+          "explanation": "정답 설명",
+          "visual": "answer_reveal"
+        }
+      },
+      {
+        "card_num": 3,
+        "type": "facts",
+        "content": {
+          "headline": "알아두면 좋은 사실",
+          "facts": ["팩트1", "팩트2", "팩트3"],
+          "visual": "fact_cards"
+        }
+      },
+      {
+        "card_num": 4,
+        "type": "tips",
+        "content": {
+          "headline": "급여 팁",
+          "tips": ["팁1", "팁2"],
+          "visual": "practical_tips"
+        }
+      },
+      {
+        "card_num": 5,
+        "type": "warning",
+        "content": {
+          "headline": "주의사항",
+          "cautions": ["주의1", "주의2"],
+          "visual": "caution_note"
+        }
+      },
+      {
+        "card_num": 6,
+        "type": "comment_cta",
+        "content": {
+          "headline": "여러분은 어떠세요?",
+          "question": "우리 아이도 {topic} 좋아하나요?",
+          "cta": "댓글로 알려주세요!",
+          "visual": "햇살이_curious"
+        }
+      }
+    ]
+  },
+
+  "caption": {
+    "max_length": 2200,
+    "structure": [
+      "quiz_hook",
+      "answer_tease",
+      "engagement_question",
+      "햇살이_voice",
+      "comment_cta",
+      "hashtags"
+    ],
+    "hashtag_count": {"min": 15, "max": 30}
+  },
+
+  "tone_markers": {
+    "required": ["~요?", "~할까요?", "~어떠세요?"],
+    "emoji": ["🤔", "💡", "✨", "🐕"],
+    "forbidden": []
+  },
+
+  "engagement_hooks": [
+    "정답 맞히신 분?",
+    "우리 아이도 좋아하나요?",
+    "댓글로 알려주세요!",
+    "저장하고 나중에 다시 보세요"
+  ]
+}

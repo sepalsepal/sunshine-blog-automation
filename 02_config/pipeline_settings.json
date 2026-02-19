@@ -1,0 +1,16 @@
+{
+  "$comment": "파이프라인 설정 v1.0 - 야간 자동화 안정성",
+  "retry": {
+    "max_retry": 2,
+    "on_exceed": "STOP_AND_REPORT"
+  },
+  "notification": {
+    "on_max_retry": true,
+    "telegram_alert": true
+  },
+  "timeouts": {
+    "image_generation_sec": 120,
+    "text_overlay_sec": 60,
+    "upload_sec": 30
+  }
+}

@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}대시보드 - Project Sunshine{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- 환영 메시지 -->
+    <div class="col-12 mb-4">
+        <div class="card bg-gradient" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+            <div class="card-body text-center py-4">
+                <div class="dog-emoji mb-2">🐕</div>
+                <h2 class="mb-1">Project Sunshine v5.0</h2>
+                <p class="mb-0">햇살이와 함께하는 반려견 음식 정보 자동화</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 빠른 시작 -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-rocket-takeoff"></i> 빠른 시작</h5>
+            </div>
+            <div class="card-body">
+                <a href="/create" class="btn btn-sunshine btn-lg w-100 mb-3">
+                    <i class="bi bi-plus-circle"></i> 새 콘텐츠 제작
+                </a>
+
+                <div class="list-group">
+                    <a href="/create?topic=apple" class="list-group-item list-group-item-action">
+                        <i class="bi bi-apple"></i> 사과 콘텐츠 제작
+                    </a>
+                    <a href="/create?topic=banana" class="list-group-item list-group-item-action">
+                        <i class="bi bi-basket"></i> 바나나 콘텐츠 제작
+                    </a>
+                    <a href="/create?topic=carrot" class="list-group-item list-group-item-action">
+                        <i class="bi bi-carrot"></i> 당근 콘텐츠 제작
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 시스템 상태 -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-speedometer2"></i> 시스템 상태</h5>
+            </div>
+            <div class="card-body">
+                <div id="system-status">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>API 서버</span>
+                        <span id="api-status" class="badge bg-secondary">확인중...</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>에이전트</span>
+                        <span id="agents-count" class="badge bg-secondary">-</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>실행중인 파이프라인</span>
+                        <span id="running-count" class="badge bg-secondary">-</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="small text-muted">
+                    <div><i class="bi bi-clock"></i> 가동 시간: <span id="uptime">-</span></div>
+                    <div><i class="bi bi-tag"></i> 버전: v5.0.0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 최근 파이프라인 -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-clock-history"></i> 최근 제작 이력</h5>
+                <a href="/history" class="btn btn-sm btn-outline-secondary">전체보기</a>
+            </div>
+            <div class="card-body">
+                <div id="recent-pipelines" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>주제</th>
+                                <th>상태</th>
+                                <th>시작 시간</th>
+                                <th>액션</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pipelines-tbody">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">로딩 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 에이전트 소개 -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-people"></i> 제작팀 소개</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3" id="agents-list">
+                    <!-- 에이전트 카드가 여기에 로드됨 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    loadSystemStatus();
+    loadPipelines();
+    loadAgents();
+});
+
+async function loadSystemStatus() {
+    try {
+        const resp = await fetch('/health');
+        const data = await resp.json();
+
+        document.getElementById('api-status').textContent = data.status === 'healthy' ? '정상' : '오류';
+        document.getElementById('api-status').className = 'badge ' + (data.status === 'healthy' ? 'bg-success' : 'bg-danger');
+
+        document.getElementById('agents-count').textContent = data.agents_loaded + '명';
+        document.getElementById('agents-count').className = 'badge bg-info';
+
+        const uptime = Math.floor(data.uptime_seconds);
+        const hours = Math.floor(uptime / 3600);
+        const minutes = Math.floor((uptime % 3600) / 60);
+        document.getElementById('uptime').textContent = `${hours}시간 ${minutes}분`;
+
+    } catch (e) {
+        document.getElementById('api-status').textContent = '연결 실패';
+        document.getElementById('api-status').className = 'badge bg-danger';
+    }
+}
+
+async function loadPipelines() {
+    try {
+        const resp = await fetch('/api/pipelines');
+        const data = await resp.json();
+
+        const tbody = document.getElementById('pipelines-tbody');
+
+        if (data.pipelines.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">제작 이력이 없습니다</td></tr>';
+            document.getElementById('running-count').textContent = '0';
+            return;
+        }
+
+        const running = data.pipelines.filter(p => p.status === 'running').length;
+        document.getElementById('running-count').textContent = running;
+        document.getElementById('running-count').className = 'badge ' + (running > 0 ? 'bg-warning text-dark' : 'bg-success');
+
+        tbody.innerHTML = data.pipelines.slice(0, 5).map(p => `
+            <tr>
+                <td><code>${p.id}</code></td>
+                <td>${p.topic}</td>
+                <td><span class="badge ${getStatusBadge(p.status)}">${getStatusText(p.status)}</span></td>
+                <td>${new Date(p.started_at).toLocaleString('ko-KR')}</td>
+                <td>
+                    <a href="/pipeline/${p.id}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        `).join('');
+
+    } catch (e) {
+        console.error('파이프라인 로드 실패:', e);
+    }
+}
+
+async function loadAgents() {
+    try {
+        const resp = await fetch('/api/agents');
+        const data = await resp.json();
+
+        const div = document.getElementById('agents-list');
+        div.innerHTML = data.agents.map(a => `
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                        <div class="fs-1">${getAgentEmoji(a.role)}</div>
+                        <h6 class="mb-1">${a.name}</h6>
+                        <small class="text-muted">${a.role}</small>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+    } catch (e) {
+        console.error('에이전트 로드 실패:', e);
+    }
+}
+
+function getStatusBadge(status) {
+    return {
+        'pending': 'bg-secondary',
+        'running': 'bg-warning text-dark',
+        'completed': 'bg-success',
+        'failed': 'bg-danger',
+        'awaiting_approval': 'bg-info'
+    }[status] || 'bg-secondary';
+}
+
+function getStatusText(status) {
+    return {
+        'pending': '대기',
+        'running': '실행중',
+        'completed': '완료',
+        'failed': '실패',
+        'awaiting_approval': '승인대기'
+    }[status] || status;
+}
+
+function getAgentEmoji(role) {
+    return {
+        '기획': '📋',
+        '팩트체크': '🔍',
+        '텍스트': '✍️',
+        '이미지': '🎨',
+        '편집': '🖼️',
+        '검수': '✅',
+        '캡션': '💬',
+        '게시': '📤'
+    }[role] || '👤';
+}
+</script>
+{% endblock %}

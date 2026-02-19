@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "WO-STRATEGY-MATRIX: Platform × Format 매핑",
+    "created": "2026-02-12",
+    "author": "김부장"
+  },
+
+  "platform_capabilities": {
+    "BLOG": {
+      "supported_formats": ["CHECKLIST", "WARNING", "STORY", "DATA", "QNA"],
+      "optimal_formats": ["DATA", "STORY"],
+      "max_content_length": 10000,
+      "supports_html": true,
+      "supports_emoji": true,
+      "image_required": true,
+      "seo_optimized": true
+    },
+    "INSTA": {
+      "supported_formats": ["CHECKLIST", "WARNING", "STORY", "DATA", "QNA"],
+      "optimal_formats": ["WARNING", "CHECKLIST"],
+      "max_content_length": 2200,
+      "supports_html": false,
+      "supports_emoji": true,
+      "image_required": true,
+      "carousel_support": true
+    },
+    "THREAD": {
+      "supported_formats": ["WARNING", "DATA", "QNA"],
+      "optimal_formats": ["WARNING", "QNA"],
+      "max_content_length": 500,
+      "supports_html": false,
+      "supports_emoji": true,
+      "image_required": false,
+      "thread_chain": true
+    }
+  },
+
+  "format_templates": {
+    "BLOG": {
+      "DATA": {
+        "template_id": "BLOG_AUTHORITY_DATA_v1",
+        "sections": ["intro", "facts", "evidence", "faq", "conclusion"],
+        "word_range": [1500, 3000]
+      },
+      "WARNING": {
+        "template_id": "BLOG_TRUST_WARNING_v1",
+        "sections": ["alert_header", "danger_explanation", "symptoms", "emergency", "prevention"],
+        "word_range": [1000, 2000]
+      },
+      "CHECKLIST": {
+        "template_id": "BLOG_SAVE_CHECKLIST_v1",
+        "sections": ["summary", "checklist", "tips", "save_cta"],
+        "word_range": [800, 1500]
+      }
+    },
+    "INSTA": {
+      "WARNING": {
+        "template_id": "INSTA_TRUST_WARNING_v1",
+        "cards": 8,
+        "structure": ["hook", "danger", "symptoms", "action", "save_cta"]
+      },
+      "QNA": {
+        "template_id": "INSTA_ENGAGEMENT_QNA_v1",
+        "cards": 6,
+        "structure": ["question", "reveal", "facts", "comment_cta"]
+      },
+      "CHECKLIST": {
+        "template_id": "INSTA_SAVE_CHECKLIST_v1",
+        "cards": 5,
+        "structure": ["title", "items", "bonus_tip", "save_cta"]
+      }
+    },
+    "THREAD": {
+      "WARNING": {
+        "template_id": "THREAD_TRUST_WARNING_v1",
+        "max_chars": 500,
+        "structure": ["hook", "warning", "action"]
+      },
+      "QNA": {
+        "template_id": "THREAD_ENGAGEMENT_QNA_v1",
+        "max_chars": 500,
+        "structure": ["question", "answer", "debate_hook"]
+      }
+    }
+  },
+
+  "intent_format_recommendation": {
+    "AUTHORITY": {
+      "BLOG": "DATA",
+      "INSTA": "DATA",
+      "THREAD": "DATA"
+    },
+    "TRUST": {
+      "BLOG": "WARNING",
+      "INSTA": "WARNING",
+      "THREAD": "WARNING"
+    },
+    "ENGAGEMENT": {
+      "BLOG": "QNA",
+      "INSTA": "QNA",
+      "THREAD": "QNA"
+    },
+    "SAVE": {
+      "BLOG": "CHECKLIST",
+      "INSTA": "CHECKLIST",
+      "THREAD": "CHECKLIST"
+    },
+    "CTA": {
+      "BLOG": "STORY",
+      "INSTA": "STORY",
+      "THREAD": "WARNING"
+    }
+  }
+}

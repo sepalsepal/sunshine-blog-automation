@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sunshine.scheduler.evening</string>
+
+    <key>Comment</key>
+    <string>Project Sunshine - 저녁 게시 스케줄러 (18:30)</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/env</string>
+        <string>python3</string>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/services/scripts/auto_scheduler.py</string>
+        <string>run</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>18</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/scheduler_evening.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/scheduler_evening_err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>TimeOut</key>
+    <integer>600</integer>
+</dict>
+</plist>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sunshine.notion-sync</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/scripts/auto_sync_notion.py</string>
+        <string>--all</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine</string>
+
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/notion_sync.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/al02399300/Desktop/Jun_AI/Dog_Contents/project_sunshine/config/logs/notion_sync_error.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

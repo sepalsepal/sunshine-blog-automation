@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sunshine Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const API_BASE = "http://localhost:5001/api";
+
+        // 상태 배지 컴포넌트
+        function StatusBadge({ status }) {
+            const styles = {
+                "✅ 완료": "bg-green-100 text-green-800 border-green-200",
+                "❌ 실패": "bg-red-100 text-red-800 border-red-200",
+                "🔄 진행중": "bg-blue-100 text-blue-800 border-blue-200 pulse",
+                "🔄 재시도중": "bg-yellow-100 text-yellow-800 border-yellow-200 pulse",
+                "⏸️ 대기": "bg-gray-100 text-gray-600 border-gray-200",
+            };
+            return (
+                <span className={`px-3 py-1 rounded-full text-sm font-medium border ${styles[status] || "bg-gray-100"}`}>
+                    {status}
+                </span>
+            );
+        }
+
+        // 메인 테이블 컴포넌트
+        function RunTable({ run, onRerun }) {
+            if (!run) return <div className="text-gray-500 text-center py-8">데이터 없음</div>;
+
+            return (
+                <div className="bg-white rounded-lg shadow overflow-hidden">
+                    <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                        <div>
+                            <h2 className="text-xl font-bold text-gray-800">{run.content_name}</h2>
+                            <p className="text-sm text-gray-500">
+                                시작: {new Date(run.created_at).toLocaleString('ko-KR')}
+                                {run.completed_at && ` | 완료: ${new Date(run.completed_at).toLocaleString('ko-KR')}`}
+                            </p>
+                        </div>
+                        <span className={`px-4 py-2 rounded-lg text-sm font-bold ${
+                            run.final_status === 'SUCCESS' ? 'bg-green-500 text-white' :
+                            run.final_status === 'FAILED' ? 'bg-red-500 text-white' :
+                            'bg-blue-500 text-white'
+                        }`}>
+                            {run.final_status}
+                        </span>
+                    </div>
+
+                    <table className="w-full">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">노드명</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">담당</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">적용 룰</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">상태</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">실패 원인</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">액션</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            {run.status.map((node, idx) => (
+                                <tr key={idx} className={node.status.includes("실패") ? "bg-red-50" : ""}>
+                                    <td className="px-6 py-4 font-medium text-gray-900">{node.node_name}</td>
+                                    <td className="px-6 py-4 text-gray-600">{node.agent}</td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-wrap gap-1">
+                                            {node.applied_rules.map((rule, i) => (
+                                                <span key={i} className="px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded text-xs">
+                                                    {rule}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <StatusBadge status={node.status} />
+                                        {node.attempts > 0 && (
+                                            <span className="ml-2 text-xs text-gray-500">({node.attempts}회)</span>
+                                        )}
+                                    </td>
+                                    <td className="px-6 py-4 text-red-600 text-sm">
+                                        {node.failed_reason || "-"}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {node.status.includes("실패") && (
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => onRerun(run.id, node.node_name)}
+                                                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+                                                    title="재실행"
+                                                >
+                                                    🔄
+                                                </button>
+                                                <button
+                                                    onClick={() => navigator.clipboard.writeText(node.failed_reason)}
+                                                    className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-sm"
+                                                    title="복사"
+                                                >
+                                                    📋
+                                                </button>
+                                            </div>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {run.log_text && (
+                        <div className="px-6 py-4 bg-gray-50 border-t">
+                            <p className="text-sm text-gray-600">
+                                <span className="font-medium">로그:</span> {run.log_text}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // 히스토리 컴포넌트
+        function History({ runs, onSelect, selectedId }) {
+            return (
+                <div className="bg-white rounded-lg shadow">
+                    <div className="px-4 py-3 border-b border-gray-200">
+                        <h3 className="font-bold text-gray-800">📜 실행 히스토리</h3>
+                    </div>
+                    <div className="max-h-96 overflow-y-auto">
+                        {runs.map(run => (
+                            <div
+                                key={run.id}
+                                onClick={() => onSelect(run)}
+                                className={`px-4 py-3 border-b cursor-pointer hover:bg-gray-50 ${
+                                    selectedId === run.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+                                }`}
+                            >
+                                <div className="flex justify-between items-center">
+                                    <span className="font-medium text-gray-800">{run.content_name}</span>
+                                    <span className={`px-2 py-0.5 rounded text-xs ${
+                                        run.final_status === 'SUCCESS' ? 'bg-green-100 text-green-700' :
+                                        run.final_status === 'FAILED' ? 'bg-red-100 text-red-700' :
+                                        'bg-blue-100 text-blue-700'
+                                    }`}>
+                                        {run.final_status}
+                                    </span>
+                                </div>
+                                <p className="text-xs text-gray-500 mt-1">
+                                    {new Date(run.created_at).toLocaleString('ko-KR')}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // 메인 App
+        function App() {
+            const [currentRun, setCurrentRun] = useState(null);
+            const [allRuns, setAllRuns] = useState([]);
+            const [selectedRun, setSelectedRun] = useState(null);
+            const [lastUpdate, setLastUpdate] = useState(null);
+            const [isPolling, setIsPolling] = useState(true);
+
+            // 데이터 fetch
+            const fetchLatest = async () => {
+                try {
+                    const res = await fetch(`${API_BASE}/runs/latest`);
+                    const data = await res.json();
+                    setCurrentRun(data);
+                    setLastUpdate(new Date());
+                } catch (err) {
+                    console.error("Fetch error:", err);
+                }
+            };
+
+            const fetchAll = async () => {
+                try {
+                    const res = await fetch(`${API_BASE}/runs`);
+                    const data = await res.json();
+                    setAllRuns(data);
+                } catch (err) {
+                    console.error("Fetch error:", err);
+                }
+            };
+
+            // 재실행
+            const handleRerun = async (runId, nodeName) => {
+                try {
+                    await fetch(`${API_BASE}/runs/${runId}/rerun`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ node_name: nodeName })
+                    });
+                    fetchLatest();
+                    fetchAll();
+                } catch (err) {
+                    console.error("Rerun error:", err);
+                }
+            };
+
+            // 5초 폴링
+            useEffect(() => {
+                fetchLatest();
+                fetchAll();
+
+                if (isPolling) {
+                    const interval = setInterval(() => {
+                        fetchLatest();
+                        fetchAll();
+                    }, 5000);
+                    return () => clearInterval(interval);
+                }
+            }, [isPolling]);
+
+            const displayRun = selectedRun || currentRun;
+
+            return (
+                <div className="p-6">
+                    {/* 헤더 */}
+                    <div className="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-800">🌻 Project Sunshine Dashboard</h1>
+                            <p className="text-sm text-gray-500">
+                                마지막 업데이트: {lastUpdate?.toLocaleTimeString('ko-KR') || '-'}
+                                <span className={`ml-2 inline-block w-2 h-2 rounded-full ${isPolling ? 'bg-green-500' : 'bg-gray-400'}`}></span>
+                            </p>
+                        </div>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => setIsPolling(!isPolling)}
+                                className={`px-4 py-2 rounded ${isPolling ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-700'}`}
+                            >
+                                {isPolling ? '⏸️ 폴링 중지' : '▶️ 폴링 시작'}
+                            </button>
+                            <button
+                                onClick={() => { fetchLatest(); fetchAll(); }}
+                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                            >
+                                🔄 새로고침
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* 메인 레이아웃 */}
+                    <div className="grid grid-cols-4 gap-6">
+                        {/* 메인 테이블 (3/4) */}
+                        <div className="col-span-3">
+                            <RunTable run={displayRun} onRerun={handleRerun} />
+                        </div>
+
+                        {/* 히스토리 사이드바 (1/4) */}
+                        <div className="col-span-1">
+                            <History
+                                runs={allRuns}
+                                onSelect={(run) => setSelectedRun(run)}
+                                selectedId={displayRun?.id}
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

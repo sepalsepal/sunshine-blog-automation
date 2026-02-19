@@ -1,0 +1,64 @@
+{
+  "$schema": "./schemas/body_rules.schema.json",
+  "version": "1.0.0",
+  "description": "본문 텍스트 오버레이 규칙 - 분석 금지, 규칙으로만 생성",
+  "rules": {
+    "body_v1": {
+      "name": "body_v1",
+      "description": "표준 본문 규칙 (16:9 선명 + 블러 텍스트 영역)",
+      "source": "render_content.js",
+      "created_at": "2026-02-03",
+      "canvas": {
+        "width": 1080,
+        "height": 1080,
+        "deviceScaleFactor": 2
+      },
+      "layout": {
+        "clear_area_height": 608,
+        "blur_area_height": 472,
+        "blur_strength": "60px",
+        "blur_brightness": 0.75,
+        "dark_overlay": 0.15
+      },
+      "title": {
+        "fontFamily": "Pretendard, -apple-system, sans-serif",
+        "fontSize": 52,
+        "fontWeight": 800,
+        "color": "#FFFFFF",
+        "textShadow": "0 2px 8px rgba(0,0,0,0.6)"
+      },
+      "subtitle": {
+        "fontFamily": "Pretendard, -apple-system, sans-serif",
+        "fontSize": 26,
+        "fontWeight": 500,
+        "color": "#FFFFFF"
+      },
+      "validation": {
+        "required_fields": ["title", "background_image"],
+        "forbidden_analysis": [
+          "pixel_comparison",
+          "similarity_score",
+          "position_inference"
+        ]
+      }
+    }
+  },
+  "metadata_schema": {
+    "rule_name": "string (required)",
+    "rule_hash": "string (required)",
+    "generated_at": "ISO8601 datetime",
+    "input_image": "string (path)",
+    "title_text": "string",
+    "subtitle_text": "string"
+  },
+  "verification": {
+    "method": "metadata_only",
+    "description": "본문도 픽셀 분석하지 않음. 메타데이터만 확인",
+    "checks": [
+      "rule_name 존재",
+      "rule_hash 존재",
+      "input_image 존재"
+    ],
+    "on_mismatch": "DELETE_AND_RECREATE"
+  }
+}

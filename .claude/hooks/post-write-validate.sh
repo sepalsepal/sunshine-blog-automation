@@ -12,6 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
 LOG_DIR="$PROJECT_ROOT/config/logs/validator"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+NOTION_UPDATE_SCRIPT="$PROJECT_ROOT/scripts/notion_update.py"
 
 # 로그 디렉토리 생성
 mkdir -p "$LOG_DIR"
@@ -37,6 +38,26 @@ log_result() {
     echo "---" >> "$LOG_DIR/validator_$TIMESTAMP.log"
 }
 
+# 콘텐츠 번호 추출 함수
+extract_content_num() {
+    local path="$1"
+    # 패턴: /contents/X_folder/NNN_food_name/...
+    echo "$path" | grep -oE '/[0-9]{3}_' | head -1 | tr -d '/_'
+}
+
+# Notion 업데이트 함수 (백그라운드 실행)
+update_notion() {
+    local content_num="$1"
+    local validator_status="$2"
+
+    if [ -z "$content_num" ] || [ ! -f "$NOTION_UPDATE_SCRIPT" ]; then
+        return 0
+    fi
+
+    # 백그라운드에서 Notion 업데이트 (실패해도 무시)
+    python3 "$NOTION_UPDATE_SCRIPT" "$content_num" --validator "$validator_status" --quiet 2>/dev/null &
+}
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 1. 표지 이미지 검증 (blog/01_표지_*.png)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -47,8 +68,11 @@ if [[ "$FILE_PATH" == */blog/01_* && "$FILE_PATH" == *.png ]]; then
     RESULT=$(python3 "$PROJECT_ROOT/.claude/hooks/validators/cover_validator.py" "$FILE_PATH" 2>&1)
     EXIT_CODE=$?
 
+    CONTENT_NUM=$(extract_content_num "$FILE_PATH")
+
     if [ $EXIT_CODE -ne 0 ]; then
         log_result "COVER_VALIDATOR" "FAIL" "$RESULT"
+        update_notion "$CONTENT_NUM" "FAIL"
         echo "" >&2
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
         echo "COVER VALIDATOR FAIL" >&2
@@ -61,6 +85,7 @@ if [[ "$FILE_PATH" == */blog/01_* && "$FILE_PATH" == *.png ]]; then
     fi
 
     log_result "COVER_VALIDATOR" "PASS" "$RESULT"
+    update_notion "$CONTENT_NUM" "PASS"
     echo "[Validator] 표지 검증 PASS" >&2
 fi
 
@@ -72,9 +97,11 @@ if [[ "$FILE_PATH" == */blog/0[3-7]_* && "$FILE_PATH" == *.png ]]; then
 
     RESULT=$(python3 "$PROJECT_ROOT/.claude/hooks/validators/c2_validator.py" "$FILE_PATH" 2>&1)
     EXIT_CODE=$?
+    CONTENT_NUM=$(extract_content_num "$FILE_PATH")
 
     if [ $EXIT_CODE -ne 0 ]; then
         log_result "C2_VALIDATOR" "FAIL" "$RESULT"
+        update_notion "$CONTENT_NUM" "FAIL"
         echo "" >&2
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
         echo "C2 INFOGRAPHIC VALIDATOR FAIL" >&2
@@ -87,6 +114,7 @@ if [[ "$FILE_PATH" == */blog/0[3-7]_* && "$FILE_PATH" == *.png ]]; then
     fi
 
     log_result "C2_VALIDATOR" "PASS" "$RESULT"
+    update_notion "$CONTENT_NUM" "PASS"
     echo "[Validator] C2 인포그래픽 검증 PASS" >&2
 fi
 
@@ -98,9 +126,11 @@ if [[ "$FILE_PATH" == */blog/*본문* || "$FILE_PATH" == */blog/*.txt ]]; then
 
     RESULT=$(python3 "$PROJECT_ROOT/.claude/hooks/validators/body_validator.py" "$FILE_PATH" 2>&1)
     EXIT_CODE=$?
+    CONTENT_NUM=$(extract_content_num "$FILE_PATH")
 
     if [ $EXIT_CODE -ne 0 ]; then
         log_result "BODY_VALIDATOR" "FAIL" "$RESULT"
+        update_notion "$CONTENT_NUM" "FAIL"
         echo "" >&2
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
         echo "BODY VALIDATOR FAIL" >&2
@@ -113,6 +143,7 @@ if [[ "$FILE_PATH" == */blog/*본문* || "$FILE_PATH" == */blog/*.txt ]]; then
     fi
 
     log_result "BODY_VALIDATOR" "PASS" "$RESULT"
+    update_notion "$CONTENT_NUM" "PASS"
     echo "[Validator] 본문 검증 PASS" >&2
 fi
 
@@ -124,9 +155,11 @@ if [[ "$FILE_PATH" == *caption* && "$FILE_PATH" == *.txt ]]; then
 
     RESULT=$(python3 "$PROJECT_ROOT/.claude/hooks/validators/caption_validator.py" "$FILE_PATH" 2>&1)
     EXIT_CODE=$?
+    CONTENT_NUM=$(extract_content_num "$FILE_PATH")
 
     if [ $EXIT_CODE -ne 0 ]; then
         log_result "CAPTION_VALIDATOR" "FAIL" "$RESULT"
+        update_notion "$CONTENT_NUM" "FAIL"
         echo "" >&2
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
         echo "CAPTION VALIDATOR FAIL" >&2
@@ -139,7 +172,23 @@ if [[ "$FILE_PATH" == *caption* && "$FILE_PATH" == *.txt ]]; then
     fi
 
     log_result "CAPTION_VALIDATOR" "PASS" "$RESULT"
+    update_notion "$CONTENT_NUM" "PASS"
     echo "[Validator] 캡션 검증 PASS" >&2
+fi
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 5. 노션 동기화 (insta/, blog/ 폴더 변경 시)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SYNC_SCRIPT="$PROJECT_ROOT/scripts/auto_sync_notion.py"
+
+if [[ "$FILE_PATH" == */insta/* || "$FILE_PATH" == */blog/* ]]; then
+    CONTENT_NUM=$(extract_content_num "$FILE_PATH")
+
+    if [ -n "$CONTENT_NUM" ] && [ -f "$SYNC_SCRIPT" ]; then
+        # 백그라운드에서 노션 동기화 실행
+        python3 "$SYNC_SCRIPT" "$CONTENT_NUM" > /dev/null 2>&1 &
+        echo "[Hook] 노션 동기화 트리거: #$CONTENT_NUM" >&2
+    fi
 fi
 
 # 검증 대상 아닌 파일은 그냥 통과

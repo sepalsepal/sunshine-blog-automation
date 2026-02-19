@@ -1,4 +1,9 @@
 import os
+import sys
+
+# 프로젝트 경로 추가
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "04_pipeline"))
+
 import image_utils
 
 def main():

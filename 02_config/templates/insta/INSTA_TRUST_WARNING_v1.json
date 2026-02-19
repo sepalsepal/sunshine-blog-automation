@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "template_id": "INSTA_TRUST_WARNING_v1",
+    "platform": "INSTA",
+    "intent": "TRUST",
+    "format": "WARNING",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["CAUTION", "FORBIDDEN"],
+  "tone": "urgent",
+  "emotion": "fear",
+
+  "carousel": {
+    "card_count": 8,
+    "cards": [
+      {
+        "card_num": 1,
+        "type": "hook",
+        "content": {
+          "headline": "이거 모르면 위험해요",
+          "subtext": "{topic} 절대 주지 마세요",
+          "visual": "warning_cover"
+        }
+      },
+      {
+        "card_num": 2,
+        "type": "danger",
+        "content": {
+          "headline": "왜 위험할까요?",
+          "bullet_points": ["독성 성분", "영향받는 장기", "위험 수준"],
+          "visual": "toxin_explanation"
+        }
+      },
+      {
+        "card_num": 3,
+        "type": "symptoms_1",
+        "content": {
+          "headline": "초기 증상",
+          "items": ["증상1", "증상2", "증상3"],
+          "visual": "symptom_icons"
+        }
+      },
+      {
+        "card_num": 4,
+        "type": "symptoms_2",
+        "content": {
+          "headline": "심각한 증상",
+          "items": ["증상4", "증상5", "증상6"],
+          "visual": "severe_warning"
+        }
+      },
+      {
+        "card_num": 5,
+        "type": "timeline",
+        "content": {
+          "headline": "증상 발현 시간",
+          "timeline": "섭취 후 N시간 이내",
+          "visual": "timeline_graphic"
+        }
+      },
+      {
+        "card_num": 6,
+        "type": "action",
+        "content": {
+          "headline": "먹었다면?",
+          "steps": ["즉시 병원", "증상 관찰", "금지 사항"],
+          "visual": "emergency_action"
+        }
+      },
+      {
+        "card_num": 7,
+        "type": "prevention",
+        "content": {
+          "headline": "예방법",
+          "tips": ["보관 방법", "대체 음식"],
+          "visual": "prevention_tips"
+        }
+      },
+      {
+        "card_num": 8,
+        "type": "save_cta",
+        "content": {
+          "headline": "저장해두세요!",
+          "햇살이_message": "우리 아이 안전이 최우선이에요",
+          "visual": "햇살이_warning",
+          "cta": "저장 + 공유"
+        }
+      }
+    ]
+  },
+
+  "caption": {
+    "max_length": 2200,
+    "structure": [
+      "hook_line",
+      "danger_summary",
+      "symptom_list",
+      "action_guide",
+      "햇살이_voice",
+      "hashtags"
+    ],
+    "hashtag_count": {"min": 15, "max": 30}
+  },
+
+  "tone_markers": {
+    "required": ["절대", "위험", "금지", "응급"],
+    "emoji": ["🚨", "⚠️", "❌", "🏥"],
+    "forbidden": ["맛있", "영양", "급여 방법"]
+  },
+
+  "validation_rules": [
+    {
+      "rule": "card_count",
+      "check": "cards == 8",
+      "action": "FAIL"
+    },
+    {
+      "rule": "warning_emoji",
+      "check": "contains_warning_emoji",
+      "action": "WARN"
+    }
+  ]
+}

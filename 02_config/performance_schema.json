@@ -1,0 +1,112 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "콘텐츠 성과 측정 스키마",
+    "purpose": "전략 최적화를 위한 KPI 수집",
+    "created": "2026-02-12",
+    "author": "김부장"
+  },
+
+  "record_schema": {
+    "content_id": {
+      "type": "string",
+      "description": "콘텐츠 고유 ID (예: ALLIUM_127)",
+      "required": true
+    },
+    "food_id": {
+      "type": "integer",
+      "description": "음식 ID",
+      "required": true
+    },
+    "food_name": {
+      "type": "string",
+      "description": "음식명",
+      "required": true
+    },
+    "strategy": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "safety": {
+          "type": "string",
+          "enum": ["SAFE", "CAUTION", "FORBIDDEN"]
+        },
+        "intent": {
+          "type": "string",
+          "enum": ["AUTHORITY", "TRUST", "ENGAGEMENT", "SAVE", "CTA"]
+        },
+        "format": {
+          "type": "string",
+          "enum": ["CHECKLIST", "WARNING", "STORY", "DATA", "QNA"]
+        },
+        "emotion_axis": {
+          "type": "string",
+          "enum": ["trust", "fear", "curiosity", "urgency", "relief"]
+        }
+      }
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["blog", "insta", "thread"],
+      "required": true
+    },
+    "post_url": {
+      "type": "string",
+      "description": "게시물 URL",
+      "required": false
+    },
+    "published_at": {
+      "type": "string",
+      "format": "datetime",
+      "required": true
+    },
+    "metrics": {
+      "type": "object",
+      "description": "플랫폼별 원시 지표"
+    },
+    "calculated": {
+      "type": "object",
+      "description": "계산된 파생 지표"
+    },
+    "measured_at": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "measurement_count": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+
+  "example_record": {
+    "content_id": "ALLIUM_127",
+    "food_id": 127,
+    "food_name": "대파",
+    "strategy": {
+      "safety": "FORBIDDEN",
+      "intent": "TRUST",
+      "format": "WARNING",
+      "emotion_axis": "fear"
+    },
+    "platform": "insta",
+    "post_url": "https://instagram.com/p/abc123",
+    "published_at": "2026-02-12T10:00:00",
+    "metrics": {
+      "impressions": 5000,
+      "reach": 4200,
+      "saves": 150,
+      "shares": 45,
+      "comments": 28,
+      "likes": 320,
+      "profile_clicks": 85,
+      "link_clicks": 12
+    },
+    "calculated": {
+      "save_rate": 3.57,
+      "engagement_rate": 5.31,
+      "CTR": 2.02
+    },
+    "measured_at": "2026-02-12T22:00:00",
+    "measurement_count": 3
+  }
+}

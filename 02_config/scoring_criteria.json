@@ -1,0 +1,103 @@
+{
+  "_metadata": {
+    "version": "2.0",
+    "created": "2026-02-12",
+    "description": "콘텐츠 품질 점수 기준 - 김부장(Opus) 판정용 (20점 체계)",
+    "max_score": 20,
+    "pass_threshold": 15,
+    "each_item_min": 3,
+    "baseline_samples": ["#127 대파", "#136 참외"]
+  },
+
+  "scoring_dimensions": {
+    "structure": {
+      "weight": 5,
+      "name_ko": "구조 일치",
+      "description": "골든 샘플과 섹션 수, 순서 일치",
+      "criteria": {
+        "5": "골든 샘플과 섹션 수, 순서 100% 일치",
+        "4": "1개 섹션 순서 차이, 내용 정확",
+        "3": "2개 이하 섹션 차이, 구조 유지",
+        "2": "3개 섹션 차이, 핵심 구조 일부 유지",
+        "1": "구조 대폭 상이",
+        "0": "구조 파괴, 식별 불가"
+      }
+    },
+    "tone": {
+      "weight": 5,
+      "name_ko": "톤앤매너",
+      "description": "'햇살이 엄마' 말투 일관성",
+      "criteria": {
+        "5": "햇살이 엄마 말투 완벽 구현, 친근+전문 밸런스",
+        "4": "전반적 톤 일치, 경미한 어색함 1곳",
+        "3": "톤 유지하나 2-3곳 어색함",
+        "2": "톤 불일치 다수, 일관성 부족",
+        "1": "톤 완전 불일치",
+        "0": "톤 파괴, 기계적 문체"
+      }
+    },
+    "accuracy": {
+      "weight": 5,
+      "name_ko": "정보 정확성",
+      "description": "독성 매핑 테이블과 일치",
+      "criteria": {
+        "5": "toxicity_mapping.json, food_data.json과 100% 일치",
+        "4": "핵심 정보 일치, 세부 표현 차이 1곳",
+        "3": "주요 정보 정확, 부가 정보 경미한 오류",
+        "2": "일부 정보 불일치 (2-3곳)",
+        "1": "주요 정보 오류 다수",
+        "0": "치명적 정보 오류, 안전 위험"
+      }
+    },
+    "naturalness": {
+      "weight": 5,
+      "name_ko": "자연스러움",
+      "description": "어색한 표현 없음",
+      "criteria": {
+        "5": "자연스러운 한국어, 읽기 편함",
+        "4": "대체로 자연스러움, 경미한 어색함 1곳",
+        "3": "읽기 가능하나 어색함 2-3곳",
+        "2": "어색한 표현 다수, 가독성 저하",
+        "1": "부자연스러운 문장 다수",
+        "0": "기계 번역체, 읽기 어려움"
+      }
+    }
+  },
+
+  "pass_conditions": {
+    "total_min": 15,
+    "each_item_min": 3,
+    "description": "총점 ≥15/20 AND 각 항목 ≥3점"
+  },
+
+  "fail_reason_codes": {
+    "STRUCTURE_MISMATCH": "구조 일치 <3",
+    "TONE_MISMATCH": "톤앤매너 <3",
+    "ACCURACY_ERROR": "정보 정확성 <3",
+    "UNNATURAL": "자연스러움 <3",
+    "LOW_TOTAL": "총점 <15"
+  },
+
+  "termination_rules": {
+    "same_item_fail_limit": 2,
+    "same_item_fail_action": "해당 항목 중단, 수동 검토 필요",
+    "consecutive_fail_limit": 3,
+    "consecutive_fail_scope": "동일 안전도",
+    "consecutive_fail_action": "배치 중단"
+  },
+
+  "golden_samples": {
+    "#127": {
+      "name": "대파",
+      "safety": "FORBIDDEN",
+      "expected_score": 20,
+      "reference_path": "contents/1_cover_only/127_green_onion/blog/caption.txt"
+    },
+    "#136": {
+      "name": "참외",
+      "safety": "SAFE",
+      "expected_score": 20,
+      "reference_path": "contents/4_posted/136_chamoe/"
+    }
+  }
+}

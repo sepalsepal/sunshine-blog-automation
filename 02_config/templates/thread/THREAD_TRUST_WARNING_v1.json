@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "template_id": "THREAD_TRUST_WARNING_v1",
+    "platform": "THREAD",
+    "intent": "TRUST",
+    "format": "WARNING",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["CAUTION", "FORBIDDEN"],
+  "tone": "direct_urgent",
+  "emotion": "fear",
+
+  "post": {
+    "max_chars": 500,
+    "structure": [
+      {
+        "id": "hook",
+        "type": "opening",
+        "char_limit": 80,
+        "template": "🚨 {topic} 강아지한테 절대 주지 마세요",
+        "required": true
+      },
+      {
+        "id": "warning",
+        "type": "body",
+        "char_limit": 250,
+        "elements": ["danger_reason", "key_symptoms", "severity"],
+        "required": true
+      },
+      {
+        "id": "action",
+        "type": "closing",
+        "char_limit": 120,
+        "elements": ["immediate_action", "profile_link"],
+        "required": true
+      }
+    ]
+  },
+
+  "templates": {
+    "hook_variations": [
+      "🚨 {topic} 강아지한테 절대 주지 마세요",
+      "⚠️ {topic} 주는 분들 진짜 위험합니다",
+      "❌ 이거 모르고 {topic} 주시면 안돼요"
+    ],
+    "warning_body": [
+      "{toxin_name} 성분이 {organ}에 치명적이에요.",
+      "섭취 후 {time}시간 내 {symptoms} 증상이 나타나요.",
+      "소량도 위험해요. 절대 안 됩니다."
+    ],
+    "action_cta": [
+      "먹었다면 즉시 병원으로!",
+      "더 자세한 정보는 프로필 링크에서",
+      "저장하고 주변에 공유해주세요"
+    ]
+  },
+
+  "tone_markers": {
+    "required": ["절대", "위험", "금지"],
+    "emoji": ["🚨", "⚠️", "❌", "🏥"],
+    "forbidden": ["맛있", "영양", "급여 방법", "권장량"],
+    "voice": "direct_serious"
+  },
+
+  "engagement": {
+    "reply_bait": false,
+    "share_prompt": true,
+    "profile_link": true
+  },
+
+  "validation_rules": [
+    {
+      "rule": "char_limit",
+      "check": "total_chars <= 500",
+      "action": "TRIM"
+    },
+    {
+      "rule": "warning_keyword",
+      "check": "contains(['절대', '위험', '금지'])",
+      "action": "FAIL"
+    }
+  ]
+}

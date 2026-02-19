@@ -1,0 +1,70 @@
+{
+  "analysis_date": "2026-02-04",
+  "summary": {
+    "instagram_posts": 42,
+    "instagram_unique_foods": 41,
+    "local_posted_folders": 39,
+    "matched": 36,
+    "false_positives": 3,
+    "missing_locally": 5
+  },
+  "false_positives": [
+    {
+      "food_id": "banana_milk",
+      "folder": "banana_milk_바나나우유",
+      "location": "2026-01",
+      "action": "2_body_ready 또는 3_approved로 이동"
+    },
+    {
+      "food_id": "fried_chicken",
+      "folder": "fried_chicken_후라이드치킨",
+      "location": "2026-01",
+      "action": "2_body_ready 또는 3_approved로 이동"
+    },
+    {
+      "food_id": "pumpkin",
+      "folder": "pumpkin_pumpkin",
+      "location": "2026-01",
+      "action": "2_body_ready 또는 3_approved로 이동"
+    }
+  ],
+  "missing_locally": [
+    {
+      "food_id": "boiled_egg",
+      "korean": "삶은달걀",
+      "action": "4_posted에 폴더 추가"
+    },
+    {
+      "food_id": "chicken",
+      "korean": "닭고기",
+      "action": "4_posted에 폴더 추가"
+    },
+    {
+      "food_id": "cola",
+      "korean": "콜라",
+      "action": "4_posted에 폴더 추가"
+    },
+    {
+      "food_id": "pasta",
+      "korean": "파스타",
+      "action": "4_posted에 폴더 추가"
+    },
+    {
+      "food_id": "zucchini",
+      "korean": "애호박",
+      "action": "4_posted에 폴더 추가"
+    }
+  ],
+  "special_checks": {
+    "banana_milk": {
+      "instagram": false,
+      "local": true,
+      "status": "FALSE_POSITIVE"
+    },
+    "sweet_pumpkin": {
+      "instagram": true,
+      "local": true,
+      "status": "OK"
+    }
+  }
+}

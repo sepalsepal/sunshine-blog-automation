@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "template_id": "BLOG_TRUST_WARNING_v1",
+    "platform": "BLOG",
+    "intent": "TRUST",
+    "format": "WARNING",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["CAUTION", "FORBIDDEN"],
+  "tone": "urgent_caring",
+  "emotion": "fear",
+
+  "structure": {
+    "sections": [
+      {
+        "id": "alert_header",
+        "label": "경고 헤더",
+        "required": true,
+        "word_range": [50, 100],
+        "elements": ["warning_emoji", "danger_statement", "urgency_hook"]
+      },
+      {
+        "id": "danger_explanation",
+        "label": "위험성 설명",
+        "required": true,
+        "word_range": [300, 500],
+        "elements": ["toxin_name", "mechanism", "affected_organs"]
+      },
+      {
+        "id": "symptoms",
+        "label": "증상",
+        "required": true,
+        "word_range": [200, 400],
+        "elements": ["early_symptoms", "severe_symptoms", "timeline"]
+      },
+      {
+        "id": "emergency",
+        "label": "응급 대처",
+        "required": true,
+        "word_range": [200, 300],
+        "elements": ["immediate_action", "hospital_visit", "what_not_to_do"]
+      },
+      {
+        "id": "prevention",
+        "label": "예방",
+        "required": true,
+        "word_range": [150, 250],
+        "elements": ["storage_tips", "alternative_foods", "final_warning"]
+      },
+      {
+        "id": "conclusion",
+        "label": "마무리",
+        "required": true,
+        "word_range": [80, 120],
+        "elements": ["summary_warning", "햇살이_closing", "share_cta"]
+      }
+    ]
+  },
+
+  "slide_mapping": {
+    "1": {"section": "alert_header", "image_type": "warning_cover"},
+    "2": {"section": "danger_explanation", "image_type": "food_photo_with_x"},
+    "3": {"section": "danger_explanation", "image_type": "toxin_info"},
+    "4": {"section": "symptoms", "image_type": "symptom_list"},
+    "5": {"section": "emergency", "image_type": "emergency_action"},
+    "6": {"section": "prevention", "image_type": "prevention_tips"},
+    "7": {"section": "prevention", "image_type": "alternative_foods"},
+    "8": {"section": "conclusion", "image_type": "햇살이_warning"}
+  },
+
+  "tone_markers": {
+    "required": ["절대", "위험", "금지", "독성", "응급", "치명"],
+    "recommended": ["즉시", "병원", "주의"],
+    "forbidden": ["건강에 좋", "영양 가득", "맛있어요", "급여 방법", "권장량"]
+  },
+
+  "seo": {
+    "title_template": "{topic} 강아지에게 절대 금지! 독성과 응급대처법",
+    "meta_keywords": ["{topic}", "강아지", "금지", "독성", "위험", "응급"],
+    "heading_structure": ["H2", "H2", "H3", "H3", "H2"]
+  },
+
+  "validation_rules": [
+    {
+      "rule": "no_positive_expression",
+      "check": "forbidden_keywords",
+      "action": "BLOCK"
+    },
+    {
+      "rule": "warning_marker_minimum",
+      "check": "required_keywords >= 3",
+      "action": "FAIL"
+    }
+  ]
+}

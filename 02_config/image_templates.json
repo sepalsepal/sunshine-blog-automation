@@ -1,0 +1,34 @@
+{
+    "food_mode": {
+        "hero": "A senior Golden Retriever dog looking curiously at {food} on a wooden table. Warm natural lighting, cozy home kitchen background. Photorealistic, 8k resolution. -illustration -cartoon -anime",
+        "detail": "A close-up macro shot of fresh {food} on a wooden cutting board. A dog's golden paw is slightly visible at the edge of frame. Natural daylight, shallow depth of field. -illustration -cartoon",
+        "reaction": "A happy senior Golden Retriever with white muzzle tasting a small piece of {food}, tongue slightly visible, joyful expression. Indoor home setting, warm lighting. -illustration -cartoon",
+        "info": "A stainless steel dog food bowl next to a measured portion of {food} as a healthy treat. Clean white background, informative composition. -illustration -cartoon",
+        "summary": "A Golden Retriever and female owner enjoying snack time together in a warm, cozy living room. Dog sitting next to {food} on a plate. Natural window light. -illustration -cartoon"
+    },
+    "negative_prompts": {
+        "global": "-illustration -cartoon -anime -fantasy -flowers -mountains -landscape -tiger -wild animals -watermark -text -logo"
+    },
+    "model_config": {
+        "hero": {
+            "model": "flux-1.1-pro",
+            "quality": 90
+        },
+        "detail": {
+            "model": "imagen",
+            "quality": 90
+        },
+        "reaction": {
+            "model": "flux-1.1-pro",
+            "quality": 90
+        },
+        "info": {
+            "model": "imagen",
+            "quality": 90
+        },
+        "summary": {
+            "model": "imagen",
+            "quality": 90
+        }
+    }
+}

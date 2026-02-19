@@ -1,0 +1,27 @@
+{
+  "content_id": "TEST_001",
+  "food_id": 1,
+  "food_name": "테스트 음식",
+  "strategy": {
+    "safety": "FORBIDDEN",
+    "intent": "TRUST",
+    "format": "WARNING",
+    "emotion_axis": "fear"
+  },
+  "platform": "insta",
+  "post_url": "https://instagram.com/p/test123",
+  "published_at": "2026-02-12T09:49:20.752671",
+  "metrics": {
+    "impressions": 0,
+    "reach": 0,
+    "saves": 0,
+    "shares": 0,
+    "comments": 0,
+    "likes": 0,
+    "profile_clicks": 0,
+    "link_clicks": 0
+  },
+  "calculated": {},
+  "measured_at": null,
+  "measurement_count": 0
+}

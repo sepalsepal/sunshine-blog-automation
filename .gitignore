@@ -1,5 +1,10 @@
+# 환경변수 및 인증
 .env
 google_service_account.json
+config/credentials/
+*.key
+*.pickle
+
 __pycache__/
 *.pyc
 .DS_Store

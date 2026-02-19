@@ -1,0 +1,506 @@
+{% extends "base.html" %}
+
+{% block title %}콘텐츠 제작 - Project Sunshine{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- 왼쪽: 주제 선택 -->
+    <div class="col-md-5">
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-lightbulb"></i> 1. 주제 선택</h5>
+            </div>
+            <div class="card-body">
+                <!-- 주제 탐색 -->
+                <div id="topic-explorer">
+                    <div class="mb-3">
+                        <label class="form-label">추천 주제</label>
+                        <div id="recommended-topics" class="d-flex flex-wrap gap-2">
+                            <span class="text-muted">로딩 중...</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">직접 입력</label>
+                        <div class="input-group">
+                            <input type="text" id="custom-topic" class="form-control" placeholder="예: mango, carrot...">
+                            <button class="btn btn-outline-secondary" type="button" onclick="validateTopic()">
+                                <i class="bi bi-check-circle"></i> 검증
+                            </button>
+                        </div>
+                        <div id="topic-validation" class="form-text"></div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- 옵션 설정 -->
+                <div class="mb-3">
+                    <label class="form-label">옵션</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="opt-dry-run" checked>
+                        <label class="form-check-label" for="opt-dry-run">
+                            드라이런 (실제 게시 안함)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="opt-skip-approval">
+                        <label class="form-check-label" for="opt-skip-approval">
+                            PD 승인 스킵
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 시작 버튼 -->
+                <button id="start-btn" class="btn btn-sunshine btn-lg w-100" onclick="startPipeline()" disabled>
+                    <i class="bi bi-play-fill"></i> 콘텐츠 제작 시작
+                </button>
+            </div>
+        </div>
+
+        <!-- 기제작 목록 -->
+        <div class="card">
+            <div class="card-header bg-white">
+                <h6 class="mb-0"><i class="bi bi-collection"></i> 기제작 콘텐츠</h6>
+            </div>
+            <div class="card-body" style="max-height: 200px; overflow-y: auto;">
+                <div id="existing-topics" class="d-flex flex-wrap gap-1">
+                    <span class="text-muted">로딩 중...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 오른쪽: 진행 상황 -->
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-gear-wide-connected"></i> 2. 제작 진행</h5>
+                <span id="pipeline-status" class="badge bg-secondary">대기중</span>
+            </div>
+            <div class="card-body">
+                <!-- 진행률 바 -->
+                <div class="progress mb-4" style="height: 25px;">
+                    <div id="progress-bar" class="progress-bar bg-warning" role="progressbar" style="width: 0%">
+                        0%
+                    </div>
+                </div>
+
+                <!-- 단계별 진행 상황 -->
+                <div id="stages-list">
+                    <div class="progress-stage pending">
+                        <div class="d-flex justify-content-between">
+                            <span><i class="bi bi-circle"></i> 대기중</span>
+                        </div>
+                        <small class="text-muted">주제를 선택하고 시작하세요</small>
+                    </div>
+                </div>
+
+                <!-- 품질 점수 -->
+                <div id="quality-scores" class="mt-4" style="display: none;">
+                    <h6>품질 검수 결과</h6>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="text-center p-2 rounded bg-light">
+                                <div class="small text-muted">G1 글검수</div>
+                                <div id="score-g1" class="fs-4 fw-bold">-</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center p-2 rounded bg-light">
+                                <div class="small text-muted">G2 이미지</div>
+                                <div id="score-g2" class="fs-4 fw-bold">-</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center p-2 rounded bg-light">
+                                <div class="small text-muted">G3 합성</div>
+                                <div id="score-g3" class="fs-4 fw-bold">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 미리보기 (완료 후) -->
+        <div id="result-preview" class="card mt-4" style="display: none;">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-images"></i> 3. 결과 미리보기</h5>
+            </div>
+            <div class="card-body">
+                <div id="preview-images" class="row g-2">
+                    <!-- 이미지 미리보기가 여기에 로드됨 -->
+                </div>
+
+                <div id="preview-caption" class="mt-3 p-3 bg-light rounded">
+                    <!-- 캡션이 여기에 로드됨 -->
+                </div>
+
+                <!-- 승인 버튼 (PD용) -->
+                <div id="approval-section" class="mt-3" style="display: none;">
+                    <hr>
+                    <h6>PD 승인</h6>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success flex-grow-1" onclick="approveContent(true)">
+                            <i class="bi bi-check-lg"></i> 승인 (게시 진행)
+                        </button>
+                        <button class="btn btn-danger" onclick="approveContent(false)">
+                            <i class="bi bi-x-lg"></i> 거절
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const API_BASE = '';  // 같은 서버
+
+let selectedTopic = null;
+let currentPipelineId = null;
+let ws = null;
+
+// 페이지 로드 시
+document.addEventListener('DOMContentLoaded', () => {
+    loadTopics();
+});
+
+// 주제 로드
+async function loadTopics() {
+    try {
+        const resp = await fetch(`${API_BASE}/api/topics/explore`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ count: 10, exclude_existing: true })
+        });
+        const data = await resp.json();
+
+        // 추천 주제
+        const recDiv = document.getElementById('recommended-topics');
+        recDiv.innerHTML = data.recommended_topics.map(t => `
+            <button class="btn btn-sm btn-outline-primary topic-btn"
+                    onclick="selectTopic('${t.name_en}', '${t.name_kr}', '${t.safety}')">
+                ${t.name_kr} (${t.name_en})
+                ${t.safety === 'safe' ? '<i class="bi bi-check-circle-fill text-success"></i>' : ''}
+            </button>
+        `).join('');
+
+        // 기제작 목록
+        const existDiv = document.getElementById('existing-topics');
+        existDiv.innerHTML = data.existing_topics.map(t => `
+            <span class="badge bg-secondary">${t}</span>
+        `).join('');
+
+    } catch (e) {
+        console.error('주제 로드 실패:', e);
+    }
+}
+
+// 주제 선택
+function selectTopic(nameEn, nameKr, safety) {
+    selectedTopic = { nameEn, nameKr, safety };
+
+    // 버튼 스타일 업데이트
+    document.querySelectorAll('.topic-btn').forEach(btn => {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline-primary');
+    });
+    event.target.classList.remove('btn-outline-primary');
+    event.target.classList.add('btn-primary');
+
+    // 시작 버튼 활성화
+    document.getElementById('start-btn').disabled = false;
+    document.getElementById('custom-topic').value = nameEn;
+}
+
+// 주제 검증
+async function validateTopic() {
+    const topic = document.getElementById('custom-topic').value.trim();
+    if (!topic) return;
+
+    try {
+        const resp = await fetch(`${API_BASE}/api/topics/${topic}/validate`);
+        const data = await resp.json();
+
+        const validDiv = document.getElementById('topic-validation');
+        if (data.valid) {
+            validDiv.innerHTML = `<span class="text-success">
+                <i class="bi bi-check-circle"></i> ${data.name_kr} - ${data.safety === 'safe' ? '안전' : '주의'}
+            </span>`;
+            selectedTopic = { nameEn: topic, nameKr: data.name_kr, safety: data.safety };
+            document.getElementById('start-btn').disabled = false;
+        } else {
+            validDiv.innerHTML = `<span class="text-danger">
+                <i class="bi bi-x-circle"></i> 등록되지 않은 주제
+            </span>`;
+        }
+    } catch (e) {
+        console.error('검증 실패:', e);
+    }
+}
+
+// 파이프라인 시작
+async function startPipeline() {
+    if (!selectedTopic) return;
+
+    const dryRun = document.getElementById('opt-dry-run').checked;
+    const skipApproval = document.getElementById('opt-skip-approval').checked;
+
+    try {
+        const resp = await fetch(`${API_BASE}/api/pipeline/start`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                topic: selectedTopic.nameEn,
+                dry_run: dryRun,
+                skip_approval: skipApproval,
+                skip_publish: dryRun
+            })
+        });
+        const data = await resp.json();
+
+        currentPipelineId = data.pipeline_id;
+        updateStatus('running', '실행중');
+
+        // WebSocket 연결
+        connectWebSocket(data.pipeline_id);
+
+        // 폴링 시작 (백업)
+        pollStatus();
+
+        // 버튼 비활성화
+        document.getElementById('start-btn').disabled = true;
+        document.getElementById('start-btn').innerHTML = '<i class="bi bi-hourglass-split"></i> 제작중...';
+
+    } catch (e) {
+        console.error('시작 실패:', e);
+        alert('파이프라인 시작 실패: ' + e.message);
+    }
+}
+
+// WebSocket 연결
+function connectWebSocket(pipelineId) {
+    const wsUrl = `ws://${window.location.host}/ws/pipeline/${pipelineId}`;
+    ws = new WebSocket(wsUrl);
+
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === 'progress') {
+            updateStage(data.stage, data.name, data.status, data.score);
+        }
+    };
+
+    ws.onerror = (e) => console.error('WebSocket 에러:', e);
+    ws.onclose = () => console.log('WebSocket 연결 종료');
+}
+
+// 상태 폴링 (WebSocket 백업)
+async function pollStatus() {
+    if (!currentPipelineId) return;
+
+    try {
+        const resp = await fetch(`${API_BASE}/api/pipeline/${currentPipelineId}/status`);
+        const data = await resp.json();
+
+        // 상태 업데이트
+        updateStatus(data.status, getStatusText(data.status));
+
+        // 진행률 업데이트
+        const progress = (data.current_stage / data.total_stages) * 100;
+        updateProgress(progress);
+
+        // 단계 업데이트
+        if (data.stages && data.stages.length > 0) {
+            updateStagesFromData(data.stages);
+        }
+
+        // 완료/실패 확인
+        if (data.status === 'completed' || data.status === 'failed') {
+            onPipelineComplete(data);
+            return;
+        }
+
+        // 승인 대기 확인
+        if (data.status === 'awaiting_approval') {
+            showApprovalSection();
+        }
+
+        // 계속 폴링
+        setTimeout(pollStatus, 2000);
+
+    } catch (e) {
+        console.error('상태 조회 실패:', e);
+        setTimeout(pollStatus, 5000);
+    }
+}
+
+// 상태 텍스트 변환
+function getStatusText(status) {
+    const texts = {
+        'pending': '대기중',
+        'running': '실행중',
+        'completed': '완료',
+        'failed': '실패',
+        'awaiting_approval': '승인대기'
+    };
+    return texts[status] || status;
+}
+
+// 상태 배지 업데이트
+function updateStatus(status, text) {
+    const badge = document.getElementById('pipeline-status');
+    badge.textContent = text;
+    badge.className = 'badge ' + {
+        'pending': 'bg-secondary',
+        'running': 'bg-warning text-dark',
+        'completed': 'bg-success',
+        'failed': 'bg-danger',
+        'awaiting_approval': 'bg-info'
+    }[status];
+}
+
+// 진행률 바 업데이트
+function updateProgress(percent) {
+    const bar = document.getElementById('progress-bar');
+    bar.style.width = percent + '%';
+    bar.textContent = Math.round(percent) + '%';
+
+    if (percent >= 100) {
+        bar.classList.remove('bg-warning');
+        bar.classList.add('bg-success');
+    }
+}
+
+// 단계 업데이트
+function updateStage(stageNum, name, status, score) {
+    const stagesList = document.getElementById('stages-list');
+
+    // 기존 단계 업데이트 또는 새 단계 추가
+    let stageDiv = document.getElementById(`stage-${stageNum}`);
+    if (!stageDiv) {
+        stageDiv = document.createElement('div');
+        stageDiv.id = `stage-${stageNum}`;
+        stageDiv.className = 'progress-stage';
+        stagesList.appendChild(stageDiv);
+    }
+
+    stageDiv.className = `progress-stage ${status}`;
+    stageDiv.innerHTML = `
+        <div class="d-flex justify-content-between">
+            <span>
+                <i class="bi ${getStageIcon(status)}"></i>
+                ${stageNum}. ${name}
+            </span>
+            ${score ? `<span class="badge ${score >= 90 ? 'bg-success' : 'bg-warning'}">${score}점</span>` : ''}
+        </div>
+    `;
+}
+
+function getStageIcon(status) {
+    return {
+        'pending': 'bi-circle',
+        'running': 'bi-arrow-repeat',
+        'completed': 'bi-check-circle-fill text-success',
+        'failed': 'bi-x-circle-fill text-danger'
+    }[status] || 'bi-circle';
+}
+
+// 파이프라인 완료 처리
+async function onPipelineComplete(data) {
+    if (data.status === 'completed') {
+        // 결과 로드
+        try {
+            const resp = await fetch(`${API_BASE}/api/pipeline/${currentPipelineId}/result`);
+            const result = await resp.json();
+
+            // 품질 점수 표시
+            showQualityScores(result.quality_scores);
+
+            // 결과 미리보기 표시
+            showResultPreview(result);
+
+        } catch (e) {
+            console.error('결과 로드 실패:', e);
+        }
+    }
+
+    // 버튼 복원
+    document.getElementById('start-btn').disabled = false;
+    document.getElementById('start-btn').innerHTML = '<i class="bi bi-play-fill"></i> 다시 제작하기';
+}
+
+// 품질 점수 표시
+function showQualityScores(scores) {
+    document.getElementById('quality-scores').style.display = 'block';
+
+    if (scores.G1) document.getElementById('score-g1').textContent = scores.G1 + '점';
+    if (scores.G2) document.getElementById('score-g2').textContent = scores.G2 + '점';
+    if (scores.G3) document.getElementById('score-g3').textContent = scores.G3 + '점';
+}
+
+// 결과 미리보기 표시
+function showResultPreview(result) {
+    document.getElementById('result-preview').style.display = 'block';
+
+    // 이미지 (TODO: 실제 이미지 경로 연결)
+    const imagesDiv = document.getElementById('preview-images');
+    if (result.output_images && result.output_images.length > 0) {
+        imagesDiv.innerHTML = result.output_images.map((img, i) => `
+            <div class="col-3">
+                <div class="bg-light rounded p-2 text-center">
+                    <i class="bi bi-image fs-1"></i>
+                    <div class="small">${i + 1}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 캡션
+    const captionDiv = document.getElementById('preview-caption');
+    if (result.caption) {
+        captionDiv.innerHTML = `
+            <strong>캡션:</strong><br>
+            ${result.caption}<br><br>
+            <strong>해시태그:</strong> ${result.hashtags.map(h => '#' + h).join(' ')}
+        `;
+    }
+}
+
+// 승인 섹션 표시
+function showApprovalSection() {
+    document.getElementById('result-preview').style.display = 'block';
+    document.getElementById('approval-section').style.display = 'block';
+}
+
+// 승인 처리
+async function approveContent(approved) {
+    try {
+        const feedback = approved ? null : prompt('거절 사유를 입력하세요:');
+
+        const resp = await fetch(`${API_BASE}/api/pipeline/${currentPipelineId}/approve`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                pipeline_id: currentPipelineId,
+                approved: approved,
+                feedback: feedback
+            })
+        });
+
+        const data = await resp.json();
+        alert(data.message);
+
+        if (approved) {
+            pollStatus();  // 게시 진행 폴링
+        }
+
+    } catch (e) {
+        console.error('승인 처리 실패:', e);
+    }
+}
+</script>
+{% endblock %}

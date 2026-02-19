@@ -1,0 +1,126 @@
+{
+  "work_order": "WO-PERFORMANCE-LOOP",
+  "timestamp": "2026-02-12T09:49:20.758049",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "pass_rate": "5/5",
+  "all_pass": true,
+  "results": [
+    {
+      "name": "레코드 생성",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "레코드 구조",
+          "passed": true,
+          "details": "필수 필드 포함"
+        },
+        {
+          "name": "지표 초기화",
+          "passed": true,
+          "details": "모든 지표 0으로 초기화"
+        },
+        {
+          "name": "파일 저장",
+          "passed": true,
+          "details": "레코드 저장 확인"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    },
+    {
+      "name": "지표 업데이트",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "지표 반영",
+          "passed": true,
+          "details": "saves=150 정상"
+        },
+        {
+          "name": "파생 지표 계산",
+          "passed": true,
+          "details": "save_rate=3.57%"
+        },
+        {
+          "name": "측정 횟수",
+          "passed": true,
+          "details": "measurement_count=1"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    },
+    {
+      "name": "집계",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "Intent별 집계",
+          "passed": true,
+          "details": "Intent 5개 집계"
+        },
+        {
+          "name": "Safety별 집계",
+          "passed": true,
+          "details": "Safety 3개 집계"
+        },
+        {
+          "name": "플랫폼별 집계",
+          "passed": true,
+          "details": "insta count=5"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    },
+    {
+      "name": "Intent 추천",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "추천 구조",
+          "passed": true,
+          "details": "필수 필드 포함"
+        },
+        {
+          "name": "룰 기반 폴백",
+          "passed": true,
+          "details": "basis=RULE"
+        },
+        {
+          "name": "FORBIDDEN→TRUST",
+          "passed": true,
+          "details": "FORBIDDEN에 TRUST 추천"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    },
+    {
+      "name": "Executor Hook",
+      "passed": true,
+      "sub_tests": [
+        {
+          "name": "Validation PASS",
+          "passed": true,
+          "details": "PASS 상태 확인"
+        },
+        {
+          "name": "Executor 실행",
+          "passed": true,
+          "details": "EXECUTED 상태"
+        },
+        {
+          "name": "Hook 연결",
+          "passed": true,
+          "details": "PerformanceLogger 연결됨"
+        }
+      ],
+      "details": "3/3 통과",
+      "error": null
+    }
+  ]
+}

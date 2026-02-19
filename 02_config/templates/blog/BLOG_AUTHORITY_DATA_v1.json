@@ -1,0 +1,84 @@
+{
+  "_meta": {
+    "template_id": "BLOG_AUTHORITY_DATA_v1",
+    "platform": "BLOG",
+    "intent": "AUTHORITY",
+    "format": "DATA",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["SAFE", "CAUTION"],
+  "tone": "expert_friendly",
+  "emotion": "trust",
+
+  "structure": {
+    "sections": [
+      {
+        "id": "intro",
+        "label": "도입부",
+        "required": true,
+        "word_range": [100, 200],
+        "elements": ["햇살이_greeting", "topic_hook", "authority_statement"]
+      },
+      {
+        "id": "facts",
+        "label": "핵심 팩트",
+        "required": true,
+        "word_range": [300, 500],
+        "elements": ["main_fact", "supporting_data", "expert_citation"]
+      },
+      {
+        "id": "evidence",
+        "label": "과학적 근거",
+        "required": true,
+        "word_range": [400, 600],
+        "elements": ["mechanism", "research_reference", "veterinary_note"]
+      },
+      {
+        "id": "practical",
+        "label": "실천 가이드",
+        "required": true,
+        "word_range": [200, 400],
+        "elements": ["how_to", "dosage_table", "preparation_tips"]
+      },
+      {
+        "id": "faq",
+        "label": "FAQ",
+        "required": false,
+        "word_range": [200, 300],
+        "elements": ["common_questions", "expert_answers"]
+      },
+      {
+        "id": "conclusion",
+        "label": "마무리",
+        "required": true,
+        "word_range": [100, 150],
+        "elements": ["summary", "햇살이_closing", "save_suggestion"]
+      }
+    ]
+  },
+
+  "slide_mapping": {
+    "1": {"section": "intro", "image_type": "cover"},
+    "2": {"section": "intro", "image_type": "food_photo"},
+    "3": {"section": "facts", "image_type": "nutrition_info"},
+    "4": {"section": "practical", "image_type": "feeding_guide"},
+    "5": {"section": "practical", "image_type": "dosage_table"},
+    "6": {"section": "evidence", "image_type": "caution_notes"},
+    "7": {"section": "practical", "image_type": "cooking_method"},
+    "8": {"section": "conclusion", "image_type": "햇살이_photo"}
+  },
+
+  "tone_markers": {
+    "required": ["~요", "~해요", "~이에요", "~드릴게요"],
+    "recommended": ["전문가", "연구", "과학적"],
+    "forbidden": []
+  },
+
+  "seo": {
+    "title_template": "{topic} 강아지 급여 가이드 - 영양과 주의사항 총정리",
+    "meta_keywords": ["{topic}", "강아지", "급여", "영양", "주의사항"],
+    "heading_structure": ["H2", "H3", "H3", "H3", "H2"]
+  }
+}

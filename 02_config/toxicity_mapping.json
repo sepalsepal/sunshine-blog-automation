@@ -1,0 +1,1004 @@
+{
+  "_metadata": {
+    "version": "2.0",
+    "created": "2026-02-12",
+    "updated": "2026-02-12",
+    "description": "FORBIDDEN 음식 독성 매핑 테이블 - §22.11 Safety ENUM 연동",
+    "total_categories": 11,
+    "total_foods": 37,
+    "source_verification": {
+      "verified_at": "2026-02-12T03:47:26.782415",
+      "total_urls": 19,
+      "pass_count": 15,
+      "fail_count": 4,
+      "pending_manual_check": [
+        "https://vcahospitals.com/know-your-pet/onion-garlic-chive-and-leek-poisoning-in-dogs",
+        "https://vcahospitals.com/know-your-pet/xylitol-poisoning-in-dogs",
+        "https://www.fda.gov/consumers/consumer-updates/paws-xylitol-its-dangerous-dogs",
+        "https://vcahospitals.com/know-your-pet/lactose-intolerance-in-dogs"
+      ]
+    }
+  },
+  "toxicity_categories": {
+    "ALLIUM": {
+      "name_ko": "파류 독성",
+      "foods": [
+        "대파",
+        "양파",
+        "마늘",
+        "부추",
+        "쪽파",
+        "리크"
+      ],
+      "toxins": [
+        {
+          "name": "알리신",
+          "effect": "적혈구 파괴"
+        },
+        {
+          "name": "티오설페이트",
+          "effect": "용혈성 빈혈 유발"
+        },
+        {
+          "name": "N-프로필 이황화물",
+          "effect": "산화 스트레스"
+        }
+      ],
+      "symptoms": [
+        "용혈성 빈혈",
+        "헤모글로빈 산화",
+        "적혈구 파괴",
+        "하인즈 소체 형성"
+      ],
+      "severity": "HIGH",
+      "onset_time": "24-72시간 후 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/onion",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        },
+        {
+          "url": "https://vcahospitals.com/know-your-pet/onion-garlic-chive-and-leek-poisoning-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": false
+        }
+      ]
+    },
+    "GRAPE_TOXIN": {
+      "name_ko": "포도류 독성",
+      "foods": [
+        "포도",
+        "건포도"
+      ],
+      "toxins": [
+        {
+          "name": "타르타르산",
+          "effect": "급성 신부전 유발"
+        },
+        {
+          "name": "탄닌",
+          "effect": "소화기 손상"
+        },
+        {
+          "name": "미확인 독성물질",
+          "effect": "신장 독성"
+        }
+      ],
+      "symptoms": [
+        "급성 신부전",
+        "구토",
+        "무기력",
+        "식욕 저하"
+      ],
+      "severity": "HIGH",
+      "onset_time": "6-24시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/grape",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        },
+        {
+          "url": "https://vcahospitals.com/know-your-pet/grape-raisin-and-currant-poisoning-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": true
+        }
+      ]
+    },
+    "THEOBROMINE": {
+      "name_ko": "테오브로민 독성",
+      "foods": [
+        "초콜릿",
+        "브라우니",
+        "킷캣",
+        "리세스"
+      ],
+      "toxins": [
+        {
+          "name": "테오브로민",
+          "effect": "심장 독성"
+        },
+        {
+          "name": "카페인",
+          "effect": "신경 독성"
+        }
+      ],
+      "symptoms": [
+        "심박 이상",
+        "발작",
+        "구토",
+        "설사",
+        "과흥분"
+      ],
+      "severity": "HIGH",
+      "onset_time": "1-4시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        },
+        {
+          "url": "https://vcahospitals.com/know-your-pet/chocolate-poisoning-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": true
+        }
+      ]
+    },
+    "CAFFEINE": {
+      "name_ko": "카페인 독성",
+      "foods": [
+        "커피",
+        "콜라",
+        "에너지드링크"
+      ],
+      "toxins": [
+        {
+          "name": "카페인",
+          "effect": "신경 독성"
+        }
+      ],
+      "symptoms": [
+        "심박 이상",
+        "과흥분",
+        "떨림",
+        "고체온"
+      ],
+      "severity": "MEDIUM-HIGH",
+      "onset_time": "30분-2시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.petpoisonhelpline.com/poison/caffeine/",
+          "type": "vet_org",
+          "name": "Pet Poison Helpline",
+          "verified": true
+        },
+        {
+          "url": "https://vcahospitals.com/know-your-pet/caffeine-toxicity-in-pets",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": true
+        }
+      ]
+    },
+    "ALCOHOL": {
+      "name_ko": "알코올 독성",
+      "foods": [
+        "맥주",
+        "소주",
+        "와인"
+      ],
+      "toxins": [
+        {
+          "name": "에탄올",
+          "effect": "중추신경 억제"
+        },
+        {
+          "name": "아세트알데히드",
+          "effect": "간 독성"
+        }
+      ],
+      "symptoms": [
+        "중추신경 억제",
+        "호흡 곤란",
+        "저혈당",
+        "저체온"
+      ],
+      "severity": "HIGH",
+      "onset_time": "15-30분 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        },
+        {
+          "url": "https://www.petpoisonhelpline.com/poison/alcohol/",
+          "type": "vet_org",
+          "name": "Pet Poison Helpline",
+          "verified": true
+        }
+      ]
+    },
+    "XYLITOL": {
+      "name_ko": "자일리톨 독성",
+      "foods": [
+        "무설탕 껌",
+        "무설탕 사탕"
+      ],
+      "toxins": [
+        {
+          "name": "자일리톨",
+          "effect": "급성 저혈당"
+        }
+      ],
+      "symptoms": [
+        "급격한 인슐린 분비",
+        "저혈당",
+        "간 손상"
+      ],
+      "severity": "HIGH",
+      "onset_time": "10-60분 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://vcahospitals.com/know-your-pet/xylitol-poisoning-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": false
+        },
+        {
+          "url": "https://www.fda.gov/consumers/consumer-updates/paws-xylitol-its-dangerous-dogs",
+          "type": "gov",
+          "name": "U.S. FDA",
+          "verified": false
+        }
+      ]
+    },
+    "PERSIN": {
+      "name_ko": "퍼신 독성",
+      "foods": [
+        "아보카도"
+      ],
+      "toxins": [
+        {
+          "name": "퍼신",
+          "effect": "심근 독성"
+        }
+      ],
+      "symptoms": [
+        "구토",
+        "설사",
+        "심근 손상",
+        "호흡 곤란"
+      ],
+      "severity": "MEDIUM-HIGH",
+      "onset_time": "12-24시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/avocado",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        },
+        {
+          "url": "https://www.petpoisonhelpline.com/poison/avocado/",
+          "type": "vet_org",
+          "name": "Pet Poison Helpline",
+          "verified": true
+        }
+      ]
+    },
+    "LACTOSE": {
+      "name_ko": "유당 불내증",
+      "foods": [
+        "우유",
+        "아이스크림",
+        "밀키스"
+      ],
+      "toxins": [
+        {
+          "name": "유당",
+          "effect": "소화 장애"
+        }
+      ],
+      "symptoms": [
+        "설사",
+        "복부 팽만",
+        "가스",
+        "구토"
+      ],
+      "severity": "LOW-MEDIUM",
+      "onset_time": "30분-2시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://vcahospitals.com/know-your-pet/lactose-intolerance-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": false
+        }
+      ]
+    },
+    "HIGH_SODIUM_FAT": {
+      "name_ko": "고염분/고지방 위험",
+      "foods": [
+        "프링글스",
+        "라면",
+        "베이컨",
+        "도리토스",
+        "레이즈",
+        "닭강정"
+      ],
+      "toxins": [
+        {
+          "name": "나트륨",
+          "effect": "신장/심장 부담"
+        },
+        {
+          "name": "포화지방",
+          "effect": "췌장염 위험"
+        }
+      ],
+      "symptoms": [
+        "췌장염",
+        "신장 문제",
+        "비만",
+        "고혈압"
+      ],
+      "severity": "MEDIUM",
+      "onset_time": "반복 노출 시 만성 문제",
+      "sources": [
+        {
+          "url": "https://vcahospitals.com/know-your-pet/pancreatitis-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": true
+        },
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        }
+      ]
+    },
+    "CITRUS_TOXIN": {
+      "name_ko": "감귤류 독성",
+      "foods": [
+        "자몽",
+        "레몬"
+      ],
+      "toxins": [
+        {
+          "name": "푸라노쿠마린",
+          "effect": "약물 대사 방해"
+        },
+        {
+          "name": "시트르산",
+          "effect": "위장 자극"
+        },
+        {
+          "name": "리모넨",
+          "effect": "소화기 자극"
+        }
+      ],
+      "symptoms": [
+        "위장 자극",
+        "구토",
+        "약물 대사 방해"
+      ],
+      "severity": "MEDIUM",
+      "onset_time": "1-6시간 내 증상 발현",
+      "sources": [
+        {
+          "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/lemon",
+          "type": "vet_org",
+          "name": "ASPCA Animal Poison Control",
+          "verified": true
+        }
+      ]
+    },
+    "SUGAR_ADDITIVES": {
+      "name_ko": "과당/첨가물 위험",
+      "foods": [
+        "케이크",
+        "도넛",
+        "환타",
+        "스키틀즈",
+        "스타버스트",
+        "스프라이트"
+      ],
+      "toxins": [
+        {
+          "name": "과당",
+          "effect": "비만/당뇨 위험"
+        },
+        {
+          "name": "인공 착색료",
+          "effect": "알레르기 유발 가능"
+        },
+        {
+          "name": "인공 감미료",
+          "effect": "소화 장애"
+        }
+      ],
+      "symptoms": [
+        "비만",
+        "당뇨",
+        "췌장염",
+        "치아 문제"
+      ],
+      "severity": "LOW-MEDIUM",
+      "onset_time": "반복 노출 시 만성 문제",
+      "sources": [
+        {
+          "url": "https://vcahospitals.com/know-your-pet/obesity-in-dogs",
+          "type": "vet_org",
+          "name": "VCA Animal Hospitals",
+          "verified": true
+        }
+      ]
+    }
+  },
+  "food_mapping": {
+    "20": {
+      "name": "프링글스",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "나트륨 과다",
+        "포화지방",
+        "인공 조미료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수분 공급 후 관찰"
+    },
+    "22": {
+      "name": "아보카도",
+      "primary_toxin": "PERSIN",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "퍼신(Persin)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "섭취 시 즉시 수의사 상담"
+    },
+    "23": {
+      "name": "콜라",
+      "primary_toxin": "CAFFEINE",
+      "secondary_toxin": "SUGAR_ADDITIVES",
+      "toxic_compounds": [
+        "카페인",
+        "과당",
+        "인산"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수의사 상담"
+    },
+    "32": {
+      "name": "우유",
+      "primary_toxin": "LACTOSE",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "유당(Lactose)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "소량 섭취 시 관찰, 증상 지속 시 수의사 상담"
+    },
+    "51": {
+      "name": "양파",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "알리신",
+        "티오설페이트",
+        "N-프로필 이황화물"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 용혈성 빈혈 위험"
+    },
+    "53": {
+      "name": "마늘",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "알리신",
+        "티오설페이트",
+        "N-프로필 이황화물"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 용혈성 빈혈 위험"
+    },
+    "55": {
+      "name": "포도",
+      "primary_toxin": "GRAPE_TOXIN",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "타르타르산",
+        "탄닌",
+        "미확인 독성물질"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 급성 신부전 위험"
+    },
+    "56": {
+      "name": "건포도",
+      "primary_toxin": "GRAPE_TOXIN",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "타르타르산(농축)",
+        "탄닌(농축)",
+        "미확인 독성물질"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 응급 수의사 방문 - 포도보다 독성 농축"
+    },
+    "57": {
+      "name": "초콜릿",
+      "primary_toxin": "THEOBROMINE",
+      "secondary_toxin": "CAFFEINE",
+      "toxic_compounds": [
+        "테오브로민",
+        "카페인"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 체중당 섭취량 계산 필요"
+    },
+    "61": {
+      "name": "양념치킨",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "마늘/양파 성분",
+        "나트륨 과다",
+        "고지방"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "복합 위험 성분",
+      "emergency_action": "파류 성분 확인 후 수의사 상담"
+    },
+    "65": {
+      "name": "비빔밥",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "마늘/양파 성분",
+        "고추장 염분",
+        "참기름"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "복합 위험 성분",
+      "emergency_action": "파류 성분 함량에 따라 수의사 상담"
+    },
+    "66": {
+      "name": "짜장면",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "양파 다량",
+        "나트륨 과다",
+        "춘장 성분"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "복합 위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 양파 다량 포함"
+    },
+    "70": {
+      "name": "라면",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": "ALLIUM",
+      "toxic_compounds": [
+        "나트륨 과다(1800mg+)",
+        "포화지방",
+        "MSG"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수분 공급 후 관찰"
+    },
+    "74": {
+      "name": "불고기",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "마늘/양파 양념",
+        "간장 나트륨",
+        "설탕"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "복합 위험 성분",
+      "emergency_action": "파류 성분 함량에 따라 수의사 상담"
+    },
+    "75": {
+      "name": "케이크",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": "THEOBROMINE",
+      "toxic_compounds": [
+        "과당",
+        "유지방",
+        "초콜릿 성분 가능"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "초콜릿 케이크 시 즉시 수의사 방문"
+    },
+    "76": {
+      "name": "도넛",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "과당",
+        "트랜스지방",
+        "인공 첨가물"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰"
+    },
+    "77": {
+      "name": "아이스크림",
+      "primary_toxin": "LACTOSE",
+      "secondary_toxin": "SUGAR_ADDITIVES",
+      "toxic_compounds": [
+        "유당",
+        "과당",
+        "인공 감미료 가능"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "자일리톨 함유 제품 시 즉시 수의사 방문"
+    },
+    "78": {
+      "name": "브라우니",
+      "primary_toxin": "THEOBROMINE",
+      "secondary_toxin": "CAFFEINE",
+      "toxic_compounds": [
+        "테오브로민(고농축)",
+        "카페인",
+        "과당"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 초콜릿 고농축"
+    },
+    "85": {
+      "name": "닭강정",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": "SUGAR_ADDITIVES",
+      "toxic_compounds": [
+        "나트륨 과다",
+        "과당 시럽",
+        "튀김 기름"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰, 구토/설사 시 수의사 상담"
+    },
+    "87": {
+      "name": "베이컨",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "나트륨 과다",
+        "아질산염",
+        "포화지방"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수분 공급 후 관찰"
+    },
+    "88": {
+      "name": "버드와이저",
+      "primary_toxin": "ALCOHOL",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "에탄올(5%)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 응급 수의사 방문 - 알코올 중독 위험"
+    },
+    "89": {
+      "name": "카스맥주",
+      "primary_toxin": "ALCOHOL",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "에탄올(4.5%)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 응급 수의사 방문 - 알코올 중독 위험"
+    },
+    "92": {
+      "name": "도리토스",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": "ALLIUM",
+      "toxic_compounds": [
+        "나트륨 과다",
+        "양파 파우더",
+        "인공 조미료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수분 공급 후 관찰"
+    },
+    "93": {
+      "name": "환타",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "과당",
+        "인공 착색료",
+        "인공 향료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰"
+    },
+    "94": {
+      "name": "킷캣",
+      "primary_toxin": "THEOBROMINE",
+      "secondary_toxin": "CAFFEINE",
+      "toxic_compounds": [
+        "테오브로민",
+        "카페인",
+        "과당"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 체중당 섭취량 계산 필요"
+    },
+    "95": {
+      "name": "레이즈",
+      "primary_toxin": "HIGH_SODIUM_FAT",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "나트륨 과다",
+        "포화지방",
+        "인공 조미료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 수분 공급 후 관찰"
+    },
+    "96": {
+      "name": "밀키스",
+      "primary_toxin": "LACTOSE",
+      "secondary_toxin": "SUGAR_ADDITIVES",
+      "toxic_compounds": [
+        "유당",
+        "과당",
+        "탄산"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "소량 섭취 시 관찰"
+    },
+    "98": {
+      "name": "피자",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": "HIGH_SODIUM_FAT",
+      "toxic_compounds": [
+        "마늘/양파",
+        "나트륨 과다",
+        "치즈 지방"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "복합 위험 성분",
+      "emergency_action": "파류 성분 함량에 따라 수의사 상담"
+    },
+    "99": {
+      "name": "리세스",
+      "primary_toxin": "THEOBROMINE",
+      "secondary_toxin": "CAFFEINE",
+      "toxic_compounds": [
+        "테오브로민",
+        "카페인",
+        "땅콩 지방"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 초콜릿+땅콩 조합"
+    },
+    "101": {
+      "name": "스키틀즈",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "과당",
+        "인공 착색료",
+        "인공 향료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰"
+    },
+    "102": {
+      "name": "소주",
+      "primary_toxin": "ALCOHOL",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "에탄올(16-25%)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 응급 수의사 방문 - 고농도 알코올"
+    },
+    "103": {
+      "name": "스타벅스커피",
+      "primary_toxin": "CAFFEINE",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "카페인(고농축)"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 카페인 중독 위험"
+    },
+    "104": {
+      "name": "스타버스트",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "과당",
+        "인공 착색료",
+        "인공 향료"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰"
+    },
+    "107": {
+      "name": "스프라이트",
+      "primary_toxin": "SUGAR_ADDITIVES",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "과당",
+        "탄산",
+        "구연산"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 관찰"
+    },
+    "112": {
+      "name": "자몽",
+      "primary_toxin": "CITRUS_TOXIN",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "푸라노쿠마린",
+        "시트르산",
+        "리모넨"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "약물 복용 중인 경우 즉시 수의사 상담"
+    },
+    "113": {
+      "name": "레몬",
+      "primary_toxin": "CITRUS_TOXIN",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "시트르산(고농도)",
+        "리모넨",
+        "소랄렌"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "다량 섭취 시 위장 자극 관찰"
+    },
+    "127": {
+      "name": "대파",
+      "primary_toxin": "ALLIUM",
+      "secondary_toxin": null,
+      "toxic_compounds": [
+        "알리신",
+        "티오설페이트",
+        "N-프로필 이황화물"
+      ],
+      "danger_level": "FORBIDDEN",
+      "warning_header": "위험 성분",
+      "emergency_action": "즉시 수의사 방문 - 용혈성 빈혈 위험"
+    }
+  },
+  "toxin_to_foods": {
+    "ALLIUM": [
+      51,
+      53,
+      61,
+      65,
+      66,
+      70,
+      74,
+      92,
+      98,
+      127
+    ],
+    "GRAPE_TOXIN": [
+      55,
+      56
+    ],
+    "THEOBROMINE": [
+      57,
+      75,
+      78,
+      94,
+      99
+    ],
+    "CAFFEINE": [
+      23,
+      103
+    ],
+    "ALCOHOL": [
+      88,
+      89,
+      102
+    ],
+    "XYLITOL": [],
+    "PERSIN": [
+      22
+    ],
+    "LACTOSE": [
+      32,
+      77,
+      96
+    ],
+    "HIGH_SODIUM_FAT": [
+      20,
+      61,
+      65,
+      66,
+      70,
+      74,
+      76,
+      85,
+      87,
+      92,
+      95,
+      98
+    ],
+    "CITRUS_TOXIN": [
+      112,
+      113
+    ],
+    "SUGAR_ADDITIVES": [
+      23,
+      75,
+      76,
+      77,
+      85,
+      93,
+      96,
+      101,
+      104,
+      107
+    ]
+  },
+  "severity_order": [
+    "HIGH",
+    "MEDIUM-HIGH",
+    "MEDIUM",
+    "LOW-MEDIUM",
+    "LOW"
+  ],
+  "emergency_contacts": {
+    "note": "응급 상황 시 가까운 24시간 동물병원 방문 권장",
+    "info": "섭취량, 체중, 섭취 시간 기록 필수"
+  }
+}

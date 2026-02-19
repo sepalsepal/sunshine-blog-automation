@@ -1,0 +1,91 @@
+{
+  "_meta": {
+    "template_id": "THREAD_ENGAGEMENT_QNA_v1",
+    "platform": "THREAD",
+    "intent": "ENGAGEMENT",
+    "format": "QNA",
+    "version": "1.0",
+    "created": "2026-02-12"
+  },
+
+  "applicable_safety": ["SAFE", "CAUTION"],
+  "tone": "provocative",
+  "emotion": "curiosity",
+
+  "post": {
+    "max_chars": 500,
+    "structure": [
+      {
+        "id": "question",
+        "type": "opening",
+        "char_limit": 100,
+        "template": "{topic} 강아지한테 줘도 된다? 🤔",
+        "required": true
+      },
+      {
+        "id": "answer",
+        "type": "body",
+        "char_limit": 250,
+        "elements": ["answer_reveal", "key_facts", "condition"],
+        "required": true
+      },
+      {
+        "id": "debate_hook",
+        "type": "closing",
+        "char_limit": 100,
+        "elements": ["opinion_ask", "reply_cta"],
+        "required": true
+      }
+    ]
+  },
+
+  "templates": {
+    "question_variations": [
+      "{topic} 강아지한테 줘도 된다? 🤔",
+      "{topic} 급여해도 될까요?",
+      "강아지 {topic} 먹어도 되는지 아시나요?"
+    ],
+    "answer_reveal": {
+      "YES": "✅ 네, 줘도 됩니다!\n단, {condition}",
+      "NO": "❌ 안 됩니다!\n{reason}",
+      "CONDITIONAL": "🔺 조건부로 가능해요\n{conditions}"
+    },
+    "debate_hooks": [
+      "여러분은 어떻게 생각하세요?",
+      "우리 아이도 먹나요? 댓글로 알려주세요!",
+      "이 사실 알고 계셨나요?"
+    ]
+  },
+
+  "tone_markers": {
+    "required": ["~요?", "~나요?", "어떻게"],
+    "emoji": ["🤔", "💡", "✅", "❌", "🔺"],
+    "forbidden": [],
+    "voice": "curious_friendly"
+  },
+
+  "engagement": {
+    "reply_bait": true,
+    "debate_prompt": true,
+    "poll_style": true
+  },
+
+  "reply_templates": {
+    "correct_answer": "맞아요! 잘 알고 계시네요 👏",
+    "wrong_answer": "조금 다른데요! {correct_info}",
+    "follow_up": "더 자세한 정보는 프로필에서 확인하세요!"
+  },
+
+  "validation_rules": [
+    {
+      "rule": "char_limit",
+      "check": "total_chars <= 500",
+      "action": "TRIM"
+    },
+    {
+      "rule": "question_format",
+      "check": "ends_with_question",
+      "action": "WARN"
+    }
+  ]
+}

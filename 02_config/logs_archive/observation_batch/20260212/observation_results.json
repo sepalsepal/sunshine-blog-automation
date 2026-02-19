@@ -1,0 +1,206 @@
+{
+  "work_order": "WO-OBSERVATION-BATCH",
+  "mode": "OBSERVATION_ONLY",
+  "timestamp": "2026-02-12T09:19:36.819046",
+  "duration_seconds": 0.0,
+  "planned": 10,
+  "processed": 10,
+  "completed": true,
+  "stop_conditions": {
+    "override_count": 0,
+    "url_fail_count": 0,
+    "blocked_occurred": false,
+    "executor_exception": false,
+    "stop_reason": null
+  },
+  "statistics": {
+    "total": 10,
+    "pass": 10,
+    "fail": 0,
+    "blocked": 0,
+    "executed": 10,
+    "pass_rate": "10/10"
+  },
+  "by_safety": {
+    "SAFE": {
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "blocked": 0
+    },
+    "CAUTION": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "blocked": 0
+    },
+    "FORBIDDEN": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "blocked": 0
+    }
+  },
+  "results": [
+    {
+      "id": 1,
+      "name": "호박",
+      "safety": "SAFE",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 3,
+      "name": "블루베리",
+      "safety": "SAFE",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 5,
+      "name": "고구마",
+      "safety": "SAFE",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 6,
+      "name": "사과",
+      "safety": "SAFE",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 2,
+      "name": "당근",
+      "safety": "CAUTION",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 4,
+      "name": "체리",
+      "safety": "CAUTION",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 7,
+      "name": "파인애플",
+      "safety": "CAUTION",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 20,
+      "name": "프링글스",
+      "safety": "FORBIDDEN",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 22,
+      "name": "아보카도",
+      "safety": "FORBIDDEN",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    },
+    {
+      "id": 23,
+      "name": "콜라",
+      "safety": "FORBIDDEN",
+      "status": "PASS",
+      "score": {
+        "structure": 5,
+        "tone": 5,
+        "accuracy": 5,
+        "naturalness": 5
+      },
+      "total": 20,
+      "fail_codes": [],
+      "executed": true,
+      "error": null
+    }
+  ]
+}

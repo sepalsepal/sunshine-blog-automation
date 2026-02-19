@@ -1,0 +1,64 @@
+{
+  "$schema": "./schemas/cover_rules.schema.json",
+  "version": "1.0.0",
+  "description": "표지 텍스트 오버레이 규칙 - 분석 금지, 규칙으로만 생성",
+  "rules": {
+    "cover_v1": {
+      "name": "cover_v1",
+      "description": "표준 표지 규칙 (boiled_egg, spinach, duck 등 적용)",
+      "source": "render_cover_standard.js + render_boiled_egg.js",
+      "created_at": "2026-02-03",
+      "canvas": {
+        "width": 1080,
+        "height": 1080,
+        "deviceScaleFactor": 2
+      },
+      "title": {
+        "fontFamily": "'Arial Black', 'Arial Bold', sans-serif",
+        "fontSize": 114,
+        "fontWeight": 900,
+        "color": "#FFFFFF",
+        "textShadow": "2px 2px 4px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.5)",
+        "letterSpacing": "4px",
+        "textTransform": "uppercase",
+        "position": {
+          "top_percent": 14,
+          "top_px": 150,
+          "left_percent": 50,
+          "transform": "translateX(-50%)"
+        }
+      },
+      "background": {
+        "note": "PD 제작 배경 이미지 사용",
+        "source_pattern": "{food}_00_bg.png OR {food}_00_cover.png",
+        "fallback": "{food}_00.png"
+      },
+      "validation": {
+        "required_fields": ["title", "background_image"],
+        "title_max_length": 15,
+        "forbidden_analysis": [
+          "pixel_comparison",
+          "similarity_score",
+          "position_inference"
+        ]
+      }
+    }
+  },
+  "metadata_schema": {
+    "rule_name": "string (required)",
+    "rule_hash": "string (required, SHA256 of rule JSON)",
+    "generated_at": "ISO8601 datetime",
+    "input_image": "string (path)",
+    "title_text": "string"
+  },
+  "verification": {
+    "method": "metadata_only",
+    "description": "표지는 픽셀 분석하지 않음. 메타데이터만 확인",
+    "checks": [
+      "rule_name 존재",
+      "rule_hash 일치",
+      "input_image 존재"
+    ],
+    "on_mismatch": "DELETE_AND_RECREATE"
+  }
+}

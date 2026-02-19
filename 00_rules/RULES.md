@@ -794,27 +794,21 @@ Q&A 2개
 
 ### 7.0 음식별 단일 폴더 원칙 🔒 (v4.3 신규)
 
-**원칙:** 하나의 음식은 전체 contents 폴더에서 **단 하나의 폴더**만 가진다.
+**원칙:** 하나의 음식은 `01_contents/` 폴더에서 **단 하나의 폴더**만 가진다.
 
 ```
 ✅ 올바른 예:
-   contents/2_body_ready/163_fried_egg_계란후라이/
+   01_contents/163_FriedEgg/
 
-❌ 잘못된 예 (중복):
-   contents/1_cover_only/163_fried_egg_계란후라이/
-   contents/2_body_ready/163_fried_egg_계란후라이/
+❌ 잘못된 예:
+   01_contents/163_FriedEgg/
+   01_contents/163_fried_egg/    ← 중복 (대소문자 다름)
 ```
 
 **규칙:**
-- 콘텐츠 진행 시 폴더를 **이동**하지 않고, 현재 위치에서 하위 폴더 추가
-- 상태 변경 시 폴더 전체를 다음 단계로 이동
-- 동일 번호/음식명 폴더가 여러 상태 폴더에 존재하면 **즉시 병합**
-
-**폴더 상태 흐름:**
-```
-1_cover_only → 2_body_ready → 3_approved → 4_posted
-     (이동)         (이동)         (이동)
-```
+- 콘텐츠는 `01_contents/{번호}_{영문명}/` 폴더에 고정
+- **게시 완료 후에도 폴더 이동 없음** (노션 상태만 업데이트)
+- 동일 번호의 폴더가 여러 개 존재하면 **즉시 병합**
 
 **위반 시:** 즉시 병합 처리. 중복 폴더 삭제.
 
@@ -1083,14 +1077,15 @@ PD가 "{번호}번 {음식명} 게시" 또는 "{음식명} 게시하자"로 지�
 
 ### 9.4 Instagram 게시
 
-**[STEP 1] Cloudinary URL 확인**
+**[STEP 1] 노션 클라우디너리 체크**
 ```
-① 구글시트에서 해당 콘텐츠의 Cloudinary URL 확인
-② URL이 이미 존재하면 → 그대로 사용. 업로드 하지 않음.
-③ URL이 없는 슬라이드만 → 신규 업로드
-④ 업로드 후 구글시트에 URL 기록
+① 노션에서 해당 콘텐츠 조회
+② '클라우디너리 업데이트' 체크박스 확인
+   ├── ✓ 체크됨 → 클라우디너리 스킵, 바로 게시
+   └── ☐ 미체크 → 클라우디너리 업로드 후 게시
+③ 업로드 완료 시 노션 체크박스 업데이트
 
-⚠ 이미 URL이 있는 이미지를 다시 업로드하는 것 금지.
+⚠ 이미 체크된 콘텐츠는 재업로드 금지 (중복 방지)
 ```
 
 **[STEP 2~3] Graph API 게시**
@@ -1102,16 +1097,45 @@ PD가 "{번호}번 {음식명} 게시" 또는 "{음식명} 게시하자"로 지�
 2. permalink 저장
 
 ### 9.6 게시 후 처리
-• 상태 → posted 변경
-• 게시일시 기록
 
-### 9.7 보고 형식
+**노션 전체 싱크 (필수):**
 ```
-✅ {음식명} 게시 완료
-📸 Instagram: {permalink}
-🧵 Threads: {permalink}
-📄 슬라이드: {N}장
-🕐 게시: {시각}
+모든 열을 '완료' 상태로 업데이트:
+├── 표지_1: 완료
+├── 음식사진_2: 완료
+├── 개와음식_3: 완료
+├── 이미지_4~8: 완료
+├── 햇살이실사_9: 완료
+├── insta_caption: 완료
+├── Thread_caption: 완료
+├── blog_caption: 완료
+├── 인스타게시: 완료 (인스타 게시 시)
+├── 쓰레드게시: 완료 (쓰레드 게시 시)
+├── 블로그게시: 완료 (블로그 게시 시)
+└── 클라우디너리 업데이트: ✓
+```
+
+### 9.7 보고 형식 (고정)
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 노션 전체 싱크 완료
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{이모지} {번호}_{영문명}
+
+업데이트된 항목:
+├── 표지_1: 완료
+├── 음식사진_2: 완료
+├── 개와음식_3: 완료
+├── 이미지_4~8: 완료
+├── 햇살이실사_9: 완료
+├── insta_caption: 완료
+├── Thread_caption: 완료
+├── blog_caption: 완료
+├── {플랫폼}게시: 완료
+└── 클라우디너리 업데이트: ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ### 9.8 예외 처리
@@ -1273,7 +1297,7 @@ FAIL 발생
 
 ---
 
-## 14. 상태 동기화 원칙 🔒 (v3.8 전면 개정)
+## 14. 상태 동기화 원칙 🔒 (v4.0 개정)
 
 ### 14.1 Source of Truth
 
@@ -1281,29 +1305,30 @@ FAIL 발생
 인스타그램 게시 여부가 최종 진실(Source of Truth)
 ```
 
-| 인스타 상태 | 로컬/노션 조치 |
-|------------|---------------|
-| 게시됨 | 무조건 4_posted + 게시완료 |
+| 인스타 상태 | 노션 조치 |
+|------------|----------|
+| 게시됨 | 노션 "게시완료" 업데이트 |
 | 미게시 | 현재 상태 유지 |
+
+**⚠️ 폴더 이동 없음:** 게시 완료 후에도 콘텐츠 폴더는 이동하지 않음
 
 ### 14.2 자동 동기화 규칙
 
 ```
-인스타에 게시됨 = 무조건 게시완료
-- 로컬: 4_posted 폴더로 자동 이동
+인스타에 게시됨 = 노션 상태만 업데이트
 - 노션: "게시완료" 자동 업데이트
 - instagram_url 자동 저장
-- 묻지 않고 자동 수정
+- 폴더 이동 없음 (현재 위치 유지)
 ```
 
 ### 14.3 불일치 처리
 
-**발견 즉시 자동 수정 (승인 불필요):**
+**발견 즉시 노션만 수정 (승인 불필요):**
 ```
-if 인스타_게시됨 and 로컬_상태 != "4_posted":
-    → 4_posted로 자동 이동
+if 인스타_게시됨 and 노션_상태 != "게시완료":
     → 노션 "게시완료" 업데이트
     → 로그 기록
+    → 폴더 이동 없음
 ```
 
 ### 14.4 sync 명령 동작
@@ -1313,27 +1338,22 @@ if 인스타_게시됨 and 로컬_상태 != "4_posted":
 2. 불일치 자동 수정 (묻지 않음)
 3. 결과 리포트 출력
 
-### 14.5 원자 트랜잭션 (Atomic Transaction)
+### 14.5 동기화 트랜잭션
 
 ```python
-def sync_post_atomic(content_id, instagram_url):
-    """원자적 동기화 - 전부 성공하거나 전부 실패"""
+def sync_post(content_id, instagram_url):
+    """게시 후 노션 상태 업데이트 (폴더 이동 없음)"""
 
     log = {
         "content_id": content_id,
         "instagram_url": instagram_url,
-        "local_move": None,
         "notion_update": None,
         "final_status": None,
         "timestamp": datetime.now().isoformat()
     }
 
     try:
-        # Step 1: 로컬 이동
-        original_path = move_to_posted(content_id)
-        log["local_move"] = "success"
-
-        # Step 2: 노션 업데이트 (재시도 로직 포함)
+        # 노션 업데이트 (재시도 로직 포함)
         for attempt in range(3):
             try:
                 update_notion_status(content_id, "게시완료", instagram_url)
@@ -1350,11 +1370,6 @@ def sync_post_atomic(content_id, instagram_url):
         return True
 
     except Exception as e:
-        # 롤백: 로컬 원위치
-        if log["local_move"] == "success":
-            rollback_local_move(content_id, original_path)
-            log["local_move"] = "rolled_back"
-
         log["final_status"] = "FAILED"
         log["error"] = str(e)
         save_sync_log(log)
@@ -1364,27 +1379,19 @@ def sync_post_atomic(content_id, instagram_url):
 ### 14.6 상태 전이 규칙
 
 ```
-┌─────────────┐     게시 성공      ┌─────────────┐
-│ 3_approved  │ ─────────────────→ │  4_posted   │
-└─────────────┘                    └─────────────┘
-       │                                  │
-       │ 실패 시 롤백                      │ 인스타 확인
-       ↓                                  ↓
-┌─────────────┐                    ┌─────────────┐
-│  원위치     │                    │  게시완료   │
-└─────────────┘                    └─────────────┘
+게시 성공 → 노션 "게시완료" 업데이트
+         → 폴더 이동 없음 (현재 위치 유지)
 ```
 
-### 14.7 3중 검증 (Triple Check)
+### 14.7 2중 검증 (Double Check)
 
 ```python
-def triple_check():
+def double_check():
     insta_count = get_instagram_post_count()  # 인스타 게시물 수
     notion_posted = get_notion_posted_count()  # 노션 게시완료 수
-    local_posted = count_local_4_posted()      # 로컬 4_posted 수
 
-    # 3중 일치 확인
-    assert insta_count == notion_posted == local_posted
+    # 2중 일치 확인 (인스타 = 노션)
+    assert insta_count == notion_posted
 
     # 노션 게시완료 중 인스타 미존재 확인
     orphan = find_notion_without_insta()
@@ -1675,11 +1682,11 @@ python3 scripts/distribute_clean_images.py --dry-run  # 미리보기
 
 **폴더 구조:**
 ```
-99_CleanReady/
-├── _done/           ← 처리 완료
-├── _unknown/        ← 식별 불가 (PD 확인 필요)
-├── _processed.log   ← 처리 이력
-└── (신규 이미지)    ← 배치 대기
+000_CleanReady/
+├── 01_cover/        ← 표지용 클린 이미지
+├── 02_food/         ← 음식 사진 클린 이미지
+├── 03_DogWithFood/  ← 강아지+음식 브릿지 이미지
+└── _processed.log   ← 처리 이력
 ```
 
 ---
@@ -1716,23 +1723,23 @@ python3 scripts/distribute_clean_images.py --dry-run  # 미리보기
 
 | 노션 필드 | 타입 | 데이터 소스 | 업데이트 조건 |
 |----------|------|------------|--------------|
-| `인스타상태` | select | 폴더 위치 | 콘텐츠 폴더 이동 시 |
-| `Validator` | select | 스크립트 결과 | Validator 실행 후 |
-| `insta_caption` | checkbox | `insta/caption.txt` 존재 | 파일 생성/삭제 시 |
-| `blog_caption` | checkbox | `blog/caption.txt` 존재 | 파일 생성/삭제 시 |
-| `insta_images` | number | `insta/*.png` 개수 | 이미지 추가/삭제 시 |
-| `blog_images` | number | `blog/*.png` 개수 | 이미지 추가/삭제 시 |
-| `인스타URL` | url | `permalink.txt` | 게시 완료 후 |
+| `인스타게시` | status | 게시 여부 | 인스타 게시 완료 시 |
+| `쓰레드게시` | status | 게시 여부 | 쓰레드 게시 완료 시 |
+| `클라우디너리 업데이트` | checkbox | 업로드 여부 | Cloudinary 업로드 후 |
+| `표지_1` ~ `햇살이실사_9` | status/select | 로컬 파일 존재 | 파일 생성/삭제 시 |
+| `insta_caption` | status | 캡션 파일 존재 | 파일 생성/삭제 시 |
+| `Thread_caption` | status | 캡션 파일 존재 | 파일 생성/삭제 시 |
+| `blog_caption` | status | 캡션 파일 존재 | 파일 생성/삭제 시 |
 
-### 19.2 인스타상태 매핑
+### 19.2 게시 상태 업데이트
 
-| 폴더 | 노션 상태 |
-|------|----------|
-| `1_cover_only` | 표지완료 |
-| `2_body_ready` | 본문완료 |
-| `3_approved` | 승인완료 |
-| `4_posted` | 게시완료 |
-| `5_archived` | 게시완료 |
+**⚠️ 폴더 이동 없음:** 게시 완료 후에도 콘텐츠 폴더는 이동하지 않음
+
+| 이벤트 | 노션 업데이트 |
+|--------|-------------|
+| 인스타 게시 완료 | `인스타게시` → 완료 |
+| 쓰레드 게시 완료 | `쓰레드게시` → 완료 |
+| 블로그 게시 완료 | `블로그게시` → 완료 |
 
 ### 19.3 동기화 스크립트
 
@@ -1740,15 +1747,15 @@ python3 scripts/distribute_clean_images.py --dry-run  # 미리보기
 |---------|------|----------|
 | `notion_sync.py` | 전체 동기화 (136개) | 배치 작업 완료 후 |
 | `notion_update.py` | 단일 콘텐츠 업데이트 | Hook에서 자동 호출 |
-| `notion_check.py` | 노션↔로컬↔인스타 3중 검증 | 게시 후 검증 |
+| `notion_check.py` | 노션↔인스타 2중 검증 | 게시 후 검증 |
 
 ### 19.4 자동 동기화 규칙
 
 **트리거 이벤트:**
-1. **콘텐츠 폴더 이동** → 인스타상태 업데이트
-2. **캡션 파일 생성** → checkbox True 설정
-3. **이미지 추가/삭제** → 이미지 개수 업데이트
-4. **게시 완료** → URL + 상태 업데이트
+1. **이미지 파일 추가** → 해당 열 '완료' 업데이트
+2. **캡션 파일 생성** → 해당 열 '완료' 업데이트
+3. **Cloudinary 업로드** → 체크박스 True 설정
+4. **게시 완료** → 게시 상태 '완료' 업데이트
 5. **Validator 실행** → PASS/FAIL 결과 반영
 
 **금지 사항:**
