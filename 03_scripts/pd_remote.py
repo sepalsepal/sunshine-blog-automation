@@ -392,7 +392,7 @@ def cmd_다음(sync: NotionSync):
 
 
 def cmd_다음_by_safety(sync: NotionSync, safety: str):
-    """선택된 안전도의 게시 전 5개 목록 + 미리보기"""
+    """선택된 안전도의 게시 전 3개 목록 + 선택 버튼"""
     global last_preview, last_top5
 
     # 안전도 이모지
@@ -402,23 +402,36 @@ def cmd_다음_by_safety(sync: NotionSync, safety: str):
     미제작 = sync.poll_status_changes("미제작", field="인스타_상태")
     미제작_filtered = [x for x in 미제작 if x.get("안전도") == safety]
     미제작_filtered.sort(key=lambda x: x.get("번호", 999))
-    top5 = 미제작_filtered[:5]
-    last_top5 = top5
+    top3 = 미제작_filtered[:3]
+    last_top5 = top3  # 호환성 유지
 
-    if not top5:
+    if not top3:
         send_text(f"📭 {safety_emoji} {safety} 게시 전 항목이 없습니다")
         return
 
-    # 2. 목록 텍스트 전송
+    # 2. 목록 + 선택 버튼
     msg = "━━━━━━━━━━━━━━━━━━\n"
-    msg += f"📋 <b>{safety_emoji} {safety} 게시 전 (5개)</b>\n"
+    msg += f"📋 <b>{safety_emoji} {safety} 게시 옵션</b>\n"
     msg += "━━━━━━━━━━━━━━━━━━\n"
-    for i, item in enumerate(top5):
+
+    buttons = []
+    for i, item in enumerate(top3):
         num = item.get("번호", 0)
         name = item.get("음식명", "")
+        page_id = item.get("page_id", "")
         msg += f"{i+1}. [{num:03d}] {name}\n"
-    msg += "━━━━━━━━━━━━━━━━━━"
-    send_text(msg)
+
+        # 선택 버튼
+        buttons.append([{
+            "text": f"📌 {i+1}번 [{num:03d}] {name}",
+            "callback_data": f"select:{i}:{page_id[:25]}"
+        }])
+
+    msg += "━━━━━━━━━━━━━━━━━━\n"
+    msg += "게시할 콘텐츠를 선택하세요:"
+
+    keyboard = {"inline_keyboard": buttons}
+    send_text(msg, reply_markup=keyboard)
 
     # 3. 1번 항목 미리보기
     target = top5[0]
@@ -744,15 +757,11 @@ def main():
                         approval_start_time = None
 
                     elif data.startswith("safety:"):
-                        # 안전도 선택
+                        # 안전도 선택 → 콘텐츠 3개 옵션 표시
                         safety = data.split(":")[1]
                         log(f"🎨 안전도 선택: {safety}")
                         cmd_다음_by_safety(sync, safety)
-                        # 1번 항목 자동 미리보기
-                        if last_top5:
-                            send_preview(last_top5[0], last_top5, sync)
-                            approval_start_time = time.time()
-                            approval_target = last_top5[0]
+                        # 사용자가 콘텐츠 선택할 때까지 대기
 
                     elif data.startswith("select:"):
                         # 번호 선택
