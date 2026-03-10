@@ -10,7 +10,7 @@ Project Sunshine - 터미널 원격 제어
 - Instagram 통계 조회
 
 사용법:
-    python services/scripts/telegram_bot.py
+    python 03_scripts/telegram_bot.py
 
 Author: 송지영 대리
 Date: 2026-01-30
@@ -24,9 +24,10 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
-# 프로젝트 루트 설정
-ROOT = Path(__file__).parent.parent.parent
+# 프로젝트 루트 설정 (03_scripts/ → project_sunshine/)
+ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "04_pipeline"))  # core.utils 접근용
 
 from dotenv import load_dotenv
 load_dotenv(ROOT / ".env")
@@ -163,7 +164,7 @@ class TelegramBotRemote:
 
     def handle_status(self):
         """파이프라인 상태 확인"""
-        status_file = ROOT / "services/dashboard/status.json"
+        status_file = ROOT / "05_services/dashboard/status.json"
 
         if status_file.exists():
             with open(status_file, 'r', encoding='utf-8') as f:
@@ -204,7 +205,7 @@ class TelegramBotRemote:
 
     def handle_stats(self):
         """Instagram 통계 조회"""
-        stats_file = ROOT / "config/data/instagram_stats.json"
+        stats_file = ROOT / "02_config/data/instagram_stats.json"
 
         if stats_file.exists():
             with open(stats_file, 'r', encoding='utf-8') as f:
@@ -236,7 +237,7 @@ class TelegramBotRemote:
 
         try:
             # publish_content.py 실행
-            script_path = ROOT / "services/scripts/publish_content.py"
+            script_path = ROOT / "03_scripts/publishing/publish_content.py"
             result = subprocess.run(
                 [sys.executable, str(script_path), topic],
                 capture_output=True,
@@ -300,7 +301,7 @@ sausage, coca_cola, avocado, olive"""
         msg = """🎬 <b>대시보드 열기</b>
 
 터미널에서 다음 명령 실행:
-<code>streamlit run services/dashboard/app.py</code>
+<code>streamlit run 05_services/dashboard/app.py</code>
 
 또는 이미 실행 중이라면:
 http://localhost:8501"""
