@@ -348,32 +348,75 @@ def send_publish_confirmation(insta_url: str, threads_url: str, num: int, name: 
 
 
 # ============================================================
-# 명령어: 다음
+# 명령어: 다음 (안전도 선택 → 콘텐츠 목록)
 # ============================================================
 
 def cmd_다음(sync: NotionSync):
-    """게시 전 5개 목록 + 가장 낮은 번호 미리보기"""
+    """안전도 선택 버튼 표시"""
+    # 각 안전도별 미제작 개수 조회
+    미제작_전체 = sync.poll_status_changes("미제작", field="인스타_상태")
+
+    safe_count = len([x for x in 미제작_전체 if x.get("안전도") == "SAFE"])
+    caution_count = len([x for x in 미제작_전체 if x.get("안전도") == "CAUTION"])
+    forbidden_count = len([x for x in 미제작_전체 if x.get("안전도") == "FORBIDDEN"])
+
+    if not 미제작_전체:
+        send_text("📭 게시 전 항목이 없습니다")
+        return
+
+    # 안전도 선택 버튼
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {"text": f"🟢 SAFE ({safe_count})", "callback_data": "safety:SAFE"},
+            ],
+            [
+                {"text": f"🟡 CAUTION ({caution_count})", "callback_data": "safety:CAUTION"},
+            ],
+            [
+                {"text": f"🔴 FORBIDDEN ({forbidden_count})", "callback_data": "safety:FORBIDDEN"},
+            ],
+        ]
+    }
+
+    msg = "━━━━━━━━━━━━━━━━━━\n"
+    msg += "📋 <b>안전도 선택</b>\n"
+    msg += "━━━━━━━━━━━━━━━━━━\n"
+    msg += f"🟢 SAFE: {safe_count}건\n"
+    msg += f"🟡 CAUTION: {caution_count}건\n"
+    msg += f"🔴 FORBIDDEN: {forbidden_count}건\n"
+    msg += "━━━━━━━━━━━━━━━━━━\n"
+    msg += "게시할 안전도를 선택하세요:"
+
+    send_text(msg, reply_markup=keyboard)
+
+
+def cmd_다음_by_safety(sync: NotionSync, safety: str):
+    """선택된 안전도의 게시 전 5개 목록 + 미리보기"""
     global last_preview, last_top5
 
-    # 1. 게시 전 5개 조회 (번호 낮은 순)
+    # 안전도 이모지
+    safety_emoji = {"SAFE": "🟢", "CAUTION": "🟡", "FORBIDDEN": "🔴"}.get(safety, "")
+
+    # 1. 해당 안전도의 미제작 조회 (번호 낮은 순)
     미제작 = sync.poll_status_changes("미제작", field="인스타_상태")
-    미제작.sort(key=lambda x: x.get("번호", 999))
-    top5 = 미제작[:5]
+    미제작_filtered = [x for x in 미제작 if x.get("안전도") == safety]
+    미제작_filtered.sort(key=lambda x: x.get("번호", 999))
+    top5 = 미제작_filtered[:5]
     last_top5 = top5
 
     if not top5:
-        send_text("📭 게시 전 항목이 없습니다")
+        send_text(f"📭 {safety_emoji} {safety} 게시 전 항목이 없습니다")
         return
 
     # 2. 목록 텍스트 전송
     msg = "━━━━━━━━━━━━━━━━━━\n"
-    msg += "📋 <b>게시 전 항목 (번호순 5개)</b>\n"
+    msg += f"📋 <b>{safety_emoji} {safety} 게시 전 (5개)</b>\n"
     msg += "━━━━━━━━━━━━━━━━━━\n"
     for i, item in enumerate(top5):
         num = item.get("번호", 0)
         name = item.get("음식명", "")
-        safety = item.get("안전도", "")
-        msg += f"{i+1}. [{num:03d}] {name} — {safety}\n"
+        msg += f"{i+1}. [{num:03d}] {name}\n"
     msg += "━━━━━━━━━━━━━━━━━━"
     send_text(msg)
 
@@ -700,6 +743,17 @@ def main():
                             reject_item(last_preview, sync)
                         approval_start_time = None
 
+                    elif data.startswith("safety:"):
+                        # 안전도 선택
+                        safety = data.split(":")[1]
+                        log(f"🎨 안전도 선택: {safety}")
+                        cmd_다음_by_safety(sync, safety)
+                        # 1번 항목 자동 미리보기
+                        if last_top5:
+                            send_preview(last_top5[0], last_top5, sync)
+                            approval_start_time = time.time()
+                            approval_target = last_top5[0]
+
                     elif data.startswith("select:"):
                         # 번호 선택
                         parts = data.split(":")
@@ -725,8 +779,7 @@ def main():
                     if text == "다음":
                         log(f"📩 명령어 수신: '{text}'")
                         cmd_다음(sync)
-                        approval_start_time = time.time()
-                        approval_target = last_preview
+                        # 안전도 선택 후 approval 시작 (콜백에서 처리)
 
                     elif text == "게시":
                         log(f"📩 명령어 수신: '{text}'")
